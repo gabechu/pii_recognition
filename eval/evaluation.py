@@ -1,16 +1,16 @@
 from itertools import chain
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Optional, Tuple
 
 from sklearn.metrics import classification_report
 from sklearn.preprocessing import LabelBinarizer
 
-from tokenizers.nltk_tokenizer import word_tokenizer
 from recognisers.entity_recogniser import Rec_co
+from tokenizers.nltk_tokenizer import word_tokenizer
 
 
 def get_predicted_entities(
     text: str,
-    entities: List,
+    entities: List[str],
     recogniser: Rec_co,
     mapping: Optional[Dict] = None,
     default_label: str = "O",
@@ -32,7 +32,9 @@ def get_predicted_entities(
     return entity_labels
 
 
-def is_substring(source_start_end: Tuple, target_start_end: Tuple) -> bool:
+def is_substring(
+    source_start_end: Tuple[int, int], target_start_end: Tuple[int, int]
+) -> bool:
     if (
         source_start_end[0] >= target_start_end[0]
         and source_start_end[1] <= target_start_end[1]
@@ -42,7 +44,7 @@ def is_substring(source_start_end: Tuple, target_start_end: Tuple) -> bool:
         return False
 
 
-def bio_classification_report(y_true: List, y_pred: List) -> str:
+def bio_classification_report(y_true: List[List[str]], y_pred: List[List[str]]) -> str:
     """
     Classification report for a list of BIO-encoded sequences.
     It computes token-level metrics and discards "O" labels.
