@@ -1,15 +1,14 @@
 from abc import abstractmethod
-from typing import Any, List
+from typing import Any, List, TypeVar
 
-
-from typing import TypeVar
+from .recogniser_result import RecogniserResult
 
 
 class EntityRecogniser:
     def __init__(
         self,
-        supported_entities: List,
-        supported_languages: List,
+        supported_entities: List[str],
+        supported_languages: List[str],
         name: str = None,
         version: str = "0.0.1",
         **kwargs,
@@ -25,12 +24,12 @@ class EntityRecogniser:
 
         self._model = self.load_model()
 
-    def validate_entities(self, asked_entities):
+    def validate_entities(self, asked_entities: List[str]):
         assert all(
             [entity in self.supported_entities for entity in asked_entities]
         ), f"Only support {self.supported_entities}"
 
-    def validate_languages(self, asked_languages):
+    def validate_languages(self, asked_languages: List[str]):
         assert all(
             [language in self.supported_languages for language in asked_languages]
         ), f"Only support {self.languages}"
@@ -39,7 +38,7 @@ class EntityRecogniser:
     def load_model(self) -> Any:
         ...
 
-    def analyze(self, text: str, entities: List) -> List:
+    def analyze(self, text: str, entities: List[str]) -> List[RecogniserResult]:
         ...
 
 
