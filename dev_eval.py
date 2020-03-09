@@ -1,15 +1,18 @@
 from eval.evaluation import bio_classification_report, get_predicted_entities
-from reader.conll_reader import get_conll_eval_data, spacy_join_detokenzier
-from recognisers.spacy_recogniser import SpacyRecogniser
+from reader.conll_reader import get_conll_eval_data
 from recognisers.crf_recogniser import CrfRecogniser
+
+# from recognisers.spacy_recogniser import SpacyRecogniser
+from tokenizers.detokenizer import spacy_join_detokenzier
 from tokenizers.nltk_tokenizer import word_tokenizer
-import mlflow
 
 
+# Prepare evalution data
 X_test, y_test = get_conll_eval_data(
     file_path="datasets/conll2003/eng.testb", detokenizer=spacy_join_detokenzier
 )
 
+# Initiate name entity recogniser
 # multilingual_recogniser = SpacyRecogniser(
 #     model_name="xx_ent_wiki_sm",
 #     supported_entities=["LOC", "MISC", "ORG", "PER"],
@@ -36,6 +39,9 @@ crf_recogniser = CrfRecogniser(
     model_path="exported_models/conll2003-en.crfsuite",
     tokenizer=word_tokenizer,
 )
+
+
+# Predict
 y_pred = [
     get_predicted_entities(text, ["B-PER", "I-PER"], crf_recogniser) for text in X_test
 ]
@@ -57,11 +63,12 @@ def select_by_index(target, indices):
     return results
 
 
-print(counter, counter / len(y_pred))
+print(
+    f"Removed {counter} ({counter/len(y_pred)}) invalid records from evalution."
+    f"This is because CONLL tokeniser gives different outcomes than the"
+    f"tokenizer we have used."
+)
 res = bio_classification_report(
     select_by_index(y_test, okay_index), select_by_index(y_pred, okay_index)
 )
-
-# res = res['I-PER']['f1_score']
-# import pdb; pdb.set_trace()
-mlflow.log_metric("I-PER f1-score", res["I-PER"]["f1-score"])
+print(res)
