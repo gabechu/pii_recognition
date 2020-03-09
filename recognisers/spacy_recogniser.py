@@ -9,7 +9,10 @@ from .recogniser_result import RecogniserResult
 
 class SpacyRecogniser(EntityRecogniser):
     def __init__(
-        self, supported_entities: List, supported_languages: List, model_name: str
+        self,
+        supported_entities: List[str],
+        supported_languages: List[str],
+        model_name: str,
     ):
         self._model_name = model_name
         super().__init__(
@@ -20,7 +23,7 @@ class SpacyRecogniser(EntityRecogniser):
     def load_model(self) -> MultiLanguage:
         return spacy.load(self._model_name, disable=["parser", "tagger"])
 
-    def analyze(self, text: str, entities: List) -> List:
+    def analyze(self, text: str, entities: List[str]) -> List[RecogniserResult]:
         self.validate_entities(entities)
 
         # TODO: validate languages
