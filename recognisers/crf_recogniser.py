@@ -3,6 +3,7 @@ from typing import Callable, List
 from pycrfsuite import Tagger
 
 from features.word_to_features import word2features
+from tokenizers.token import Token
 
 from .entity_recogniser import EntityRecogniser
 from .recogniser_result import RecogniserResult
@@ -11,10 +12,10 @@ from .recogniser_result import RecogniserResult
 class CrfRecogniser(EntityRecogniser):
     def __init__(
         self,
-        supported_entities: List,
-        supported_languages: List,
+        supported_entities: List[str],
+        supported_languages: List[str],
         model_path: str,
-        tokenizer: Callable,
+        tokenizer: Callable[[str], List[Token]],
     ):
         self._model_path = model_path
         self._tokenizer = tokenizer
@@ -28,15 +29,15 @@ class CrfRecogniser(EntityRecogniser):
         tagger.open(self._model_path)
         return tagger
 
-    def preprocess_text(self, text: str) -> List:
+    def preprocess_text(self, text: str) -> List[Token]:
         return self._tokenizer(text)
 
-    def build_features(self, tokenised_sentence: List) -> List:
+    def build_features(self, tokenised_sentence: List[str]) -> List[List[str]]:
         return [
             word2features(tokenised_sentence, i) for i in range(len(tokenised_sentence))
         ]
 
-    def analyze(self, text: str, entities: List) -> List:
+    def analyze(self, text: str, entities: List[str]) -> List[RecogniserResult]:
         self.validate_entities(entities)
         # TODO: validate languages
 
