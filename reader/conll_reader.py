@@ -4,7 +4,9 @@ from typing import Callable, List, Tuple
 from nltk.corpus.reader import ConllCorpusReader
 
 
-def get_conll_eval_data(file_path: str, detokenizer: Callable) -> Tuple:
+def get_conll_eval_data(
+    file_path: str, detokenizer: Callable[[List[str]], str]
+) -> Tuple[List, List]:
     path = PurePath(file_path)
 
     data = ConllCorpusReader(
@@ -18,13 +20,9 @@ def get_conll_eval_data(file_path: str, detokenizer: Callable) -> Tuple:
     return sents, labels
 
 
-def sent2tokens(sent: List) -> List:
+def sent2tokens(sent: List[Tuple[str, str, str]]) -> List[str]:
     return [token for token, postag, label in sent]
 
 
-def sent2labels(sent: List) -> List:
+def sent2labels(sent: List[Tuple[str, str, str]]) -> List[str]:
     return [label for token, postag, label in sent]
-
-
-def spacy_join_detokenzier(tokens: List) -> str:
-    return " ".join(tokens)
