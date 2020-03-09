@@ -3,6 +3,8 @@ from reader.conll_reader import get_conll_eval_data, spacy_join_detokenzier
 from recognisers.spacy_recogniser import SpacyRecogniser
 from recognisers.crf_recogniser import CrfRecogniser
 from tokenizers.nltk_tokenizer import word_tokenizer
+import mlflow
+
 
 X_test, y_test = get_conll_eval_data(
     file_path="datasets/conll2003/eng.testb", detokenizer=spacy_join_detokenzier
@@ -56,8 +58,10 @@ def select_by_index(target, indices):
 
 
 print(counter, counter / len(y_pred))
-print(
-    bio_classification_report(
-        select_by_index(y_test, okay_index), select_by_index(y_pred, okay_index)
-    )
+res = bio_classification_report(
+    select_by_index(y_test, okay_index), select_by_index(y_pred, okay_index)
 )
+
+# res = res['I-PER']['f1_score']
+# import pdb; pdb.set_trace()
+mlflow.log_metric("I-PER f1-score", res["I-PER"]["f1-score"])

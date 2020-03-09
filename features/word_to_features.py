@@ -1,4 +1,7 @@
-def word2features(tokenised_sentence, i):
+from typing import List
+
+
+def word2features(tokenised_sentence: List[str], i: int) -> List[str]:
     word = tokenised_sentence[i]
 
     features = [
