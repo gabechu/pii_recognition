@@ -42,7 +42,7 @@ class CrfRecogniser(EntityRecogniser):
         # TODO: validate languages
 
         preprocessed_text = self.preprocess_text(text)
-        tokens = [token.data for token in preprocessed_text]
+        tokens = [token.text for token in preprocessed_text]
         features = self.build_features(tokens)
         entity_tags = self._model.tag(features)
 

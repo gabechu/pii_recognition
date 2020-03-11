@@ -25,11 +25,13 @@ class EntityRecogniser:
         self._model = self.load_model()
 
     def validate_entities(self, asked_entities: List[str]):
+        """Check whether asked entities are supported by the model."""
         assert all(
             [entity in self.supported_entities for entity in asked_entities]
         ), f"Only support {self.supported_entities}"
 
     def validate_languages(self, asked_languages: List[str]):
+        """Check whether asked languages are supported by the model."""
         assert all(
             [language in self.supported_languages for language in asked_languages]
         ), f"Only support {self.languages}"
@@ -39,6 +41,7 @@ class EntityRecogniser:
         ...
 
     def analyze(self, text: str, entities: List[str]) -> List[RecogniserResult]:
+        """Anotate asked entities in the text."""
         ...
 
 
