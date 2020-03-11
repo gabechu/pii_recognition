@@ -3,6 +3,6 @@ from dataclasses import dataclass
 
 @dataclass
 class Token:
-    data: str
+    text: str
     start: int
     end: int
