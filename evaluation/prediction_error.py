@@ -21,6 +21,7 @@ class SampleError:
             annotations. A mismatch occurs due to tokenisation. Different tokenisation
             strategies produce different outcomes.
     """
+
     token_errors: List[TokenError]
     full_text: str
     length_mismatch: bool
