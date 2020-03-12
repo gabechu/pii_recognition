@@ -28,13 +28,13 @@ class EntityRecogniser(metaclass=ABCMeta):
         """Check whether asked entities are supported by the model."""
         assert all(
             [entity in self.supported_entities for entity in asked_entities]
-        ), f"Only support {self.supported_entities}"
+        ), f"Only support {self.supported_entities}, but got {asked_entities}"
 
     def validate_languages(self, asked_languages: List[str]):
         """Check whether asked languages are supported by the model."""
         assert all(
             [language in self.supported_languages for language in asked_languages]
-        ), f"Only support {self.supported_languages}"
+        ), f"Only support {self.supported_languages}, but got {asked_languages}"
 
     @abstractmethod
     def load_model(self) -> Any:

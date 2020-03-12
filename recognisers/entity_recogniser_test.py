@@ -30,8 +30,8 @@ def test_entity_recogniser_validation():
 
     with pytest.raises(AssertionError) as err:
         actual.validate_entities(["PER", "LOC"])
-    assert str(err.value) == "Only support ['PER']"
+    assert str(err.value) == "Only support ['PER'], but got ['PER', 'LOC']"
 
     with pytest.raises(AssertionError) as err:
         actual.validate_languages(["en", "pt"])
-    assert str(err.value) == "Only support ['en']"
+    assert str(err.value) == "Only support ['en'], but got ['en', 'pt']"

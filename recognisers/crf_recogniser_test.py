@@ -48,4 +48,4 @@ def test_crf_recogniser_analyze(text, mock_tokeniser):
 
     with pytest.raises(AssertionError) as err:
         recogniser.analyze(text, entities=["PER", "LOC", "TIME"])
-    assert str(err.value) == "Only support ['PER', 'LOC']"
+    assert str(err.value) == "Only support ['PER', 'LOC'], but got ['PER', 'LOC', 'TIME']"
