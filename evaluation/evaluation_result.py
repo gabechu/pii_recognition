@@ -5,5 +5,5 @@ from .prediction_error import SampleError
 
 @dataclass
 class EvaluationResult:
-    label_pair: Counter  # annotation and prediction in tuple
+    label_pair_counter: Counter
     mistakes: SampleError

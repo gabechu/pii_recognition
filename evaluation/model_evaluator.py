@@ -7,14 +7,10 @@ from recognisers.entity_recogniser import Rec_co
 from tokenizers.token import Token
 
 from .evaluation_result import EvaluationResult
+from .label import Label, map_labels
 from .metrics import compute_f_beta
 from .prediction_error import SampleError, TokenError
-from .span_to_token import mapping_labels, span_labels_to_token_labels
-
-
-class Label(NamedTuple):
-    annotated: str
-    predicted: str
+from .span_to_token import span_labels_to_token_labels
 
 
 class ModelEvaluator:
@@ -30,7 +26,7 @@ class ModelEvaluator:
         self.tokeniser = tokeniser
         self.entity_mapping = entity_mapping
 
-    def predict_token_labels(self, text: str) -> List[str]:
+    def predict_token_based_entities(self, text: str) -> List[str]:
         recognised_entities = self.recogniser.analyze(text, self.target_entities)
         tokens = self.tokeniser(text)
         return span_labels_to_token_labels(tokens, recognised_entities)
@@ -39,24 +35,27 @@ class ModelEvaluator:
         self, text: str, annotations: List[str], predictions: List[str]
     ) -> Tuple[Counter, SampleError]:
         """
-        Given a sample of text, compare the ground truth entity labels (annotations) and
-        predicted entity labels (predictions).
+        Given a sample of text, compare the ground truth entity labels dennoted by annotation and
+        predicted entity labels denoted by predictions. Count the occurrence and find mistakes.
         """
+        # annotation may use a different label schema, if so
+        # use mapping to convert predictions to that schema for comparison
         if self.entity_mapping:
-            predictions = mapping_labels(predictions, self.entity_mapping)
+            predictions = map_labels(predictions, self.entity_mapping)
 
-        label_pair = Counter()
+        label_pair_counter = Counter()
         if len(annotations) != len(predictions):
             return (
-                label_pair,
-                SampleError(token_errors=[], full_text=text, length_error=True),
+                label_pair_counter,
+                SampleError(token_errors=[], full_text=text, length_mismatch=True),
             )
 
-        sample_error = SampleError(token_errors=[], full_text=text, length_error=False)
+        sample_error = SampleError(token_errors=[], full_text=text, length_mismatch=False)
         tokens = self.tokeniser(text)
 
         for i in range(len(annotations)):
-            label_pair[Label(annotations[i], predictions[i])] += 1
+            label_pair_counter[Label(annotations[i], predictions[i])] += 1
+            # log mistakes
             if annotations[i] != predictions[i]:
                 sample_error.token_errors.append(
                     TokenError(
@@ -66,19 +65,21 @@ class ModelEvaluator:
                     )
                 )
 
-        return label_pair, sample_error
+        return label_pair_counter, sample_error
 
     def evaluate_sample(self, text: str, annotations: List[str]) -> EvaluationResult:
-        predictions = self.predict_token_labels(text)
-        label_pair, sample_error = self._compare(text, annotations, predictions)
-        return EvaluationResult(label_pair=label_pair, mistakes=sample_error)
+        predictions = self.predict_token_based_entities(text)
+        label_pair_counter, sample_error = self._compare(
+            text, annotations, predictions
+        )
+        return EvaluationResult(label_pair_counter=label_pair_counter, mistakes=sample_error)
 
     def evaulate_all(
         self, texts: List[str], annotations: List[List[str]]
     ) -> List[EvaluationResult]:
         assert len(texts) == len(annotations), (
-            f"Number of texts: {len(texts)} mismatch with number of annotations"
-            f"{len(annotations)}"
+            f"The number of texts: {len(texts)} mismatches with the number of"
+            f"annotations {len(annotations)}"
         )
 
         return [
@@ -90,7 +91,7 @@ class ModelEvaluator:
     ) -> Dict[str, float]:
         # aggregate results
         all_results: Counter = sum(
-            [res.label_pair for res in evaluation_results], Counter()
+            [res.label_pair_counter for res in evaluation_results], Counter()
         )
 
         # compute score per entity

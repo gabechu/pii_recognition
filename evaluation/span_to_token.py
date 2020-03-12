@@ -7,6 +7,10 @@ from tokenizers.token import Token
 def is_substring(
     source_start_end: Tuple[int, int], target_start_end: Tuple[int, int]
 ) -> bool:
+    """
+    Whether a string is a substring of another. The string is annotated by position
+    of the start and end characters.
+    """
     if (
         source_start_end[0] >= target_start_end[0]
         and source_start_end[1] <= target_start_end[1]
@@ -39,17 +43,3 @@ def span_labels_to_token_labels(
                 token_entity_labels[i] = entity.entity_type
                 break
     return token_entity_labels
-
-
-def mapping_labels(
-    in_labels: List[str], to_labels_mapping: Dict[str, str]
-) -> List[str]:
-    keys = to_labels_mapping.keys()
-
-    to_labels = []
-    for label in in_labels:
-        if label in keys:
-            to_labels.append(to_labels_mapping[label])
-        else:
-            to_labels.append(label)
-    return to_labels
