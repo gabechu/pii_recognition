@@ -6,9 +6,7 @@ class Label(NamedTuple):
     predicted: str
 
 
-def map_labels(
-    schema_A_labels: List[str], A2B_mapping: Dict[str, str]
-) -> List[str]:
+def map_labels(schema_A_labels: List[str], A2B_mapping: Dict[str, str]) -> List[str]:
     """Convert between different labeling schema."""
     A_label_set = A2B_mapping.keys()
 
