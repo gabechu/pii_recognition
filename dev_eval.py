@@ -2,12 +2,12 @@ from evaluation.model_evaluator import ModelEvaluator
 from data_reader.conll_reader import get_conll_eval_data
 from recognisers.crf_recogniser import CrfRecogniser
 from recognisers.spacy_recogniser import SpacyRecogniser
-from tokenizers.detokenizer import spacy_join_detokenzier
+from tokenizers.detokenizer import space_join_detokenzier
 from tokenizers.nltk_tokenizer import word_tokenizer
 
 # Prepare evalution data
 X_test, y_test = get_conll_eval_data(
-    file_path="datasets/conll2003/eng.testb", detokenizer=spacy_join_detokenzier
+    file_path="datasets/conll2003/eng.testb", detokenizer=space_join_detokenzier
 )
 
 
