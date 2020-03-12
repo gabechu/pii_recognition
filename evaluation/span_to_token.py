@@ -1,4 +1,4 @@
-from typing import Dict, List, Tuple
+from typing import List, Tuple
 
 from recognisers.recogniser_result import RecogniserResult
 from tokenizers.token import Token
