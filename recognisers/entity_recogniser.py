@@ -1,10 +1,10 @@
-from abc import abstractmethod
+from abc import ABCMeta, abstractmethod
 from typing import Any, List, TypeVar
 
 from .recogniser_result import RecogniserResult
 
 
-class EntityRecogniser:
+class EntityRecogniser(metaclass=ABCMeta):
     def __init__(
         self,
         supported_entities: List[str],
@@ -34,12 +34,13 @@ class EntityRecogniser:
         """Check whether asked languages are supported by the model."""
         assert all(
             [language in self.supported_languages for language in asked_languages]
-        ), f"Only support {self.languages}"
+        ), f"Only support {self.supported_languages}"
 
     @abstractmethod
     def load_model(self) -> Any:
         ...
 
+    @abstractmethod
     def analyze(self, text: str, entities: List[str]) -> List[RecogniserResult]:
         """Anotate asked entities in the text."""
         ...
