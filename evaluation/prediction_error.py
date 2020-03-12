@@ -13,7 +13,7 @@ class TokenError:
 class SampleError:
     """
     Log prediction errors happening in a sample text.
-    
+
     Attributes:
         token_errors: Prediction error per token.
         full_text: The original sample text being used for prediction.
@@ -21,7 +21,6 @@ class SampleError:
             annotations. A mismatch occurs due to tokenisation. Different tokenisation
             strategies produce different outcomes.
     """
-
     token_errors: List[TokenError]
     full_text: str
     length_mismatch: bool
