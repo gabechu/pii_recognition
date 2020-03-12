@@ -3,7 +3,7 @@ from typing import Callable, List
 from pycrfsuite import Tagger
 
 from features.word_to_features import word2features
-from tokenizers.token import Token
+from tokeniser.token import Token
 
 from .entity_recogniser import EntityRecogniser
 from .recogniser_result import RecogniserResult
