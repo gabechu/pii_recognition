@@ -1,5 +1,5 @@
 from collections import Counter
-from typing import Callable, Dict, List, NamedTuple, Optional, Tuple
+from typing import Callable, Dict, List, Optional, Tuple
 
 import numpy as np
 
@@ -35,8 +35,9 @@ class ModelEvaluator:
         self, text: str, annotations: List[str], predictions: List[str]
     ) -> Tuple[Counter, SampleError]:
         """
-        Given a sample of text, compare the ground truth entity labels dennoted by annotation and
-        predicted entity labels denoted by predictions. Count the occurrence and find mistakes.
+        Given a sample of text, compare the ground truth entity labels dennoted by
+        annotation and predicted entity labels denoted by predictions. Count the
+        occurrence and find mistakes.
         """
         # annotation may use a different label schema, if so
         # use mapping to convert predictions to that schema for comparison
@@ -50,7 +51,9 @@ class ModelEvaluator:
                 SampleError(token_errors=[], full_text=text, length_mismatch=True),
             )
 
-        sample_error = SampleError(token_errors=[], full_text=text, length_mismatch=False)
+        sample_error = SampleError(
+            token_errors=[], full_text=text, length_mismatch=False
+        )
         tokens = self.tokeniser(text)
 
         for i in range(len(annotations)):
@@ -69,10 +72,10 @@ class ModelEvaluator:
 
     def evaluate_sample(self, text: str, annotations: List[str]) -> EvaluationResult:
         predictions = self.predict_token_based_entities(text)
-        label_pair_counter, sample_error = self._compare(
-            text, annotations, predictions
+        label_pair_counter, sample_error = self._compare(text, annotations, predictions)
+        return EvaluationResult(
+            label_pair_counter=label_pair_counter, mistakes=sample_error
         )
-        return EvaluationResult(label_pair_counter=label_pair_counter, mistakes=sample_error)
 
     def evaulate_all(
         self, texts: List[str], annotations: List[List[str]]
