@@ -1,7 +1,7 @@
 from typing import List, Tuple
 
 from recognisers.recogniser_result import RecogniserResult
-from tokenizers.token import Token
+from tokeniser.token import Token
 
 
 def is_substring(

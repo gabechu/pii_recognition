@@ -4,7 +4,7 @@ from typing import Callable, Dict, List, Optional, Tuple
 import numpy as np
 
 from recognisers.entity_recogniser import Rec_co
-from tokenizers.token import Token
+from tokeniser.token import Token
 
 from .evaluation_result import EvaluationResult
 from .label import Label, map_labels

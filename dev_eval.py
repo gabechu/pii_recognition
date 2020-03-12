@@ -2,12 +2,12 @@ from evaluation.model_evaluator import ModelEvaluator
 from data_reader.conll_reader import get_conll_eval_data
 from recognisers.crf_recogniser import CrfRecogniser
 from recognisers.spacy_recogniser import SpacyRecogniser
-from tokenizers.detokenizer import space_join_detokenzier
-from tokenizers.nltk_tokenizer import word_tokenizer
+from tokeniser.detokeniser import space_join_detokensier
+from tokeniser.tokeniser import nltk_word_tokenizer
 
 # Prepare evalution data
 X_test, y_test = get_conll_eval_data(
-    file_path="datasets/conll2003/eng.testb", detokenizer=space_join_detokenzier
+    file_path="datasets/conll2003/eng.testb", detokenizer=space_join_detokensier
 )
 
 
@@ -24,9 +24,9 @@ crf_recogniser = CrfRecogniser(
     ],
     supported_languages=["en"],
     model_path="exported_models/conll2003-en.crfsuite",
-    tokenizer=word_tokenizer,
+    tokenizer=nltk_word_tokenizer,
 )
-evaluator = ModelEvaluator(crf_recogniser, ["I-PER"], word_tokenizer)
+evaluator = ModelEvaluator(crf_recogniser, ["I-PER"], nltk_word_tokenizer)
 
 
 results = evaluator.evaulate_all(X_test, y_test)
