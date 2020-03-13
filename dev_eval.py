@@ -1,7 +1,6 @@
 from evaluation.model_evaluator import ModelEvaluator
 from data_reader.conll_reader import get_conll_eval_data
 from recognisers.crf_recogniser import CrfRecogniser
-from recognisers.spacy_recogniser import SpacyRecogniser
 from tokeniser.detokeniser import space_join_detokensier
 from tokeniser.tokeniser import nltk_word_tokenizer
 
