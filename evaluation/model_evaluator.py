@@ -26,12 +26,12 @@ class ModelEvaluator:
         self.tokeniser = tokeniser
         self.entity_mapping = entity_mapping
 
-    def predict_token_based_entities(self, text: str) -> List[str]:
+    def get_token_based_prediction(self, text: str) -> List[str]:
         recognised_entities = self.recogniser.analyse(text, self.target_entities)
         tokens = self.tokeniser(text)
         return span_labels_to_token_labels(tokens, recognised_entities)
 
-    def _compare(
+    def _compare_predicted_and_truth(
         self, text: str, annotations: List[str], predictions: List[str]
     ) -> Tuple[Counter, SampleError]:
         """
@@ -71,8 +71,10 @@ class ModelEvaluator:
         return label_pair_counter, sample_error
 
     def evaluate_sample(self, text: str, annotations: List[str]) -> EvaluationResult:
-        predictions = self.predict_token_based_entities(text)
-        label_pair_counter, sample_error = self._compare(text, annotations, predictions)
+        predictions = self.get_token_based_prediction(text)
+        label_pair_counter, sample_error = self._compare_predicted_and_truth(
+            text, annotations, predictions
+        )
         return EvaluationResult(
             label_pair_counter=label_pair_counter, mistakes=sample_error
         )
