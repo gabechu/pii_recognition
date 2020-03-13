@@ -17,7 +17,7 @@ crf_recogniser = CrfRecogniser(
     ],
     supported_languages=["en"],
     model_path="exported_models/conll2003-en.crfsuite",  # pretrained model
-    tokenizer=nltk_word_tokenizer,
+    tokenizer=nltk_word_tokenizer,  # this crf is token based
 )
 
 crf_recogniser.analyze(text="I love Melbourne.", entities=["I-PER", "I-LOC"])
