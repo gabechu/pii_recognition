@@ -1,9 +1,7 @@
 from typing import Dict, List
 
 
-def map_labels(
-    type_A_labels: List[str], A2B_mapping: Dict[str, str]
-) -> List[str]:
+def map_labels(type_A_labels: List[str], A2B_mapping: Dict[str, str]) -> List[str]:
     """
     Convert between different label conventions. For example, in one convention
     entities are defined as [PER, LOC], while in another entities can be defined as
