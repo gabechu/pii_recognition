@@ -27,7 +27,7 @@ class ModelEvaluator:
         self.entity_mapping = entity_mapping
 
     def predict_token_based_entities(self, text: str) -> List[str]:
-        recognised_entities = self.recogniser.analyze(text, self.target_entities)
+        recognised_entities = self.recogniser.analyse(text, self.target_entities)
         tokens = self.tokeniser(text)
         return span_labels_to_token_labels(tokens, recognised_entities)
 

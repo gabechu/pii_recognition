@@ -37,7 +37,7 @@ class CrfRecogniser(EntityRecogniser):
             word2features(tokenised_sentence, i) for i in range(len(tokenised_sentence))
         ]
 
-    def analyze(self, text: str, entities: List[str]) -> List[RecogniserResult]:
+    def analyse(self, text: str, entities: List[str]) -> List[RecogniserResult]:
         self.validate_entities(entities)
         # TODO: validate languages
 

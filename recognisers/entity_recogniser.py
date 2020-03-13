@@ -41,7 +41,7 @@ class EntityRecogniser(metaclass=ABCMeta):
         ...
 
     @abstractmethod
-    def analyze(self, text: str, entities: List[str]) -> List[RecogniserResult]:
+    def analyse(self, text: str, entities: List[str]) -> List[RecogniserResult]:
         """Anotate asked entities in the text."""
         ...
 

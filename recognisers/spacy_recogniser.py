@@ -23,7 +23,7 @@ class SpacyRecogniser(EntityRecogniser):
     def load_model(self) -> MultiLanguage:
         return spacy.load(self._model_name, disable=["parser", "tagger"])
 
-    def analyze(self, text: str, entities: List[str]) -> List[RecogniserResult]:
+    def analyse(self, text: str, entities: List[str]) -> List[RecogniserResult]:
         self.validate_entities(entities)
 
         # TODO: validate languages

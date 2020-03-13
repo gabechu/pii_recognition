@@ -37,15 +37,17 @@ def text():
 
 
 @patch.object(target=CrfRecogniser, attribute="load_model", new=get_mock_load_model())
-def test_crf_recogniser_analyze(text, mock_tokeniser):
+def test_crf_recogniser_analyse(text, mock_tokeniser):
     recogniser = CrfRecogniser(["PER", "LOC"], ["en"], "fake_path", mock_tokeniser)
 
-    actual = recogniser.analyze(text, entities=["PER"])
+    actual = recogniser.analyse(text, entities=["PER"])
     assert actual == [RecogniserResult("PER", 8, 11)]
 
-    actual = recogniser.analyze(text, entities=["PER", "LOC"])
+    actual = recogniser.analyse(text, entities=["PER", "LOC"])
     assert actual == [RecogniserResult("PER", 8, 11), RecogniserResult("LOC", 17, 26)]
 
     with pytest.raises(AssertionError) as err:
-        recogniser.analyze(text, entities=["PER", "LOC", "TIME"])
-    assert str(err.value) == "Only support ['PER', 'LOC'], but got ['PER', 'LOC', 'TIME']"
+        recogniser.analyse(text, entities=["PER", "LOC", "TIME"])
+    assert (
+        str(err.value) == "Only support ['PER', 'LOC'], but got ['PER', 'LOC', 'TIME']"
+    )
