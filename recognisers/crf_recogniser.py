@@ -59,4 +59,6 @@ class CrfRecogniser(EntityRecogniser):
                         end=preprocessed_text[i].end,
                     )
                 )
+                # TODO: Merging spans. Token is used to identify the boundary of spans,
+                # if two tokens are adjacent, we should get one span instead of two.
         return results
