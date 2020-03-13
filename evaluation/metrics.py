@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def compute_f_beta(precision: float, recall: float, beta: float) -> float:
+def compute_f_beta(precision: float, recall: float, beta: float = 1.0) -> float:
     if np.isnan(precision) or np.isnan(recall) or (precision == 0 and recall == 0):
         return np.nan
 
