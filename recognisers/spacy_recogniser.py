@@ -4,7 +4,7 @@ import spacy
 from spacy.lang.xx import MultiLanguage
 
 from .entity_recogniser import EntityRecogniser
-from .recogniser_result import RecogniserResult
+from label.label_schema import SpanLabel
 
 
 class SpacyRecogniser(EntityRecogniser):
@@ -23,7 +23,7 @@ class SpacyRecogniser(EntityRecogniser):
     def load_model(self) -> MultiLanguage:
         return spacy.load(self._model_name, disable=["parser", "tagger"])
 
-    def analyse(self, text: str, entities: List[str]) -> List[RecogniserResult]:
+    def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
         self.validate_entities(entities)
 
         # TODO: validate languages
@@ -35,7 +35,7 @@ class SpacyRecogniser(EntityRecogniser):
         filtered_entities = list(filter(lambda x: x.label_ in entities, spacy_entities))
 
         return [
-            RecogniserResult(
+            SpanLabel(
                 entity_type=entity.label_, start=entity.start_char, end=entity.end_char
             )
             for entity in filtered_entities

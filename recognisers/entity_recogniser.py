@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import Any, List, TypeVar
 
-from .recogniser_result import RecogniserResult
+from label.label_schema import SpanLabel
 
 
 class EntityRecogniser(metaclass=ABCMeta):
@@ -41,7 +41,7 @@ class EntityRecogniser(metaclass=ABCMeta):
         ...
 
     @abstractmethod
-    def analyse(self, text: str, entities: List[str]) -> List[RecogniserResult]:
+    def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
         """Anotate asked entities in the text."""
         ...
 

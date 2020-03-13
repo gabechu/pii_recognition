@@ -5,7 +5,7 @@ from tokeniser.token import Token
 import pytest
 
 from .crf_recogniser import CrfRecogniser
-from .recogniser_result import RecogniserResult
+from label.label_schema import SpanLabel
 
 
 def get_mock_load_model():
@@ -26,7 +26,7 @@ def mock_tokeniser():
         Token("Bob", 8, 11),
         Token("from", 12, 16),
         Token("Melbourne", 17, 26),
-        Token(".", 27, 28),
+        Token(".", 26, 27),
     ]
     return tokeniser
 
@@ -41,10 +41,10 @@ def test_crf_recogniser_analyse(text, mock_tokeniser):
     recogniser = CrfRecogniser(["PER", "LOC"], ["en"], "fake_path", mock_tokeniser)
 
     actual = recogniser.analyse(text, entities=["PER"])
-    assert actual == [RecogniserResult("PER", 8, 11)]
+    assert actual == [SpanLabel("PER", 8, 11)]
 
     actual = recogniser.analyse(text, entities=["PER", "LOC"])
-    assert actual == [RecogniserResult("PER", 8, 11), RecogniserResult("LOC", 17, 26)]
+    assert actual == [SpanLabel("PER", 8, 11), SpanLabel("LOC", 17, 26)]
 
     with pytest.raises(AssertionError) as err:
         recogniser.analyse(text, entities=["PER", "LOC", "TIME"])

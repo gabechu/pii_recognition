@@ -6,7 +6,7 @@ from features.word_to_features import word2features
 from tokeniser.token import Token
 
 from .entity_recogniser import EntityRecogniser
-from .recogniser_result import RecogniserResult
+from label.label_schema import SpanLabel
 
 
 class CrfRecogniser(EntityRecogniser):
@@ -37,7 +37,7 @@ class CrfRecogniser(EntityRecogniser):
             word2features(tokenised_sentence, i) for i in range(len(tokenised_sentence))
         ]
 
-    def analyse(self, text: str, entities: List[str]) -> List[RecogniserResult]:
+    def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
         self.validate_entities(entities)
         # TODO: validate languages
 
@@ -53,7 +53,7 @@ class CrfRecogniser(EntityRecogniser):
             entity_type = entity_tags[i]
             if entity_type in entities:
                 results.append(
-                    RecogniserResult(
+                    SpanLabel(
                         entity_type=entity_type,
                         start=preprocessed_text[i].start,
                         end=preprocessed_text[i].end,
