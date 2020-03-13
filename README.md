@@ -20,7 +20,7 @@ crf_recogniser = CrfRecogniser(
     tokenizer=nltk_word_tokenizer,  # this crf is token based
 )
 
-crf_recogniser.analyze(text="I love Melbourne.", entities=["I-PER", "I-LOC"])
+crf_recogniser.analyse(text="I love Melbourne.", entities=["I-PER", "I-LOC"])
 ```
 
 This should print
@@ -39,7 +39,7 @@ spacy_recogniser = SpacyRecogniser(
     supported_languages=["en", "de", "es", "fr", "it", "pt", "ru"],
     model_name="xx_ent_wiki_sm"  # more models on https://spacy.io/models
 )
-spacy_recogniser.analyze(text="I love Melbourne.", entities=["PER", "LOC"])
+spacy_recogniser.analyse(text="I love Melbourne.", entities=["PER", "LOC"])
 ```
 
 This should also print
