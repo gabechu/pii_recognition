@@ -62,4 +62,4 @@ evaluator = ModelEvaluator(
 results = evaluator.evaulate_all(X_test, y_test)
 score = evaluator.calculate_score(results, f_beta=1.)
 ```
-Aggregation score could be an enhancement that we'd like to incorporate in the near future.
+The evaluation produces per entity based results. Aggregation score can be an enhancement that we'd like to incorporate in the near future.
