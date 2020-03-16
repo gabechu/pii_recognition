@@ -1,10 +1,11 @@
 from collections import Counter
 
+import numpy as np
 import pytest
 from mock import Mock
 from pytest import fixture
 
-from label.label_schema import SpanLabel, EvalLabel
+from label.label_schema import EvalLabel, SpanLabel
 from tokeniser.token import Token
 
 from .model_evaluator import ModelEvaluator
@@ -174,4 +175,52 @@ def test_evaulate_all(text, mock_recogniser, mock_tokeniser):
 
 
 def test_calculate_score():
-    ...
+    evaluator = ModelEvaluator(
+        recogniser=Mock(), target_entities=["PER", "LOC"], tokeniser=Mock()
+    )
+
+    # test 1: LOC 0.=presion=recall
+    counters = [
+        Counter(
+            {
+                EvalLabel("O", "O"): 3,
+                EvalLabel("O", "LOC"): 1,
+                EvalLabel("LOC", "O"): 1,
+                EvalLabel("PER", "PER"): 1,
+            }
+        )
+    ]
+    actual = evaluator.calculate_score(counters)
+    assert actual == {"PER": 1.0, "LOC": np.nan}
+
+    # test 2: multiple texts
+    counters = [
+        Counter(
+            {
+                EvalLabel("O", "O"): 4,
+                EvalLabel("LOC", "LOC"): 1,
+                EvalLabel("PER", "PER"): 1,
+            }
+        )
+    ] * 2
+    actual = evaluator.calculate_score(counters)
+    assert actual == {"PER": 1.0, "LOC": 1.0}
+
+    # test 3: with entity mapping
+    evaluator = ModelEvaluator(
+        recogniser=Mock(),
+        target_entities=["PER", "LOC"],
+        tokeniser=Mock(),
+        entity_mapping={"LOC": "LOCATION", "PER": "PERSON"},
+    )
+    counters = [
+        Counter(
+            {
+                EvalLabel("O", "O"): 4,
+                EvalLabel("LOCATION", "LOCATION"): 1,
+                EvalLabel("PERSON", "PERSON"): 1,
+            }
+        )
+    ] * 2
+    actual = evaluator.calculate_score(counters)
+    assert actual == {"PERSON": 1.0, "LOCATION": 1.0}

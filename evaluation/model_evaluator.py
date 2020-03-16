@@ -117,10 +117,12 @@ class ModelEvaluator:
         entity_precision = {}
         entity_f_score = {}
 
-        for entity in self.target_entities:
-            if self.entity_mapping:
-                entity = self.entity_mapping[entity]
+        translated_target_entities = [
+            self.entity_mapping[entity] if self.entity_mapping else entity
+            for entity in self.target_entities
+        ]
 
+        for entity in translated_target_entities:
             annotated = sum(
                 [all_results[x] for x in all_results if x.annotated == entity]
             )
