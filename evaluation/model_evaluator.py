@@ -14,6 +14,17 @@ from .prediction_error import SampleError, TokenError
 
 
 class ModelEvaluator:
+    """
+    Evaluates a named entity recogniser.
+
+    Attributes:
+        recogniser: a named entity recogniser.
+        target_entities: entities to be evaluated.
+        tokeniser: a callable to break a string into tokens.
+        entity_mapping: a dict facilitate entity conversion. Predicted entity labels
+            may differ from evaluation entity labels, e.g., PERSON and PER.
+    """
+
     def __init__(
         self,
         recogniser: Rec_co,
@@ -49,8 +60,6 @@ class ModelEvaluator:
         annotation and predicted entity labels denoted by predictions. Count the
         occurrence and find mistakes.
         """
-        # annotated label may use a different label schema, to facilitate predictions
-        # use a mapping to convert to something comparable
         if self.entity_mapping:
             predictions = map_labels(predictions, self.entity_mapping)
 
