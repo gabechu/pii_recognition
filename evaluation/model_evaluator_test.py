@@ -41,6 +41,36 @@ def mock_tokeniser():
     return tokeniser
 
 
+def test_class_init():
+    mock_recogniser = Mock()
+    mock_tokeniser = Mock()
+
+    # test 1: succeed
+    evaluator = ModelEvaluator(
+        recogniser=mock_recogniser,
+        target_entities=["PER", "LOC"],
+        tokeniser=mock_tokeniser,
+        entity_mapping={"PER": "PERSON"},
+    )
+
+    assert evaluator.recogniser == mock_recogniser
+    assert evaluator.target_entities == ["PER", "LOC"]
+    assert evaluator.tokeniser == mock_tokeniser
+    assert evaluator.entity_mapping == {"PER": "PERSON"}
+
+    # test 2: raise assertion error
+    with pytest.raises(AssertionError) as err:
+        evaluator = ModelEvaluator(
+            recogniser=mock_recogniser,
+            target_entities=["PER", "PER", "LOC"],
+            tokeniser=mock_tokeniser,
+        )
+    assert (
+        str(err.value)
+        == "No repeated entities are allowed, but found ['PER', 'PER', 'LOC']."
+    )
+
+
 def test_get_token_based_prediction(text, mock_recogniser, mock_tokeniser):
     # test 1: succeed
     evaluator = ModelEvaluator(

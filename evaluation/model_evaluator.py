@@ -32,6 +32,10 @@ class ModelEvaluator:
         tokeniser: Callable[[str], List[Token]],
         entity_mapping: Optional[Dict[str, str]] = None,
     ):
+        assert len(set(target_entities)) == len(
+            target_entities
+        ), f"No repeated entities are allowed, but found {target_entities}."
+
         self.recogniser = recogniser
         self.target_entities = target_entities
         self.tokeniser = tokeniser
