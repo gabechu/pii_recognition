@@ -4,7 +4,7 @@
 
 ### Example Usage
 #### CRF Model
-Let's load a pretrained CRF PII recogniser and run over an example text.
+Let's load a pretrained CRF PII recogniser and run the recogniser over an example text.
 
 ```python
 from tokeniser.tokeniser import nltk_word_tokenizer
@@ -23,13 +23,14 @@ crf_recogniser = CrfRecogniser(
 crf_recogniser.analyse(text="I love Melbourne.", entities=["I-PER", "I-LOC"])
 ```
 
-This should print
+This should print (span is used for segment labelling)
 ```console
 [SpanLabel(entity_type='I-LOC', start=7, end=16)]
 ```
 
+
 #### spaCy Model
-Create a spaCy recogniser and analyse text with it
+Create a spaCy recogniser and conduct analysis
 
 ```python
 from recognisers.spacy_recogniser import SpacyRecogniser
@@ -61,7 +62,7 @@ ground_truths = [["O", "O", "O", "O", "O", "O"], ["O", "O", "O", "O", "O", "O"]]
 ```
 
 ### Evaluator
-Evaluate one specific recogniser for `f-score`, depending on the value of `f_beta` it can be `f1` or `f2`. 
+Evaluation is based on `f-score`. Take one specific recogniser and pass to the evaluator, depending on the value of `f_beta`, `f1` or `f2` values will be produced for each desried entity.
 ```python
 from evaluation.model_evaluator import ModelEvaluator
 
