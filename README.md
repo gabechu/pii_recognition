@@ -25,7 +25,7 @@ crf_recogniser.analyse(text="I love Melbourne.", entities=["I-PER", "I-LOC"])
 
 This should print
 ```console
-[RecogniserResult(entity_type='I-LOC', start=7, end=16)]
+[SpanLabel(entity_type='I-LOC', start=7, end=16)]
 ```
 
 #### spaCy Model
@@ -44,11 +44,23 @@ spacy_recogniser.analyse(text="I love Melbourne.", entities=["PER", "LOC"])
 
 This should also print
 ```console
-[RecogniserResult(entity_type='LOC', start=7, end=16)]
+[SpanLabel(entity_type='LOC', start=7, end=16)]
 ```
 
 
 ## Recogniser Evaluation
+### Data Format
+The *input data* to evaluation is a list of strings, where each string represents either a sentence or a paragraph, for example,
+```python
+input_data = ["A sentence to be evaluated.", "A paragraph to be evaluated."]
+```
+
+The label of *ground truth* is defined at a token-level, that is, assigning an entity label to every token in the text, for example, if using a BIO schema ground truths for the above input data are
+```python
+ground_truths = [["O", "O", "O", "O", "O", "O"], ["O", "O", "O", "O", "O", "O"]]
+```
+
+### Evaluator
 Evaluate one specific recogniser for `f-score`, depending on the value of `f_beta` it can be `f1` or `f2`. 
 ```python
 from evaluation.model_evaluator import ModelEvaluator
@@ -59,7 +71,7 @@ evaluator = ModelEvaluator(
     tokeniser=nltk_word_tokenizer  # labels are token based
 )
 
-results = evaluator.evaulate_all(X_test, y_test)
+results = evaluator.evaulate_all(input_data, ground_truths)
 score = evaluator.calculate_score(results, f_beta=1.)
 ```
-The evaluation produces per entity based results. Aggregation score can be an enhancement that we'd like to incorporate in the near future.
+The evaluation produces per entity based results, e.g., `{"PER": 0.7, "LOC": 0.8}`. An aggregation score will be incorporated as an enhancement.
