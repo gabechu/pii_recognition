@@ -42,6 +42,7 @@ def mock_tokeniser():
 
 
 def test_get_token_based_prediction(text, mock_recogniser, mock_tokeniser):
+    # test 1: succeed
     evaluator = ModelEvaluator(
         recogniser=mock_recogniser,
         target_entities=["PER", "LOC"],
@@ -50,6 +51,7 @@ def test_get_token_based_prediction(text, mock_recogniser, mock_tokeniser):
     actual = evaluator.get_token_based_prediction(text)
     assert actual == ["O", "O", "PER", "O", "LOC", "O"]
 
+    # test 2: raise assertion error
     evaluator = ModelEvaluator(
         recogniser=mock_recogniser, target_entities=["PER"], tokeniser=mock_tokeniser,
     )
@@ -139,8 +141,19 @@ def test_evaluate_sample(text, mock_recogniser, mock_tokeniser):
         target_entities=["PER", "LOC"],
         tokeniser=mock_tokeniser,
     )
+
+    # test 1: simple straightforward pass
     counter, mistakes = evaluator.evaluate_sample(
         text, annotations=["O", "O", "PER", "O", "LOC", "O"]
+    )
+    assert counter == Counter(
+        {EvalLabel("O", "O"): 4, EvalLabel("LOC", "LOC"): 1, EvalLabel("PER", "PER"): 1}
+    )
+    assert mistakes == SampleError(token_errors=[], full_text=text, failed=False)
+
+    # test 2: annotated labels not in target_entities
+    counter, mistakes = evaluator.evaluate_sample(
+        text, annotations=["O", "MISC", "PER", "O", "LOC", "MISC"]
     )
     assert counter == Counter(
         {EvalLabel("O", "O"): 4, EvalLabel("LOC", "LOC"): 1, EvalLabel("PER", "PER"): 1}
