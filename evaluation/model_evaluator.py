@@ -3,14 +3,15 @@ from typing import Callable, Dict, List, Optional, Tuple
 
 import numpy as np
 
+from label.label_schema import EvalLabel
+from label.mapping import map_labels
 from recognisers.entity_recogniser import Rec_co
 from tokeniser.token import Token
 
 from .evaluation_result import EvaluationResult
-from .label import Label, map_labels
 from .metrics import compute_f_beta
 from .prediction_error import SampleError, TokenError
-from .span_to_token import span_labels_to_token_labels
+from label.span_to_token import span_labels_to_token_labels
 
 
 class ModelEvaluator:
@@ -29,18 +30,28 @@ class ModelEvaluator:
     def get_token_based_prediction(self, text: str) -> List[str]:
         recognised_entities = self.recogniser.analyse(text, self.target_entities)
         tokens = self.tokeniser(text)
-        return span_labels_to_token_labels(tokens, recognised_entities)
+        token_labels = span_labels_to_token_labels(recognised_entities, tokens)
+
+        # validate predictions
+        asked_entities = set(self.target_entities) | {"O"}
+        predicted_entities = set(token_labels)
+        assert predicted_entities.issubset(asked_entities), (
+            f"Predictions contain unasked entities "
+            f"{sorted(list(predicted_entities - asked_entities))}"
+        )
+
+        return token_labels
 
     def _compare_predicted_and_truth(
         self, text: str, annotations: List[str], predictions: List[str]
     ) -> Tuple[Counter, SampleError]:
         """
-        Given a sample of text, compare the ground truth entity labels dennoted by
+        Given a sample text, compare the ground truth entity labels dennoted by
         annotation and predicted entity labels denoted by predictions. Count the
         occurrence and find mistakes.
         """
-        # annotation may use a different label schema, if so
-        # use mapping to convert predictions to that schema for comparison
+        # annotated label may use a different label schema, to facilitate predictions
+        # use a mapping to convert to something comparable
         if self.entity_mapping:
             predictions = map_labels(predictions, self.entity_mapping)
 
@@ -48,16 +59,14 @@ class ModelEvaluator:
         if len(annotations) != len(predictions):
             return (
                 label_pair_counter,
-                SampleError(token_errors=[], full_text=text, length_mismatch=True),
+                SampleError(token_errors=[], full_text=text, failed=True),
             )
 
-        sample_error = SampleError(
-            token_errors=[], full_text=text, length_mismatch=False
-        )
+        sample_error = SampleError(token_errors=[], full_text=text, failed=False)
         tokens = self.tokeniser(text)
 
         for i in range(len(annotations)):
-            label_pair_counter[Label(annotations[i], predictions[i])] += 1
+            label_pair_counter[EvalLabel(annotations[i], predictions[i])] += 1
             # log mistakes
             if annotations[i] != predictions[i]:
                 sample_error.token_errors.append(
