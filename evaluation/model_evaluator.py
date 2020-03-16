@@ -81,6 +81,7 @@ class ModelEvaluator:
     def evaluate_sample(
         self, text: str, annotations: List[str]
     ) -> Tuple[Counter, SampleError]:
+        # TODO: filter annotation by target_entity
         predictions = self.get_token_based_prediction(text)
         label_pair_counter, sample_error = self._compare_predicted_and_truth(
             text, annotations, predictions
