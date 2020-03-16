@@ -132,8 +132,19 @@ def test__compare_predicted_and_truth(text, mock_tokeniser):
     assert mistakes == SampleError(token_errors=[], full_text=text, failed=False)
 
 
-def test_evaluate_sample():
-    ...
+def test_evaluate_sample(text, mock_recogniser, mock_tokeniser):
+    evaluator = ModelEvaluator(
+        recogniser=mock_recogniser,
+        target_entities=["PER", "LOC"],
+        tokeniser=mock_tokeniser,
+    )
+    counter, mistakes = evaluator.evaluate_sample(
+        text, annotations=["O", "O", "PER", "O", "LOC", "O"]
+    )
+    assert counter == Counter(
+        {EvalLabel("O", "O"): 4, EvalLabel("LOC", "LOC"): 1, EvalLabel("PER", "PER"): 1}
+    )
+    assert mistakes == SampleError(token_errors=[], full_text=text, failed=False)
 
 
 def test_evaulate_all():
