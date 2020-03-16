@@ -5,13 +5,12 @@ import numpy as np
 
 from label.label_schema import EvalLabel
 from label.mapping import map_labels
+from label.span_to_token import span_labels_to_token_labels
 from recognisers.entity_recogniser import Rec_co
 from tokeniser.token import Token
 
-from .evaluation_result import EvaluationResult
 from .metrics import compute_f_beta
 from .prediction_error import SampleError, TokenError
-from label.span_to_token import span_labels_to_token_labels
 
 
 class ModelEvaluator:
@@ -79,34 +78,39 @@ class ModelEvaluator:
 
         return label_pair_counter, sample_error
 
-    def evaluate_sample(self, text: str, annotations: List[str]) -> EvaluationResult:
+    def evaluate_sample(
+        self, text: str, annotations: List[str]
+    ) -> Tuple[Counter, SampleError]:
         predictions = self.get_token_based_prediction(text)
         label_pair_counter, sample_error = self._compare_predicted_and_truth(
             text, annotations, predictions
         )
-        return EvaluationResult(
-            label_pair_counter=label_pair_counter, mistakes=sample_error
-        )
+        return label_pair_counter, sample_error
 
     def evaulate_all(
         self, texts: List[str], annotations: List[List[str]]
-    ) -> List[EvaluationResult]:
+    ) -> Tuple[List[Counter], List[SampleError]]:
         assert len(texts) == len(annotations), (
             f"The number of texts: {len(texts)} mismatches with the number of"
             f"annotations {len(annotations)}"
         )
 
-        return [
-            self.evaluate_sample(texts[i], annotations[i]) for i in range(len(texts))
-        ]
+        counters = []
+        mistakes = []
+        for i in range(len(texts)):
+            label_pair_counter, sample_error = self.evaluate_sample(
+                texts[i], annotations[i]
+            )
+            counters.append(label_pair_counter)
+            mistakes.append(sample_error)
+
+        return counters, mistakes
 
     def calculate_score(
-        self, evaluation_results: List[EvaluationResult], f_beta: float = 1.0
+        self, all_eval_counters: List[Counter], f_beta: float = 1.0
     ) -> Dict[str, float]:
         # aggregate results
-        all_results: Counter = sum(
-            [res.label_pair_counter for res in evaluation_results], Counter()
-        )
+        all_results: Counter = sum(all_eval_counters, Counter())
 
         # compute score per entity
         entity_recall = {}
