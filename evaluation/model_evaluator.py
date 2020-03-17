@@ -5,7 +5,7 @@ import numpy as np
 
 from label.label_schema import EvalLabel
 from label.mapping import map_labels, mask_labels
-from label.span_to_token import span_labels_to_token_labels
+from label.span import span_labels_to_token_labels
 from recognisers.entity_recogniser import Rec_co
 from tokeniser.token import Token
 
