@@ -4,7 +4,7 @@ from typing import Callable, Dict, List, Optional, Tuple
 import numpy as np
 
 from label.label_schema import EvalLabel
-from label.mapping import map_labels
+from label.mapping import map_labels, mask_labels
 from label.span_to_token import span_labels_to_token_labels
 from recognisers.entity_recogniser import Rec_co
 from tokeniser.token import Token
@@ -94,9 +94,7 @@ class ModelEvaluator:
     def evaluate_sample(
         self, text: str, annotations: List[str]
     ) -> Tuple[Counter, SampleError]:
-        new_annotations = [
-            ann if ann in self.target_entities else "O" for ann in annotations
-        ]
+        new_annotations = mask_labels(annotations, self.target_entities)
         predictions = self.get_token_based_prediction(text)
         label_pair_counter, sample_error = self._compare_predicted_and_truth(
             text, new_annotations, predictions
