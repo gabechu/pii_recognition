@@ -19,12 +19,12 @@ def map_labels(type_A_labels: List[str], A2B_mapping: Dict[str, str]) -> List[st
 
 
 def mask_labels(
-    input_labels: List[str], non_mask_labels: List[str], default_value: str = "O"
+    input_labels: List[str], non_mask_labels: List[str], mask_value: str = "O"
 ) -> List[str]:
     results = []
     for lab in input_labels:
         if lab in non_mask_labels:
             results.append(lab)
         else:
-            results.append(default_value)
+            results.append(mask_value)
     return results
