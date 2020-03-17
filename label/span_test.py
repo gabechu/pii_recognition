@@ -75,8 +75,8 @@ def test_token_labels_to_span_labels():
         SpanLabel("O", 43, 60),
     ]
 
-    tokens = []
-    tags = ["O"]
+    tokens = [Token(".", 0, 1)]
+    tags = ["O", "O"]
     with pytest.raises(AssertionError) as err:
         token_labels_to_span_labels(tokens, tags)
-    assert str(err.value) == "Length mismatch, where len(tokens)=0 and len(tags)=1"
+    assert str(err.value) == "Length mismatch, where len(tokens)=1 and len(tags)=2"
