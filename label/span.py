@@ -62,6 +62,7 @@ def token_labels_to_span_labels(
     if len(labels) == 1:
         return [SpanLabel(labels[0], segment_start, segment_end)]
 
+    # process all except the last one
     for i in range(1, len(labels)):
         if labels[i] == labels[i - 1]:
             segment_end = tokens[i].end
@@ -70,7 +71,7 @@ def token_labels_to_span_labels(
             segment_start = tokens[i].start
             segment_end = tokens[i].end
 
-        if i == len(labels) - 1:
-            segment_end = tokens[i].end
-            span_labels.append(SpanLabel(labels[i], segment_start, segment_end))
+    # write out the last one
+    segment_end = tokens[-1].end
+    span_labels.append(SpanLabel(labels[-1], segment_start, segment_end))
     return span_labels
