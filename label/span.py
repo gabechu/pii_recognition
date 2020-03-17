@@ -45,3 +45,32 @@ def span_labels_to_token_labels(
                 token_labels[i] = label.entity_type
                 break
     return token_labels
+
+
+def token_labels_to_span_labels(
+    tokens: List[Token], labels: List[str]
+) -> List[SpanLabel]:
+    assert len(tokens) == len(labels), (
+        f"Length mismatch, where len(tokens)={len(tokens)} and "
+        f"len(tags)={len(labels)}"
+    )
+
+    span_labels = []
+    segment_start = tokens[0].start
+    segment_end = tokens[0].end
+
+    if len(labels) == 1:
+        return [SpanLabel(labels[0], segment_start, segment_end)]
+
+    for i in range(1, len(labels)):
+        if labels[i] == labels[i - 1]:
+            segment_end = tokens[i].end
+        else:
+            span_labels.append(SpanLabel(labels[i - 1], segment_start, segment_end))
+            segment_start = tokens[i].start
+            segment_end = tokens[i].end
+
+        if i == len(labels) - 1:
+            segment_end = tokens[i].end
+            span_labels.append(SpanLabel(labels[i], segment_start, segment_end))
+    return span_labels
