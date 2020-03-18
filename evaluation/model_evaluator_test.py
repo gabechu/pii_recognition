@@ -50,13 +50,13 @@ def test_class_init():
         recogniser=mock_recogniser,
         target_entities=["PER", "LOC"],
         tokeniser=mock_tokeniser,
-        entity_mapping={"PER": "PERSON"},
+        to_eval_labels={"PER": "PERSON"},
     )
 
     assert evaluator.recogniser == mock_recogniser
     assert evaluator.target_entities == ["PER", "LOC"]
     assert evaluator.tokeniser == mock_tokeniser
-    assert evaluator.entity_mapping == {"PER": "PERSON"}
+    assert evaluator.to_eval_labels == {"PER": "PERSON"}
 
     # test 2: raise assertion error
     with pytest.raises(AssertionError) as err:
@@ -148,7 +148,7 @@ def test__compare_predicted_and_truth(text, mock_tokeniser):
         recogniser=Mock(),
         target_entities=["ANY"],
         tokeniser=mock_tokeniser,
-        entity_mapping={"LOC": "LOCATION", "PER": "PERSON"},
+        to_eval_labels={"LOC": "LOCATION", "PER": "PERSON"},
     )
     counter, mistakes = evaluator._compare_predicted_and_truth(
         text,
@@ -259,7 +259,7 @@ def test_calculate_score():
         recogniser=Mock(),
         target_entities=["PER", "LOC"],
         tokeniser=Mock(),
-        entity_mapping={"LOC": "LOCATION", "PER": "PERSON"},
+        to_eval_labels={"LOC": "LOCATION", "PER": "PERSON"},
     )
     counters = [
         Counter(

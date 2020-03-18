@@ -21,7 +21,7 @@ class ModelEvaluator:
         recogniser: a named entity recogniser.
         target_entities: entities to be evaluated.
         tokeniser: a callable to break a string into tokens.
-        entity_mapping: a dict facilitate entity conversion. Predicted entity labels
+        to_eval_labels: a dict facilitate entity conversion. Predicted entity labels
             may differ from evaluation entity labels, e.g., PERSON and PER.
     """
 
@@ -30,7 +30,7 @@ class ModelEvaluator:
         recogniser: Rec_co,
         target_entities: List[str],
         tokeniser: Optional[Callable[[str], List[Token]]] = None,
-        entity_mapping: Optional[Dict[str, str]] = None,
+        to_eval_labels: Optional[Dict[str, str]] = None,
     ):
         assert len(set(target_entities)) == len(
             target_entities
@@ -39,7 +39,7 @@ class ModelEvaluator:
         self.recogniser = recogniser
         self.target_entities = target_entities
         self.tokeniser = tokeniser
-        self.entity_mapping = entity_mapping
+        self.to_eval_labels = to_eval_labels
 
     def get_token_based_prediction(self, text: str) -> List[str]:
         recognised_entities = self.recogniser.analyse(text, self.target_entities)
@@ -65,8 +65,8 @@ class ModelEvaluator:
         annotation and predicted entity labels denoted by predictions. Count the
         occurrence and find mistakes.
         """
-        if self.entity_mapping:
-            predictions = map_labels(predictions, self.entity_mapping)
+        if self.to_eval_labels:
+            predictions = map_labels(predictions, self.to_eval_labels)
 
         label_pair_counter = Counter()
         if len(annotations) != len(predictions):
@@ -132,7 +132,7 @@ class ModelEvaluator:
         entity_f_score = {}
 
         translated_target_entities = [
-            self.entity_mapping[entity] if self.entity_mapping else entity
+            self.to_eval_labels[entity] if self.to_eval_labels else entity
             for entity in self.target_entities
         ]
 
