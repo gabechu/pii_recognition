@@ -233,8 +233,10 @@ def test_calculate_score():
             }
         )
     ]
-    actual = evaluator.calculate_score(counters)
-    assert actual == {"PER": 1.0, "LOC": np.nan}
+    recall, precision, f1 = evaluator.calculate_score(counters)
+    assert recall == {"PER": 1.0, "LOC": 0.0}
+    assert precision == {"PER": 1.0, "LOC": 0.0}
+    assert f1 == {"PER": 1.0, "LOC": np.nan}
 
     # test 2: multiple texts
     counters = [
@@ -246,8 +248,11 @@ def test_calculate_score():
             }
         )
     ] * 2
-    actual = evaluator.calculate_score(counters)
-    assert actual == {"PER": 1.0, "LOC": 1.0}
+    recall, precision, f1 = evaluator.calculate_score(counters)
+    assert recall == {"PER": 1.0, "LOC": 1.0}
+    assert precision == {"PER": 1.0, "LOC": 1.0}
+    assert f1 == {"PER": 1.0, "LOC": 1.0}
+
 
     # test 3: with entity mapping
     evaluator = ModelEvaluator(
@@ -265,5 +270,7 @@ def test_calculate_score():
             }
         )
     ] * 2
-    actual = evaluator.calculate_score(counters)
-    assert actual == {"PERSON": 1.0, "LOCATION": 1.0}
+    recall, precision, f1 = evaluator.calculate_score(counters)
+    assert recall == {"PERSON": 1.0, "LOCATION": 1.0}
+    assert precision == {"PERSON": 1.0, "LOCATION": 1.0}
+    assert f1 == {"PERSON": 1.0, "LOCATION": 1.0}

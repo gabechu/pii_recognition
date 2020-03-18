@@ -29,7 +29,7 @@ class ModelEvaluator:
         self,
         recogniser: Rec_co,
         target_entities: List[str],
-        tokeniser: Callable[[str], List[Token]],
+        tokeniser: Optional[Callable[[str], List[Token]]] = None,
         entity_mapping: Optional[Dict[str, str]] = None,
     ):
         assert len(set(target_entities)) == len(
@@ -43,8 +43,9 @@ class ModelEvaluator:
 
     def get_token_based_prediction(self, text: str) -> List[str]:
         recognised_entities = self.recogniser.analyse(text, self.target_entities)
-        tokens = self.tokeniser(text)
-        token_labels = span_labels_to_token_labels(recognised_entities, tokens)
+        if self.tokeniser:
+            tokens = self.tokeniser(text)
+            token_labels = span_labels_to_token_labels(recognised_entities, tokens)
 
         # validate predictions
         asked_entities = set(self.target_entities) | {"O"}
@@ -117,12 +118,11 @@ class ModelEvaluator:
             )
             counters.append(label_pair_counter)
             mistakes.append(sample_error)
-
         return counters, mistakes
 
     def calculate_score(
         self, all_eval_counters: List[Counter], f_beta: float = 1.0
-    ) -> Dict[str, float]:
+    ) -> Tuple[Dict, Dict, Dict]:
         # aggregate results
         all_results: Counter = sum(all_eval_counters, Counter())
 
@@ -163,4 +163,4 @@ class ModelEvaluator:
             else:
                 entity_f_score[entity] = np.NaN
 
-        return entity_f_score
+        return entity_recall, entity_precision, entity_f_score
