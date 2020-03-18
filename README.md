@@ -76,3 +76,8 @@ results = evaluator.evaulate_all(input_data, ground_truths)
 score = evaluator.calculate_score(results, f_beta=1.)
 ```
 The evaluation produces per entity based results, e.g., `{"PER": 0.7, "LOC": 0.8}`. An aggregation score will be incorporated as an enhancement.
+
+### Performance
+Evaluation of experiments are conducted on CONLL 2003 English data. The performance has been logged in `mlflow`. There is a concern raised regarding to the quality of CONLL 2003 that we've been using. I obtained the copy of CONLL data on github, whether github author posted the full dataset is unknown and how the author follows the latest guideline generating the CONLL data is also unknown. Eyeball checking shows that in data many country names are labelled as `I-PER` instead of `I-LOC`, a sentence can contain only one single word with rest to be random numbers. Further evaluation needed to determine if we can trust results getting from CONLL evaluation. Anyhow, here's the unvalidated performance
+
+[![Image1](docs/assets/eval_results.png)](docs/assets/eval_results.png)
