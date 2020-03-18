@@ -25,7 +25,9 @@ def mock_ConllCorpusReader():
             ("JAPAN", "NNP", "I-LOC"),
             ("GET", "VB", "O"),
         ],
+        [],
         [("Nadim", "NNP", "I-PER"), ("Ladki", "NNP", "I-PER")],
+        [],
     ]
     return mock
 

@@ -13,6 +13,7 @@ def get_conll_eval_data(
         str(path.parents[0]), str(path.name), ["words", "pos", "ignore", "chunk"]
     )
     sent_features = list(data.iob_sents())
+    sent_features = [x for x in sent_features if x]  # remove empty
 
     sents = [detokenizer(sent2tokens(sent)) for sent in sent_features]
     labels = [sent2labels(sent) for sent in sent_features]
