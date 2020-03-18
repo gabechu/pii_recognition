@@ -29,7 +29,7 @@ class ModelEvaluator:
         self,
         recogniser: Rec_co,
         target_entities: List[str],
-        tokeniser: Optional[Callable[[str], List[Token]]] = None,
+        tokeniser: Callable[[str], List[Token]],
         to_eval_labels: Optional[Dict[str, str]] = None,
     ):
         assert len(set(target_entities)) == len(
@@ -43,9 +43,9 @@ class ModelEvaluator:
 
     def get_token_based_prediction(self, text: str) -> List[str]:
         recognised_entities = self.recogniser.analyse(text, self.target_entities)
-        if self.tokeniser:
-            tokens = self.tokeniser(text)
-            token_labels = span_labels_to_token_labels(recognised_entities, tokens)
+
+        tokens = self.tokeniser(text)
+        token_labels = span_labels_to_token_labels(recognised_entities, tokens)
 
         # validate predictions
         asked_entities = set(self.target_entities) | {"O"}
@@ -95,10 +95,25 @@ class ModelEvaluator:
     def evaluate_sample(
         self, text: str, annotations: List[str]
     ) -> Tuple[Counter, SampleError]:
-        new_annotations = mask_labels(annotations, self.target_entities)
+        # mask non-interested annotations out
+        if self.to_eval_labels:
+            translated_target_entities = map_labels(
+                self.target_entities, self.to_eval_labels
+            )
+        else:
+            translated_target_entities = self.target_entities
+        new_annotations = mask_labels(annotations, translated_target_entities)
+
+        # make prediction
         predictions = self.get_token_based_prediction(text)
+        if self.to_eval_labels:
+            new_predictions = map_labels(predictions, self.to_eval_labels)
+        else:
+            new_predictions = predictions
+
+        # log results
         label_pair_counter, sample_error = self._compare_predicted_and_truth(
-            text, new_annotations, predictions
+            text, new_annotations, new_predictions
         )
         return label_pair_counter, sample_error
 

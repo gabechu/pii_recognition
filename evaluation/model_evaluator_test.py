@@ -191,6 +191,26 @@ def test_evaluate_sample(text, mock_recogniser, mock_tokeniser):
     assert mistakes == SampleError(token_errors=[], full_text=text, failed=False)
 
 
+def test_evaluate_sample_with_label_conversion(mock_recogniser, mock_tokeniser):
+    evaluator = ModelEvaluator(
+        recogniser=mock_recogniser,
+        target_entities=["PER", "LOC"],
+        tokeniser=mock_tokeniser,
+        to_eval_labels={"PER": "I-PER", "LOC": "I-LOC"},
+    )
+    counter, mistakes = evaluator.evaluate_sample(
+        text, annotations=["O", "I-MISC", "I-PER", "O", "I-LOC", "I-MISC"]
+    )
+    assert counter == Counter(
+        {
+            EvalLabel("O", "O"): 4,
+            EvalLabel("I-LOC", "I-LOC"): 1,
+            EvalLabel("I-PER", "I-PER"): 1,
+        }
+    )
+    assert mistakes == SampleError(token_errors=[], full_text=text, failed=False)
+
+
 def test_evaulate_all(text, mock_recogniser, mock_tokeniser):
     evaluator = ModelEvaluator(
         recogniser=mock_recogniser,
@@ -252,7 +272,6 @@ def test_calculate_score():
     assert recall == {"PER": 1.0, "LOC": 1.0}
     assert precision == {"PER": 1.0, "LOC": 1.0}
     assert f1 == {"PER": 1.0, "LOC": 1.0}
-
 
     # test 3: with entity mapping
     evaluator = ModelEvaluator(
