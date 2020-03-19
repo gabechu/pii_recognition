@@ -1,3 +1,5 @@
+import os
+
 import mlflow
 
 from data_reader.conll_reader import get_conll_eval_data
@@ -39,6 +41,7 @@ with mlflow.start_run(run_name=RUN_NAME):
 
     write_iterable_to_text(mistakes, f"{RUN_NAME}.mis")
     mlflow.log_artifact(f"{RUN_NAME}.mis")
+    os.remove(f"{RUN_NAME}.mis")
 
     mlflow.log_metric("PER_recall", recall["I-PER"])
     mlflow.log_metric("PER_precision", precision["I-PER"])
