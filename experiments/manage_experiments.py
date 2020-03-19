@@ -25,3 +25,8 @@ def delete_experiment(exp_name: str):
         mlflow.delete_experiment(experiment_id)
     except MlflowException:
         logging.info(f"Experiment has already been deleted.")
+
+
+if __name__ == "__main__":
+    activate_experiment(CRF_EXP, f"{CRF_EXP}_artifact")
+    activate_experiment(Spacy_EXP, f"{Spacy_EXP}_artifact")
