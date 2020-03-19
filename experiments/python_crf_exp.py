@@ -15,12 +15,6 @@ from .manage_experiments import CRF_EXP
 RUN_NAME = "word2feature"
 
 
-def write_plain_text(content: List, file_path: str):
-    with open(file_path, "w") as f:
-        for elem in content:
-            f.write(str(elem) + "\n")
-
-
 # init recogniser
 recogniser = CrfRecogniser(
     supported_entities=[
