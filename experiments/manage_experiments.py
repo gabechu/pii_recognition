@@ -5,6 +5,7 @@ from mlflow.exceptions import MlflowException
 
 CRF_EXP = "PythonCRF"
 Spacy_EXP = "Spacy"
+LETTER_CASE_EXP = "LetterCase"
 
 
 def activate_experiment(exp_name: str, artifact_location: str):
@@ -30,3 +31,4 @@ def delete_experiment(exp_name: str):
 if __name__ == "__main__":
     activate_experiment(CRF_EXP, f"{CRF_EXP}_artifact")
     activate_experiment(Spacy_EXP, f"{Spacy_EXP}_artifact")
+    activate_experiment(LETTER_CASE_EXP, f"{LETTER_CASE_EXP}_artifact")
