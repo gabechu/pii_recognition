@@ -5,7 +5,7 @@ from mlflow.exceptions import MlflowException
 
 CRF_EXP = "PythonCRF"
 Spacy_EXP = "Spacy"
-LETTER_CASE_EXP = "LetterCase"
+FIRST_LETTER_UPPERCASE = "FirstLetterUppercase"
 
 
 def activate_experiment(exp_name: str, artifact_location: str):
