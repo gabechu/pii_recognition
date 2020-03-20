@@ -27,6 +27,12 @@ def text():
 
 
 def test_first_letter_uppercase_analyse(text, mock_tokeniser):
-    recogniser = FirstLetterUppercase(supported_languages=["en"], tokeniser=mock_tokeniser)
+    recogniser = FirstLetterUppercase(
+        supported_languages=["en"], tokeniser=mock_tokeniser
+    )
     actual = recogniser.analyse(text, entities=["PER"])
-    assert actual == [SpanLabel("PER", 0, 4), SpanLabel("PER", 8, 11), SpanLabel("PER", 17, 26)]
+    assert actual == [
+        SpanLabel("PER", 0, 4),
+        SpanLabel("PER", 8, 11),
+        SpanLabel("PER", 17, 26),
+    ]

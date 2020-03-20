@@ -12,6 +12,7 @@ class FirstLetterUppercase(EntityRecogniser):
     A heuristic model that check the first letter of every word/token and determine if
     that token is PERSON. Only PERSON entity is supported.
     """
+
     PER = "PER"
     default_tag = "O"  # a token belongs to no entity
 
