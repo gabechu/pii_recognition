@@ -4,6 +4,7 @@ from recognisers.entity_recogniser import Rec_co
 from typing import List
 from utils import write_iterable_to_text
 import os
+from .manage_experiments import activate_experiment
 
 
 def log_evaluation_to_mlflow(
@@ -14,7 +15,9 @@ def log_evaluation_to_mlflow(
     X_test: List[str],
     y_test: List[List[str]],
 ):
+    activate_experiment(experiment_name, f"{experiment_name}_artifact")
     mlflow.set_experiment(experiment_name)
+
     with mlflow.start_run(run_name=run_name):
         counters, mistakes = evaluator.evaulate_all(X_test, y_test)
         # remove returns with no mistakes
