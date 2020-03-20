@@ -36,7 +36,7 @@ recogniser = SpacyRecogniser(
 )
 
 evaluator = ModelEvaluator(
-        recogniser, ["PERSON"], nltk_word_tokenizer, to_eval_labels={"PERSON": "I-PER"}
+    recogniser, ["PERSON"], nltk_word_tokenizer, to_eval_labels={"PERSON": "I-PER"}
 )
 
 X_test, y_test = get_conll_eval_data(
