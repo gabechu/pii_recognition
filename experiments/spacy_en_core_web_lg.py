@@ -35,12 +35,12 @@ recogniser = SpacyRecogniser(
     model_name="en_core_web_lg",
 )
 
-X_test, y_test = get_conll_eval_data(
-    file_path="datasets/conll2003/eng.testb", detokenizer=space_join_detokensier
-)
-
 evaluator = ModelEvaluator(
         recogniser, ["PERSON"], nltk_word_tokenizer, to_eval_labels={"PERSON": "I-PER"}
+)
+
+X_test, y_test = get_conll_eval_data(
+    file_path="datasets/conll2003/eng.testb", detokenizer=space_join_detokensier
 )
 
 log_evaluation_to_mlflow(Spacy_EXP, RUN_NAME, recogniser, evaluator, X_test, y_test)
