@@ -10,9 +10,13 @@ from .manage_experiments import FLAIR
 RUN_NAME = "pretrained"
 
 
-# Default is loadding en-ner-conll03-v0.4.pt model
-# cannot find info on supported entities
-recogniser = Flair(supported_entities=["PER"], supported_languages=["en"])
+# more info on models
+# https://github.com/flairNLP/flair/blob/master/resources/docs/TUTORIAL_2_TAGGING.md
+recogniser = Flair(
+    supported_entities=["PER", "LOC", "ORG", "MISC"],
+    supported_languages=["en"],
+    model_name="ner",
+)
 
 
 evaluator = ModelEvaluator(
