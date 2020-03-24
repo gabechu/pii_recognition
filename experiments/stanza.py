@@ -1,6 +1,6 @@
 from data_reader.conll_reader import get_conll_eval_data
 from evaluation.model_evaluator import ModelEvaluator
-from recognisers.stanza import StanzaEn
+from recognisers.stanza import Stanza
 from tokeniser.detokeniser import space_join_detokensier
 from tokeniser.tokeniser import nltk_word_tokenizer
 
@@ -9,7 +9,30 @@ from .mlflow_log import log_evaluation_to_mlflow
 
 RUN_NAME = "pretrained_en"
 
-recogniser = StanzaEn(supported_entities=["PERSON"])
+recogniser = Stanza(
+    supported_entities=[
+        "PERSON",
+        "NORP",
+        "FAC",
+        "ORG",
+        "GPE",
+        "LOC",
+        "PRODUCT",
+        "EVENT",
+        "WORK_OF_ART",
+        "LAW",
+        "LANGUAGE",
+        "DATE",
+        "TIME",
+        "PERCENT",
+        "MONEY",
+        "QUANTITY",
+        "ORDINAL",
+        "CARDINAL",
+    ],
+    supported_languages=["en"],
+    model_name="en",
+)
 evaluator = ModelEvaluator(
     recogniser, ["PERSON"], nltk_word_tokenizer, {"PERSON": "I-PER"}
 )
