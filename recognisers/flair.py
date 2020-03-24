@@ -23,7 +23,7 @@ class Flair(EntityRecogniser):
         self,
         supported_entities: List[str],
         supported_languages: List[str],
-        model_name: str
+        model_name: str,
     ):
         self.model_name = model_name
         super().__init__(
