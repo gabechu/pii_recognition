@@ -7,7 +7,7 @@ from tokeniser.tokeniser import nltk_word_tokenizer
 from .manage_experiments import FLAIR
 from .mlflow_log import log_evaluation_to_mlflow
 
-RUN_NAME = "ner-en"
+RUN_NAME = "pretrained-en"
 
 recogniser = Flair(
     supported_entities=["PER", "LOC", "ORG", "MISC"],
