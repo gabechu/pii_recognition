@@ -10,7 +10,9 @@ from .mlflow_log import log_evaluation_to_mlflow
 RUN_NAME = "pretrained_en"
 
 recogniser = StanzaEn(supported_entities=["PERSON"])
-evaluator = ModelEvaluator(recogniser, ["PERSON"], nltk_word_tokenizer, {"PERSON": "I-PER"})
+evaluator = ModelEvaluator(
+    recogniser, ["PERSON"], nltk_word_tokenizer, {"PERSON": "I-PER"}
+)
 
 X_test, y_test = get_conll_eval_data(
     file_path="datasets/conll2003/eng.testb", detokenizer=space_join_detokensier
