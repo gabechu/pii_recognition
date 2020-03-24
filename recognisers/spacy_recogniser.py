@@ -8,6 +8,16 @@ from label.label_schema import SpanLabel
 
 
 class SpacyRecogniser(EntityRecogniser):
+    """
+    Spacy named entity recogniser.
+
+    Attributes:
+        supported_entities: the entities supported by this recogniser.
+        supported_languages: the languages supported by this recogniser.
+        model_name: pretrained NER models, more available model at
+            https://spacy.io/models
+    """
+
     def __init__(
         self,
         supported_entities: List[str],
@@ -25,9 +35,6 @@ class SpacyRecogniser(EntityRecogniser):
 
     def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
         self.validate_entities(entities)
-
-        # TODO: validate languages
-        # TODO: add support for batch
 
         doc = self._model(text)
         spacy_entities = [entity for entity in doc.ents]
