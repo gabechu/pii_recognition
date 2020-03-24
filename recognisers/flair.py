@@ -35,6 +35,8 @@ class Flair(EntityRecogniser):
         return SequenceTagger.load(self.model_name)
 
     def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
+        self.validate_entities(entities)
+
         sentence = Sentence(text)
         self._model.predict(sentence, verbose=True)
 
