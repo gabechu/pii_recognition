@@ -38,7 +38,7 @@ class Flair(EntityRecogniser):
         self.validate_entities(entities)
 
         sentence = Sentence(text)
-        self._model.predict(sentence, verbose=True)
+        self._model.predict(sentence)
 
         span_labels = []
         for entity in sentence.get_spans("ner"):
