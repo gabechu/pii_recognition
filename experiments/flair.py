@@ -3,15 +3,12 @@ from evaluation.model_evaluator import ModelEvaluator
 from recognisers.flair import Flair
 from tokeniser.detokeniser import space_join_detokensier
 from tokeniser.tokeniser import nltk_word_tokenizer
-from .mlflow_log import log_evaluation_to_mlflow
 
 from .manage_experiments import FLAIR
+from .mlflow_log import log_evaluation_to_mlflow
 
-RUN_NAME = "pretrained"
+RUN_NAME = "ner-en"
 
-
-# more info on models
-# https://github.com/flairNLP/flair/blob/master/resources/docs/TUTORIAL_2_TAGGING.md
 recogniser = Flair(
     supported_entities=["PER", "LOC", "ORG", "MISC"],
     supported_languages=["en"],
