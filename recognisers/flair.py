@@ -13,9 +13,9 @@ class Flair(EntityRecogniser):
     Flair named entity recogniser.
 
     Attributes:
-        supported_entities: entities that a model is capable of handling.
-        supported_languages: languages that a model is capable of handling.
-        model_name: name of pretrained NER models, find more at
+        supported_entities: the entities supported by this recogniser.
+        supported_languages: the languages supported by this recogniser.
+        model_name: pretrained NER models, more available model at
             https://github.com/flairNLP/flair/blob/master/resources/docs/TUTORIAL_2_TAGGING.md#list-of-pre-trained-sequence-tagger-models
     """
 
