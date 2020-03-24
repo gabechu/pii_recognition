@@ -78,6 +78,14 @@ score = evaluator.calculate_score(results, f_beta=1.)
 The evaluation produces per entity based results, e.g., `{"PER": 0.7, "LOC": 0.8}`. An aggregation score will be incorporated as an enhancement.
 
 ### Performance
-Evaluation of experiments are conducted on CONLL 2003 English data (`eng.testb`). The performance has been logged in `mlflow` and measured by `f1`, `f2`, `precision` and `recall`. There is a concern raised regarding to the quality of CONLL 2003 that we've been using. I obtained the copy of this CONLL dataset on github, whether the github author posted the full dataset is unknown and whether the author follows the latest guideline generating the CONLL data is also unknown. Eyeball checking shows that in this dataset many country names are labelled as `I-PER` instead of `I-LOC`, as well as examples of sentences containing only one single word with the rest words being random numbers. Further evaluation needed to determine if we can trust the results getting from this CONLL evaluation. Anyhow, here's the unvalidated performance
+Evaluation of experiments are conducted on CONLL 2003 English data -- `eng.testb`. The performance has been logged with `mlflow` and measured by `f1`, `f2` (optional), `precision` and `recall`. I obtained the copy of this CONLL dataset on github, whether the github author posted the full dataset is unknown and whether the author follows the latest guideline generating the CONLL data is also unknown. Further investigation will be taken to decide if we can trust the results getting from this CONLL evaluation. But for now, here's the unvalidated performance
 
-[![Image1](docs/assets/eval_results.png)](docs/assets/eval_results.png)
+
+| Experiment | Run | Test Set | Recall | Precision | F1 |  Evaluation Duration |
+| -------------    | ------------- |------------- |------------- |------------- |------------- |------------- |
+| Heuristic | first_letter_uppercase |  Conll-03 en.testb  |  0.973 | 0.298| 0.456| 1.1s   |
+| CRF       | python_crf_no_pos      |  Conll-03 en.testb  |  0.887 | 0.824| 0.854| 1.4s   |
+| Spacy     | en_core_web_lg         |  Conll-03 en.testb  |  0.824 | 0.828| 0.826| 6.7s   |
+|           | xx_ent_wiki_sm         |  Conll-03 en.testb  |  0.764 | 0.789| 0.776| 6.9s   |
+|Flair      | pretrained_en          |  Conll-03 en.testb  |  0.986 | 0.980| 0.983| 32.6min|
+|Stanza     | pretrained_en          |  Conll-03 en.testb  |  0.855 | 0.846| 0.850| 10.6min|
