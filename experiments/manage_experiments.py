@@ -7,6 +7,7 @@ CRF_EXP = "PythonCRF"
 Spacy_EXP = "Spacy"
 FIRST_LETTER_UPPERCASE = "FirstLetterUppercase"
 FLAIR = "Flair"
+STANZA = "Stanza"
 
 
 def activate_experiment(exp_name: str, artifact_location: str):
