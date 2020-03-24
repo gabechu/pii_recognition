@@ -1,9 +1,8 @@
 from typing import List
 
-import stanza
+from stanza import Pipeline
 
 from label.label_schema import SpanLabel
-from stanza import Pipeline
 
 from .entity_recogniser import EntityRecogniser
 
