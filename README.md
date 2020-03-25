@@ -93,4 +93,4 @@ Evaluation of experiments are conducted on CONLL 2003 English data -- `eng.testb
 |Flair      | pretrained_en          |  Conll-03 en.testb  |  0.986 | 0.980| 0.983| 32.6min|
 |Stanza     | pretrained_en          |  Conll-03 en.testb  |  0.855 | 0.846| 0.850| 10.6min|
 
-notes: no batch is enabled, all models are running on CPU and tested with English dataset
+notes: no batch is enabled, all models are running on CPU and tested with English dataset on PERSON entity
