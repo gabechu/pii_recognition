@@ -1,6 +1,5 @@
 # TODO: adapt changes of mlflow log
 from data_reader.wnut_reader import get_wnut_eval_data
-from experiments.python_crf import PARAMS
 from data_reader.conll_reader import get_conll_eval_data
 from evaluation.model_evaluator import ModelEvaluator
 from recognisers.spacy_recogniser import SpacyRecogniser
@@ -48,14 +47,20 @@ for param in PARAMS:
             file_path=param["eval_data"], detokenizer=space_join_detokensier
         )
         evaluator = ModelEvaluator(
-            recogniser, ["PERSON"], nltk_word_tokenizer, to_eval_labels={"PERSON": "I-PER"}
+            recogniser,
+            ["PERSON"],
+            nltk_word_tokenizer,
+            to_eval_labels={"PERSON": "I-PER"},
         )
     elif "wnut2017" in param["eval_data"]:
         X_test, y_test = get_wnut_eval_data(
             file_path=param["eval_data"], detokenizer=space_join_detokensier
         )
         evaluator = ModelEvaluator(
-            recogniser, ["PERSON"], nltk_word_tokenizer, to_eval_labels={"PERSON": "I-person"}
+            recogniser,
+            ["PERSON"],
+            nltk_word_tokenizer,
+            to_eval_labels={"PERSON": "I-person"},
         )
 
     if evaluator and X_test and y_test:
