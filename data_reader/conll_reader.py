@@ -6,7 +6,14 @@ from nltk.corpus.reader import ConllCorpusReader
 
 def get_conll_eval_data(
     file_path: str, detokenizer: Callable[[List[str]], str]
-) -> Tuple[List, List]:
+) -> Tuple[List[str], List[List[str]]]:
+    """
+    Label types of CONLL 2003 evaluation data:
+        I-PER
+        I-LOC
+        I_ORG
+        I-MISC
+    """
     path = PurePath(file_path)
 
     data = ConllCorpusReader(
