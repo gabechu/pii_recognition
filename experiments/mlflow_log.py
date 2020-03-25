@@ -20,7 +20,7 @@ def log_evaluation_to_mlflow(
     X_test: List[str],
     y_test: List[List[str]],
     run_name: str = "default",
-):  
+):
     artifact_path = os.path.join(BASE_DIR, "artifacts", f"{experiment_name}")
 
     activate_experiment(experiment_name, artifact_path)
