@@ -1,5 +1,4 @@
 import logging
-import os
 
 import mlflow
 from mlflow.exceptions import MlflowException
@@ -20,6 +19,12 @@ crf_1 = {
 
 crf_2 = {
     "eval_data": "datasets/conll2003/eng.testa",
+    "model_path": "exported_models/conll2003-en.crfsuite",
+    "tokeniser": nltk_word_tokenizer,
+}
+
+crf_3 = {
+    "eval_data": "datasets/wnut2017/emerging.test.annotated",
     "model_path": "exported_models/conll2003-en.crfsuite",
     "tokeniser": nltk_word_tokenizer,
 }
