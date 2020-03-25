@@ -1,9 +1,13 @@
+import os
+import tempfile
+from typing import List
+
 import mlflow
+
 from evaluation.model_evaluator import ModelEvaluator
 from recognisers.entity_recogniser import Rec_co
-from typing import List
 from utils import write_iterable_to_text
-import os
+
 from .manage_experiments import activate_experiment
 
 
@@ -26,8 +30,10 @@ def log_evaluation_to_mlflow(
         recall, precision, f1 = evaluator.calculate_score(counters, f_beta=1.0)
         _, _, f2 = evaluator.calculate_score(counters, f_beta=2.0)
 
-        write_iterable_to_text(mistakes, f"{run_name}.mis")
-        mlflow.log_artifact(f"{run_name}.mis")
+        with tempfile.TemporaryDirectory() as tempdir:
+            error_file_path = os.path.join(tempdir, f"{run_name}.mis")
+            write_iterable_to_text(mistakes, error_file_path)
+            mlflow.log_artifact(error_file_path)
 
         os.remove(f"{run_name}.mis")
 
