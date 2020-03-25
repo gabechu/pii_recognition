@@ -1,20 +1,20 @@
 import os
 import tempfile
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 import mlflow
 
+from constants import BASE_DIR, LABEL_COMPLIANCE
 from evaluation.model_evaluator import ModelEvaluator
 from recognisers.entity_recogniser import Rec_co
 from utils import write_iterable_to_text
 
 from .manage_experiments import activate_experiment
-from config import BASE_DIR
 
 
 def log_evaluation_to_mlflow(
     experiment_name: str,
-    param: Dict,
+    params: Dict,
     recogniser: Rec_co,
     evaluator: ModelEvaluator,
     X_test: List[str],
@@ -39,14 +39,37 @@ def log_evaluation_to_mlflow(
             write_iterable_to_text(mistakes, error_file_path)
             mlflow.log_artifact(error_file_path)
 
-        for key, value in param.items():
-            if not isinstance(value, str):
-                mlflow.log_param(key, value.__name__)
-            else:
-                mlflow.log_param(key, value)
+        log_params(params)
 
-        # TODO: for now only focusing on I-PER and label is form CONLL 2003
-        mlflow.log_metric("PER_recall", recall["I-PER"])
-        mlflow.log_metric("PER_precision", precision["I-PER"])
-        mlflow.log_metric("PER_f1", f1["I-PER"])
-        mlflow.log_metric("PER_f2", f2["I-PER"])
+        log_metrics(recall, suffix="recall")
+        log_metrics(precision, suffix="precision")
+        log_metrics(f1, suffix="f1")
+        log_metrics(f2, suffix="f2")
+
+
+def log_metrics(metrics: Dict, suffix: Optional[str] = None):
+    # TODO: add test!
+    for key, value in metrics.items():
+        assert isinstance(key, str), f"Metric key must be string but got {type(key)}"
+
+        if key in LABEL_COMPLIANCE:
+            if suffix:
+                key_name = LABEL_COMPLIANCE[key] + f"_{suffix}"
+            else:
+                key_name = LABEL_COMPLIANCE[key]
+        else:
+            if suffix:
+                key_name = key + f"_{suffix}"
+            else:
+                key_name = key
+
+        mlflow.log_metric(key_name, value)
+
+
+def log_params(params: Dict):
+    # TODO: add test!
+    for key, value in params.items():
+        if not isinstance(value, str):
+            mlflow.log_param(key, value.__name__)
+        else:
+            mlflow.log_param(key, value)
