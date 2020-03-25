@@ -48,6 +48,9 @@ This should also print
 [SpanLabel(entity_type='LOC', start=7, end=16)]
 ```
 
+#### Other available models
+Many other off-the-shelf models are supported as well and detail implementations can be found in the `recognisers` folder, including two neural networks [`flair`](https://github.com/flairNLP/flair) and [`stanza`](https://github.com/stanfordnlp/stanza).
+
 
 ## Recogniser Evaluation
 ### Data Format
@@ -90,4 +93,4 @@ Evaluation of experiments are conducted on CONLL 2003 English data -- `eng.testb
 |Flair      | pretrained_en          |  Conll-03 en.testb  |  0.986 | 0.980| 0.983| 32.6min|
 |Stanza     | pretrained_en          |  Conll-03 en.testb  |  0.855 | 0.846| 0.850| 10.6min|
 
-note: no batch is enabled, all models are running on CPU and tested with English dataset
+notes: no batch is enabled, all models are running on CPU and tested with English dataset
