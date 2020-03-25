@@ -28,8 +28,7 @@ crf_2 = {
 def activate_experiment(exp_name: str, artifact_location: str):
     try:
         mlflow.create_experiment(
-            name=exp_name,
-            artifact_location=artifact_location,
+            name=exp_name, artifact_location=artifact_location,
         )
     except MlflowException:
         logging.info(f"Experiment {exp_name} already exists.")
