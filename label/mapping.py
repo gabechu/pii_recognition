@@ -28,3 +28,14 @@ def mask_labels(
         else:
             results.append(mask_value)
     return results
+
+
+def map_bio_to_io_labels(bio_labels: List[str]) -> List[str]:
+    io_labels = []
+
+    for label in bio_labels:
+        if label.startswith("B"):
+            io_labels.append("I" + label[1:])
+        else:
+            io_labels.append(label)
+    return io_labels
