@@ -81,7 +81,7 @@ spacy_spacy_en_core_web_lg_1 = {
     "eval_data": "datasets/conll2003/eng.testb",
     "model_name": "en_core_web_lg",
 }
-spacy_spacy_en_core_web_lg_1 = {
+spacy_spacy_en_core_web_lg_2 = {
     "supported_entities": [
         "CARDINAL",
         "DATE",
@@ -106,7 +106,7 @@ spacy_spacy_en_core_web_lg_1 = {
     "eval_data": "datasets/conll2003/eng.testa",
     "model_name": "en_core_web_lg",
 }
-spacy_spacy_en_core_web_lg_2 = {
+spacy_spacy_en_core_web_lg_3 = {
     "supported_entities": [
         "CARDINAL",
         "DATE",

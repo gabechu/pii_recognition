@@ -6,11 +6,19 @@ from recognisers.spacy_recogniser import SpacyRecogniser
 from tokeniser.detokeniser import space_join_detokensier
 from tokeniser.tokeniser import nltk_word_tokenizer
 
-from .manage_experiments import (SPACY_EXP, spacy_spacy_en_core_web_lg_1,
-                                 spacy_spacy_en_core_web_lg_2)
+from .manage_experiments import (
+    SPACY_EXP,
+    spacy_spacy_en_core_web_lg_1,
+    spacy_spacy_en_core_web_lg_2,
+    spacy_spacy_en_core_web_lg_3,
+)
 from .mlflow_tracking import log_evaluation_to_mlflow
 
-PARAMS = [spacy_spacy_en_core_web_lg_1, spacy_spacy_en_core_web_lg_2]
+PARAMS = [
+    spacy_spacy_en_core_web_lg_1,
+    spacy_spacy_en_core_web_lg_2,
+    spacy_spacy_en_core_web_lg_3,
+]
 RUN_NAME = "spacy_en_core_web_lg"
 
 for param in PARAMS:
