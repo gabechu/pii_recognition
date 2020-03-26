@@ -14,7 +14,6 @@ def get_wnut_eval_data(
         I-creative-work
         I-group
     """
-    # TODO: add test!
     sents = []
     labels = []
     sentence_tokens = []
