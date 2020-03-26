@@ -6,7 +6,7 @@ from tokeniser.detokeniser import space_join_detokensier
 from tokeniser.tokeniser import nltk_word_tokenizer
 
 from .manage_experiments import (
-    SPACY_EXP,
+    SPACY,
     spacy_spacy_en_core_web_lg_1,
     spacy_spacy_en_core_web_lg_2,
     spacy_spacy_en_core_web_lg_3,
@@ -54,5 +54,5 @@ for param in PARAMS:
 
     if evaluator and X_test and y_test:
         log_evaluation_to_mlflow(
-            SPACY_EXP, param, recogniser, evaluator, X_test, y_test, run_name=RUN_NAME
+            SPACY, param, recogniser, evaluator, X_test, y_test, run_name=RUN_NAME
         )

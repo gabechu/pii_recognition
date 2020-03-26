@@ -33,10 +33,7 @@ for param in PARAMS:
             file_path=param["eval_data"], detokenizer=space_join_detokensier
         )
         evaluator = ModelEvaluator(
-            recogniser,
-            ["PER"],
-            nltk_word_tokenizer,
-            to_eval_labels={"PER": "I-PER"},
+            recogniser, ["PER"], nltk_word_tokenizer, to_eval_labels={"PER": "I-PER"},
         )
     elif "wnut2017" in param["eval_data"]:
         X_test, y_test = get_wnut_eval_data(
