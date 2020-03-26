@@ -1,13 +1,14 @@
 from data_reader.conll_reader import get_conll_eval_data
+from data_reader.wnut_reader import get_wnut_eval_data
 from evaluation.model_evaluator import ModelEvaluator
 from recognisers.stanza import Stanza
 from tokeniser.detokeniser import space_join_detokensier
 from tokeniser.tokeniser import nltk_word_tokenizer
 
-from .manage_experiments import STANZA
+from .manage_experiments import STANZA, stanza_1, stanza_2, stanza_3
 from .mlflow_tracking import log_evaluation_to_mlflow
 
-PARAMS = []
+PARAMS = [stanza_1, stanza_2, stanza_3]
 RUN_NAME = "pretrained_en"
 
 for param in PARAMS:
