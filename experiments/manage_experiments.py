@@ -131,3 +131,22 @@ spacy_spacy_en_core_web_lg_3 = {
     "eval_data": "datasets/wnut2017/emerging.test.annotated",
     "model_name": "en_core_web_lg",
 }
+
+spacy_xx_ent_wiki_sm_1 = {
+    "supported_entities": ["LOC", "MISC", "ORG", "PER"],
+    "supported_languages": ["en", "de", "es", "fr", "it", "pt", "ru"],
+    "eval_data": "datasets/conll2003/eng.testb",
+    "model_name": "xx_ent_wiki_sm",
+}
+spacy_xx_ent_wiki_sm_2 = {
+    "supported_entities": ["LOC", "MISC", "ORG", "PER"],
+    "supported_languages": ["en", "de", "es", "fr", "it", "pt", "ru"],
+    "eval_data": "datasets/conll2003/eng.testa",
+    "model_name": "xx_ent_wiki_sm",
+}
+spacy_xx_ent_wiki_sm_3 = {
+    "supported_entities": ["LOC", "MISC", "ORG", "PER"],
+    "supported_languages": ["en", "de", "es", "fr", "it", "pt", "ru"],
+    "eval_data": "datasets/wnut2017/emerging.test.annotated",
+    "model_name": "xx_ent_wiki_sm",
+}
