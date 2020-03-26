@@ -245,3 +245,12 @@ flair_3 = {
     "eval_data": "datasets/wnut2017/emerging.test.annotated",
     "model_name": "ner",
 }
+
+first_letter_uppercase_3 = {
+    "supported_entities": [
+        "PER"
+    ],
+    "supported_languages": ["en"],
+    "eval_data": "datasets/wnut2017/emerging.test.annotated",
+    "tokeniser": nltk_word_tokenizer,
+}
