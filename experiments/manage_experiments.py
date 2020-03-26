@@ -81,6 +81,31 @@ spacy_spacy_en_core_web_lg_1 = {
     "eval_data": "datasets/conll2003/eng.testb",
     "model_name": "en_core_web_lg",
 }
+spacy_spacy_en_core_web_lg_1 = {
+    "supported_entities": [
+        "CARDINAL",
+        "DATE",
+        "EVENT",
+        "FAC",
+        "GPE",
+        "LANGUAGE",
+        "LAW",
+        "LOC",
+        "MONEY",
+        "NORP",
+        "ORDINAL",
+        "ORG",
+        "PERCENT",
+        "PERSON",
+        "PRODUCT",
+        "QUANTITY",
+        "TIME",
+        "WORK_OF_ART",
+    ],
+    "supported_languages": ["en"],
+    "eval_data": "datasets/conll2003/eng.testa",
+    "model_name": "en_core_web_lg",
+}
 spacy_spacy_en_core_web_lg_2 = {
     "supported_entities": [
         "CARDINAL",
