@@ -1,15 +1,39 @@
+import logging
 import os
 import tempfile
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 import mlflow
+from mlflow.exceptions import MlflowException
 
 from constants import BASE_DIR, LABEL_COMPLIANCE
 from evaluation.model_evaluator import ModelEvaluator
 from recognisers.entity_recogniser import Rec_co
 from utils import write_iterable_to_text
 
-from .manage_experiments import activate_experiment
+
+def activate_experiment(exp_name: str, artifact_location: str):
+    # TODO: add test!
+    try:
+        mlflow.create_experiment(
+            name=exp_name, artifact_location=artifact_location,
+        )
+    except MlflowException:
+        logging.info(f"Experiment {exp_name} already exists.")
+
+
+def delete_experiment(exp_name: str):
+    # TODO: add test!
+    try:
+        experiment_id = mlflow.get_experiment_by_name(exp_name).experiment_id
+    except AttributeError:
+        logging.info(f"No {exp_name} experiment found.")
+        return
+
+    try:
+        mlflow.delete_experiment(experiment_id)
+    except MlflowException:
+        logging.info(f"Experiment has already been deleted.")
 
 
 def log_evaluation_to_mlflow(
@@ -66,10 +90,12 @@ def log_metrics(metrics: Dict, suffix: Optional[str] = None):
         mlflow.log_metric(key_name, value)
 
 
-def log_params(params: Dict):
+def log_params(params: Dict[str, Any]):
     # TODO: add test!
     for key, value in params.items():
-        if not isinstance(value, str):
+        if callable(value):
             mlflow.log_param(key, value.__name__)
+        if isinstance(value, (tuple, list)):
+            mlflow.log_param(key, ", ".join(map(str, value)))
         else:
             mlflow.log_param(key, value)

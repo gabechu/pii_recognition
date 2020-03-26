@@ -1,9 +1,5 @@
-import logging
-
-import mlflow
-from mlflow.exceptions import MlflowException
-
 from tokeniser.tokeniser import nltk_word_tokenizer
+
 
 CRF_EXP = "PythonCRF"
 SPACY_EXP = "Spacy"
@@ -35,25 +31,3 @@ spacy_2 = {
     "eval_data": "datasets/wnut2017/emerging.test.annotated",
     "model_name": "en_core_web_lg",
 }
-
-
-def activate_experiment(exp_name: str, artifact_location: str):
-    try:
-        mlflow.create_experiment(
-            name=exp_name, artifact_location=artifact_location,
-        )
-    except MlflowException:
-        logging.info(f"Experiment {exp_name} already exists.")
-
-
-def delete_experiment(exp_name: str):
-    try:
-        experiment_id = mlflow.get_experiment_by_name(exp_name).experiment_id
-    except AttributeError:
-        logging.info(f"No {exp_name} experiment found.")
-        return
-
-    try:
-        mlflow.delete_experiment(experiment_id)
-    except MlflowException:
-        logging.info(f"Experiment has already been deleted.")
