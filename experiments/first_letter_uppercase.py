@@ -5,8 +5,7 @@ from recognisers.first_letter_uppercase import FirstLetterUppercase
 from tokeniser.detokeniser import space_join_detokensier
 from tokeniser.tokeniser import nltk_word_tokenizer
 
-from .manage_experiments import (FIRST_LETTER_UPPERCASE,
-                                 first_letter_uppercase_3)
+from .manage_experiments import FIRST_LETTER_UPPERCASE, first_letter_uppercase_3
 from .mlflow_tracking import log_evaluation_to_mlflow
 
 PARAMS = [first_letter_uppercase_3]
@@ -14,8 +13,7 @@ RUN_NAME = "use_istitle"
 
 for param in PARAMS:
     recogniser = FirstLetterUppercase(
-        supported_languages=param["en"],
-        tokeniser=param["model_name"],
+        supported_languages=param["supported_languages"], tokeniser=param["tokeniser"],
     )
 
     evaluator = None
@@ -42,5 +40,11 @@ for param in PARAMS:
 
     if evaluator and X_test and y_test:
         log_evaluation_to_mlflow(
-            FIRST_LETTER_UPPERCASE, param, recogniser, evaluator, X_test, y_test, run_name=RUN_NAME
+            FIRST_LETTER_UPPERCASE,
+            param,
+            recogniser,
+            evaluator,
+            X_test,
+            y_test,
+            run_name=RUN_NAME,
         )
