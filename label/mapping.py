@@ -31,7 +31,6 @@ def mask_labels(
 
 
 def map_bio_to_io_labels(bio_labels: List[str]) -> List[str]:
-    # TODO: add test!
     io_labels = []
 
     for label in bio_labels:
