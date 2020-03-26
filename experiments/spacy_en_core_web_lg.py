@@ -6,35 +6,20 @@ from recognisers.spacy_recogniser import SpacyRecogniser
 from tokeniser.detokeniser import space_join_detokensier
 from tokeniser.tokeniser import nltk_word_tokenizer
 
-from .manage_experiments import SPACY_EXP, spacy_1, spacy_2
+from .manage_experiments import (
+    SPACY_EXP,
+    spacy_spacy_en_core_web_lg_1,
+    spacy_spacy_en_core_web_lg_2,
+)
 from .mlflow_log import log_evaluation_to_mlflow
 
-PARAMS = [spacy_1, spacy_2]
+PARAMS = [spacy_spacy_en_core_web_lg_1, spacy_spacy_en_core_web_lg_2]
 RUN_NAME = "spacy_en_core_web_lg"
 
 for param in PARAMS:
     recogniser = SpacyRecogniser(
-        supported_entities=[
-            "CARDINAL",
-            "DATE",
-            "EVENT",
-            "FAC",
-            "GPE",
-            "LANGUAGE",
-            "LAW",
-            "LOC",
-            "MONEY",
-            "NORP",
-            "ORDINAL",
-            "ORG",
-            "PERCENT",
-            "PERSON",
-            "PRODUCT",
-            "QUANTITY",
-            "TIME",
-            "WORK_OF_ART",
-        ],
-        supported_languages=["en"],
+        supported_entities=param["supported_entities"],
+        supported_languages=param["supported_languages"],
         model_name=param["model_name"],
     )
 
