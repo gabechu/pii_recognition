@@ -226,3 +226,10 @@ stanza_3 = {
     "eval_data": "datasets/wnut2017/emerging.test.annotated",
     "model_name": "en",
 }
+
+flair_3 = {
+    "supported_entities": ["PER", "LOC", "ORG", "MISC"],
+    "supported_languages": ["en"],
+    "eval_data": "datasets/wnut2017/emerging.test.annotated",
+    "model_name": "ner",
+}
