@@ -1,4 +1,3 @@
-# TODO: adapt changes of mlflow log
 from data_reader.conll_reader import get_conll_eval_data
 from evaluation.model_evaluator import ModelEvaluator
 from recognisers.stanza import Stanza
@@ -6,40 +5,44 @@ from tokeniser.detokeniser import space_join_detokensier
 from tokeniser.tokeniser import nltk_word_tokenizer
 
 from .manage_experiments import STANZA
-from .mlflow_log import log_evaluation_to_mlflow
+from .mlflow_tracking import log_evaluation_to_mlflow
 
+PARAMS = []
 RUN_NAME = "pretrained_en"
 
-recogniser = Stanza(
-    supported_entities=[
-        "PERSON",
-        "NORP",
-        "FAC",
-        "ORG",
-        "GPE",
-        "LOC",
-        "PRODUCT",
-        "EVENT",
-        "WORK_OF_ART",
-        "LAW",
-        "LANGUAGE",
-        "DATE",
-        "TIME",
-        "PERCENT",
-        "MONEY",
-        "QUANTITY",
-        "ORDINAL",
-        "CARDINAL",
-    ],
-    supported_languages=["en"],
-    model_name="en",
-)
-evaluator = ModelEvaluator(
-    recogniser, ["PERSON"], nltk_word_tokenizer, {"PERSON": "I-PER"}
-)
+for param in PARAMS:
+    recogniser = Stanza(
+        supported_entities=param["supported_entities"],
+        supported_languages=param["supported_languages"],
+        model_name=param["model_name"],
+    )
 
-X_test, y_test = get_conll_eval_data(
-    file_path="datasets/conll2003/eng.testb", detokenizer=space_join_detokensier
-)
+    evaluator = None
+    X_test = None
+    y_test = None
 
-log_evaluation_to_mlflow(STANZA, RUN_NAME, recogniser, evaluator, X_test, y_test)
+    if "conll2003" in param["eval_data"]:
+        X_test, y_test = get_conll_eval_data(
+            file_path=param["eval_data"], detokenizer=space_join_detokensier
+        )
+        evaluator = ModelEvaluator(
+            recogniser,
+            ["PERSON"],
+            nltk_word_tokenizer,
+            to_eval_labels={"PERSON": "I-PER"},
+        )
+    elif "wnut2017" in param["eval_data"]:
+        X_test, y_test = get_wnut_eval_data(
+            file_path=param["eval_data"], detokenizer=space_join_detokensier
+        )
+        evaluator = ModelEvaluator(
+            recogniser,
+            ["PERSON"],
+            nltk_word_tokenizer,
+            to_eval_labels={"PERSON": "I-person"},
+        )
+
+    if evaluator and X_test and y_test:
+        log_evaluation_to_mlflow(
+            STANZA, param, recogniser, evaluator, X_test, y_test, run_name=RUN_NAME
+        )
