@@ -95,7 +95,7 @@ def log_params(params: Dict[str, Any]):
     for key, value in params.items():
         if callable(value):
             mlflow.log_param(key, value.__name__)
-        if isinstance(value, (tuple, list)):
+        elif isinstance(value, list):
             mlflow.log_param(key, ", ".join(map(str, value)))
         else:
             mlflow.log_param(key, value)

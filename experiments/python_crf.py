@@ -6,24 +6,15 @@ from tokeniser.detokeniser import space_join_detokensier
 from tokeniser.tokeniser import nltk_word_tokenizer
 
 from .manage_experiments import CRF_EXP, crf_1, crf_2, crf_3
-from .mlflow_log import log_evaluation_to_mlflow
+from .mlflow_tracking import log_evaluation_to_mlflow
 
 PARAMS = [crf_1, crf_2, crf_3]
 RUN_NAME = "crf_no_pos"
 
 for param in PARAMS:
     recogniser = CrfRecogniser(
-        supported_entities=[
-            "B-LOC",
-            "I-LOC",
-            "B-ORG",
-            "I-ORG",
-            "B-PER",
-            "I-PER",
-            "B-MISC",
-            "I-MISC",
-        ],
-        supported_languages=["en"],
+        supported_entities=param["supported_entities"],
+        supported_languages=param["supported_languages"],
         model_path=param["model_path"],
         tokenizer=param["tokeniser"],
     )
