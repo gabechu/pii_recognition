@@ -1,4 +1,3 @@
-# TODO: adapt changes of mlflow log
 from data_reader.conll_reader import get_conll_eval_data
 from data_reader.wnut_reader import get_wnut_eval_data
 from evaluation.model_evaluator import ModelEvaluator
