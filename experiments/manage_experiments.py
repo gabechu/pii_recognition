@@ -227,6 +227,18 @@ stanza_3 = {
     "model_name": "en",
 }
 
+flair_1 = {
+    "supported_entities": ["PER", "LOC", "ORG", "MISC"],
+    "supported_languages": ["en"],
+    "eval_data": "datasets/conll2003/eng.testb",
+    "model_name": "ner",
+}
+flair_2 = {
+    "supported_entities": ["PER", "LOC", "ORG", "MISC"],
+    "supported_languages": ["en"],
+    "eval_data": "datasets/conll2003/eng.testa",
+    "model_name": "ner",
+}
 flair_3 = {
     "supported_entities": ["PER", "LOC", "ORG", "MISC"],
     "supported_languages": ["en"],

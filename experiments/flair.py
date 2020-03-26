@@ -5,11 +5,11 @@ from recognisers.flair import Flair
 from tokeniser.detokeniser import space_join_detokensier
 from tokeniser.tokeniser import nltk_word_tokenizer
 
-from .manage_experiments import FLAIR, flair_3
+from .manage_experiments import FLAIR, flair_3, flair_1, flair_2
 from .mlflow_tracking import log_evaluation_to_mlflow
 
 RUN_NAME = "pretrained-en"
-PARAMS = [flair_3]
+PARAMS = [flair_1, flair_2, flair_3]
 
 for param in PARAMS:
     recogniser = Flair(
@@ -27,10 +27,7 @@ for param in PARAMS:
             file_path=param["eval_data"], detokenizer=space_join_detokensier
         )
         evaluator = ModelEvaluator(
-            recogniser,
-            ["PERSON"],
-            nltk_word_tokenizer,
-            to_eval_labels={"PERSON": "I-PER"},
+            recogniser, ["PER"], nltk_word_tokenizer, to_eval_labels={"PER": "I-PER"},
         )
     elif "wnut2017" in param["eval_data"]:
         X_test, y_test = get_wnut_eval_data(
@@ -38,9 +35,9 @@ for param in PARAMS:
         )
         evaluator = ModelEvaluator(
             recogniser,
-            ["PERSON"],
+            ["PER"],
             nltk_word_tokenizer,
-            to_eval_labels={"PERSON": "I-person"},
+            to_eval_labels={"PER": "I-person"},
         )
 
     if evaluator and X_test and y_test:
