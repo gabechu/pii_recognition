@@ -2,7 +2,7 @@ from tokeniser.tokeniser import nltk_word_tokenizer
 
 
 CRF_EXP = "PythonCRF"
-SPACY_EXP = "Spacy"
+SPACY = "Spacy"
 FIRST_LETTER_UPPERCASE = "FirstLetterUppercase"
 FLAIR = "Flair"
 STANZA = "Stanza"
