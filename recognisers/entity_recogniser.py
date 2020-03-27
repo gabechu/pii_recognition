@@ -4,7 +4,10 @@ from typing import Any, List, TypeVar
 from label.label_schema import SpanLabel
 
 
+
 class EntityRecogniser(metaclass=ABCMeta):
+    _model = None
+
     def __init__(
         self,
         supported_entities: List[str],
@@ -22,8 +25,6 @@ class EntityRecogniser(metaclass=ABCMeta):
         self.supported_entities = supported_entities
         self.supported_languages = supported_languages
 
-        self._model = self.load_model()
-
     def validate_entities(self, asked_entities: List[str]):
         """Check whether asked entities are supported by the model."""
         assert all(
@@ -36,8 +37,9 @@ class EntityRecogniser(metaclass=ABCMeta):
             [language in self.supported_languages for language in asked_languages]
         ), f"Only support {self.supported_languages}, but got {asked_languages}"
 
+    @property
     @abstractmethod
-    def load_model(self) -> Any:
+    def model(self) -> Any:
         ...
 
     @abstractmethod
