@@ -30,13 +30,14 @@ class StanzaRecogniser(EntityRecogniser):
             supported_languages=supported_languages,
         )
 
-    def load_model(self) -> Pipeline:
+    @property
+    def model(self) -> Pipeline:
         return Pipeline(self.model_name)
 
     def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
         self.validate_entities(entities)
 
-        results = self._model(text)
+        results = self.model(text)
 
         span_labels = []
         for entity in results.entities:
