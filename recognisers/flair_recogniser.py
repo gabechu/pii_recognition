@@ -31,14 +31,15 @@ class FlairRecogniser(EntityRecogniser):
             supported_languages=supported_languages,
         )
 
-    def load_model(self):
+    @property
+    def model(self):
         return SequenceTagger.load(self.model_name)
 
     def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
         self.validate_entities(entities)
 
         sentence = Sentence(text)
-        self._model.predict(sentence)
+        self.model.predict(sentence)
 
         span_labels = []
         for entity in sentence.get_spans("ner"):
