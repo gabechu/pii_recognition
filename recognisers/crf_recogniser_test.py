@@ -8,7 +8,7 @@ from .crf_recogniser import CrfRecogniser
 from label.label_schema import SpanLabel
 
 
-def get_mock_load_model():
+def get_mock_model():
     model = Mock()
     model.tag.return_value = ["O", "O", "PER", "O", "LOC", "O"]
 
@@ -36,9 +36,7 @@ def text():
     return "This is Bob from Melbourne."
 
 
-@patch.object(
-    target=CrfRecogniser, attribute="model", new_callable=get_mock_load_model()
-)
+@patch.object(target=CrfRecogniser, attribute="model", new_callable=get_mock_model())
 def test_crf_recogniser_analyse(text, mock_tokeniser):
     recogniser = CrfRecogniser(["PER", "LOC"], ["en"], "fake_path", mock_tokeniser)
 
