@@ -25,7 +25,8 @@ class CrfRecogniser(EntityRecogniser):
             supported_languages=supported_languages,
         )
 
-    def load_model(self) -> Tagger:
+    @property
+    def model(self) -> Tagger:
         tagger = Tagger()
         tagger.open(self._model_path)
         return tagger
@@ -45,7 +46,7 @@ class CrfRecogniser(EntityRecogniser):
         preprocessed_text = self.preprocess_text(text)
         tokens = [token.text for token in preprocessed_text]
         features = self.build_features(tokens)
-        entity_tags = self._model.tag(features)
+        entity_tags = self.model.tag(features)
 
         assert len(entity_tags) == len(tokens) == len(preprocessed_text)
 

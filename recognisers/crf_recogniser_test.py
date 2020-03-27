@@ -36,7 +36,9 @@ def text():
     return "This is Bob from Melbourne."
 
 
-@patch.object(target=CrfRecogniser, attribute="load_model", new=get_mock_load_model())
+@patch.object(
+    target=CrfRecogniser, attribute="model", new_callable=get_mock_load_model()
+)
 def test_crf_recogniser_analyse(text, mock_tokeniser):
     recogniser = CrfRecogniser(["PER", "LOC"], ["en"], "fake_path", mock_tokeniser)
 

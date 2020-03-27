@@ -4,7 +4,6 @@ from typing import Any, List, TypeVar
 from label.label_schema import SpanLabel
 
 
-
 class EntityRecogniser(metaclass=ABCMeta):
     _model = None
 
