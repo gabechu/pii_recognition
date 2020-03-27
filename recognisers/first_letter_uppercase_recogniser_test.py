@@ -4,7 +4,7 @@ from pytest import fixture
 from label.label_schema import SpanLabel
 from tokeniser.token import Token
 
-from .first_letter_uppercase import FirstLetterUppercaseRecogniser
+from .first_letter_uppercase_recogniser import FirstLetterUppercaseRecogniser
 
 
 @fixture

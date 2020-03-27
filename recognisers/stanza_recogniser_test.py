@@ -6,7 +6,7 @@ from pytest import fixture
 
 from label.label_schema import SpanLabel
 
-from .stanza import StanzaRecogniser
+from .stanza_recogniser import StanzaRecogniser
 
 
 class MockStanzaSpan(NamedTuple):
@@ -29,7 +29,7 @@ def text():
     return "This is Bob from Melbourne."
 
 
-@patch("recognisers.stanza.Pipeline", new=mock_pipeline())
+@patch("recognisers.stanza_recogniser.Pipeline", new=mock_pipeline())
 def test_stanza_analyse(text):
     recogniser = StanzaRecogniser(
         supported_entities=["PERSON", "LOC", "ORG"],

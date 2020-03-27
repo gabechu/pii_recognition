@@ -6,7 +6,7 @@ from pytest import fixture
 
 from label.label_schema import SpanLabel
 
-from .flair import FlairRecogniser
+from .flair_recogniser import FlairRecogniser
 
 
 class MockFlairSpan(NamedTuple):
@@ -29,8 +29,8 @@ def text():
     return "This is Bob from Melbourne."
 
 
-@patch("recognisers.flair.Sentence", new=mock_sentence())
-@patch("recognisers.flair.SequenceTagger", new=Mock())
+@patch("recognisers.flair_recogniser.Sentence", new=mock_sentence())
+@patch("recognisers.flair_recogniser.SequenceTagger", new=Mock())
 def test_flair_analyse():
     recogniser = FlairRecogniser(
         supported_entities=["PER", "LOC", "ORG", "MISC"],
