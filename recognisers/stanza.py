@@ -6,8 +6,8 @@ from label.label_schema import SpanLabel
 
 from .entity_recogniser import EntityRecogniser
 
-# TODO: add suffix recogniser
-class Stanza(EntityRecogniser):
+
+class StanzaRecogniser(EntityRecogniser):
     """
     Stanza named entity recogniser.
 

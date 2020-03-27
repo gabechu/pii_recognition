@@ -4,7 +4,7 @@ from pytest import fixture
 from label.label_schema import SpanLabel
 from tokeniser.token import Token
 
-from .first_letter_uppercase import FirstLetterUppercase
+from .first_letter_uppercase import FirstLetterUppercaseRecogniser
 
 
 @fixture
@@ -27,7 +27,7 @@ def text():
 
 
 def test_first_letter_uppercase_analyse(text, mock_tokeniser):
-    recogniser = FirstLetterUppercase(
+    recogniser = FirstLetterUppercaseRecogniser(
         supported_languages=["en"], tokeniser=mock_tokeniser
     )
     actual = recogniser.analyse(text, entities=["PER"])

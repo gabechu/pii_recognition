@@ -6,8 +6,8 @@ from tokeniser.tokeniser import Token
 
 from .entity_recogniser import EntityRecogniser
 
-# TODO: add suffix recogniser
-class FirstLetterUppercase(EntityRecogniser):
+
+class FirstLetterUppercaseRecogniser(EntityRecogniser):
     """
     A heuristic model that check the first letter of every word/token and determine if
     that token is PERSON. Only PERSON entity is supported.

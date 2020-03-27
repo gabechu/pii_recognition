@@ -7,8 +7,8 @@ from label.label_schema import SpanLabel
 
 from .entity_recogniser import EntityRecogniser
 
-# TODO: add suffix recogniser
-class Flair(EntityRecogniser):
+
+class FlairRecogniser(EntityRecogniser):
     """
     Flair named entity recogniser.
 
