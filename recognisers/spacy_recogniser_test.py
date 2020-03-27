@@ -14,7 +14,7 @@ class MockEntity(NamedTuple):
     end_char: int
 
 
-def get_mock_load_model():
+def get_mock_model():
     model = Mock()
     model.return_value.ents = [MockEntity("PER", 8, 11), MockEntity("LOC", 17, 26)]
 
@@ -28,7 +28,7 @@ def text():
     return "This is Bob from Melbourne."
 
 
-@patch.object(target=SpacyRecogniser, attribute="load_model", new=get_mock_load_model())
+@patch.object(target=SpacyRecogniser, attribute="model", new_callable=get_mock_model())
 def test_spacy_recogniser(text):
     recogniser = SpacyRecogniser(["PER", "LOC"], ["en"], model_name="fake_model")
 
