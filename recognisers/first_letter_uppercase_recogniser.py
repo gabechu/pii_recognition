@@ -14,7 +14,7 @@ class FirstLetterUppercaseRecogniser(EntityRecogniser):
     """
 
     PER = "PER"
-    default_tag = "O"  # a token belongs to no entity
+    model = None  # abstract property
 
     def __init__(
         self, supported_languages: List[str], tokeniser: Callable[[str], List[Token]]
@@ -24,13 +24,10 @@ class FirstLetterUppercaseRecogniser(EntityRecogniser):
             supported_entities=[self.PER], supported_languages=supported_languages
         )
 
-    def load_model(self):
-        pass
-
     def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
         tokens = self.tokeniser(text)
         entity_tags = [
-            self.PER if token.text.istitle() else self.default_tag for token in tokens
+            self.PER if token.text.istitle() else "O" for token in tokens
         ]
 
         spans = token_labels_to_span_labels(tokens, entity_tags)
