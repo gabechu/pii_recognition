@@ -1,14 +1,14 @@
-from typing import Dict, Type, Generic
+from typing import Dict, Generic, Type
 
 from .crf_recogniser import CrfRecogniser
-from .entity_recogniser import Rec_co, EntityRecogniser
+from .entity_recogniser import EntityRecogniser
 from .first_letter_uppercase_recogniser import FirstLetterUppercaseRecogniser
 from .flair_recogniser import FlairRecogniser
 from .spacy_recogniser import SpacyRecogniser
 from .stanza_recogniser import StanzaRecogniser
 
 
-def get_recogniser(name: str, params: Dict) -> Rec_co:
+def get_recogniser(name: str, params: Dict) -> EntityRecogniser:
     # recogniser lazy initialised
     available_recognisers = {
         "Crf": CrfRecogniser(**params),
