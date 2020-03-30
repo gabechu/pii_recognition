@@ -1,4 +1,4 @@
-from dagster import solid
+from dagster import solid, pipeline
 
 
 @solid
@@ -26,3 +26,11 @@ def initialise_evaluator():
     ...
 
 
+@solid
+def evaluate_and_logging():
+    ...
+
+
+@pipeline
+def evaluation_pipeline():
+    ...
