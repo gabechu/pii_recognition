@@ -1,17 +1,17 @@
 from dagster import execute_pipeline, pipeline, solid
 
 from recognisers.crf_recogniser import CrfRecogniser
-from recognisers.entity_recogniser import EntityRecogniser
-from recognisers.first_letter_uppercase_recogniser import \
-    FirstLetterUppercaseRecogniser
+from recognisers.first_letter_uppercase_recogniser import FirstLetterUppercaseRecogniser
 from recognisers.flair_recogniser import FlairRecogniser
 from recognisers.recogniser_registry import RecogniserRegistry
 from recognisers.spacy_recogniser import SpacyRecogniser
 from recognisers.stanza_recogniser import StanzaRecogniser
 
+from .types import RecogniserRegistryDT
+
 
 @solid
-def register_recognisers(context):
+def register_recognisers(context) -> RecogniserRegistryDT:
     registry = RecogniserRegistry()
 
     registry.add_recogniser(CrfRecogniser)
@@ -19,12 +19,14 @@ def register_recognisers(context):
     registry.add_recogniser(FlairRecogniser)
     registry.add_recogniser(SpacyRecogniser)
     registry.add_recogniser(StanzaRecogniser)
-    
+
     return registry
 
 
 @solid
-def get_recogniser(context, recogniser_registry, recogniser_name: str):
+def get_recogniser(
+    context, recogniser_registry: RecogniserRegistryDT, recogniser_name: str
+):
     return recogniser_registry.registry[recogniser_name]
 
 
