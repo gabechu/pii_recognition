@@ -1,4 +1,5 @@
 from typing import Dict, Generic, Type
+
 from dagster import Field, String
 
 from .crf_recogniser import CrfRecogniser

@@ -16,10 +16,10 @@ class CrfRecogniser(EntityRecogniser):
         supported_entities: List[str],
         supported_languages: List[str],
         model_path: str,
-        tokenizer: Callable[[str], List[Token]],
+        tokeniser: Callable[[str], List[Token]],
     ):
         self._model_path = model_path
-        self._tokenizer = tokenizer
+        self._tokeniser = tokeniser
         super().__init__(
             supported_entities=supported_entities,
             supported_languages=supported_languages,
@@ -32,7 +32,7 @@ class CrfRecogniser(EntityRecogniser):
         return tagger
 
     def preprocess_text(self, text: str) -> List[Token]:
-        return self._tokenizer(text)
+        return self._tokeniser(text)
 
     def build_features(self, tokenised_sentence: List[str]) -> List[List[str]]:
         return [
