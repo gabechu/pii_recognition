@@ -9,19 +9,11 @@ from .stanza_recogniser import StanzaRecogniser
 class RecogniserRegistry:
     def __init__(self):
         self.registry = {}
-        self.add_predefined_recogniser()
 
     def add_recogniser(self, recogniser: EntityRecogniser):
         # TODO: myerror
         # https://github.com/python/mypy/issues/3728
         self.registry[recogniser.__name__] = recogniser  # type: ignore
-
-    def add_predefined_recogniser(self):
-        self.add_recogniser(CrfRecogniser)
-        self.add_recogniser(FirstLetterUppercaseRecogniser)
-        self.add_recogniser(FlairRecogniser)
-        self.add_recogniser(SpacyRecogniser)
-        self.add_recogniser(StanzaRecogniser)
 
     def get_recogniser(self, name: str) -> EntityRecogniser:
         if name not in self.registry:
