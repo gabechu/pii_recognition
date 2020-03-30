@@ -6,7 +6,7 @@ import numpy as np
 from label.label_schema import EvalLabel
 from label.mapping import map_labels, mask_labels
 from label.span import span_labels_to_token_labels
-from recognisers.entity_recogniser import Rec_co
+from recognisers.entity_recogniser import EntityRecogniser
 from tokeniser.token import Token
 
 from .metrics import compute_f_beta
@@ -27,7 +27,7 @@ class ModelEvaluator:
 
     def __init__(
         self,
-        recogniser: Rec_co,
+        recogniser: EntityRecogniser,
         target_entities: List[str],
         tokeniser: Callable[[str], List[Token]],
         to_eval_labels: Optional[Dict[str, str]] = None,
@@ -68,7 +68,7 @@ class ModelEvaluator:
         if self.to_eval_labels:
             predictions = map_labels(predictions, self.to_eval_labels)
 
-        label_pair_counter = Counter()
+        label_pair_counter: Counter = Counter()
         if len(annotations) != len(predictions):
             return (
                 label_pair_counter,

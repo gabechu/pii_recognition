@@ -1,7 +1,3 @@
-from typing import Dict, Generic, Type
-
-from dagster import Field, String
-
 from .crf_recogniser import CrfRecogniser
 from .entity_recogniser import EntityRecogniser
 from .first_letter_uppercase_recogniser import FirstLetterUppercaseRecogniser
@@ -27,10 +23,11 @@ class RecogniserRegistry:
         self.add_recogniser(SpacyRecogniser)
         self.add_recogniser(StanzaRecogniser)
 
-    def get_recogniser(self, name: str):
+    def get_recogniser(self, name: str) -> EntityRecogniser:
         if name not in self.registry:
             raise ValueError(
-                f"Recogniser not found, available recognisers are {self.registry.keys()}"
+                f"Recogniser not found, available recognisers are"
+                f"{self.registry.keys()}"
             )
 
         return self.registry[name]
