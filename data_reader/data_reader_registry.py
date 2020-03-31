@@ -16,10 +16,10 @@ class DataReaderRegistry:
     def add_reader(self, reader: Callable):
         self.registry[reader.__name__] = reader
 
-    def get_reader(self, reader_name: str) -> Callable:
-        if reader_name not in self.registry:
+    def get_reader(self, name: str) -> Callable:
+        if name not in self.registry:
             raise ValueError(
-                f"Found no reader of name {reader_name}, available evaluation readers"
+                f"Found no reader of name {name}, available evaluation readers"
                 f"are {self.registry.keys()}"
             )
-        return self.registry[reader_name]
+        return self.registry[name]
