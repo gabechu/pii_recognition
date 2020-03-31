@@ -10,11 +10,11 @@ class DataReaderRegistry:
         self.add_predefined_readers()
 
     def add_predefined_readers(self):
-        self.add_reader(get_conll_eval_data)
-        self.add_reader(get_wnut_eval_data)
+        self.add_reader(get_conll_eval_data, "conll")
+        self.add_reader(get_wnut_eval_data, "wnut")
 
-    def add_reader(self, reader: Callable):
-        self.registry[reader.__name__] = reader
+    def add_reader(self, reader: Callable, reader_tag: str):
+        self.registry[reader_tag] = reader
 
     def get_reader(self, name: str) -> Callable:
         if name not in self.registry:
