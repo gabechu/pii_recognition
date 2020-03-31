@@ -22,8 +22,3 @@ class Path:
 
 def create_path_subclass(cls_name: str, pattern: str) -> Type[Path]:
     return type(cls_name, (Path,), {"_pattern": pattern})
-
-
-DataPath = create_path_subclass(
-    "DataPath", "datasets/(?P<data_name>[a-zA-Z]+)(?P<version>\d+)/"
-)
