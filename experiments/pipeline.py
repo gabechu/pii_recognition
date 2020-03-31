@@ -2,7 +2,10 @@ import inspect
 
 from dagster import Field, List, String, execute_pipeline, pipeline, solid
 
+from data_reader.data_reader_registry import DataReaderRegistry
 from recognisers.recogniser_registry import RecogniserRegistry
+from tokeniser.detokeniser import DetokeniserRegistry
+from paths import DataPath
 
 from .types import RecogniserRegistryDT
 
@@ -36,9 +39,21 @@ def initialise_recogniser(context, recogniser_cls):
     return recogniser_cls(**filtered_config)
 
 
-@solid
-def get_evaluation_data(context):
-    ...
+@solid(
+    config={
+        "detokeniser": Field(
+            String, is_required=False, default_value="space_join_detokensier"
+        )
+    }
+)
+def get_evaluation_data(context, data_path: str):
+    path = DataPath(data_path)
+    reader_registry = DataReaderRegistry()
+    detokeniser_registry = DetokeniserRegistry()
+
+    reader = reader_registry.registry[path.data_name]  # type: ignore
+    detokeniser = detokeniser_registry.registry[context.solid_config["detokeniser"]]
+    return reader(path.path, detokeniser)
 
 
 @solid
@@ -53,7 +68,8 @@ def evaluate_and_logging(context):
 
 @pipeline
 def evaluation_pipeline():
-    return initialise_recogniser(get_recogniser())
+    recogniser = initialise_recogniser(get_recogniser())
+    eval_data = get_evaluation_data()
 
 
 if __name__ == "__main__":
@@ -68,6 +84,9 @@ if __name__ == "__main__":
                     "supported_languages": ["en", "de", "es", "fr", "it", "pt", "ru"],
                     "model_name": "xx_ent_wiki_sm",
                 }
+            },
+            "get_evaluation_data": {
+                "inputs": {"data_path": {"value": "datasets/conll2003/eng.testb"}},
             },
         }
     }
