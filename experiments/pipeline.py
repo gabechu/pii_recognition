@@ -1,11 +1,12 @@
 import inspect
 
-from dagster import Field, List, String, execute_pipeline, pipeline, solid
+from dagster import (Field, List, Output, OutputDefinition, String,
+                     execute_pipeline, pipeline, solid)
 
 from data_reader.data_reader_registry import DataReaderRegistry
+from paths import DataPath
 from recognisers.recogniser_registry import RecogniserRegistry
 from tokeniser.detokeniser import DetokeniserRegistry
-from paths import DataPath
 
 from .types import RecogniserRegistryDT
 
@@ -44,7 +45,8 @@ def initialise_recogniser(context, recogniser_cls):
         "detokeniser": Field(
             String, is_required=False, default_value="space_join_detokensier"
         )
-    }
+    },
+    output_defs=[OutputDefinition(list, 'X_test'), OutputDefinition(list, 'y_test')]
 )
 def get_evaluation_data(context, data_path: str):
     path = DataPath(data_path)
@@ -53,7 +55,9 @@ def get_evaluation_data(context, data_path: str):
 
     reader = reader_registry.registry[path.data_name]  # type: ignore
     detokeniser = detokeniser_registry.registry[context.solid_config["detokeniser"]]
-    return reader(path.path, detokeniser)
+    X_test, y_test = reader(path.path, detokeniser)
+    yield Output(X_test, "X_test")
+    yield Output(y_test, "y_test")
 
 
 @solid
@@ -69,7 +73,7 @@ def evaluate_and_logging(context):
 @pipeline
 def evaluation_pipeline():
     recogniser = initialise_recogniser(get_recogniser())
-    eval_data = get_evaluation_data()
+    X_test, y_test = get_evaluation_data()
 
 
 if __name__ == "__main__":
@@ -91,5 +95,4 @@ if __name__ == "__main__":
         }
     }
 
-    result = execute_pipeline(evaluation_pipeline, environment_dict=environment_dict)
-    assert result.success
+    execute_pipeline(evaluation_pipeline, environment_dict=environment_dict)
