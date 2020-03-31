@@ -15,7 +15,7 @@ class DetokeniserRegistry:
         self.registry = {}
         self.add_predefined_detokeniser()
 
-    def add_predefined_detokeniser(self):
+    def add_predefined_detokenisers(self):
         self.add_detokeniser(space_join_detokensier)
         self.add_detokeniser(treebank_detokeniser)
 
