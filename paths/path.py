@@ -21,4 +21,4 @@ class Path:
 
 
 def create_path_subclass(cls_name: str, pattern: str) -> Type[Path]:
-    return type(cls_name, (Path,), {"_pattern": pattern})
+    return type(cls_name, (Path,), {"_pattern_str": pattern})
