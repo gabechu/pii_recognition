@@ -28,7 +28,7 @@ class RecogniserRegistry:
     def get_recogniser(self, name: str) -> EntityRecogniser:
         if name not in self.registry:
             raise ValueError(
-                f"Recogniser not found, available recognisers are"
+                f"Found no recogniser of name {name}, available recognisers are"
                 f"{self.registry.keys()}"
             )
 
