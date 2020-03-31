@@ -4,14 +4,22 @@ from .conll_reader import get_conll_eval_data
 from .wnut_reader import get_wnut_eval_data
 
 
-def get_eval_reader(name: str) -> Callable:
-    available_eval_reader = {
-        "conll2003": get_conll_eval_data,
-        "wnut2017": get_wnut_eval_data,
-    }
+class DataReaderRegistry:
+    def __init__(self):
+        self.registry = {}
+        self.add_predefined_readers()
 
-    assert (
-        name in available_eval_reader
-    ), f"Found no reader of name {name}, available evaluation readers are {available_eval_reader.keys()}"
+    def add_predefined_readers(self):
+        self.add_reader(get_conll_eval_data)
+        self.add_reader(get_wnut_eval_data)
 
-    return available_eval_reader[name]
+    def add_reader(self, reader: Callable):
+        self.registry[reader.__name__] = reader
+
+    def get_reader(self, reader_name: str):
+        if reader_name not in self.registry:
+            raise ValueError(
+                f"Found no reader of name {reader_name}, available evaluation readers"
+                f"are {self.registry.keys()}"
+            )
+        return self.registry[reader_name]
