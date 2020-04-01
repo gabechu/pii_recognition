@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "pii_recognition"
+version = "0.1.0"
+description = ""
+authors = ["Gabe <wei.g.chu@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "3.7"
+tensorflow = "^2.1.0"
+spacy = "^2.2.3"
+nltk = "^3.4.5"
+scikit-learn = "^0.22.2"
+numpy = "^1.18.1"
+sklearn-crfsuite = "^0.3.6"
+python-crfsuite = "^0.9.6"
+mlflow = "^1.7.0"
+grpcio = "^1.27.2"
+grpcio-tools = "^1.27.2"
+flair = "^0.4.5"
+stanza = "^1.0.0"
+dagster = "^0.7.5"
+dagit = "^0.7.5"
+pandas = "^1.0.3"
+pakkr = "^0.1.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "^19.10b0"
+flake8 = "^3.7.9"
+mypy = "^0.761"
+isort = "^4.3.21"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
