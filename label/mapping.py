@@ -19,11 +19,19 @@ def map_labels(type_A_labels: List[str], A2B_mapping: Dict[str, str]) -> List[st
 
 
 def mask_labels(
-    input_labels: List[str], non_mask_labels: List[str], mask_value: str = "O"
+    input_labels: List[str], keep_labels: List[str], mask_value: str = "O"
 ) -> List[str]:
+    """
+    Mask non-keep labels with mask value.
+
+    Args:
+        input_labels: entity label for every token.
+        keep_labels: labels don't want to be masked.
+        mask_value: replacement value for non-keep labels in masking.
+    """
     results = []
     for lab in input_labels:
-        if lab in non_mask_labels:
+        if lab in keep_labels:
             results.append(lab)
         else:
             results.append(mask_value)
