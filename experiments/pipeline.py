@@ -1,12 +1,22 @@
 import inspect
 
-from dagster import (Field, List, Output, OutputDefinition, String,
-                     execute_pipeline, pipeline, solid)
+from dagster import (
+    Field,
+    List,
+    Output,
+    OutputDefinition,
+    String,
+    execute_pipeline,
+    pipeline,
+    solid,
+)
 
 from data_reader.data_reader_registry import DataReaderRegistry
+from evaluation.model_evaluator import ModelEvaluator
 from paths import DataPath
 from recognisers.recogniser_registry import RecogniserRegistry
 from tokeniser.detokeniser import DetokeniserRegistry
+from tokeniser.tokeniser import TokeniserRegistry
 
 from .types import RecogniserRegistryDT
 
@@ -46,7 +56,7 @@ def initialise_recogniser(context, recogniser_cls):
             String, is_required=False, default_value="space_join_detokensier"
         )
     },
-    output_defs=[OutputDefinition(list, 'X_test'), OutputDefinition(list, 'y_test')]
+    output_defs=[OutputDefinition(list, "X_test"), OutputDefinition(list, "y_test")],
 )
 def get_evaluation_data(context, data_path: str):
     path = DataPath(data_path)
@@ -60,9 +70,21 @@ def get_evaluation_data(context, data_path: str):
     yield Output(y_test, "y_test")
 
 
-@solid
-def initialise_evaluator(context):
-    ...
+@solid(
+    config={
+        "tokeniser": Field(
+            String, is_required=False, default_value="nltk_word_tokenizer"
+        )
+    }
+)
+def initialise_evaluator(context, recogniser, target_entities, to_eval_labels=None):
+    tokeniser_registry = TokeniserRegistry()
+    return ModelEvaluator(
+        recogniser,
+        target_entities,
+        tokeniser_registry.registry[context.solid_config["tokeniser"]],
+        to_eval_labels,
+    )
 
 
 @solid
@@ -74,6 +96,7 @@ def evaluate_and_logging(context):
 def evaluation_pipeline():
     recogniser = initialise_recogniser(get_recogniser())
     X_test, y_test = get_evaluation_data()
+    evaluator = initialise_evaluator(recogniser)
 
 
 if __name__ == "__main__":
@@ -91,6 +114,12 @@ if __name__ == "__main__":
             },
             "get_evaluation_data": {
                 "inputs": {"data_path": {"value": "datasets/conll2003/eng.testb"}},
+            },
+            "initialise_evaluator": {
+                "inputs": {
+                    "target_entities": {"value": ["PER"]},
+                    "to_eval_labels": {"value": {"PER": "I-person"}},
+                }
             },
         }
     }
