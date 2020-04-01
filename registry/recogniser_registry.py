@@ -1,6 +1,5 @@
 from recognisers.crf_recogniser import CrfRecogniser
-from recognisers.first_letter_uppercase_recogniser import \
-    FirstLetterUppercaseRecogniser
+from recognisers.first_letter_uppercase_recogniser import FirstLetterUppercaseRecogniser
 from recognisers.flair_recogniser import FlairRecogniser
 from recognisers.spacy_recogniser import SpacyRecogniser
 from recognisers.stanza_recogniser import StanzaRecogniser

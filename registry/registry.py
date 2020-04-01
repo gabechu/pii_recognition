@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import TypeVar
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class Registry(dict, metaclass=ABCMeta):
@@ -13,5 +13,5 @@ class Registry(dict, metaclass=ABCMeta):
         ...
 
     def add_item(self, item: T):
-        name = getattr(item, '__name__')
+        name = getattr(item, "__name__")
         self[name] = item
