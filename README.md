@@ -52,6 +52,9 @@ This should also print
 Many other off-the-shelf models are supported as well and detail implementations can be found in the `recognisers` folder, including two neural networks [`flair`](https://github.com/flairNLP/flair) and [`stanza`](https://github.com/stanfordnlp/stanza).
 
 
+## Recogniser Training
+Training is not now actively underdevelopment. We have maintained two directories holding files for training, which are `training` and `features`. These files were created just to facilitate model export so that we can have a model for evaluation, they have neither been tested nor optimised.
+
 ## Recogniser Evaluation
 ### Data Format
 The *input data* to evaluation is a list of strings, where each string represents either a sentence or a paragraph, for example,
