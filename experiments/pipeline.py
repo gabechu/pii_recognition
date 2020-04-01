@@ -18,7 +18,7 @@ from recognisers.recogniser_registry import RecogniserRegistry
 from tokeniser.detokeniser import DetokeniserRegistry
 from tokeniser.tokeniser import TokeniserRegistry
 
-from .types import RecogniserRegistryDT
+from experiments.mlflow_tracking import log_evaluation_to_mlflow
 
 
 @solid
@@ -88,8 +88,12 @@ def initialise_evaluator(context, recogniser, target_entities, to_eval_labels=No
 
 
 @solid
-def evaluate_and_logging(context):
-    ...
+def evaluate_and_logging(
+    context, recogniser, evaluator, X_test, y_test, experiment_name, run_name
+):
+    log_evaluation_to_mlflow(
+        experiment_name, recogniser, evaluator, X_test, y_test, run_name
+    )
 
 
 @pipeline
@@ -97,6 +101,7 @@ def evaluation_pipeline():
     recogniser = initialise_recogniser(get_recogniser())
     X_test, y_test = get_evaluation_data()
     evaluator = initialise_evaluator(recogniser)
+    evaluate_and_logging(recogniser, evaluator, X_test, y_test)
 
 
 if __name__ == "__main__":
@@ -119,6 +124,12 @@ if __name__ == "__main__":
                 "inputs": {
                     "target_entities": {"value": ["PER"]},
                     "to_eval_labels": {"value": {"PER": "I-person"}},
+                }
+            },
+            "evaluate_and_logging": {
+                "inputs": {
+                    "experiment_name": {"value": "Spacy"},
+                    "run_name": {"value": "pipeline"},
                 }
             },
         }

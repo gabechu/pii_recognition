@@ -38,7 +38,6 @@ def delete_experiment(exp_name: str):
 
 def log_evaluation_to_mlflow(
     experiment_name: str,
-    params: Dict,
     recogniser: Rec_co,
     evaluator: ModelEvaluator,
     X_test: List[str],
@@ -63,7 +62,7 @@ def log_evaluation_to_mlflow(
             write_iterable_to_text(mistakes, error_file_path)
             mlflow.log_artifact(error_file_path)
 
-        log_params(params)
+        # log_params(params)
 
         log_metrics(recall, suffix="recall")
         log_metrics(precision, suffix="precision")
