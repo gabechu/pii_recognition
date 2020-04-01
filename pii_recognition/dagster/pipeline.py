@@ -2,7 +2,6 @@ import inspect
 
 from dagster import (
     Field,
-    List,
     Output,
     OutputDefinition,
     String,

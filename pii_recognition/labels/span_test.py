@@ -3,8 +3,7 @@ import pytest
 from pii_recognition.tokenisation.token_schema import Token
 
 from .schema import SpanLabel
-from .span import (is_substring, span_labels_to_token_labels,
-                   token_labels_to_span_labels)
+from .span import is_substring, span_labels_to_token_labels, token_labels_to_span_labels
 
 
 def test_is_substring():

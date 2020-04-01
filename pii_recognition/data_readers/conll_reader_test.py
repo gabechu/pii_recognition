@@ -33,7 +33,10 @@ def mock_ConllCorpusReader():
     return mock
 
 
-@patch("pii_recognition.data_readers.conll_reader.ConllCorpusReader", new=mock_ConllCorpusReader())
+@patch(
+    "pii_recognition.data_readers.conll_reader.ConllCorpusReader",
+    new=mock_ConllCorpusReader(),
+)
 def test_get_conll_eval_data():
     sents, labels = get_conll_eval_data(
         file_path="fake_path", detokenizer=space_join_detokensier
