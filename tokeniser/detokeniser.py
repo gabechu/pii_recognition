@@ -13,7 +13,7 @@ def treebank_detokeniser(tokens: List[str]) -> str:
 class DetokeniserRegistry:
     def __init__(self):
         self.registry = {}
-        self.add_predefined_detokeniser()
+        self.add_predefined_detokenisers()
 
     def add_predefined_detokenisers(self):
         self.add_detokeniser(space_join_detokensier)

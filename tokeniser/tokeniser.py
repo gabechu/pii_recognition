@@ -20,8 +20,8 @@ class TokeniserRegistry:
         self.registry = {}
         self.add_predefined_tokenisers()
 
-    def add_predefined_detokeniser(self):
+    def add_predefined_tokenisers(self):
         self.add_tokeniser(nltk_word_tokenizer)
 
-    def add_detokeniser(self, tokeniser: Callable):
+    def add_tokeniser(self, tokeniser: Callable):
         self.registry[tokeniser.__name__] = tokeniser
