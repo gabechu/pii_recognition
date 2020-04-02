@@ -41,7 +41,6 @@ for param in PARAMS:
     if evaluator and X_test and y_test:
         log_evaluation_to_mlflow(
             FIRST_LETTER_UPPERCASE,
-            param,
             recogniser,
             evaluator,
             X_test,

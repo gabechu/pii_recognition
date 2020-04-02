@@ -7,7 +7,7 @@ from .entity_recogniser import EntityRecogniser
 
 @patch.object(target=EntityRecogniser, attribute="__abstractmethods__", new=set())
 def test_entity_recogniser_attributes():
-    actual = EntityRecogniser(
+    actual = EntityRecogniser(  # type: ignore
         supported_entities=["PER"],
         supported_languages=["en"],
         name="TEST",
@@ -18,14 +18,19 @@ def test_entity_recogniser_attributes():
     assert actual.name == "TEST"
     assert actual.version == "0.0.0"
 
-    actual = EntityRecogniser(supported_entities=["PER"], supported_languages=["en"])
+    actual = EntityRecogniser(  # type: ignore
+        supported_entities=["PER"], supported_languages=["en"]
+    )
+
     assert actual.name == "EntityRecogniser"
     assert actual.version == "0.0.1"
 
 
 @patch.object(target=EntityRecogniser, attribute="__abstractmethods__", new=set())
 def test_entity_recogniser_validation():
-    actual = EntityRecogniser(supported_entities=["PER"], supported_languages=["en"])
+    actual = EntityRecogniser(  # type: ignore
+        supported_entities=["PER"], supported_languages=["en"]
+    )
     actual.validate_entities(["PER"])
     actual.validate_languages(["en"])
 

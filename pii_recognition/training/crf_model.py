@@ -122,14 +122,14 @@ def bio_classification_report(y_true, y_pred):
     y_pred_combined = lb.transform(list(chain.from_iterable(y_pred)))
 
     tagset = set(lb.classes_) - {"O"}
-    tagset = sorted(tagset, key=lambda tag: tag.split("-", 1)[::-1])
+    taglist = sorted(tagset, key=lambda tag: tag.split("-", 1)[::-1])
     class_indices = {cls: idx for idx, cls in enumerate(lb.classes_)}
 
     return classification_report(
         y_true_combined,
         y_pred_combined,
-        labels=[class_indices[cls] for cls in tagset],
-        target_names=tagset,
+        labels=[class_indices[cls] for cls in taglist],
+        target_names=taglist,
     )
 
 

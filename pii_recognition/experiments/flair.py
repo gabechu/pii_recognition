@@ -42,5 +42,5 @@ for param in PARAMS:
 
     if evaluator and X_test and y_test:
         log_evaluation_to_mlflow(
-            FLAIR, param, recogniser, evaluator, X_test, y_test, run_name=RUN_NAME
+            FLAIR, recogniser, evaluator, X_test, y_test, run_name=RUN_NAME
         )

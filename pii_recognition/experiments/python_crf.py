@@ -42,5 +42,5 @@ for param in PARAMS:
 
     if evaluator and X_test and y_test:
         log_evaluation_to_mlflow(
-            CRF_EXP, param, recogniser, evaluator, X_test, y_test, run_name=RUN_NAME
+            CRF_EXP, recogniser, evaluator, X_test, y_test, run_name=RUN_NAME
         )

@@ -45,5 +45,5 @@ for param in PARAMS:
 
     if evaluator and X_test and y_test:
         log_evaluation_to_mlflow(
-            STANZA, param, recogniser, evaluator, X_test, y_test, run_name=RUN_NAME
+            STANZA, recogniser, evaluator, X_test, y_test, run_name=RUN_NAME
         )
