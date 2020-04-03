@@ -1,5 +1,5 @@
 language: python
-dist: xenial
+dist: bionic
 python:
   - "3.7"
 
@@ -25,5 +25,7 @@ jobs:
   include:
     - name: flake8
       script: poetry run flake8 pii_recognition
+    - name: mypy
+      script: poetry run mypy --config-file pyproject.toml pii_recognition
     - name: unittest
       script: poetry run pytest pii_recognition
