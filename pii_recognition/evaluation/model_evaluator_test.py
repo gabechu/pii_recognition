@@ -50,13 +50,13 @@ def test_class_init():
         recogniser=mock_recogniser,
         target_entities=["PER", "LOC"],
         tokeniser=mock_tokeniser,
-        to_eval_labels={"PER": "PERSON"},
+        convert_labels={"PER": "PERSON"},
     )
 
     assert evaluator.recogniser == mock_recogniser
     assert evaluator.target_entities == ["PER", "LOC"]
     assert evaluator.tokeniser == mock_tokeniser
-    assert evaluator.to_eval_labels == {"PER": "PERSON"}
+    assert evaluator.convert_labels == {"PER": "PERSON"}
 
     # test 2: raise assertion error
     with pytest.raises(AssertionError) as err:
@@ -148,7 +148,7 @@ def test__compare_predicted_and_truth(text, mock_tokeniser):
         recogniser=Mock(),
         target_entities=["ANY"],
         tokeniser=mock_tokeniser,
-        to_eval_labels={"LOC": "LOCATION", "PER": "PERSON"},
+        convert_labels={"LOC": "LOCATION", "PER": "PERSON"},
     )
     counter, mistakes = evaluator._compare_predicted_and_truth(
         text,
@@ -196,7 +196,7 @@ def test_evaluate_sample_with_label_conversion(mock_recogniser, mock_tokeniser):
         recogniser=mock_recogniser,
         target_entities=["PER", "LOC"],
         tokeniser=mock_tokeniser,
-        to_eval_labels={"PER": "I-PER", "LOC": "I-LOC"},
+        convert_labels={"PER": "I-PER", "LOC": "I-LOC"},
     )
     counter, mistakes = evaluator.evaluate_sample(
         text, annotations=["O", "I-MISC", "I-PER", "O", "I-LOC", "I-MISC"]
@@ -278,7 +278,7 @@ def test_calculate_score():
         recogniser=Mock(),
         target_entities=["PER", "LOC"],
         tokeniser=Mock(),
-        to_eval_labels={"LOC": "LOCATION", "PER": "PERSON"},
+        convert_labels={"LOC": "LOCATION", "PER": "PERSON"},
     )
     counters = [
         Counter(
