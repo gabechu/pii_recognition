@@ -1,24 +1,32 @@
 import re
-from typing import Match, Type
+from abc import ABCMeta, abstractmethod
+from typing import Match, Optional
 
 
-class Path:
-    _pattern_str = None
+class Path(metaclass=ABCMeta):
+    valid: bool = False
 
     def __init__(self, path: str):
         self.path = path
-        self._pattern_to_attrs(self.get_pattern())
+        matches = self.get_pattern()
+        if matches:
+            self.valid = True
+            self._pattern_to_attrs(matches)
 
-    def get_pattern(self) -> Match:
-        if not self._pattern_str:
-            raise AttributeError("Pattern has not been defined.")
+    # Will be invoked regardless whether attribute
+    # exists or not, this fix mypy error due to
+    # dynamic attributes creations
+    def __getattribute__(self, name: str) -> str:
+        return super().__getattribute__(name)
 
-        return re.match(self._pattern_str, self.path)
+    @property
+    @abstractmethod
+    def pattern_str(self) -> str:
+        ...
+
+    def get_pattern(self) -> Optional[Match]:
+        return re.match(self.pattern_str, self.path)
 
     def _pattern_to_attrs(self, pattern: Match):
         for key, value in pattern.groupdict().items():
             setattr(self, key, value)
-
-
-def create_path_subclass(cls_name: str, pattern: str) -> Type[Path]:
-    return type(cls_name, (Path,), {"_pattern_str": pattern})
