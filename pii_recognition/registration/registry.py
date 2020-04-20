@@ -1,4 +1,6 @@
 from typing import Generic, Optional, Type, TypeVar
+from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
+
 
 T_co = TypeVar("T_co", covariant=True)
 
@@ -12,3 +14,6 @@ class Registry(dict, Generic[T_co]):
 
     def create_instance(self, name: str, **config) -> T_co:
         return self[name](**config)
+
+
+recogniser = Registry[EntityRecogniser]()

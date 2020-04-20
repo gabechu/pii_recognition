@@ -5,8 +5,6 @@ from pii_recognition.labels.schema import SpanLabel
 
 
 class EntityRecogniser(metaclass=ABCMeta):
-    _model = None
-
     def __init__(
         self,
         supported_entities: List[str],
