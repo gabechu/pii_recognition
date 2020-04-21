@@ -2,8 +2,8 @@ from typing import Dict, List, Tuple
 
 from pakkr import returns
 
-from pii_recognition import registry
 from pii_recognition.evaluation.model_evaluator import ModelEvaluator
+from pii_recognition.recognisers import registry as recogniser_registry
 from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
 
 
@@ -12,7 +12,7 @@ from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
 def get_recogniser(
     recogniser_name: str, recogniser_config: Dict = {}
 ) -> Dict[str, EntityRecogniser]:
-    recogniser_class = registry.recogniser[recogniser_name]
+    recogniser_class = recogniser_registry[recogniser_name]
     recogniser_instance = recogniser_class(**recogniser_config)
     return {"recogniser": recogniser_instance}
 
