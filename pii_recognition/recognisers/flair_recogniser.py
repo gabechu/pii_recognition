@@ -4,6 +4,7 @@ from flair.data import Sentence
 from flair.models import SequenceTagger
 
 from pii_recognition.labels.schema import SpanLabel
+from pii_recognition.utils import cached_property
 
 from .entity_recogniser import EntityRecogniser
 
@@ -31,7 +32,7 @@ class FlairRecogniser(EntityRecogniser):
             supported_languages=supported_languages,
         )
 
-    @property
+    @cached_property
     def model(self):
         return SequenceTagger.load(self.model_name)
 

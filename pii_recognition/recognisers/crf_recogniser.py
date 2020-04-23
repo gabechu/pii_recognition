@@ -6,6 +6,7 @@ from pii_recognition.features.word_to_features import word2features
 from pii_recognition.labels.schema import SpanLabel
 from pii_recognition.labels.span import token_labels_to_span_labels
 from pii_recognition.tokenisation.token_schema import Token
+from pii_recognition.utils import cached_property
 
 from .entity_recogniser import EntityRecogniser
 
@@ -25,7 +26,7 @@ class CrfRecogniser(EntityRecogniser):
             supported_languages=supported_languages,
         )
 
-    @property
+    @cached_property
     def model(self) -> Tagger:
         tagger = Tagger()
         tagger.open(self._model_path)

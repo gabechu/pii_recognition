@@ -14,7 +14,6 @@ class FirstLetterUppercaseRecogniser(EntityRecogniser):
     """
 
     PER = "PER"
-    model = None  # abstract property
 
     def __init__(
         self, supported_languages: List[str], tokeniser: Callable[[str], List[Token]]

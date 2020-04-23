@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from typing import Any, List, TypeVar
+from typing import List
 
 from pii_recognition.labels.schema import SpanLabel
 
@@ -34,15 +34,7 @@ class EntityRecogniser(metaclass=ABCMeta):
             [language in self.supported_languages for language in asked_languages]
         ), f"Only support {self.supported_languages}, but got {asked_languages}"
 
-    @property
-    @abstractmethod
-    def model(self) -> Any:
-        ...
-
     @abstractmethod
     def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
         """Anotate asked entities in the text."""
         ...
-
-
-Rec_co = TypeVar("Rec_co", bound=EntityRecogniser)
