@@ -1,8 +1,16 @@
+from abc import ABCMeta, abstractmethod
 from typing import List
 
 from nltk.tokenize import TreebankWordTokenizer
 
 from .token_schema import Token
+
+
+class Tokeniser(metaclass=ABCMeta):
+    @abstractmethod
+    def tokenise(self, text: str) -> List[Token]:
+        ...
+
 
 treebank_tokenizer = TreebankWordTokenizer()
 

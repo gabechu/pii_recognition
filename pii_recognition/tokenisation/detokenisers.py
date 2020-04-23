@@ -1,5 +1,13 @@
-from typing import List, Callable
+from abc import ABCMeta, abstractmethod
+from typing import Callable, List
+
 from nltk.tokenize.treebank import TreebankWordDetokenizer
+
+
+class Detokeniser(metaclass=ABCMeta):
+    @abstractmethod
+    def detokenise(self, tokens: List[str]) -> str:
+        ...
 
 
 def space_join_detokensier(tokens: List[str]) -> str:
