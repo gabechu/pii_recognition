@@ -1,6 +1,8 @@
 from unittest.mock import patch
 
 from .pipeline import get_recogniser
+from pii_recognition.registration.registry import Registry
+from typing import Any
 
 
 class RegistryNoConfig:
@@ -15,10 +17,11 @@ class RegistryWithConfig:
 
 
 def mock_registry():
-    return {
-        "RegistryNoConfig": RegistryNoConfig,
-        "RegistryWithConfig": RegistryWithConfig,
-    }
+    # Any is equivalent to Type[Any]
+    regsitry: Registry[Any] = Registry()
+    regsitry.add_item(RegistryNoConfig)
+    regsitry.add_item(RegistryWithConfig)
+    return regsitry
 
 
 @patch("pii_recognition.evaluation.pipeline.recogniser_registry", new=mock_registry())
