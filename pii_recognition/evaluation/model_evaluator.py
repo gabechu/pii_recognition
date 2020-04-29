@@ -1,5 +1,5 @@
 from collections import Counter
-from typing import Callable, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 
@@ -7,7 +7,7 @@ from pii_recognition.labels.mapping import map_labels, mask_labels
 from pii_recognition.labels.schema import EvalLabel
 from pii_recognition.labels.span import span_labels_to_token_labels
 from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
-from pii_recognition.tokenisation.token_schema import Token
+from pii_recognition.tokenisation import tokeniser_registry
 
 from .metrics import compute_f_beta
 from .prediction_error import SampleError, TokenError
@@ -31,22 +31,20 @@ class ModelEvaluator:
         self,
         recogniser: EntityRecogniser,
         target_entities: List[str],
-        tokeniser: Callable[[str], List[Token]],
+        tokeniser: Dict,
         convert_labels: Optional[Dict[str, str]] = None,
     ):
-        assert len(set(target_entities)) == len(
-            target_entities
-        ), f"No repeated entities are allowed, but found {target_entities}."
-
         self.recogniser = recogniser
         self.target_entities = target_entities
-        self.tokeniser = tokeniser
-        self.convert_labels = convert_labels
+        self._tokeniser = tokeniser_registry.create_instance(
+            tokeniser["name"], tokeniser["config"]
+        )
+        self._convert_labels = convert_labels
 
     def get_token_based_prediction(self, text: str) -> List[str]:
         recognised_entities = self.recogniser.analyse(text, self.target_entities)
 
-        tokens = self.tokeniser(text)
+        tokens = self._tokeniser.tokenise(text)
         token_labels = span_labels_to_token_labels(recognised_entities, tokens)
 
         # validate predictions
@@ -67,8 +65,8 @@ class ModelEvaluator:
         annotation and predicted entity labels denoted by predictions. Count the
         occurrence and find mistakes.
         """
-        if self.convert_labels:
-            predictions = map_labels(predictions, self.convert_labels)
+        if self._convert_labels:
+            predictions = map_labels(predictions, self._convert_labels)
 
         label_pair_counter: Counter = Counter()
         if len(annotations) != len(predictions):
@@ -78,7 +76,7 @@ class ModelEvaluator:
             )
 
         sample_error = SampleError(token_errors=[], full_text=text, failed=False)
-        tokens = self.tokeniser(text)
+        tokens = self._tokeniser.tokenise(text)
 
         for i in range(len(annotations)):
             label_pair_counter[EvalLabel(annotations[i], predictions[i])] += 1
@@ -98,9 +96,9 @@ class ModelEvaluator:
         self, text: str, annotations: List[str]
     ) -> Tuple[Counter, SampleError]:
         # mask non-interested annotations out
-        if self.convert_labels:
+        if self._convert_labels:
             translated_target_entities = map_labels(
-                self.target_entities, self.convert_labels
+                self.target_entities, self._convert_labels
             )
         else:
             translated_target_entities = self.target_entities
@@ -108,8 +106,8 @@ class ModelEvaluator:
 
         # make prediction
         predictions = self.get_token_based_prediction(text)
-        if self.convert_labels:
-            new_predictions = map_labels(predictions, self.convert_labels)
+        if self._convert_labels:
+            new_predictions = map_labels(predictions, self._convert_labels)
         else:
             new_predictions = predictions
 
@@ -149,7 +147,7 @@ class ModelEvaluator:
         entity_f_score = {}
 
         translated_target_entities = [
-            self.convert_labels[entity] if self.convert_labels else entity
+            self._convert_labels[entity] if self._convert_labels else entity
             for entity in self.target_entities
         ]
 

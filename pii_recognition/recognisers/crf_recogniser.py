@@ -1,10 +1,11 @@
-from typing import Callable, List
+from typing import List, Dict
 
 from pycrfsuite import Tagger
 
 from pii_recognition.features.word_to_features import word2features
 from pii_recognition.labels.schema import SpanLabel
 from pii_recognition.labels.span import token_labels_to_span_labels
+from pii_recognition.tokenisation import tokeniser_registry
 from pii_recognition.tokenisation.token_schema import Token
 from pii_recognition.utils import cached_property
 
@@ -17,10 +18,12 @@ class CrfRecogniser(EntityRecogniser):
         supported_entities: List[str],
         supported_languages: List[str],
         model_path: str,
-        tokeniser: Callable[[str], List[Token]],
+        tokeniser: Dict,
     ):
         self._model_path = model_path
-        self._tokeniser = tokeniser
+        self._tokeniser = tokeniser_registry.create_instance(
+            tokeniser["name"], tokeniser["config"]
+        )
         super().__init__(
             supported_entities=supported_entities,
             supported_languages=supported_languages,
@@ -33,7 +36,7 @@ class CrfRecogniser(EntityRecogniser):
         return tagger
 
     def preprocess_text(self, text: str) -> List[Token]:
-        return self._tokeniser(text)
+        return self._tokeniser.tokenise(text)
 
     def build_features(self, tokenised_sentence: List[str]) -> List[List[str]]:
         return [

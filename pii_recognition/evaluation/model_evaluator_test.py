@@ -1,5 +1,5 @@
 from collections import Counter
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 import numpy as np
 import pytest
@@ -8,7 +8,7 @@ from pytest import fixture
 from pii_recognition.labels.schema import EvalLabel, SpanLabel
 from pii_recognition.tokenisation.token_schema import Token
 
-from .model_evaluator import ModelEvaluator
+from .model_evaluator import ModelEvaluator, tokeniser_registry
 from .prediction_error import SampleError, TokenError
 
 
@@ -28,9 +28,14 @@ def mock_recogniser():
 
 
 @fixture
-def mock_tokeniser():
+def tokeniser_config():
+    return {"name": "fake_tokeniser", "config": {"fake_param": "fake_value"}}
+
+
+def get_mock_tokeniser():
+    # reference: text = "This is Bob from Melbourne."
     tokeniser = Mock()
-    tokeniser.return_value = [
+    tokeniser.return_value.tokenise.return_value = [
         Token("This", 0, 4),
         Token("is", 5, 7),
         Token("Bob", 8, 11),
@@ -41,59 +46,62 @@ def mock_tokeniser():
     return tokeniser
 
 
-def test_class_init():
+@patch.object(
+    target=tokeniser_registry,
+    attribute="create_instance",
+    new_callable=get_mock_tokeniser,
+)
+def test_class_init(mock_tokeniser, tokeniser_config):
     mock_recogniser = Mock()
-    mock_tokeniser = Mock()
 
-    # test 1: succeed
     evaluator = ModelEvaluator(
         recogniser=mock_recogniser,
         target_entities=["PER", "LOC"],
-        tokeniser=mock_tokeniser,
+        tokeniser=tokeniser_config,
         convert_labels={"PER": "PERSON"},
     )
 
     assert evaluator.recogniser == mock_recogniser
     assert evaluator.target_entities == ["PER", "LOC"]
-    assert evaluator.tokeniser == mock_tokeniser
-    assert evaluator.convert_labels == {"PER": "PERSON"}
-
-    # test 2: raise assertion error
-    with pytest.raises(AssertionError) as err:
-        evaluator = ModelEvaluator(
-            recogniser=mock_recogniser,
-            target_entities=["PER", "PER", "LOC"],
-            tokeniser=mock_tokeniser,
-        )
-    assert (
-        str(err.value)
-        == "No repeated entities are allowed, but found ['PER', 'PER', 'LOC']."
-    )
+    mock_tokeniser.assert_called_with("fake_tokeniser", {"fake_param": "fake_value"})
+    assert evaluator._convert_labels == {"PER": "PERSON"}
 
 
-def test_get_token_based_prediction(text, mock_recogniser, mock_tokeniser):
+@patch.object(
+    target=tokeniser_registry,
+    attribute="create_instance",
+    new_callable=get_mock_tokeniser,
+)
+def test_get_token_based_prediction(
+    mock_tokeniser, text, mock_recogniser, tokeniser_config
+):
     # test 1: succeed
     evaluator = ModelEvaluator(
         recogniser=mock_recogniser,
         target_entities=["PER", "LOC"],
-        tokeniser=mock_tokeniser,
+        tokeniser=tokeniser_config,
     )
     actual = evaluator.get_token_based_prediction(text)
     assert actual == ["O", "O", "PER", "O", "LOC", "O"]
 
     # test 2: raise assertion error
     evaluator = ModelEvaluator(
-        recogniser=mock_recogniser, target_entities=["PER"], tokeniser=mock_tokeniser,
+        recogniser=mock_recogniser, target_entities=["PER"], tokeniser=tokeniser_config,
     )
     with pytest.raises(AssertionError) as err:
         evaluator.get_token_based_prediction(text)
     assert str(err.value) == f"Predictions contain unasked entities ['LOC']"
 
 
-def test__compare_predicted_and_truth(text, mock_tokeniser):
+@patch.object(
+    target=tokeniser_registry,
+    attribute="create_instance",
+    new_callable=get_mock_tokeniser,
+)
+def test__compare_predicted_and_truth(mock_tokeniser, text, tokeniser_config):
     # test 1: predicted == truths
     evaluator = ModelEvaluator(
-        recogniser=Mock(), target_entities=["ANY"], tokeniser=mock_tokeniser,
+        recogniser=Mock(), target_entities=["ANY"], tokeniser=tokeniser_config,
     )
     counter, mistakes = evaluator._compare_predicted_and_truth(
         text,
@@ -107,7 +115,7 @@ def test__compare_predicted_and_truth(text, mock_tokeniser):
 
     # test 2: predicted != truths where 2 mistakes were made
     evaluator = ModelEvaluator(
-        recogniser=Mock(), target_entities=["ANY"], tokeniser=mock_tokeniser,
+        recogniser=Mock(), target_entities=["ANY"], tokeniser=tokeniser_config,
     )
     counter, mistakes = evaluator._compare_predicted_and_truth(
         text,
@@ -133,7 +141,7 @@ def test__compare_predicted_and_truth(text, mock_tokeniser):
 
     # test 3: len(predicted) != len(truths)
     evaluator = ModelEvaluator(
-        recogniser=Mock(), target_entities=["ANY"], tokeniser=mock_tokeniser
+        recogniser=Mock(), target_entities=["ANY"], tokeniser=tokeniser_config
     )
     counter, mistakes = evaluator._compare_predicted_and_truth(
         text,
@@ -147,7 +155,7 @@ def test__compare_predicted_and_truth(text, mock_tokeniser):
     evaluator = ModelEvaluator(
         recogniser=Mock(),
         target_entities=["ANY"],
-        tokeniser=mock_tokeniser,
+        tokeniser=tokeniser_config,
         convert_labels={"LOC": "LOCATION", "PER": "PERSON"},
     )
     counter, mistakes = evaluator._compare_predicted_and_truth(
@@ -165,11 +173,16 @@ def test__compare_predicted_and_truth(text, mock_tokeniser):
     assert mistakes == SampleError(token_errors=[], full_text=text, failed=False)
 
 
-def test_evaluate_sample(text, mock_recogniser, mock_tokeniser):
+@patch.object(
+    target=tokeniser_registry,
+    attribute="create_instance",
+    new_callable=get_mock_tokeniser,
+)
+def test_evaluate_sample(mock_tokeniser, text, mock_recogniser, tokeniser_config):
     evaluator = ModelEvaluator(
         recogniser=mock_recogniser,
         target_entities=["PER", "LOC"],
-        tokeniser=mock_tokeniser,
+        tokeniser=tokeniser_config,
     )
 
     # test 1: simple straightforward pass
@@ -191,11 +204,18 @@ def test_evaluate_sample(text, mock_recogniser, mock_tokeniser):
     assert mistakes == SampleError(token_errors=[], full_text=text, failed=False)
 
 
-def test_evaluate_sample_with_label_conversion(mock_recogniser, mock_tokeniser):
+@patch.object(
+    target=tokeniser_registry,
+    attribute="create_instance",
+    new_callable=get_mock_tokeniser,
+)
+def test_evaluate_sample_with_label_conversion(
+    mock_tokeniser, mock_recogniser, tokeniser_config
+):
     evaluator = ModelEvaluator(
         recogniser=mock_recogniser,
         target_entities=["PER", "LOC"],
-        tokeniser=mock_tokeniser,
+        tokeniser=tokeniser_config,
         convert_labels={"PER": "I-PER", "LOC": "I-LOC"},
     )
     counter, mistakes = evaluator.evaluate_sample(
@@ -211,11 +231,16 @@ def test_evaluate_sample_with_label_conversion(mock_recogniser, mock_tokeniser):
     assert mistakes == SampleError(token_errors=[], full_text=text, failed=False)
 
 
-def test_evaulate_all(text, mock_recogniser, mock_tokeniser):
+@patch.object(
+    target=tokeniser_registry,
+    attribute="create_instance",
+    new_callable=get_mock_tokeniser,
+)
+def test_evaulate_all(mock_tokeniser, text, mock_recogniser, tokeniser_config):
     evaluator = ModelEvaluator(
         recogniser=mock_recogniser,
         target_entities=["PER", "LOC"],
-        tokeniser=mock_tokeniser,
+        tokeniser=tokeniser_config,
     )
     counters, mistakes = evaluator.evaulate_all(
         texts=[text] * 2, annotations=[["O", "O", "PER", "O", "LOC", "O"]] * 2
@@ -237,9 +262,14 @@ def test_evaulate_all(text, mock_recogniser, mock_tokeniser):
     assert mistakes == [SampleError(token_errors=[], full_text=text, failed=False)] * 2
 
 
-def test_calculate_score():
+@patch.object(
+    target=tokeniser_registry,
+    attribute="create_instance",
+    new_callable=get_mock_tokeniser,
+)
+def test_calculate_score(mock_tokeniser, tokeniser_config):
     evaluator = ModelEvaluator(
-        recogniser=Mock(), target_entities=["PER", "LOC"], tokeniser=Mock()
+        recogniser=Mock(), target_entities=["PER", "LOC"], tokeniser=tokeniser_config
     )
 
     # test 1: LOC 0.=presion=recall
@@ -277,7 +307,7 @@ def test_calculate_score():
     evaluator = ModelEvaluator(
         recogniser=Mock(),
         target_entities=["PER", "LOC"],
-        tokeniser=Mock(),
+        tokeniser=tokeniser_config,
         convert_labels={"LOC": "LOCATION", "PER": "PERSON"},
     )
     counters = [

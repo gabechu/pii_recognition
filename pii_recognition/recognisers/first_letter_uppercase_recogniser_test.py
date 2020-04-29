@@ -1,17 +1,18 @@
-from unittest.mock import Mock
-
-from pytest import fixture
+from unittest.mock import Mock, patch
 
 from pii_recognition.labels.schema import SpanLabel
 from pii_recognition.tokenisation.token_schema import Token
 
-from .first_letter_uppercase_recogniser import FirstLetterUppercaseRecogniser
+from .first_letter_uppercase_recogniser import (
+    FirstLetterUppercaseRecogniser,
+    tokeniser_registry,
+)
 
 
-@fixture
-def mock_tokeniser():
+def get_mock_tokeniser():
+    # reference: text = "This is Bob from Melbourne."
     tokeniser = Mock()
-    tokeniser.return_value = [
+    tokeniser.return_value.tokenise.return_value = [
         Token("This", 0, 4),
         Token("is", 5, 7),
         Token("Bob", 8, 11),
@@ -22,16 +23,18 @@ def mock_tokeniser():
     return tokeniser
 
 
-@fixture
-def text():
-    return "This is Bob from Melbourne."
-
-
-def test_first_letter_uppercase_analyse(text, mock_tokeniser):
+@patch.object(
+    target=tokeniser_registry,
+    attribute="create_instance",
+    new_callable=get_mock_tokeniser,
+)
+def test_first_letter_uppercase_analyse(mock_tokeniser):
     recogniser = FirstLetterUppercaseRecogniser(
-        supported_languages=["en"], tokeniser=mock_tokeniser
+        ["en"],
+        tokeniser={"name": "fake_tokeniser", "config": {"fake_param": "fake_value"}},
     )
-    actual = recogniser.analyse(text, entities=["PER"])
+    mock_tokeniser.assert_called_with("fake_tokeniser", {"fake_param": "fake_value"})
+    actual = recogniser.analyse("fake_text", entities=["PER"])
     assert actual == [
         SpanLabel("PER", 0, 4),
         SpanLabel("PER", 8, 11),
