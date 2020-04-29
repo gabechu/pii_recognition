@@ -14,7 +14,4 @@ class Registry(dict, Generic[T_co]):
         if config is None:
             config = {}
 
-        def _create_instance(name: str, **config) -> T_co:
-            return self[name](**config)
-
-        return _create_instance(name, **config)
+        return self[name](**config)
