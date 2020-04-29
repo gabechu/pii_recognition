@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import List
 
-import nltk
+from nltk.tokenize import TreebankWordTokenizer as TreebankWordTokenizer_
 
 from pii_recognition.utils import cached_property
 
@@ -16,8 +16,8 @@ class Tokeniser(metaclass=ABCMeta):
 
 class TreebankWordTokeniser(Tokeniser):
     @cached_property
-    def _engine(self):
-        return nltk.tokenize.TreebankWordTokenizer()
+    def _engine(self) -> TreebankWordTokenizer_:
+        return TreebankWordTokenizer_()
 
     def tokenise(self, text: str) -> List[Token]:
         # spans is a list of tuples e.g. [(0:5), (6:10)]
