@@ -7,17 +7,19 @@ from pii_recognition.tokenisation.detokenisers import (
 from pii_recognition.tokenisation.tokenisers import Tokeniser, TreebankWordTokeniser
 
 
-def tokeniser_init():
+def tokeniser_init() -> Registry:
     registry = Registry[Tokeniser]()
     registry.add_item(TreebankWordTokeniser)
 
     return registry
 
 
-def detokeniser_init():
+def detokeniser_init() -> Registry:
     registry = Registry[Detokeniser]()
     registry.add_item(SpaceJoinDetokeniser)
     registry.add_item(TreebankWordDetokeniser)
+
+    return registry
 
 
 # initialisations are simple once become complex considering

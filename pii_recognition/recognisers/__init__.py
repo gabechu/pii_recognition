@@ -2,7 +2,7 @@ from .entity_recogniser import EntityRecogniser
 from pii_recognition.registration.registry import Registry
 
 
-def init():
+def init() -> Registry:
     from .crf_recogniser import CrfRecogniser
     from .first_letter_uppercase_recogniser import FirstLetterUppercaseRecogniser
     from .flair_recogniser import FlairRecogniser

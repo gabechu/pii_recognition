@@ -7,8 +7,9 @@ class Reader(metaclass=ABCMeta):
         ...
 
     @abstractmethod
-    def get_evaluation_data(self, file_path: str) -> Tuple[List[str], List[List[str]]]:
+    def get_test_data(self, file_path: str) -> Tuple[List[str], List[List[str]]]:
         """
-        Read evaluation data and split into features and labels.
+        Read test data and split into features and labels, where features are inputs
+        to a model and labels are the ground truths.
         """
         ...

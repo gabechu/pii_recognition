@@ -40,7 +40,10 @@ def test_crf_recogniser_analyse(mock_tokeniser):
         ["PER", "LOC"],
         ["en"],
         "fake_path",
-        tokeniser={"name": "fake_tokeniser", "config": {"fake_param": "fake_value"}},
+        tokeniser_setup={
+            "name": "fake_tokeniser",
+            "config": {"fake_param": "fake_value"},
+        },
     )
 
     actual = recogniser.analyse("fake_text", entities=["PER"])

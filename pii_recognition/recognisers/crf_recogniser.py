@@ -18,11 +18,11 @@ class CrfRecogniser(EntityRecogniser):
         supported_entities: List[str],
         supported_languages: List[str],
         model_path: str,
-        tokeniser: Dict,
+        tokeniser_setup: Dict,
     ):
         self._model_path = model_path
         self._tokeniser = tokeniser_registry.create_instance(
-            tokeniser["name"], tokeniser["config"]
+            tokeniser_setup["name"], tokeniser_setup.get("config")
         )
         super().__init__(
             supported_entities=supported_entities,
