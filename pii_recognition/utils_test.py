@@ -1,5 +1,6 @@
-from pii_recognition.utils import cached_property
-from unittest.mock import patch, Mock
+from unittest.mock import Mock, patch
+
+from pii_recognition.utils import cached_property, is_ascending
 
 
 def test_cached_property():
@@ -23,3 +24,17 @@ def test_cached_property():
         actual.a
         actual.a
         mock_fget.assert_called_once()
+
+
+def test_is_ascending():
+    actual = is_ascending([1, 2, 3])
+    assert actual is True
+
+    actual = is_ascending([3, 2, 1])
+    assert actual is False
+
+    actual = is_ascending((1, 2, 3))
+    assert actual is True
+
+    actual = is_ascending(range(5))
+    assert actual is True

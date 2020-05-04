@@ -82,7 +82,7 @@ def test_get_token_based_prediction(
         tokeniser=tokeniser_config,
     )
     actual = evaluator.get_token_based_prediction(text)
-    assert actual == ["O", "O", "PER", "O", "LOC", "O"]
+    assert [x.entity_type for x in actual] == ["O", "O", "PER", "O", "LOC", "O"]
 
     # test 2: raise assertion error
     evaluator = ModelEvaluator(

@@ -1,6 +1,7 @@
-from typing import Any, Iterable, Optional, Type
+from typing import Any, Iterable, Optional, Sequence, Type
 
 
+# TODO: add test
 def write_iterable_to_text(iterable: Iterable, file_path: str):
     with open(file_path, "w") as f:
         for elem in iterable:
@@ -22,3 +23,7 @@ class cached_property(property):  # class name follows the convention of propert
             value = self.fget(obj)  # type: ignore
             obj.__dict__[name] = value  # saving back to object
             return value
+
+
+def is_ascending(sequence: Sequence) -> bool:
+    return all(sequence[i] < sequence[i + 1] for i in range(len(sequence) - 1))

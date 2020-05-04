@@ -1,9 +1,9 @@
-from typing import List, Dict
+from typing import Dict, List
 
 from pycrfsuite import Tagger
 
 from pii_recognition.features.word_to_features import word2features
-from pii_recognition.labels.schema import SpanLabel
+from pii_recognition.labels.schema import SpanLabel, TokenLabel
 from pii_recognition.labels.span import token_labels_to_span_labels
 from pii_recognition.tokenisation import tokeniser_registry
 from pii_recognition.tokenisation.token_schema import Token
@@ -53,6 +53,14 @@ class CrfRecogniser(EntityRecogniser):
         entity_tags = self.model.tag(features)
 
         assert len(entity_tags) == len(tokens) == len(preprocessed_text)
+        token_labels = [
+            TokenLabel(
+                entity_type=entity_tags[i],
+                start=preprocessed_text[i].start,
+                end=preprocessed_text[i].end,
+            )
+            for i in range(len(entity_tags))
+        ]
 
-        spans = token_labels_to_span_labels(preprocessed_text, entity_tags)
+        spans = token_labels_to_span_labels(token_labels)
         return [span for span in spans if span.entity_type in entities]

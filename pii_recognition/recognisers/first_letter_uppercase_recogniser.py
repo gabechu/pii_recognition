@@ -1,6 +1,6 @@
 from typing import Dict, List
 
-from pii_recognition.labels.schema import SpanLabel
+from pii_recognition.labels.schema import SpanLabel, TokenLabel
 from pii_recognition.labels.span import token_labels_to_span_labels
 from pii_recognition.tokenisation import tokeniser_registry
 
@@ -26,6 +26,14 @@ class FirstLetterUppercaseRecogniser(EntityRecogniser):
     def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
         tokens = self._tokeniser.tokenise(text)
         entity_tags = [self.PER if token.text.istitle() else "O" for token in tokens]
+        assert len(tokens) == len(entity_tags)
 
-        spans = token_labels_to_span_labels(tokens, entity_tags)
+        token_labels = [
+            TokenLabel(
+                entity_type=entity_tags[i], start=tokens[i].start, end=tokens[i].end
+            )
+            for i in range(len(tokens))
+        ]
+
+        spans = token_labels_to_span_labels(token_labels)
         return [span for span in spans if span.entity_type in entities]

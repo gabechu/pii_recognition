@@ -4,7 +4,7 @@ from typing import Dict, List, Optional, Tuple
 import numpy as np
 
 from pii_recognition.labels.mapping import map_labels, mask_labels
-from pii_recognition.labels.schema import EvalLabel
+from pii_recognition.labels.schema import EvalLabel, TokenLabel
 from pii_recognition.labels.span import span_labels_to_token_labels
 from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
 from pii_recognition.tokenisation import tokeniser_registry
@@ -41,19 +41,22 @@ class ModelEvaluator:
         )
         self._convert_labels = convert_labels
 
-    def get_token_based_prediction(self, text: str) -> List[str]:
+    def _validate_predictions(self, predicted: List[str]):
+        asked_entities = set(self.target_entities) | {"O"}
+        predicted_entities = set(predicted)
+        assert predicted_entities.issubset(asked_entities), (
+            f"Predictions contain unasked entities "
+            f"{sorted(list(predicted_entities - asked_entities))}"
+        )
+
+    def get_token_based_prediction(self, text: str) -> List[TokenLabel]:
         recognised_entities = self.recogniser.analyse(text, self.target_entities)
 
         tokens = self._tokeniser.tokenise(text)
         token_labels = span_labels_to_token_labels(recognised_entities, tokens)
 
         # validate predictions
-        asked_entities = set(self.target_entities) | {"O"}
-        predicted_entities = set(token_labels)
-        assert predicted_entities.issubset(asked_entities), (
-            f"Predictions contain unasked entities "
-            f"{sorted(list(predicted_entities - asked_entities))}"
-        )
+        self._validate_predictions([label.entity_type for label in token_labels])
 
         return token_labels
 
@@ -105,7 +108,8 @@ class ModelEvaluator:
         new_annotations = mask_labels(annotations, translated_target_entities)
 
         # make prediction
-        predictions = self.get_token_based_prediction(text)
+        token_label_predictions = self.get_token_based_prediction(text)
+        predictions: List[str] = [pred.entity_type for pred in token_label_predictions]
         if self._convert_labels:
             new_predictions = map_labels(predictions, self._convert_labels)
         else:
