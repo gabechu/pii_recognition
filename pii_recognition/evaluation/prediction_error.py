@@ -6,7 +6,7 @@ from typing import List
 class TokenError:
     annotation: str
     prediction: str
-    token: str
+    text: str
 
 
 @dataclass

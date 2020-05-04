@@ -4,10 +4,10 @@ from typing import Dict, List, Optional, Tuple
 import numpy as np
 
 from pii_recognition.labels.mapping import map_labels, mask_labels
-from pii_recognition.labels.schema import EvalLabel, TokenLabel
+from pii_recognition.labels.schema import EvalLabel, SpanLabel, TokenLabel
 from pii_recognition.labels.span import span_labels_to_token_labels
 from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
-from pii_recognition.tokenisation import tokeniser_registry
+from pii_recognition.tokenisation.tokenisers import Tokeniser
 
 from .metrics import compute_f_beta
 from .prediction_error import SampleError, TokenError
@@ -18,60 +18,74 @@ class ModelEvaluator:
     Evaluates a named entity recogniser.
 
     Attributes:
-        recogniser: a named entity recogniser.
-        target_entities: entities to be evaluated.
-        tokeniser: a callable to break a string into tokens. Need tokeniser to convert
-            span labeled predictions to token labeled predictions, as the latter one is
-            used for evaluation.
-        convert_labels: a dict facilitate entity conversion. Predicted entity labels
-            may differ from evaluation entity labels, e.g., PERSON and PER.
+        recogniser: an instanace of EntityRecogniser, a named entity recogniser.
+        tokeniser: an instance of Tokeniser.
+        target_recogniser_entities: entities to be evaluated, the entities are labels
+            defined within the recogniser model.
+        convert_labels: a dict {predicted: annotated} facilitate entity conversion
+            between predicted and test labels. Predicted entity labels could differ
+            from test entity labels, e.g., PERSON and PER.
     """
 
     def __init__(
         self,
         recogniser: EntityRecogniser,
-        target_entities: List[str],
-        tokeniser: Dict,
+        tokeniser: Tokeniser,
+        target_recogniser_entities: List[str],
         convert_labels: Optional[Dict[str, str]] = None,
     ):
         self.recogniser = recogniser
-        self.target_entities = target_entities
-        self._tokeniser = tokeniser_registry.create_instance(
-            tokeniser["name"], tokeniser["config"]
-        )
+        self.tokeniser = tokeniser
         self._convert_labels = convert_labels
+        self.target_recogniser_entities = target_recogniser_entities
+        if self._convert_labels:
+            self._translated_entities = map_labels(
+                target_recogniser_entities, self._convert_labels
+            )
+        else:
+            self._translated_entities = target_recogniser_entities
 
     def _validate_predictions(self, predicted: List[str]):
-        asked_entities = set(self.target_entities) | {"O"}
+        """
+        Validate predicted entity labels. Predictions should not contain any unasked
+        entities.
+        """
+        asked_entities = set(self.target_recogniser_entities) | {"O"}
         predicted_entities = set(predicted)
         assert predicted_entities.issubset(asked_entities), (
             f"Predictions contain unasked entities "
             f"{sorted(list(predicted_entities - asked_entities))}"
         )
 
+    def get_span_based_prediction(self, text: str) -> List[SpanLabel]:
+        predicted_spans = self.recogniser.analyse(text, self.target_recogniser_entities)
+        self._validate_predictions([label.entity_type for label in predicted_spans])
+        return predicted_spans
+
     def get_token_based_prediction(self, text: str) -> List[TokenLabel]:
-        recognised_entities = self.recogniser.analyse(text, self.target_entities)
-
-        tokens = self._tokeniser.tokenise(text)
+        recognised_entities = self.get_span_based_prediction(text)
+        tokens = self.tokeniser.tokenise(text)
         token_labels = span_labels_to_token_labels(recognised_entities, tokens)
-
-        # validate predictions
-        self._validate_predictions([label.entity_type for label in token_labels])
 
         return token_labels
 
     def _compare_predicted_and_truth(
-        self, text: str, annotations: List[str], predictions: List[str]
+        self,
+        text: str,
+        tokens: List[str],
+        annotations: List[str],
+        predictions: List[str],
     ) -> Tuple[Counter, SampleError]:
         """
-        Given a sample text, compare the ground truth entity labels dennoted by
-        annotation and predicted entity labels denoted by predictions. Count the
-        occurrence and find mistakes.
+        Given a user text, this function compares the predicted labels (predictions)
+        identified from the text to the labels of ground truth (annotations).
         """
         if self._convert_labels:
             predictions = map_labels(predictions, self._convert_labels)
 
         label_pair_counter: Counter = Counter()
+        # token mismatch -- the tokeniser we use produces different token set from the
+        # test dataset, cannot perform evaluation.
         if len(annotations) != len(predictions):
             return (
                 label_pair_counter,
@@ -79,7 +93,6 @@ class ModelEvaluator:
             )
 
         sample_error = SampleError(token_errors=[], full_text=text, failed=False)
-        tokens = self._tokeniser.tokenise(text)
 
         for i in range(len(annotations)):
             label_pair_counter[EvalLabel(annotations[i], predictions[i])] += 1
@@ -89,7 +102,7 @@ class ModelEvaluator:
                     TokenError(
                         annotation=annotations[i],
                         prediction=predictions[i],
-                        token=tokens[i].text,
+                        text=tokens[i],
                     )
                 )
 
@@ -98,36 +111,28 @@ class ModelEvaluator:
     def evaluate_sample(
         self, text: str, annotations: List[str]
     ) -> Tuple[Counter, SampleError]:
-        # mask non-interested annotations out
-        if self._convert_labels:
-            translated_target_entities = map_labels(
-                self.target_entities, self._convert_labels
-            )
-        else:
-            translated_target_entities = self.target_entities
-        new_annotations = mask_labels(annotations, translated_target_entities)
+        masked_annotations = mask_labels(annotations, self._translated_entities)
 
         # make prediction
-        token_label_predictions = self.get_token_based_prediction(text)
-        predictions: List[str] = [pred.entity_type for pred in token_label_predictions]
-        if self._convert_labels:
-            new_predictions = map_labels(predictions, self._convert_labels)
-        else:
-            new_predictions = predictions
+        token_based_predictions = self.get_token_based_prediction(text)
+        predictions = [pred.entity_type for pred in token_based_predictions]
+        translated_predictions = (
+            map_labels(predictions, self._convert_labels)
+            if self._convert_labels
+            else predictions
+        )
 
         # log results
+        tokens = [text[pred.start : pred.end] for pred in token_based_predictions]
         label_pair_counter, sample_error = self._compare_predicted_and_truth(
-            text, new_annotations, new_predictions
+            text, tokens, masked_annotations, translated_predictions
         )
         return label_pair_counter, sample_error
 
     def evaulate_all(
         self, texts: List[str], annotations: List[List[str]]
     ) -> Tuple[List[Counter], List[SampleError]]:
-        assert len(texts) == len(annotations), (
-            f"The number of texts: {len(texts)} mismatches with the number of"
-            f"annotations {len(annotations)}"
-        )
+        assert len(texts) == len(annotations)
 
         counters = []
         mistakes = []
@@ -150,12 +155,7 @@ class ModelEvaluator:
         entity_precision = {}
         entity_f_score = {}
 
-        translated_target_entities = [
-            self._convert_labels[entity] if self._convert_labels else entity
-            for entity in self.target_entities
-        ]
-
-        for entity in translated_target_entities:
+        for entity in self._translated_entities:
             annotated = sum(
                 [all_results[x] for x in all_results if x.annotated == entity]
             )
