@@ -291,15 +291,15 @@ description = "Web UI for dagster."
 name = "dagit"
 optional = false
 python-versions = "*"
-version = "0.7.5"
+version = "0.7.9"
 
 [package.dependencies]
 Flask-GraphQL = ">=2.0.0"
 Flask-Sockets = ">=0.2.1"
 PyYAML = "*"
 click = ">=7.0"
-dagster = "0.7.5"
-dagster-graphql = "0.7.5"
+dagster = "0.7.9"
+dagster-graphql = "0.7.9"
 flask = ">=0.12.4"
 flask-cors = ">=3.0.6"
 future = "*"
@@ -316,7 +316,7 @@ description = "Dagster is an opinionated programming model for data pipelines."
 name = "dagster"
 optional = false
 python-versions = "*"
-version = "0.7.5"
+version = "0.7.9"
 
 [package.dependencies]
 PyYAML = "*"
@@ -333,11 +333,16 @@ pyrsistent = ">=0.14.8"
 python-dateutil = "*"
 pytz = "*"
 pywin32 = "!=226"
+requests = "*"
 rx = "<=1.6.1"
 six = "*"
 sqlalchemy = ">=1.0"
 toposort = ">=1.0"
+tqdm = "*"
 watchdog = ">=0.8.3"
+
+[package.extras]
+docker = ["docker"]
 
 [[package]]
 category = "main"
@@ -345,7 +350,7 @@ description = "The GraphQL frontend to python dagster."
 name = "dagster-graphql"
 optional = false
 python-versions = "*"
-version = "0.7.5"
+version = "0.7.9"
 
 [package.dependencies]
 gevent = "*"
@@ -2378,8 +2383,8 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "74cdbd68aa54c4a0969713b23fd91aaf080ad1722d8b6bc2894b082de38eb1ae"
-python-versions = "3.7"
+content-hash = "9f272a59e79971295e5f20655c34fbfe02eed9a8f0a05ba461f666f2507d3e16"
+python-versions = "^3.7"
 
 [metadata.files]
 absl-py = [
@@ -2535,16 +2540,16 @@ cymem = [
     {file = "cymem-2.0.3.tar.gz", hash = "sha256:5083b2ab5fe13ced094a82e0df465e2dbbd9b1c013288888035e24fd6eb4ed01"},
 ]
 dagit = [
-    {file = "dagit-0.7.5-py3-none-any.whl", hash = "sha256:17639490bb3993a71103a666c94e634625d7b29a3f580f0138e4bbe6e14b35a3"},
-    {file = "dagit-0.7.5.tar.gz", hash = "sha256:445dc1e7b98be33c72c81238eacb32c141339add051f6ad0d35dba6932367469"},
+    {file = "dagit-0.7.9-py3-none-any.whl", hash = "sha256:3ffdc2331bbe32bf7c32df1dbf87c424335163365cb5dbddce2b641a94cf649e"},
+    {file = "dagit-0.7.9.tar.gz", hash = "sha256:0fb7f3b6f4390b50a228e698b2b5146aea030376f4ea87748fadcfe76abfd974"},
 ]
 dagster = [
-    {file = "dagster-0.7.5-py3-none-any.whl", hash = "sha256:f91e054e93160bc35527bd2b4367dbd627d3da3718545e67b2d19169c0514c43"},
-    {file = "dagster-0.7.5.tar.gz", hash = "sha256:e2f6b2309f738d2f8522369a1638be8f901127c82f50220b994011f2229e3255"},
+    {file = "dagster-0.7.9-py3-none-any.whl", hash = "sha256:5a30ff66c6bbc450957283566f53163e0ec5a7fa7e9032bd6cd72c95e3ff7ba1"},
+    {file = "dagster-0.7.9.tar.gz", hash = "sha256:ba157d0b76358907b3dc8215feb66f7acfa3ae1d2f7311a647b2bda52ceb6121"},
 ]
 dagster-graphql = [
-    {file = "dagster-graphql-0.7.5.tar.gz", hash = "sha256:6dd4d8d4843a800f88534bf8c061907be48fb7f3fb2ee29a879a166ab3f0c6ab"},
-    {file = "dagster_graphql-0.7.5-py3-none-any.whl", hash = "sha256:c8ae9ac6140fe111a65f87f2c06078a730fc9e96b6996b225eea8ec9a6d6ef37"},
+    {file = "dagster-graphql-0.7.9.tar.gz", hash = "sha256:04ff74fd00481ea0da3d9b7804166c9f36f198e19317b6ea71db7e9a508697bb"},
+    {file = "dagster_graphql-0.7.9-py3-none-any.whl", hash = "sha256:28e732954b4f8eb1d8c760824dc4c9fa1b8ff9812bfab276c4751b3c05c4de79"},
 ]
 databricks-cli = [
     {file = "databricks-cli-0.9.1.tar.gz", hash = "sha256:1ebf123b5567c06b7583688077120ead075ca06938b9995d4acafa97863ed8ff"},
