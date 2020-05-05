@@ -2,11 +2,13 @@ from typing import Dict, List, Tuple
 
 from pakkr import returns
 
+from pii_recognition.data_readers import reader_registry
 from pii_recognition.evaluation.model_evaluator import ModelEvaluator
+from pii_recognition.paths.data_path import DataPath
 from pii_recognition.recognisers import registry as recogniser_registry
-from pii_recognition.tokenisation.tokenisers import Tokeniser
 from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
 from pii_recognition.tokenisation import tokeniser_registry
+from pii_recognition.tokenisation.tokenisers import Tokeniser
 
 
 # recogniser has been injected to meta
@@ -44,8 +46,12 @@ def get_evaluator(
 
 # Multiple outputs
 @returns(List, List)
-def prepare_evaluation_data(eval_data_path: str) -> Tuple[List[str], List[List[str]]]:
-    ...
+def load_test_data(
+    test_data_path: str, detokeniser_setup: Dict
+) -> Tuple[List[str], List[List[str]]]:
+    data_path = DataPath(test_data_path)
+    reader = reader_registry.create_instance(data_path.reader_name, detokeniser_setup)
+    return reader.get_test_data(data_path.path)
 
 
 @returns
