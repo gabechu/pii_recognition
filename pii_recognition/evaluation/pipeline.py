@@ -29,13 +29,17 @@ def get_tokeniser(tokeniser_setup: Dict) -> Dict[str, Tokeniser]:
 
 # evaluator has been injected to meta
 @returns(evaluator=ModelEvaluator)
-def initialise_evaluator(
+def get_evaluator(
     recogniser: EntityRecogniser,
-    target_entities: List[str],
-    tokeniser_name: str,
+    tokeniser: Tokeniser,
+    target_recogniser_entities: List[str],
     convert_labels: Dict[str, str],
 ) -> Dict[str, ModelEvaluator]:
-    ...
+    return {
+        "evaluator": ModelEvaluator(
+            recogniser, tokeniser, target_recogniser_entities, convert_labels
+        )
+    }
 
 
 # Multiple outputs
