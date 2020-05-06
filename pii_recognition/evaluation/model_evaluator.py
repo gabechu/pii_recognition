@@ -127,6 +127,8 @@ class ModelEvaluator:
         label_pair_counter, sample_error = self._compare_predicted_and_truth(
             text, tokens, masked_annotations, translated_predictions
         )
+
+        # TODO: if no mistakes return None instead of empty sample_error
         return label_pair_counter, sample_error
 
     def evaulate_all(
@@ -147,6 +149,9 @@ class ModelEvaluator:
     def calculate_score(
         self, all_eval_counters: List[Counter], f_beta: float = 1.0
     ) -> Tuple[Dict, Dict, Dict]:
+        # TODO: we have test labels and labels come from recogniser,
+        # be specific of which label is used for eval
+
         # aggregate results
         all_results: Counter = sum(all_eval_counters, Counter())
 
