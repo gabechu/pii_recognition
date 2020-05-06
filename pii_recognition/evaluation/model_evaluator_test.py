@@ -135,7 +135,7 @@ def test__compare_predicted_and_truth(text):
     assert counter == Counter(
         {EvalLabel("O", "O"): 4, EvalLabel("LOC", "LOC"): 1, EvalLabel("PER", "PER"): 1}
     )
-    assert mistakes == SampleError(token_errors=[], full_text=text, failed=False)
+    assert mistakes is None
 
     # test 2: predicted != truths and 2 mistakes were made
     counter, mistakes = evaluator._compare_predicted_and_truth(
@@ -191,7 +191,7 @@ def test__compare_predicted_and_truth(text):
             EvalLabel("LOCATION", "LOCATION"): 1,
         }
     )
-    assert mistakes == SampleError(token_errors=[], full_text=text, failed=False)
+    assert mistakes is None
 
 
 def test_evaluate_sample_no_label_conversion(text, mock_recogniser, mock_tokeniser):
@@ -208,7 +208,7 @@ def test_evaluate_sample_no_label_conversion(text, mock_recogniser, mock_tokenis
     assert counter == Counter(
         {EvalLabel("O", "O"): 4, EvalLabel("LOC", "LOC"): 1, EvalLabel("PER", "PER"): 1}
     )
-    assert mistakes == SampleError(token_errors=[], full_text=text, failed=False)
+    assert mistakes is None
 
     # test 2: annotated labels not in target_recogniser_entities
     counter, mistakes = evaluator.evaluate_sample(
@@ -217,7 +217,7 @@ def test_evaluate_sample_no_label_conversion(text, mock_recogniser, mock_tokenis
     assert counter == Counter(
         {EvalLabel("O", "O"): 4, EvalLabel("LOC", "LOC"): 1, EvalLabel("PER", "PER"): 1}
     )
-    assert mistakes == SampleError(token_errors=[], full_text=text, failed=False)
+    assert mistakes is None
 
     # test 3: len of annotations mismatch with len of predictions
     counter, mistakes = evaluator.evaluate_sample(
@@ -258,7 +258,7 @@ def test_evaluate_sample_with_label_conversion(text, mock_recogniser, mock_token
             EvalLabel("I-PER", "I-PER"): 1,
         }
     )
-    assert mistakes == SampleError(token_errors=[], full_text=text, failed=False)
+    assert mistakes is None
 
 
 def test_evaluate_sample_with_mistakes(text, mock_bad_recogniser, mock_tokeniser):
@@ -301,7 +301,7 @@ def test_evaulate_all(text, mock_recogniser, mock_tokeniser):
         ]
         * 2
     )
-    assert mistakes == [SampleError(token_errors=[], full_text=text, failed=False)] * 2
+    assert mistakes == []
 
 
 def test_calculate_score(mock_tokeniser):

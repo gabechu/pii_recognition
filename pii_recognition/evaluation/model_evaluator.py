@@ -75,10 +75,11 @@ class ModelEvaluator:
         tokens: List[str],
         annotations: List[str],
         predictions: List[str],
-    ) -> Tuple[Counter, SampleError]:
+    ) -> Tuple[Counter, Optional[SampleError]]:
         """
-        Given a user text, this function compares the predicted labels (predictions)
-        identified from the text to the labels of ground truth (annotations).
+        Comparing the predicted labels (predictions) identified from a given text to
+        the labels of ground truth (annotations). A counter and a container that holds
+        prediction errors are returned.
         """
         if self._convert_labels:
             predictions = map_labels(predictions, self._convert_labels)
@@ -106,11 +107,17 @@ class ModelEvaluator:
                     )
                 )
 
-        return label_pair_counter, sample_error
+        # avoid variable reassignment; otherwise mypy would complain
+        if (sample_error.failed is False) and (not sample_error.token_errors):
+            rectified_sample_error = None  # if no error found
+        else:
+            rectified_sample_error = sample_error
+
+        return label_pair_counter, rectified_sample_error
 
     def evaluate_sample(
         self, text: str, annotations: List[str]
-    ) -> Tuple[Counter, SampleError]:
+    ) -> Tuple[Counter, Optional[SampleError]]:
         masked_annotations = mask_labels(annotations, self._translated_entities)
 
         # make prediction
@@ -128,7 +135,6 @@ class ModelEvaluator:
             text, tokens, masked_annotations, translated_predictions
         )
 
-        # TODO: if no mistakes return None instead of empty sample_error
         return label_pair_counter, sample_error
 
     def evaulate_all(
@@ -143,7 +149,8 @@ class ModelEvaluator:
                 texts[i], annotations[i]
             )
             counters.append(label_pair_counter)
-            mistakes.append(sample_error)
+            if sample_error is not None:
+                mistakes.append(sample_error)
         return counters, mistakes
 
     def calculate_score(
