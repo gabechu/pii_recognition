@@ -6,6 +6,7 @@ import os
 from typing import Dict
 
 import mlflow
+from mlflow import ActiveRun
 
 from pii_recognition.constants import BASE_DIR
 
@@ -20,7 +21,7 @@ def start_tracker(
     experiment_name: str,
     run_name: str = "default",
     tracker_uri: str = DEFAULT_TRACKER_URI,
-) -> mlflow.ActiveRun:
+) -> ActiveRun:
     """
     Start a new tracker. This tracker stays active under which metrics and parameters
     will be logged. To terminate the current tracker, call `end_tracker()` or use a

@@ -1,5 +1,6 @@
 from typing import Dict, List, Tuple
 
+from mlflow import ActiveRun
 from pakkr import returns
 
 from pii_recognition.data_readers import reader_registry
@@ -9,6 +10,13 @@ from pii_recognition.recognisers import registry as recogniser_registry
 from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
 from pii_recognition.tokenisation import tokeniser_registry
 from pii_recognition.tokenisation.tokenisers import Tokeniser
+
+from .tracking import end_tracker, start_tracker
+
+
+@returns(ActiveRun)
+def enable_tracker(experiment_name: str, run_name: str) -> ActiveRun:
+    return start_tracker(experiment_name, run_name)
 
 
 # recogniser has been injected to meta
@@ -21,6 +29,7 @@ def get_recogniser(recogniser_setup: Dict) -> Dict[str, EntityRecogniser]:
 
 
 # tokeniser has been injected to meta
+@returns(tokeniser=Tokeniser)
 def get_tokeniser(tokeniser_setup: Dict) -> Dict[str, Tokeniser]:
     return {
         "tokeniser": tokeniser_registry.create_instance(
@@ -64,3 +73,8 @@ def evaluate_and_logging(
     run_name: str,
 ):
     ...
+
+
+@returns
+def disable_tracker():
+    end_tracker()
