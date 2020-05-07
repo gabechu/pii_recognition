@@ -1,9 +1,10 @@
 from typing import Any
-from unittest.mock import patch
+from unittest.mock import Mock, call, patch
 
 from pii_recognition.registration.registry import Registry
 
 from .pakkr_pipeline import (
+    evaluate,
     get_recogniser,
     get_tokeniser,
     load_test_data,
@@ -64,3 +65,21 @@ def test_load_test_data():
     with patch.object(reader_registry, "create_instance") as mock_registry:
         load_test_data(data_path, detokeniser_setup)
         mock_registry.assert_called_with("ConllReader", detokeniser_setup)
+
+
+@patch("pii_recognition.evaluation.pakkr_pipeline.log_entities_metric")
+def test_evaluate(mock_log):
+    X_test = ["This is Bob from Melbourne ."]
+    y_test = [["O", "O", "I-PER", "O", "O", "O"]]
+    evaluator = Mock()
+    evaluator.evaluate_all.return_value = "fake_counter", "fake_mistakes"
+    evaluator.calculate_score.return_value = (
+        {"I-PER": 0.5},
+        {"I-PER": 0.4},
+        {"I-PER": 0.3},
+    )
+
+    evaluate(X_test, y_test, evaluator)
+    mock_log.assert_has_calls(
+        [call({"I-PER": 0.5}), call({"I-PER": 0.4}), call({"I-PER": 0.3})]
+    )

@@ -47,6 +47,6 @@ def end_tracker():
     mlflow.end_run()
 
 
-def log_metric_per_entity(metric: Dict[str, float], metric_name: str = None):
+def log_entities_metric(metric: Dict[str, float], metric_name: str = None):
     for entity_name, entity_score in metric.items():
         mlflow.log_metric(entity_name + f"_{metric_name}", entity_score)

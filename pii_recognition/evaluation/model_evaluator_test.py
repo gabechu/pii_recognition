@@ -284,7 +284,7 @@ def test_evaulate_all(text, mock_recogniser, mock_tokeniser):
         tokeniser=mock_tokeniser,
         target_recogniser_entities=["PER", "LOC"],
     )
-    counters, mistakes = evaluator.evaulate_all(
+    counters, mistakes = evaluator.evaluate_all(
         texts=[text] * 2, annotations=[["O", "O", "PER", "O", "LOC", "O"]] * 2
     )
 

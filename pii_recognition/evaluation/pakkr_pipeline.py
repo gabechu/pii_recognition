@@ -11,7 +11,7 @@ from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
 from pii_recognition.tokenisation import tokeniser_registry
 from pii_recognition.tokenisation.tokenisers import Tokeniser
 
-from .tracking import end_tracker, start_tracker
+from .tracking import end_tracker, log_entities_metric, start_tracker
 
 
 @returns(ActiveRun)
@@ -63,18 +63,18 @@ def load_test_data(
     return reader.get_test_data(data_path.path)
 
 
-@returns
-def evaluate_and_logging(
-    X_test: List[str],
-    y_test: List[List[str]],
-    recogniser: EntityRecogniser,
-    evaluator: ModelEvaluator,
-    experiment_name: str,
-    run_name: str,
+@returns()
+def evaluate(
+    X_test: List[str], y_test: List[List[str]], evaluator: ModelEvaluator,
 ):
-    ...
+    counters, mistakes = evaluator.evaluate_all(X_test, y_test)
+    recall, precision, f1 = evaluator.calculate_score(counters)
+
+    log_entities_metric(recall)
+    log_entities_metric(precision)
+    log_entities_metric(f1)
 
 
-@returns
+@returns()
 def disable_tracker():
     end_tracker()

@@ -137,7 +137,7 @@ class ModelEvaluator:
 
         return label_pair_counter, sample_error
 
-    def evaulate_all(
+    def evaluate_all(
         self, texts: List[str], annotations: List[List[str]]
     ) -> Tuple[List[Counter], List[SampleError]]:
         assert len(texts) == len(annotations)
@@ -195,7 +195,6 @@ class ModelEvaluator:
                 entity_f_score[entity] = np.NaN
 
         # use recogniser entity labels
-        # TODO: test the block below
         if (use_test_labels is False) and (self._convert_to_test_labels is not None):
             convert_to_recogniser_labels = {
                 value: key for key, value in self._convert_to_test_labels.items()
