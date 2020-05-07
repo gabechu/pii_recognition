@@ -4,7 +4,7 @@ T_co = TypeVar("T_co", covariant=True)
 
 
 class Registry(dict, Generic[T_co]):
-    def add_item(self, item: Type[T_co], name: Optional[str] = None):
+    def register(self, item: Type[T_co], name: Optional[str] = None):
         if name:
             self[name] = item
         else:

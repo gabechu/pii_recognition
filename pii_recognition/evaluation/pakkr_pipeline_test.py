@@ -25,8 +25,8 @@ class RegistryWithConfig:
 def mock_registry():
     # Any is equivalent to Type[Any]
     regsitry: Registry[Any] = Registry()
-    regsitry.add_item(RegistryNoConfig)
-    regsitry.add_item(RegistryWithConfig)
+    regsitry.register(RegistryNoConfig)
+    regsitry.register(RegistryWithConfig)
     return regsitry
 
 

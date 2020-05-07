@@ -3,18 +3,18 @@ from typing import Any
 from .registry import Registry
 
 
-def test_Registry_add_item():
+def test_Registry_register():
     class ToyClass:
         pass
 
     # Any is equivalent to Type[Any]
     actual = Registry[Any]()
 
-    actual.add_item(ToyClass)
+    actual.register(ToyClass)
     assert isinstance(actual, dict)
     assert actual["ToyClass"] == ToyClass
 
-    actual.add_item(ToyClass, "TClass")
+    actual.register(ToyClass, "TClass")
     assert isinstance(actual, dict)
     assert actual["TClass"] == ToyClass
 
@@ -26,7 +26,7 @@ def test_Registry_create_instance():
 
     # Any is equivalent to Type[Any]
     registry = Registry[Any]()
-    registry.add_item(ToyClass)
+    registry.register(ToyClass)
 
     actual = registry.create_instance(name="ToyClass", config={"a": "value_a"})
     assert isinstance(actual, ToyClass)

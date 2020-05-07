@@ -7,8 +7,8 @@ from .wnut_reader import WnutReader
 
 def init() -> Registry:
     registry = Registry[Reader]()
-    registry.add_item(ConllReader)
-    registry.add_item(WnutReader)
+    registry.register(ConllReader)
+    registry.register(WnutReader)
 
     return registry
 

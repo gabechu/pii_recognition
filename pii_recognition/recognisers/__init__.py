@@ -10,11 +10,11 @@ def init() -> Registry:
     from .stanza_recogniser import StanzaRecogniser
 
     registry = Registry[EntityRecogniser]()
-    registry.add_item(CrfRecogniser)
-    registry.add_item(FirstLetterUppercaseRecogniser)
-    registry.add_item(FlairRecogniser)
-    registry.add_item(SpacyRecogniser)
-    registry.add_item(StanzaRecogniser)
+    registry.register(CrfRecogniser)
+    registry.register(FirstLetterUppercaseRecogniser)
+    registry.register(FlairRecogniser)
+    registry.register(SpacyRecogniser)
+    registry.register(StanzaRecogniser)
 
     return registry
 

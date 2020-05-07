@@ -9,15 +9,15 @@ from pii_recognition.tokenisation.tokenisers import Tokeniser, TreebankWordToken
 
 def tokeniser_init() -> Registry:
     registry = Registry[Tokeniser]()
-    registry.add_item(TreebankWordTokeniser)
+    registry.register(TreebankWordTokeniser)
 
     return registry
 
 
 def detokeniser_init() -> Registry:
     registry = Registry[Detokeniser]()
-    registry.add_item(SpaceJoinDetokeniser)
-    registry.add_item(TreebankWordDetokeniser)
+    registry.register(SpaceJoinDetokeniser)
+    registry.register(TreebankWordDetokeniser)
 
     return registry
 
