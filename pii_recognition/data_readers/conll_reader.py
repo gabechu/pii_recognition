@@ -3,9 +3,10 @@ from typing import List, Tuple
 
 from nltk.corpus.reader import ConllCorpusReader
 
+from pii_recognition.labels.mapping import map_bio_to_io_labels
 from pii_recognition.tokenisation.detokenisers import Detokeniser
 
-from .reader import Reader
+from .reader import Data, Reader
 
 
 def _sent2tokens(sent: List[Tuple[str, str, str]]) -> List[str]:
@@ -28,22 +29,28 @@ class ConllReader(Reader):
             columntypes=["words", "pos", "ignore", "chunk"],
         )
 
-    def get_test_data(self, file_path: str) -> Tuple[List[str], List[List[str]]]:
+    def get_test_data(
+        self, file_path: str, supported_entities: List[str], is_io_schema: bool = True
+    ) -> Data:
         """
-        Label types of CONLL 2003 evaluation data:
-            I-PER
-            I-LOC
-            I_ORG
-            I-MISC
+        Read CONLL type of data.
         """
         data = self._get_corpus(file_path)
 
         sent_features = list(data.iob_sents())
         sent_features = [x for x in sent_features if x]  # remove empty features
 
-        sents = [
-            self._detokeniser.detokenise(_sent2tokens(sent)) for sent in sent_features
-        ]
-        labels = [_sent2labels(sent) for sent in sent_features]
+        labels = []
+        sents = []
+        for sent_feat in sent_features:
+            raw_labels = _sent2labels(sent_feat)
+            if is_io_schema:
+                processed_labels = map_bio_to_io_labels(raw_labels)
+            else:
+                processed_labels = raw_labels
 
-        return sents, labels
+            self._validate_entity(set(processed_labels), set(supported_entities))
+            sent_str = self._detokeniser.detokenise(_sent2tokens(sent_feat))
+            labels.append(processed_labels)
+            sents.append(sent_str)
+        return Data(sents, labels, supported_entities, is_io_schema,)

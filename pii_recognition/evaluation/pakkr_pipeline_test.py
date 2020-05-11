@@ -1,6 +1,7 @@
 from typing import Any
 from unittest.mock import Mock, call, patch
 
+from pii_recognition.data_readers.reader import Data
 from pii_recognition.registration.registry import Registry
 
 from .pakkr_pipeline import (
@@ -87,7 +88,7 @@ def test_load_test_data():
     data_path = "pii_recognition/datasets/conll2003/eng.testa"
     detokeniser = Mock()
     with patch.object(reader_registry, "create_instance") as mock_registry:
-        load_test_data(data_path, detokeniser)
+        load_test_data(data_path, ["I-LOC"], True, detokeniser)
         mock_registry.assert_called_with("ConllReader", {"detokeniser": detokeniser})
 
 
@@ -96,6 +97,8 @@ def test_load_test_data():
 def test_evaluate(mock_log):
     X_test = ["This is Bob from Melbourne ."]
     y_test = [["O", "O", "I-PER", "O", "O", "O"]]
+    data = Data(X_test, y_test, ["I-PER"], True)
+
     evaluator = Mock()
     evaluator.evaluate_all.return_value = "fake_counter", "fake_mistakes"
     evaluator.calculate_score.return_value = (
@@ -104,7 +107,7 @@ def test_evaluate(mock_log):
         {"I-PER": 0.3},
     )
 
-    evaluate(X_test, y_test, evaluator)
+    evaluate(data, evaluator)
     mock_log.assert_has_calls(
         [
             call({"I-PER": 0.5}, "recall"),
