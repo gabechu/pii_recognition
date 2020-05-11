@@ -1,15 +1,14 @@
-from typing import List, Tuple, Dict
+from typing import List, Tuple
 
 from pii_recognition.labels.mapping import map_bio_to_io_labels
+from pii_recognition.tokenisation.detokenisers import Detokeniser
+
 from .reader import Reader
-from pii_recognition.tokenisation import detokeniser_registry
 
 
 class WnutReader(Reader):
-    def __init__(self, detokeniser_setup: Dict):
-        self._detokeniser = detokeniser_registry.create_instance(
-            name=detokeniser_setup["name"], config=detokeniser_setup.get("config")
-        )
+    def __init__(self, detokeniser: Detokeniser):
+        self._detokeniser = detokeniser
 
     def get_test_data(self, file_path: str) -> Tuple[List[str], List[List[str]]]:
         """

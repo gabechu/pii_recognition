@@ -1,28 +1,25 @@
 from typing import List
 from unittest.mock import Mock, mock_open, patch
 
-from .wnut_reader import WnutReader, detokeniser_registry
+from pytest import fixture
+
+from .wnut_reader import WnutReader
 
 
-def get_mock_detokeniser():
+@fixture
+def mock_detokeniser():
     def simple_detokeniser(tokens: List[str]) -> str:
         return " ".join(tokens)
 
     mock = Mock()
-    mock.return_value.detokenise = simple_detokeniser
+    mock.detokenise = simple_detokeniser
 
     return mock
 
 
-@patch.object(
-    target=detokeniser_registry,
-    attribute="create_instance",
-    new_callable=get_mock_detokeniser,
-)
 def test_get_wnut_eval_data(mock_detokeniser):
     patch_target = "pii_recognition.data_readers.wnut_reader.open"
-    reader = WnutReader(detokeniser_setup={"name": "fake_reader"})
-    mock_detokeniser.assert_called_once_with(config=None, name="fake_reader")
+    reader = WnutReader(detokeniser=mock_detokeniser)
 
     # test 1: empty file
     text = ""

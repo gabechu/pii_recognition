@@ -3,7 +3,7 @@ from unittest.mock import Mock, patch
 
 from pytest import fixture
 
-from .conll_reader import ConllReader, _sent2labels, _sent2tokens, detokeniser_registry
+from .conll_reader import ConllReader, _sent2labels, _sent2tokens
 
 
 @fixture
@@ -32,12 +32,13 @@ def get_mock_ConllCorpusReader():
     return mock
 
 
-def get_mock_detokeniser():
+@fixture
+def mock_detokeniser():
     def simple_detokeniser(tokens: List[str]) -> str:
         return " ".join(tokens)
 
     mock = Mock()
-    mock.return_value.detokenise = simple_detokeniser
+    mock.detokenise = simple_detokeniser
 
     return mock
 
@@ -46,15 +47,9 @@ def get_mock_detokeniser():
     "pii_recognition.data_readers.conll_reader.ConllCorpusReader",
     new=get_mock_ConllCorpusReader(),
 )
-@patch.object(
-    target=detokeniser_registry,
-    attribute="create_instance",
-    new_callable=get_mock_detokeniser,
-)
 def test_get_conll_eval_data(mock_detokeniser):
-    reader = ConllReader(detokeniser_setup={"name": "fake_reader"})
+    reader = ConllReader(detokeniser=mock_detokeniser)
     sents, labels = reader.get_test_data(file_path="fake_path")
-    mock_detokeniser.assert_called_once_with(config=None, name="fake_reader")
     assert sents == ["SOCCER - JAPAN GET", "Nadim Ladki"]
     assert labels == [["O", "O", "I-LOC", "O"], ["I-PER", "I-PER"]]
 

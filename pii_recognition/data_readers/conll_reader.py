@@ -1,9 +1,9 @@
 from pathlib import PurePath
-from typing import Dict, List, Tuple
+from typing import List, Tuple
 
 from nltk.corpus.reader import ConllCorpusReader
 
-from pii_recognition.tokenisation import detokeniser_registry
+from pii_recognition.tokenisation.detokenisers import Detokeniser
 
 from .reader import Reader
 
@@ -17,10 +17,8 @@ def _sent2labels(sent: List[Tuple[str, str, str]]) -> List[str]:
 
 
 class ConllReader(Reader):
-    def __init__(self, detokeniser_setup: Dict):
-        self._detokeniser = detokeniser_registry.create_instance(
-            name=detokeniser_setup["name"], config=detokeniser_setup.get("config")
-        )
+    def __init__(self, detokeniser: Detokeniser):
+        self._detokeniser = detokeniser
 
     def _get_corpus(self, file_path: str) -> ConllCorpusReader:
         path = PurePath(file_path)

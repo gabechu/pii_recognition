@@ -1,0 +1,27 @@
+experiment_name: Crf
+run_name: run_1
+target_recogniser_entities:
+  - I-PER
+  - I-LOC
+test_data_path: pii_recognition/datasets/conll2003/eng.testb
+tokeniser_setup:  # tokeniser for evaluator
+  name: TreebankWordTokeniser
+detokeniser_setup:  # detokeniser for data reader
+  name: TreebankWordDetokeniser
+recogniser_setup:
+  name: CrfRecogniser
+  config:
+    supported_entities:
+      - B-LOC
+      - I-LOC
+      - B-ORG
+      - I-ORG
+      - B-PER
+      - I-PER
+      - B-MISC
+      - I-MISC
+    supported_languages:
+      - en
+    model_path: pii_recognition/exported_models/conll2003-en.crfsuite
+    tokeniser_setup:
+      name: TreebankWordTokeniser

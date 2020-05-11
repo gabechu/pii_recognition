@@ -1,8 +1,9 @@
-from typing import Any, Iterable, Optional, Sequence, Type
+from typing import Any, Dict, Iterable, Optional, Sequence, Type
+
+import yaml
 
 
-# TODO: add test
-def write_iterable_to_text(iterable: Iterable, file_path: str):
+def write_iterable_to_file(iterable: Iterable, file_path: str):
     with open(file_path, "w") as f:
         for elem in iterable:
             f.write(str(elem) + "\n")
@@ -27,3 +28,9 @@ class cached_property(property):  # class name follows the convention of propert
 
 def is_ascending(sequence: Sequence) -> bool:
     return all(sequence[i] < sequence[i + 1] for i in range(len(sequence) - 1))
+
+
+def load_yaml_file(path: str) -> Optional[Dict]:
+    with open(path, "r") as stream:
+        data = yaml.safe_load(stream)
+    return data
