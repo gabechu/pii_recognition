@@ -33,7 +33,10 @@ def test_DataPath():
     assert actual.version == "2020"
     with raises(NameError) as err:
         getattr(actual, "reader_name")
-    assert str(err.value) == "No reader found to process fake dataset"
+    assert str(err.value) == (
+        "No reader found to process fake dataset. "
+        "Update `_lookup` property for adding additional readers."
+    )
 
     actual = DataPath("broken_path")
     assert actual.valid is False
