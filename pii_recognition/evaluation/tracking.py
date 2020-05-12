@@ -3,14 +3,14 @@ Tracker module implementing Mlflow API.
 """
 
 import os
-from typing import Dict
+from typing import Dict, Optional
 
 import mlflow
 from mlflow import ActiveRun
 
-from pii_recognition.constants import BASE_DIR
+from pii_recognition.constants import ROOT_DIR
 
-DEFAULT_TRACKER_URI = os.path.join(BASE_DIR, "mlruns")
+DEFAULT_TRACKER_URI = os.path.join(ROOT_DIR, "mlruns")
 
 
 def _get_experiment_id(experiment_name: str):
@@ -18,9 +18,7 @@ def _get_experiment_id(experiment_name: str):
 
 
 def start_tracker(
-    experiment_name: str,
-    run_name: str = "default",
-    tracker_uri: str = DEFAULT_TRACKER_URI,
+    experiment_name: str, run_name: Optional[str], tracker_uri: Optional[str],
 ) -> ActiveRun:
     """
     Start a new tracker. This tracker stays active under which metrics and parameters
@@ -30,6 +28,8 @@ def start_tracker(
     # Connect to a tracking URI.
     # URI can either be a HTTP/HTTPS URI for a remote server, a database connection
     # string, or a local path to log data to a directory.
+    if tracker_uri is None:
+        tracker_uri = DEFAULT_TRACKER_URI
     mlflow.set_tracking_uri(tracker_uri)
 
     # Set an experiment active, this experiment will be created under the tracking URI.
@@ -37,6 +37,8 @@ def start_tracker(
 
     # Start a new run and set it active, where the new run will be launched under the
     # active experiment.
+    if run_name is None:
+        run_name = "default"
     return mlflow.start_run(run_name=run_name)
 
 

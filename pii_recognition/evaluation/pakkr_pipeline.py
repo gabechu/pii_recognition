@@ -20,8 +20,10 @@ from .tracking import end_tracker, log_entities_metric, start_tracker
 
 
 @returns()
-def enable_tracker(experiment_name: str, run_name: str):
-    start_tracker(experiment_name, run_name)
+def enable_tracker(
+    experiment_name: str, run_name: str, tracker_uri: Optional[str] = None
+):
+    start_tracker(experiment_name, run_name, tracker_uri)
 
 
 @returns()
