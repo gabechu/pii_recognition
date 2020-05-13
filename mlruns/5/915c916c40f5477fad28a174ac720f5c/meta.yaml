@@ -1,0 +1,15 @@
+artifact_uri: /Users/gabechu/Code/pii_recognition/mlruns/5/915c916c40f5477fad28a174ac720f5c/artifacts
+end_time: 1589350024759
+entry_point_name: ''
+experiment_id: '5'
+lifecycle_stage: active
+name: ''
+run_id: 915c916c40f5477fad28a174ac720f5c
+run_uuid: 915c916c40f5477fad28a174ac720f5c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1589348762741
+status: 3
+tags: []
+user_id: gabechu
