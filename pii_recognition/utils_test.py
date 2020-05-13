@@ -2,6 +2,7 @@ from unittest.mock import Mock, call, mock_open, patch
 
 from pii_recognition.utils import (
     cached_property,
+    dump_yaml_file,
     is_ascending,
     load_yaml_file,
     write_iterable_to_file,
@@ -56,3 +57,12 @@ def test_load_yaml_file():
     with patch("builtins.open", mock_open(read_data="TEST-KEY: TEST-VALUE\n")):
         data = load_yaml_file("fake_path")
     assert data == {"TEST-KEY": "TEST-VALUE"}
+
+
+def test_dump_yaml_file():
+    with patch("builtins.open", mock_open()) as m:
+        dump_yaml_file("fake_path", {"key": "value"})
+        handle = m()
+        handle.write.assert_has_calls(
+            [call("key"), call(":"), call(" "), call("value"), call("\n")]
+        )

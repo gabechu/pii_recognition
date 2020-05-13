@@ -2,6 +2,7 @@
 # What's this experiment about?
 experiment_name: str
 run_name: str
+tracker_uri: optipnal[str]
 test_data_path: str
 test_data_support_entities: list
 test_is_io_schema: bool

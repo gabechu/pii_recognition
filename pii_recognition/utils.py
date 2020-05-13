@@ -34,3 +34,8 @@ def load_yaml_file(path: str) -> Optional[Dict]:
     with open(path, "r") as stream:
         data = yaml.safe_load(stream)
     return data
+
+
+def dump_yaml_file(path: str, data: Any):
+    with open(path, "w") as stream:
+        yaml.dump(data, stream)

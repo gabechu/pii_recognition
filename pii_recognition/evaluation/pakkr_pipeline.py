@@ -82,6 +82,12 @@ def load_test_data(
     detokeniser: Detokeniser,
 ) -> Data:
     data_path = DataPath(test_data_path)
+    if not data_path.valid:
+        raise Exception(
+            f"Got invalid data path, make sure it follow the "
+            f"pattern {data_path.pattern_str}."
+        )
+
     reader_config = {"detokeniser": detokeniser}
     reader = reader_registry.create_instance(data_path.reader_name, reader_config)
     return reader.get_test_data(

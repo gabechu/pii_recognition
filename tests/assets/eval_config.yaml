@@ -1,0 +1,26 @@
+experiment_name: TEST
+run_name: test_run
+test_data_path: tests/assets/datasets/conll2003/test.data
+test_data_support_entities:
+  - I-LOC
+  - I-PER
+  - I-ORG
+  - I-MISC
+test_is_io_schema: true
+tokeniser_setup:
+  name: TreebankWordTokeniser
+detokeniser_setup:
+  name: TreebankWordDetokeniser
+recogniser_setup:
+  name: FirstLetterUppercaseRecogniser
+  config:
+    supported_entities:
+      - PER
+    supported_languages: 
+      - en
+    tokeniser_setup:
+      name: TreebankWordTokeniser
+switch_labels:
+  PER: I-PER
+predict_on:
+  - PER
