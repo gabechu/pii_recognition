@@ -33,6 +33,8 @@ class StanzaRecogniser(EntityRecogniser):
 
     @cached_property
     def model(self) -> Pipeline:
+        # TODO: override the default location ~/stanza_resources by setting an
+        # environmental variable called STANZA_RESOURCES_DIR
         return Pipeline(self.model_name)
 
     def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:

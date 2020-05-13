@@ -1,0 +1,33 @@
+# Flair recogniser on CONLL 2003 testb
+experiment_name: Flair
+run_name: run_1
+test_data_path: pii_recognition/datasets/conll2003/eng.testb
+test_data_support_entities:
+  - I-LOC
+  - I-PER
+  - I-ORG
+  - I-MISC
+test_is_io_schema: true
+tokeniser_setup:
+  name: TreebankWordTokeniser
+detokeniser_setup:
+  name: TreebankWordDetokeniser
+recogniser_setup:
+  name: FlairRecogniser
+  config:
+    supported_entities:
+      - PER
+      - LOC
+      - ORG
+      - MISC
+    supported_languages:
+      - en
+    model_name: ner
+switch_labels:
+  PER: I-PER
+  LOC: I-LOC
+  ORG: I-ORG
+predict_on:
+  - PER
+  - LOC
+  - ORG

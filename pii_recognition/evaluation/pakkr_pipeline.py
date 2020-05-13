@@ -65,13 +65,11 @@ def get_recogniser(recogniser_setup: Dict) -> Dict[str, EntityRecogniser]:
 def get_evaluator(
     recogniser: EntityRecogniser,
     tokeniser: Tokeniser,
-    target_recogniser_entities: List[str],
-    convert_labels: Optional[Dict[str, str]] = None,
+    predict_on: List[str],
+    switch_labels: Optional[Dict[str, str]] = None,
 ) -> Dict[str, ModelEvaluator]:
     return {
-        "evaluator": ModelEvaluator(
-            recogniser, tokeniser, target_recogniser_entities, convert_labels
-        )
+        "evaluator": ModelEvaluator(recogniser, tokeniser, predict_on, switch_labels)
     }
 
 

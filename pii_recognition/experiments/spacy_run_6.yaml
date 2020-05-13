@@ -1,0 +1,41 @@
+# Spacy recogniser on WUNT 2017 with xx_ent_wiki_sm model
+experiment_name: Spacy
+run_name: run_6
+test_data_path: pii_recognition/datasets/wnut2017/emerging.test.annotated
+test_data_support_entities:
+  - I-person
+  - I-location
+  - I-corporation
+  - I-product
+  - I-creative-work
+  - I-group
+test_is_io_schema: true
+tokeniser_setup:
+  name: TreebankWordTokeniser
+detokeniser_setup:
+  name: TreebankWordDetokeniser
+recogniser_setup:
+  name: SpacyRecogniser
+  config:
+    supported_entities:
+      - LOC
+      - MISC
+      - ORG
+      - PER
+    supported_languages:
+      - en
+      - de
+      - es
+      - fr
+      - it
+      - pt
+      - ru
+    model_name: xx_ent_wiki_sm
+switch_labels:
+  LOC: I-location
+  ORG: I-corporation
+  PER: I-person
+predict_on:
+  - LOC
+  - ORG
+  - PER

@@ -30,6 +30,7 @@ def get_mock_tokeniser():
 )
 def test_first_letter_uppercase_analyse(mock_tokeniser):
     recogniser = FirstLetterUppercaseRecogniser(
+        ["PER"],
         ["en"],
         tokeniser_setup={
             "name": "fake_tokeniser",

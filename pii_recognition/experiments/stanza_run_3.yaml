@@ -1,0 +1,51 @@
+# Stanza recogniser on WNUT 2017
+experiment_name: Stanza
+run_name: run_3
+test_data_path: pii_recognition/datasets/wnut2017/emerging.test.annotated
+test_data_support_entities:
+  - I-person
+  - I-location
+  - I-corporation
+  - I-product
+  - I-creative-work
+  - I-group
+test_is_io_schema: true
+tokeniser_setup:
+  name: TreebankWordTokeniser
+detokeniser_setup:
+  name: TreebankWordDetokeniser
+recogniser_setup:
+  name: StanzaRecogniser
+  config:
+    supported_entities:
+      - PERSON
+      - NORP
+      - FAC
+      - ORG
+      - GPE
+      - LOC
+      - PRODUCT
+      - EVENT
+      - WORK_OF_ART
+      - LAW
+      - LANGUAGE
+      - DATE
+      - TIME
+      - PERCENT
+      - MONEY
+      - QUANTITY
+      - ORDINAL
+      - CARDINAL
+    supported_languages:
+      - en
+    model_name: en
+switch_labels:
+  LOC: I-location
+  GPE: I-location
+  ORG: I-corporation
+  PERSON: I-person
+predict_on:
+  - LOC
+  - GPE
+  - ORG
+  - PERSON

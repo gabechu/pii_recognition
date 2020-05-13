@@ -1,0 +1,49 @@
+# Stanza recogniser on CONLL 2003 testb
+experiment_name: Stanza
+run_name: run_1
+test_data_path: pii_recognition/datasets/conll2003/eng.testb
+test_data_support_entities:
+  - I-LOC
+  - I-PER
+  - I-ORG
+  - I-MISC
+test_is_io_schema: true
+tokeniser_setup:
+  name: TreebankWordTokeniser
+detokeniser_setup:
+  name: TreebankWordDetokeniser
+recogniser_setup:
+  name: StanzaRecogniser
+  config:
+    supported_entities:
+      - PERSON
+      - NORP
+      - FAC
+      - ORG
+      - GPE
+      - LOC
+      - PRODUCT
+      - EVENT
+      - WORK_OF_ART
+      - LAW
+      - LANGUAGE
+      - DATE
+      - TIME
+      - PERCENT
+      - MONEY
+      - QUANTITY
+      - ORDINAL
+      - CARDINAL
+    supported_languages:
+      - en
+    model_name: en
+switch_labels:
+  LOC: I-LOC
+  GPE: I-LOC
+  ORG: I-ORG
+  PERSON: I-PER
+predict_on:
+  - LOC
+  - GPE
+  - ORG
+  - PERSON

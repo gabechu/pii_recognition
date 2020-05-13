@@ -1,0 +1,29 @@
+# Heuristic recogniser on WNUT 2017 checking first letter is uppercase
+experiment_name: Heuristic
+run_name: run_3
+test_data_path: pii_recognition/datasets/wnut2017/emerging.test.annotated
+test_data_support_entities:
+  - I-person
+  - I-location
+  - I-corporation
+  - I-product
+  - I-creative-work
+  - I-group
+test_is_io_schema: true
+tokeniser_setup:
+  name: TreebankWordTokeniser
+detokeniser_setup:
+  name: TreebankWordDetokeniser
+recogniser_setup:
+  name: FirstLetterUppercaseRecogniser
+  config:
+    supported_entities:
+      - PER
+    supported_languages: 
+      - en
+    tokeniser_setup:
+      name: TreebankWordTokeniser
+switch_labels:
+  PER: I-person
+predict_on:
+  - PER

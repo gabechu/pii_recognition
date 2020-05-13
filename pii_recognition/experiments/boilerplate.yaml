@@ -1,0 +1,18 @@
+# yaml boilerplate for Pakkr evaluation pipeline
+# What's this experiment about?
+experiment_name: str
+run_name: str
+test_data_path: str
+test_data_support_entities: list
+test_is_io_schema: bool
+tokeniser_setup:
+  name: str
+  config: optional[dict]
+detokeniser_setup:
+  name: str
+  config: optional[dict]
+recogniser_setup:
+  name: str
+  config: optional[dict]
+switch_labels: optional[dict]
+predict_on: list

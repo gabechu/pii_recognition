@@ -1,7 +1,7 @@
-# CRF recogniser on CONLL 2003 testb
+# CRF recogniser on CONLL 2003 testa
 experiment_name: Crf
-run_name: run_1
-test_data_path: pii_recognition/datasets/conll2003/eng.testb
+run_name: run_2
+test_data_path: pii_recognition/datasets/conll2003/eng.testa
 test_data_support_entities:
   - I-LOC
   - I-PER

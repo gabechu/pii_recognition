@@ -1,0 +1,27 @@
+# Heuristic recogniser on CONLL 2003 testb checking first letter is uppercase
+experiment_name: Heuristic
+run_name: run_1
+test_data_path: pii_recognition/datasets/conll2003/eng.testb
+test_data_support_entities:
+  - I-LOC
+  - I-PER
+  - I-ORG
+  - I-MISC
+test_is_io_schema: true
+tokeniser_setup:
+  name: TreebankWordTokeniser
+detokeniser_setup:
+  name: TreebankWordDetokeniser
+recogniser_setup:
+  name: FirstLetterUppercaseRecogniser
+  config:
+    supported_entities:
+      - PER
+    supported_languages: 
+      - en
+    tokeniser_setup:
+      name: TreebankWordTokeniser
+switch_labels:
+  PER: I-PER
+predict_on:
+  - PER

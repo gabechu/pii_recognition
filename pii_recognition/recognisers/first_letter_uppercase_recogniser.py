@@ -15,10 +15,21 @@ class FirstLetterUppercaseRecogniser(EntityRecogniser):
 
     PER = "PER"
 
-    def __init__(self, supported_languages: List[str], tokeniser_setup: Dict):
+    def __init__(
+        self,
+        supported_entities: List[str],
+        supported_languages: List[str],
+        tokeniser_setup: Dict,
+    ):
         self._tokeniser = tokeniser_registry.create_instance(
             tokeniser_setup["name"], tokeniser_setup.get("config")
         )
+
+        # supported_entities argument has been kept for consistency with other
+        # recognisers
+        if not supported_entities == [self.PER]:
+            raise ValueError(f"{type(self).__name__} only supports {self.PER} entity.")
+
         super().__init__(
             supported_entities=[self.PER], supported_languages=supported_languages
         )
