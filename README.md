@@ -1,90 +1,109 @@
 # Personal Identifiable Information (PII) Recognition
+This project is still under development and will be going through several stages. The first stage is to find suitable off-the-shelf NER models. The second stage is to develop enhancements to deal with particular scenarios with regex. The third stage is to develop an interactive UI for demo.
+
+## Installation
+The project is developed with Python3.7, make sure you it available. Other versions of Python may work, but you may have to downgrade specific libraries to fix compatibility issues.
+
+Installing `poetry`, a tool that gracefully handles dependencies for you.
+```
+pip install poetry
+```
+Using `install` command to download and install required dependencies listed in `poetry.lock`. This could take a while.
+```
+poetry install
+```
+
+If you want to create virtualenv inside the project's root directory, you can update `poetry` config.
+```
+poetry config virtualenvs.in-project true
+```
+Starting a shell and you are ready
+```
+poetry shell
+```
 
 ## Quick Start
 
 ### Example Usage
 #### CRF Model
-Let's load a pretrained CRF PII recogniser and run the recogniser over an example text.
+Load a pretrained CRF model and fire up the analyser.
 
 ```python
-from tokeniser.tokeniser import nltk_word_tokenizer
-from recognisers.crf_recogniser import CrfRecogniser
+from pii_recognition.recognisers.crf_recogniser import CrfRecogniser
 
 crf_recogniser = CrfRecogniser(
-    supported_entities=[
-        "B-LOC", "I-LOC", "B-ORG", "I-ORG",
-        "B-PER", "I-PER", "B-MISC", "I-MISC",
-    ],
+    supported_entities=["I-LOC", "I-ORG", "I-PER", "I-MISC"],
     supported_languages=["en"],
-    model_path="exported_models/conll2003-en.crfsuite",  # pretrained model
-    tokenizer=nltk_word_tokenizer,  # this crf is token based
+    model_path="pii_recognition/exported_models/conll2003-en.crfsuite",
+    tokeniser_setup={"name": "TreebankWordTokeniser"},
 )
 
 crf_recogniser.analyse(text="I love Melbourne.", entities=["I-PER", "I-LOC"])
 ```
 
-This should print (span is used for segment labelling)
+You will get span labels as follows
 ```console
 [SpanLabel(entity_type='I-LOC', start=7, end=16)]
 ```
 
 
 #### spaCy Model
-Create a spaCy recogniser and conduct analysis
+Create a spaCy recogniser and kick off the analyser.
 
 ```python
-from recognisers.spacy_recogniser import SpacyRecogniser
+from pii_recognition.recognisers.spacy_recogniser import SpacyRecogniser
 
 spacy_recogniser = SpacyRecogniser(
     supported_entities=["LOC", "MISC", "ORG", "PER"],
     supported_languages=["en", "de", "es", "fr", "it", "pt", "ru"],
-    model_name="xx_ent_wiki_sm"  # more models on https://spacy.io/models
+    model_name="xx_ent_wiki_sm",
 )
 spacy_recogniser.analyse(text="I love Melbourne.", entities=["PER", "LOC"])
 ```
 
-This should also print
+You will get span labels as follows
 ```console
 [SpanLabel(entity_type='LOC', start=7, end=16)]
 ```
 
 #### Other available models
-Many other off-the-shelf models are supported as well and detail implementations can be found in the `recognisers` folder, including two neural networks [`flair`](https://github.com/flairNLP/flair) and [`stanza`](https://github.com/stanfordnlp/stanza).
+Many other off-the-shelf models are provided as well with the detail implementations found in `recognisers` folder, including two neural networks based inference models [`flair`](https://github.com/flairNLP/flair) and [`stanza`](https://github.com/stanfordnlp/stanza).
 
 
-## Recogniser Training
-Training is not now actively underdevelopment. We have maintained two directories holding files for training, which are `training` and `features`. These files were created just to facilitate model export so that we can have a model for evaluation, they have neither been tested nor optimised.
+## Train a Recogniser
+Training is not the focus for this project. Two directories, `features` and `exported_models`, have been maintained for training as it is needed for developing CRF models and should be aware that files within are not tested.
 
-## Recogniser Evaluation
-### Data Format
-The *input data* to evaluation is a list of strings, where each string represents either a sentence or a paragraph, for example,
+## Evaluate a Recogniser
+### Evaluation Dataset Format
+Evaluation requires sentences to be the *input*.
 ```python
-input_data = ["A sentence to be evaluated.", "A paragraph to be evaluated."]
+input_data: List[str] = ["A sentence to be evaluated.", "I love Melbourne."]
 ```
 
-The label of *ground truth* is defined at a token-level, that is, assigning an entity label to every token in the text, for example, if using a BIO schema ground truths for the above input data are
+*Ground truth* is assigned at a token-level for each input sentence. Each token of the sentence will be assigned with an entity label. The label could be in either BIO schema or IO schema.
 ```python
-ground_truths = [["O", "O", "O", "O", "O", "O"], ["O", "O", "O", "O", "O", "O"]]
+ground_truths = [["O", "O", "O", "O", "O", "O"], ["O", "O", "I-LOC", "O"]]
 ```
 
 ### Evaluator
-Evaluation is based on `f-score`. Take one specific recogniser and pass to the evaluator, depending on the value of `f_beta`, `f1` or `f2` values will be produced for each desried entity.
-```python
-from evaluation.model_evaluator import ModelEvaluator
+Evaluation is measured by `recall`, `precision` and `f-score`. Evaluator takes a recogniser and evaluate over a given dataset.
 
-evaluator = ModelEvaluator(
-    recogniser=some_recogniser,
-    target_entities=["I-PER"],
-    tokeniser=nltk_word_tokenizer  # labels are token based
-)
+### Build Pipeline with Pakkr + MLflow
+Pakkr is an awesome lightweight tool published by Zendesk ML team for pipeline development. MLflow Tracking is an API to log results and parameters in machine learning experiments and report them in an interactive UI.
 
-results = evaluator.evaulate_all(input_data, ground_truths)
-score = evaluator.calculate_score(results, f_beta=1.)
+
+The experiments have been put at `pii_recognition/experiments/` folder, you can pick one and test the pipeline out by executing the following. Note, batch and GPU are not supported yet, evaluating over deep learning models would be slow.
 ```
-The evaluation produces per entity based results, e.g., `{"PER": 0.7, "LOC": 0.8}`. An aggregation score will be incorporated as an enhancement.
+python pii_recognition/pipelines/pakkr_evaluation.py --config_yaml pii_recognition/experiments/you_pick
+```
+
+MLflow Tracking will log the run and the interaction UI is available at http://localhost:5000. Start it with:
+```
+mlflow ui
+```
 
 ### Performance
-Evaluation of experiments are conducted on CONLL 2003 English data -- `eng.testb`. The performance has been logged with `mlflow` and measured by `f1`, `f2` (optional), `precision` and `recall`. I obtained the copy of this CONLL dataset on github, whether the github author posted the full dataset is unknown and whether the author follows the latest guideline generating the CONLL data is also unknown. Further investigation will be taken to decide if we can trust the results getting from this CONLL evaluation. But for now, here's the unvalidated performance
+Evaluation of experiments are performed on CONLL 2003 English data -- `eng.testb` with `MLflow` on `f1`, `precision` and `recall`. We will be updating the table as the project moves forward.
 
 
 | Experiment | Run | Test Set | Recall | Precision | F1 |  Evaluation Duration |
