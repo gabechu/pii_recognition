@@ -10,22 +10,22 @@ The second stage is to evaluate as many as off-the-shelf NER models and find the
 Moving forward we will focus on regex, visualisation and online training. Regex is an enhancement of building bespoke component handling particular entities, for example, medicare number in Australia. Visualisation will an interactive demo showing what's it like on an end-user's perspective. Further down the road, we will enable feedback and collect it feed to the model for online learning where the model can continue improving without us creating new rules.
 
 ## Installation
-The project is developed with Python3.7, make sure you it available. Other versions of Python may work, but you may have to downgrade specific libraries to fix compatibility issues.
+The project is developed with Python3.7, make sure you have it available. We'd recommond to use [`pyenv`](https://github.com/pyenv/pyenv) to switch between multiple Python versions, but be aware dependencies may not resolve successfully, in that case, you will have to fix it manually.
 
-Installing `poetry`, a tool that gracefully handles dependencies for you.
+Install `poetry`, a dependencies management tool.
 ```
 pip install poetry
 ```
-Using `install` command to download and install required dependencies listed in `poetry.lock`. This could take a while.
+Use `install` command of `poetry` to download and install dependencies listed in `poetry.lock`. This may take a while.
 ```
 poetry install
 ```
 
-If you want to create virtualenv inside the project's root directory, you can update `poetry` config.
+Update `poetry` config to create virtualenv inside the project's root directory.
 ```
 poetry config virtualenvs.in-project true
 ```
-Starting a shell and you are ready
+Start a shell and you are ready
 ```
 poetry shell
 ```
@@ -34,7 +34,7 @@ poetry shell
 
 ### Example Usage
 #### CRF Model
-Load a pretrained CRF model and fire up the analyser.
+Load a pretrained CRF model and kick off the CRF analyser.
 
 ```python
 from pii_recognition.recognisers.crf_recogniser import CrfRecogniser
@@ -49,14 +49,14 @@ crf_recogniser = CrfRecogniser(
 crf_recogniser.analyse(text="I love Melbourne.", entities=["I-PER", "I-LOC"])
 ```
 
-You will get span labels as follows
+You will get predicted labels in spans as follows
 ```console
 [SpanLabel(entity_type='I-LOC', start=7, end=16)]
 ```
 
 
 #### spaCy Model
-Create a spaCy recogniser and kick off the analyser.
+Similarly, create a spaCy recogniser and kick off the Spacy analyser.
 
 ```python
 from pii_recognition.recognisers.spacy_recogniser import SpacyRecogniser
@@ -69,13 +69,13 @@ spacy_recogniser = SpacyRecogniser(
 spacy_recogniser.analyse(text="I love Melbourne.", entities=["PER", "LOC"])
 ```
 
-You will get span labels as follows
+You will get predicted labels in span as follows. The results may differ with other example sentences since models beneath of two recognisers are different.
 ```console
 [SpanLabel(entity_type='LOC', start=7, end=16)]
 ```
 
 #### Other available models
-Many other off-the-shelf models are provided as well with the detail implementations found in `recognisers` folder, including two neural networks based inference models [`flair`](https://github.com/flairNLP/flair) and [`stanza`](https://github.com/stanfordnlp/stanza).
+Many other off-the-shelf models are provided, with implementations residing in `pii_recognition/recognisers` folder, for example, one SOTA model built in [`flair`](https://github.com/flairNLP/flair) and another is the popular NLP library developed by Stanford [`stanza`](https://github.com/stanfordnlp/stanza).
 
 
 #### Customise a Recogniser
@@ -92,10 +92,15 @@ class CustomRecogniser(EntityRecogniser):
     def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
         ...
 ```
+Then calling `analyse` method for predictions.
+```
+custom_recogniser = CustomRecogniser(supported_entities, supported_languages, name, **kwargs)
+custom_recogniser.analyse(text="I love Melbourne.", entities)
+```
 
 
 ## Train a Recogniser
-Training is not the focus for this project. Two directories, `features` and `exported_models`, have been maintained for training as it is needed for developing CRF models and should be aware that files within are not tested.
+Training will not be the focus of this project until we start online training, you will see no test created for training related files.
 
 ## Evaluate a Recogniser
 ### Evaluation Dataset Format
@@ -127,6 +132,7 @@ MLflow Tracking will log the run and the associated artefacts to local file or a
 ```
 mlflow ui
 ```
+![Demo Animation](../assets/mlflow_tracking_ui.png?raw=true)
 
 ### Performance
 Evaluation of experiments are performed on CONLL 2003 English data -- `eng.testb` with `MLflow` on `f1`, `precision` and `recall`. We will be updating the table as the project moves forward.
