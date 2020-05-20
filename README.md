@@ -1,5 +1,13 @@
 # Personal Identifiable Information (PII) Recognition
-This project is still under development and will be going through several stages. The first stage is to find suitable off-the-shelf NER models. The second stage is to develop enhancements to deal with particular scenarios with regex. The third stage is to develop an interactive UI for demo.
+
+## Development Progress
+This project is still under development and we have finshed the first two stages.
+
+The first stage is to build a benchmark model. We have chosen `CRF` for benchmarking, it is simple and fast. `CRF` has made reasonable assumptions just to solve the kind of problem -- sequence labelling problem, and it is the stepping stone to much complex models. Quick inference which is the biggest advantage with `CRF`. So far `CRF` has been the fastest model we tested at inference time. Feature engineering is where the difficulty lies in developing a high accuracy `CRF` model. This motivates us to look at SOTA models to gain understanding about the performance gaps.
+
+The second stage is to evaluate as many as off-the-shelf NER models and find the most promising one/ones if any. We have used models developed for NER tasks, solving NER is equivalent to solving PII once entities consense. Model evaluation focuses on the conventional metrics `recall`, `precision`, `f1` and time uses for inference as well. Depending on the task, there is no single best model. Complex NER models such as `Flair` does achieve very good accuracies across many of its supported entities, but inference is very very slow if GPU and batch both are disabled. `Spacy` models have shown a good balance -- decent accuracies with quick inference. But the downside of all of the off-the-shelf models is lacking the ability to be extended on new entities unless retraining the model. Besides, definitions of entities are not crystal clear. The same entity name could interpreted differently depending on which model you have chosen. For example, `LOC` in Spacy `xx_ent_wiki_sm` model means `LOC` and `GPE` in Spacy `en_core_web_lg` model.
+
+Moving forward we will focus on regex, visualisation and online training. Regex is an enhancement of building bespoke component handling particular entities, for example, medicare number in Australia. Visualisation will an interactive demo showing what's it like on an end-user's perspective. Further down the road, we will enable feedback and collect it feed to the model for online learning where the model can continue improving without us creating new rules.
 
 ## Installation
 The project is developed with Python3.7, make sure you it available. Other versions of Python may work, but you may have to downgrade specific libraries to fix compatibility issues.
@@ -70,6 +78,22 @@ You will get span labels as follows
 Many other off-the-shelf models are provided as well with the detail implementations found in `recognisers` folder, including two neural networks based inference models [`flair`](https://github.com/flairNLP/flair) and [`stanza`](https://github.com/stanfordnlp/stanza).
 
 
+#### Customise a Recogniser
+Add a custom recogniser by inheriting from `EntityRecogniser` class and implementing `analyse` method.
+```python
+from typing import List
+from pii_recognition.labels.schema import SpanLabel
+from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
+
+class CustomRecogniser(EntityRecogniser):
+    def __init__(self, supported_entities: List[str], supported_languages: List[str], name: str, **kwargs):
+        ...
+
+    def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
+        ...
+```
+
+
 ## Train a Recogniser
 Training is not the focus for this project. Two directories, `features` and `exported_models`, have been maintained for training as it is needed for developing CRF models and should be aware that files within are not tested.
 
@@ -86,18 +110,20 @@ ground_truths = [["O", "O", "O", "O", "O", "O"], ["O", "O", "I-LOC", "O"]]
 ```
 
 ### Evaluator
-Evaluation is measured by `recall`, `precision` and `f-score`. Evaluator takes a recogniser and evaluate over a given dataset.
+Evaluation is measured by `recall`, `precision` and `f-score`. Evaluator takes a recogniser as an input and evaluate it over a provided dataset.
 
-### Build Pipeline with Pakkr + MLflow
-Pakkr is an awesome lightweight tool published by Zendesk ML team for pipeline development. MLflow Tracking is an API to log results and parameters in machine learning experiments and report them in an interactive UI.
+### Pakkr + MLflow Pipeline
+Pakkr is a lightweight tool developed by Zendesk for building machine learning pipelines. MLflow Tracking is an API to log parameters and artefacts in machine learning experiments.
 
+Experiments configurations are resided in `pii_recognition/experiments/` in `yaml` format, following `boilerplate.yaml` to create new experiment runs. Available pipelines are resided in `pii_recognition/pipelines` with CLI enabled.
 
-The experiments have been put at `pii_recognition/experiments/` folder, you can pick one and test the pipeline out by executing the following. Note, batch and GPU are not supported yet, evaluating over deep learning models would be slow.
+Execute a pipeline via CLI by passing a config yaml file. Be aware batch and GPU are not supported yet, evaluate on deep learning models are slow.
 ```
-python pii_recognition/pipelines/pakkr_evaluation.py --config_yaml pii_recognition/experiments/you_pick
+python pii_recognition/pipelines/pakkr_evaluation.py
+--config_yaml pii_recognition/experiments/you_pick
 ```
 
-MLflow Tracking will log the run and the interaction UI is available at http://localhost:5000. Start it with:
+MLflow Tracking will log the run and the associated artefacts to local file or a designated database. Examine the results with an interaction UI available at http://localhost:5000. Start it with:
 ```
 mlflow ui
 ```
