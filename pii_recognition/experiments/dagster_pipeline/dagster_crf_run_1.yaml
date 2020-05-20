@@ -1,0 +1,42 @@
+solids:
+  enable_tracker:
+    inputs:
+      experiment_name:
+        value: Crf
+      run_name:
+        value: run_1
+  get_evaluator:
+    inputs:
+      predict_on:
+        value:
+        - I-PER
+        - I-LOC
+        - I-ORG
+  get_recogniser:
+    inputs:
+      recogniser_config:
+        value:
+          model_path: pii_recognition/exported_models/conll2003-en.crfsuite
+          supported_entities:
+          - I-LOC
+          - I-ORG
+          - I-PER
+          - I-MISC
+          supported_languages:
+          - en
+          tokeniser_setup:
+            name: TreebankWordTokeniser
+      recogniser_name:
+        value: CrfRecogniser
+  load_test_data:
+    inputs:
+      test_data_path:
+        value: pii_recognition/datasets/conll2003/eng.testb
+      test_data_support_entities:
+        value:
+        - I-LOC
+        - I-PER
+        - I-ORG
+        - I-MISC
+      test_is_io_schema:
+        value: true
