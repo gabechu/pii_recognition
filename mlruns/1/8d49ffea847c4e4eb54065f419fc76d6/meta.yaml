@@ -2,7 +2,7 @@ artifact_uri: /Users/gabechu/Code/pii_recognition/mlruns/1/8d49ffea847c4e4eb5406
 end_time: 1589346674158
 entry_point_name: ''
 experiment_id: '1'
-lifecycle_stage: active
+lifecycle_stage: deleted
 name: ''
 run_id: 8d49ffea847c4e4eb54065f419fc76d6
 run_uuid: 8d49ffea847c4e4eb54065f419fc76d6
