@@ -84,6 +84,7 @@ def test_get_detokeniser():
     assert actual.param_a == "value_a"
 
 
+@patch.object(mlflow, "log_param", new=Mock())
 def test_load_test_data():
     data_path = "pii_recognition/datasets/conll2003/eng.testa"
     detokeniser = Mock()

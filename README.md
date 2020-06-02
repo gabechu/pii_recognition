@@ -135,16 +135,21 @@ mlflow ui
 ![Demo Animation](../assets/mlflow_tracking_ui.png?raw=true)
 
 ### Performance
-Evaluation of experiments are performed on CONLL 2003 English data -- `eng.testb` with `MLflow` on `f1`, `precision` and `recall`. We will be updating the table as the project moves forward.
+Evaluations are carried out on CONLL 2003 and WNUT 2017 datasets and test performance is measured by `f1`, `precision`, `recall` and time of inference, which can be found at `gchu/upload_exp_results` within folder `mlrun`. The following test sets are used:
+* `eng.testa` of CONLL 2003
+* `eng.testb` of CONLL 2003
+* `emerging.test.annotated` of WNUT 2017
 
+----------
+Table 1: Evaluation results on `eng.testb` for CONLL 2003
 
-| Experiment | Run | Test Set | Recall | Precision | F1 |  Evaluation Duration |
-| -------------    | ------------- |------------- |------------- |------------- |------------- |------------- |
-| Heuristic | first_letter_uppercase |  Conll-03 en.testb  |  0.973 | 0.298| 0.456| 1.1s   |
-| CRF       | python_crf_no_pos      |  Conll-03 en.testb  |  0.887 | 0.824| 0.854| 1.4s   |
-| Spacy     | en_core_web_lg         |  Conll-03 en.testb  |  0.824 | 0.828| 0.826| 6.7s   |
-|           | xx_ent_wiki_sm         |  Conll-03 en.testb  |  0.764 | 0.789| 0.776| 6.9s   |
-|Flair      | pretrained_en          |  Conll-03 en.testb  |  0.986 | 0.980| 0.983| 32.6min|
-|Stanza     | pretrained_en          |  Conll-03 en.testb  |  0.855 | 0.846| 0.850| 10.6min|
+|Experiment |Run             |Num of Examples |I-LOC F1 |I-LOC Precision |I-LOC Recall |I-ORG F1 |I-ORG Precision |I-ORG Recall |I-PER F1 |I-LOC Precision |I-LOC Recall |Evaluation Duration |
+| --------- | -------------- | -------------- | ------- | -------------- | ----------- | ------- | -------------- | ----------- | ------- | -------------- | ----------- | ------------------ |
+| Heuristic | Uppercase      | 3453           |         |                |             |         |                |             | 0.4563  | 0.2980         | 0.9732      | 1.6s               |
+| CRF       | In-house CRF   | 3453           | 0.7957  | 0.8389         | 0.7567      | 0.7405  | 0.7621         | 0.7200      | 0.8543  | 0.8237         | 0.8872      | 2.0s               |
+| Spacy     | en_core_web_lg | 3453           | 0.7670  | 0.7067         | 0.8385      | 0.5734  | 0.5821	      | 0.5650      | 0.8256  | 0.8277         | 0.8235      | 15.8s              |
+|           | xx_ent_wiki_sm | 3453           | 0.5966  | 0.5310         | 0.6807      | 0.4483  | 0.6008         | 0.3576	    | 0.7759  | 0.7884         | 0.7639      | 7.4s               |
+|Flair      | pretrained_en  | 3453           | 0.7269  | 0.7622         | 0.6947      | 0.8208  | 0.7573         |	0.8960      | 0.8349  | 0.7453         | 0.9490      | 21min              |
+|Stanza     | pretrained_en  | 3453           | 0.7874  | 0.7666         | 0.8093      | 0.5206  | 0.6337         | 0.4418      | 0.8488  | 0.8451         | 0.8524      | 8.6min             |
 
-notes: no batch is enabled, all models are running on CPU and tested with English dataset on PERSON entity
+	

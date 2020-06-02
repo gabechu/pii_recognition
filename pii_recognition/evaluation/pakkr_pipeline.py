@@ -90,9 +90,11 @@ def load_test_data(
 
     reader_config = {"detokeniser": detokeniser}
     reader = reader_registry.create_instance(data_path.reader_name, reader_config)
-    return reader.get_test_data(
+    data = reader.get_test_data(
         data_path.path, test_data_support_entities, test_is_io_schema
     )
+    mlflow.log_param("Num of test examples", len(data.sentences))
+    return data
 
 
 @returns()
