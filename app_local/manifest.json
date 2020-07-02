@@ -9,7 +9,7 @@
   "private": true,
   "location": {
     "support": {
-      "ticket_sidebar": "assets/iframe.html"
+      "ticket_sidebar": "http://127.0.0.1:8080/sidebar"
     }
   },
   "version": "1.0",
