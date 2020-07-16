@@ -152,4 +152,5 @@ Table 1: Evaluation results on `eng.testb` for CONLL 2003
 |Flair      | pretrained_en  | 3453           | 0.7269  | 0.7622         | 0.6947      | 0.8208  | 0.7573         |	0.8960      | 0.8349  | 0.7453         | 0.9490      | 21min              |
 |Stanza     | pretrained_en  | 3453           | 0.7874  | 0.7666         | 0.8093      | 0.5206  | 0.6337         | 0.4418      | 0.8488  | 0.8451         | 0.8524      | 8.6min             |
 
-	
+# PII Redaction App
+- [Setting Up a Development Environment](docs/development.md)
