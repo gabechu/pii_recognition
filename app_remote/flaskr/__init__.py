@@ -1,6 +1,6 @@
 from typing import Optional
 
-from flask import Flask, render_template
+from flask import Flask, render_template, Response
 
 
 def create_app(test_config: Optional[dict] = None) -> Flask:
@@ -14,5 +14,10 @@ def create_app(test_config: Optional[dict] = None) -> Flask:
     @app.route("/sidebar")
     def sidebar() -> str:
         return render_template("sidebar.html")
+
+    @app.route("/replace-ticket-id", methods=["PUT"])
+    def update_ticket_id() -> Response:
+        ...
+        # stub will be implemented
 
     return app
