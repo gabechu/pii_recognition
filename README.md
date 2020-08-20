@@ -143,7 +143,7 @@ Evaluations are carried out on CONLL 2003 and WNUT 2017 datasets and test perfor
 ----------
 Table 1: Evaluation results on `eng.testb` for CONLL 2003
 
-|Experiment |Run             |Num of Examples |I-LOC F1 |I-LOC Precision |I-LOC Recall |I-ORG F1 |I-ORG Precision |I-ORG Recall |I-PER F1 |I-LOC Precision |I-LOC Recall |Evaluation Duration |
+|Experiment |Run             |Num of Examples |I-LOC F1 |I-LOC Precision |I-LOC Recall |I-ORG F1 |I-ORG Precision |I-ORG Recall |I-PER F1 |I-PER Precision |I-PER Recall |Evaluation Duration |
 | --------- | -------------- | -------------- | ------- | -------------- | ----------- | ------- | -------------- | ----------- | ------- | -------------- | ----------- | ------------------ |
 | Heuristic | Uppercase      | 3453           |         |                |             |         |                |             | 0.4563  | 0.2980         | 0.9732      | 1.6s               |
 | CRF       | In-house CRF   | 3453           | 0.7957  | 0.8389         | 0.7567      | 0.7405  | 0.7621         | 0.7200      | 0.8543  | 0.8237         | 0.8872      | 2.0s               |
