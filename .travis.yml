@@ -24,10 +24,10 @@ before_script:
 jobs:
   include:
     - name: flake8
-      script: poetry run flake8 pii_recognition app_remote
+      script: poetry run flake8 pii_recognition
     - name: mypy
-      script: poetry run mypy --config-file pyproject.toml pii_recognition app_remote
+      script: poetry run mypy --config-file pyproject.toml pii_recognition
     - name: unittest
-      script: poetry run pytest pii_recognition app_remote
+      script: poetry run pytest pii_recognition
     - name: integration test
       script: poetry run pytest tests
