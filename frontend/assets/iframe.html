@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!--   See Using Zendesk Garden:
+    https://developer.zendesk.com/apps/docs/developer-guide/setup#using-zendesk-garden
+    https://garden.zendesk.com/css-components/bedrock/
+    https://garden.zendesk.com/css-components/utilities/typography/
+   -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/combine/npm/@zendeskgarden/css-grid@0.1.38,npm/@zendeskgarden/css-forms@7.0.20,npm/@zendeskgarden/css-buttons@8.0.0,npm/@zendeskgarden/css-callouts@3.3.17"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <h2 class="u-semibold u-fs-xl">Redact PII data in comments</h2>
+    <!-- Predict Component -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-auto">
+          Select a model:
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto">
+          <select class="c-txt__input c-txt__input--select" id="model-name">
+            <option value="comprehend">Comprehend</option>
+            <option value="flair">Flair</option>
+            <option value="spacy">Spacy</option>
+          </select>
+        </div>
+        <div class="col-auto">
+          <button class="c-btn c-btn--primary" id="detect">Detect PII</button>
+          <script
+            type="module"
+            src="components/piiDetectButtonOnClick.js"
+          ></script>
+        </div>
+      </div>
+    </div>
+    <!-- Detected PII View -->
+    <hr style="opacity: 0.25; margin-top: 15px; margin-bottom: 15px;" />
+    <div class="c-callout">
+      <strong class="c-callout__title">
+        Identified PII entities:
+      </strong>
+      <textarea
+        class="c-txt__input--area"
+        id="pii-entities"
+        width="100%"
+        rows="10"
+      ></textarea>
+    </div>
+    <!-- Proceed? -->
+    <div class="cotainer-fluid" style="margin-top: 15px;" }>
+      <div class="row justify-content-between">
+        <div class="col-auto">
+          <button class="c-btn c-btn--primary" id="reset">Reset</button>
+          <script src="components/resetButtonOnClick.js"></script>
+        </div>
+        <div class="col-auto">
+          <button class="c-btn c-btn--primary" id="redact">Redact</button>
+          <script
+            type="module"
+            src="components/redactButtonOnClick.js"
+          ></script>
+        </div>
+      </div>
+    </div>
+    <script src="https://static.zdassets.com/zendesk_app_framework_sdk/2.0/zaf_sdk.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.723.0.min.js"></script>
+    <script>
+      // resize app window
+      const client = ZAFClient.init();
+      client.invoke("resize", { width: "100%", height: "79vh" });
+    </script>
+  </body>
+</html>
