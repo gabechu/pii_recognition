@@ -6,7 +6,6 @@ authors = ["Gabe <wei.g.chu@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-tensorflow = "~2.1.0"
 spacy = "^2.2.3"
 nltk = "^3.4.5"
 scikit-learn = "^0.22.2"
@@ -23,6 +22,8 @@ dagit = "^0.7.9"
 pandas = "^1.0.3"
 pakkr = "^0.1.0"
 flask = "^1.1.2"
+boto3 = "^1.14.48"
+python-decouple = "^3.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
@@ -30,6 +31,8 @@ black = "^19.10b0"
 flake8 = "^3.7.9"
 mypy = "^0.761"
 isort = "^4.3.21"
+moto = "^1.3.14"
+pytest-env = "^0.6.2"
 
 [build-system]
 requires = ["poetry>=0.12"]

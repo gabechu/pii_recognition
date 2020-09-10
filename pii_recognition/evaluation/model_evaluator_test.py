@@ -97,7 +97,7 @@ def test_get_span_based_prediction(mock_recogniser, mock_tokeniser, text):
     )
     with pytest.raises(AssertionError) as err:
         evaluator.get_span_based_prediction(text)
-    assert str(err.value) == f"Predictions contain unasked entities ['LOC']"
+    assert str(err.value) == "Predictions contain unasked entities ['LOC']"
 
 
 def test_get_token_based_prediction(mock_recogniser, mock_tokeniser, text):
@@ -116,7 +116,7 @@ def test_get_token_based_prediction(mock_recogniser, mock_tokeniser, text):
     )
     with pytest.raises(AssertionError) as err:
         evaluator.get_token_based_prediction(text)
-    assert str(err.value) == f"Predictions contain unasked entities ['LOC']"
+    assert str(err.value) == "Predictions contain unasked entities ['LOC']"
 
 
 def test__compare_predicted_and_truth(text, mock_recogniser):
@@ -236,7 +236,7 @@ def test_evaluate_sample_no_label_conversion(text, mock_recogniser, mock_tokenis
         counter, mistakes = evaluator.evaluate_sample(
             text, annotations=["O", "O", "PER", "O", "LOC", "O"]
         )
-    assert str(err.value) == f"Predictions contain unasked entities ['LOC']"
+    assert str(err.value) == "Predictions contain unasked entities ['LOC']"
 
 
 def test_evaluate_sample_with_label_conversion(text, mock_recogniser, mock_tokeniser):

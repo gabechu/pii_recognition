@@ -1,6 +1,5 @@
 from tempfile import TemporaryDirectory
 
-import yaml
 import os
 
 from pii_recognition.evaluation.pakkr_pipeline import \
