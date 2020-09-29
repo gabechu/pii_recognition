@@ -4,7 +4,7 @@ from unittest.mock import Mock, patch
 import pytest
 from pytest import fixture
 
-from pii_recognition.labels.schema import SpanLabel
+from pii_recognition.labels.schema import Entity
 
 from .spacy_recogniser import SpacyRecogniser
 
@@ -34,10 +34,10 @@ def test_spacy_recogniser(text):
     recogniser = SpacyRecogniser(["PER", "LOC"], ["en"], model_name="fake_model")
 
     actual = recogniser.analyse(text, entities=["PER"])
-    assert actual == [SpanLabel("PER", 8, 11)]
+    assert actual == [Entity("PER", 8, 11)]
 
     actual = recogniser.analyse(text, entities=["PER", "LOC"])
-    assert actual == [SpanLabel("PER", 8, 11), SpanLabel("LOC", 17, 26)]
+    assert actual == [Entity("PER", 8, 11), Entity("LOC", 17, 26)]
 
     with pytest.raises(AssertionError) as err:
         recogniser.analyse(text, entities=["PER", "LOC", "TIME"])

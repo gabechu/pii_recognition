@@ -4,7 +4,7 @@ from typing import Dict, List, Tuple
 from pii_recognition.tokenisation.token_schema import Token
 from pii_recognition.utils import is_ascending
 
-from .schema import SpanLabel, TokenLabel
+from .schema import Entity, TokenLabel
 
 
 def is_substring(
@@ -24,7 +24,7 @@ def is_substring(
 
 
 def span_labels_to_token_labels(
-    span_labels: List[SpanLabel], tokens: List[Token], keep_o_label: bool = True
+    span_labels: List[Entity], tokens: List[Token], keep_o_label: bool = True
 ) -> List[TokenLabel]:
     """
     A conversion that breaks entity labeled by spans to tokens.
@@ -60,7 +60,7 @@ def span_labels_to_token_labels(
         ]
 
 
-def token_labels_to_span_labels(token_labels: List[TokenLabel]) -> List[SpanLabel]:
+def token_labels_to_span_labels(token_labels: List[TokenLabel]) -> List[Entity]:
     # order matters
     assert is_ascending(
         [label.start for label in token_labels]
@@ -74,9 +74,9 @@ def token_labels_to_span_labels(token_labels: List[TokenLabel]) -> List[SpanLabe
         if current_token_label.entity_type == prior_span["entity_type"]:
             prior_span["end"] = current_token_label.end
         else:
-            span_labels.append(SpanLabel(**prior_span))
+            span_labels.append(Entity(**prior_span))
             prior_span = asdict(current_token_label)
 
-    span_labels.append(SpanLabel(**prior_span))
+    span_labels.append(Entity(**prior_span))
 
     return span_labels

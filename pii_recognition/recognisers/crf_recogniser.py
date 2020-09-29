@@ -3,7 +3,7 @@ from typing import Dict, List
 from pycrfsuite import Tagger
 
 from pii_recognition.features.word_to_features import word2features
-from pii_recognition.labels.schema import SpanLabel, TokenLabel
+from pii_recognition.labels.schema import Entity, TokenLabel
 from pii_recognition.labels.span import token_labels_to_span_labels
 from pii_recognition.tokenisation import tokeniser_registry
 from pii_recognition.tokenisation.token_schema import Token
@@ -43,7 +43,7 @@ class CrfRecogniser(EntityRecogniser):
             word2features(tokenised_sentence, i) for i in range(len(tokenised_sentence))
         ]
 
-    def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
+    def analyse(self, text: str, entities: List[str]) -> List[Entity]:
         self.validate_entities(entities)
         # TODO: validate languages
 

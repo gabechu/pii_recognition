@@ -5,7 +5,7 @@ from typing import NamedTuple
 
 
 @dataclass
-class SpanLabel:
+class Entity:
     entity_type: str
     start: int
     end: int

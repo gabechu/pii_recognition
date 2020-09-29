@@ -2,7 +2,7 @@ from typing import List
 
 from stanza import Pipeline
 
-from pii_recognition.labels.schema import SpanLabel
+from pii_recognition.labels.schema import Entity
 from pii_recognition.utils import cached_property
 
 from .entity_recogniser import EntityRecogniser
@@ -37,7 +37,7 @@ class StanzaRecogniser(EntityRecogniser):
         # environmental variable called STANZA_RESOURCES_DIR
         return Pipeline(self.model_name)
 
-    def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
+    def analyse(self, text: str, entities: List[str]) -> List[Entity]:
         self.validate_entities(entities)
 
         results = self.model(text)
@@ -46,6 +46,6 @@ class StanzaRecogniser(EntityRecogniser):
         for entity in results.entities:
             if entity.type in entities:
                 span_labels.append(
-                    SpanLabel(entity.type, entity.start_char, entity.end_char)
+                    Entity(entity.type, entity.start_char, entity.end_char)
                 )
         return span_labels

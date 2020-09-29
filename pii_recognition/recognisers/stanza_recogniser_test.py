@@ -4,7 +4,7 @@ from unittest.mock import Mock, patch
 import pytest
 from pytest import fixture
 
-from pii_recognition.labels.schema import SpanLabel
+from pii_recognition.labels.schema import Entity
 
 from .stanza_recogniser import StanzaRecogniser
 
@@ -38,10 +38,10 @@ def test_stanza_analyse(text):
     )
 
     actual = recogniser.analyse(text, entities=["PERSON"])
-    assert actual == [SpanLabel("PERSON", 8, 11)]
+    assert actual == [Entity("PERSON", 8, 11)]
 
     actual = recogniser.analyse(text, entities=["PERSON", "LOC"])
-    assert actual == [SpanLabel("PERSON", 8, 11), SpanLabel("LOC", 17, 26)]
+    assert actual == [Entity("PERSON", 8, 11), Entity("LOC", 17, 26)]
 
     with pytest.raises(AssertionError) as err:
         recogniser.analyse(text, entities=["PERSON", "LOC", "TIME"])

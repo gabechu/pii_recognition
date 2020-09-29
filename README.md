@@ -51,7 +51,7 @@ crf_recogniser.analyse(text="I love Melbourne.", entities=["I-PER", "I-LOC"])
 
 You will get predicted labels in spans as follows
 ```console
-[SpanLabel(entity_type='I-LOC', start=7, end=16)]
+[Entity(entity_type='I-LOC', start=7, end=16)]
 ```
 
 
@@ -71,7 +71,7 @@ spacy_recogniser.analyse(text="I love Melbourne.", entities=["PER", "LOC"])
 
 You will get predicted labels in span as follows. The results may differ with other example sentences since models beneath of two recognisers are different.
 ```console
-[SpanLabel(entity_type='LOC', start=7, end=16)]
+[Entity(entity_type='LOC', start=7, end=16)]
 ```
 
 #### Other available models
@@ -82,14 +82,14 @@ Many other off-the-shelf models are provided, with implementations residing in `
 Add a custom recogniser by inheriting from `EntityRecogniser` class and implementing `analyse` method.
 ```python
 from typing import List
-from pii_recognition.labels.schema import SpanLabel
+from pii_recognition.labels.schema import Entity
 from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
 
 class CustomRecogniser(EntityRecogniser):
     def __init__(self, supported_entities: List[str], supported_languages: List[str], name: str, **kwargs):
         ...
 
-    def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
+    def analyse(self, text: str, entities: List[str]) -> List[Entity]:
         ...
 ```
 Then calling `analyse` method for predictions.

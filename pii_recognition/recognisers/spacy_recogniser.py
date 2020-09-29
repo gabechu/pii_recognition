@@ -3,7 +3,7 @@ from typing import List
 import spacy
 from spacy.lang.xx import MultiLanguage
 
-from pii_recognition.labels.schema import SpanLabel
+from pii_recognition.labels.schema import Entity
 from pii_recognition.utils import cached_property
 
 from .entity_recogniser import EntityRecogniser
@@ -36,7 +36,7 @@ class SpacyRecogniser(EntityRecogniser):
     def model(self) -> MultiLanguage:
         return spacy.load(self._model_name, disable=["parser", "tagger"])
 
-    def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
+    def analyse(self, text: str, entities: List[str]) -> List[Entity]:
         self.validate_entities(entities)
 
         doc = self.model(text)
@@ -45,7 +45,7 @@ class SpacyRecogniser(EntityRecogniser):
         filtered_entities = list(filter(lambda x: x.label_ in entities, spacy_entities))
 
         return [
-            SpanLabel(
+            Entity(
                 entity_type=entity.label_, start=entity.start_char, end=entity.end_char
             )
             for entity in filtered_entities

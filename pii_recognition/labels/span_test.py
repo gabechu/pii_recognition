@@ -2,7 +2,7 @@ import pytest
 
 from pii_recognition.tokenisation.token_schema import Token
 
-from .schema import SpanLabel, TokenLabel
+from .schema import Entity, TokenLabel
 from .span import is_substring, span_labels_to_token_labels, token_labels_to_span_labels
 
 
@@ -20,8 +20,8 @@ def test_is_substring():
 def test_span_labels_to_token_labels():
     # reference sentence: "This is Bob Smith from Melbourne."
     span_labels = [
-        SpanLabel("PER", 8, 17),
-        SpanLabel("LOC", 23, 32),
+        Entity("PER", 8, 17),
+        Entity("LOC", 23, 32),
     ]
     tokens = [
         Token("This", 0, 4),
@@ -43,7 +43,7 @@ def test_token_labels_to_span_labels():
     #
     token_labels = [TokenLabel("PER", 0, 4)]
     actual = token_labels_to_span_labels(token_labels)
-    assert actual == [SpanLabel("PER", 0, 4)]
+    assert actual == [Entity("PER", 0, 4)]
 
     # text: Luke
     token_labels = [
@@ -51,7 +51,7 @@ def test_token_labels_to_span_labels():
         TokenLabel("PER", 5, 14),
     ]
     actual = token_labels_to_span_labels(token_labels)
-    assert actual == [SpanLabel("PER", 0, 14)]
+    assert actual == [Entity("PER", 0, 14)]
 
     # text: Luke Skywalker
     token_labels = [
@@ -60,12 +60,12 @@ def test_token_labels_to_span_labels():
         TokenLabel("O", 14, 15),
     ]
     actual = token_labels_to_span_labels(token_labels)
-    assert actual == [SpanLabel("PER", 0, 14), SpanLabel("O", 14, 15)]
+    assert actual == [Entity("PER", 0, 14), Entity("O", 14, 15)]
 
     # text: Luke-Skywalker
     token_labels = [TokenLabel("PER", 0, 5), TokenLabel("PER", 5, 14)]
     actual = token_labels_to_span_labels(token_labels)
-    assert actual == [SpanLabel("PER", 0, 14)]
+    assert actual == [Entity("PER", 0, 14)]
 
     # text: one day, Luke Skywalker and Wedge Antilles recover a message
     token_labels = [
@@ -83,11 +83,11 @@ def test_token_labels_to_span_labels():
     ]
     actual = token_labels_to_span_labels(token_labels)
     assert actual == [
-        SpanLabel("O", 0, 8),
-        SpanLabel("PER", 9, 23),
-        SpanLabel("O", 24, 27),
-        SpanLabel("PER", 28, 42),
-        SpanLabel("O", 43, 60),
+        Entity("O", 0, 8),
+        Entity("PER", 9, 23),
+        Entity("O", 24, 27),
+        Entity("PER", 28, 42),
+        Entity("O", 43, 60),
     ]
 
     # test failure

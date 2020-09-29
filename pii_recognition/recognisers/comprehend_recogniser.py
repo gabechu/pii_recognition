@@ -5,7 +5,7 @@ from botocore.client import BaseClient
 from decouple import config
 
 from pii_recognition.aws.config_session import config_cognito_session
-from pii_recognition.labels.schema import SpanLabel
+from pii_recognition.labels.schema import Entity
 
 from .entity_recogniser import EntityRecogniser
 
@@ -27,7 +27,7 @@ class ComprehendRecogniser(EntityRecogniser):
         return session.client(service_name="comprehend",
                               region_name=AWS_REGION)
 
-    def analyse(self, text: str, entities: List[str]) -> List[SpanLabel]:
+    def analyse(self, text: str, entities: List[str]) -> List[Entity]:
         self.validate_entities(entities)
 
         # TODO: Add feature supporting multilingual but the first round is for
@@ -42,6 +42,6 @@ class ComprehendRecogniser(EntityRecogniser):
         filtered = filter(lambda ent: ent["Type"] in entities,
                           predicted_entities)
         span_labels = map(
-            lambda ent: SpanLabel(ent["Type"], ent["BeginOffset"], ent[
+            lambda ent: Entity(ent["Type"], ent["BeginOffset"], ent[
                 "EndOffset"]), filtered)
         return list(span_labels)

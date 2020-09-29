@@ -2,7 +2,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from pii_recognition.labels.schema import SpanLabel
+from pii_recognition.labels.schema import Entity
 from pii_recognition.recognisers.comprehend_recogniser import \
     ComprehendRecogniser
 
@@ -57,17 +57,17 @@ def test_comprehend_recogniser_analyse(mock_session, fake_response):
 
     spans = recogniser.analyse(fake_text, recogniser.supported_entities)
     assert spans == [
-        SpanLabel("OTHER", 83, 99),
-        SpanLabel("LOCATION", 137, 171)
+        Entity("OTHER", 83, 99),
+        Entity("LOCATION", 137, 171)
     ]
 
     spans = recogniser.analyse(fake_text, ["OTHER"])
     assert spans == [
-        SpanLabel("OTHER", 83, 99),
+        Entity("OTHER", 83, 99),
     ]
 
     spans = recogniser.analyse(fake_text, ["LOCATION"])
-    assert spans == [SpanLabel("LOCATION", 137, 171)]
+    assert spans == [Entity("LOCATION", 137, 171)]
 
     with pytest.raises(AssertionError) as err:
         recogniser.analyse(fake_text,

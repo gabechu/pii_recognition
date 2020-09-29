@@ -1,6 +1,6 @@
 from unittest.mock import Mock, patch
 
-from pii_recognition.labels.schema import SpanLabel
+from pii_recognition.labels.schema import Entity
 from pii_recognition.tokenisation.token_schema import Token
 
 from .first_letter_uppercase_recogniser import (
@@ -40,7 +40,7 @@ def test_first_letter_uppercase_analyse(mock_tokeniser):
     mock_tokeniser.assert_called_with("fake_tokeniser", {"fake_param": "fake_value"})
     actual = recogniser.analyse("fake_text", entities=["PER"])
     assert actual == [
-        SpanLabel("PER", 0, 4),
-        SpanLabel("PER", 8, 11),
-        SpanLabel("PER", 17, 26),
+        Entity("PER", 0, 4),
+        Entity("PER", 8, 11),
+        Entity("PER", 17, 26),
     ]

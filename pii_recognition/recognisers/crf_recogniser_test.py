@@ -2,7 +2,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from pii_recognition.labels.schema import SpanLabel
+from pii_recognition.labels.schema import Entity
 from pii_recognition.tokenisation.token_schema import Token
 
 from .crf_recogniser import CrfRecogniser, tokeniser_registry
@@ -48,10 +48,10 @@ def test_crf_recogniser_analyse(mock_tokeniser):
 
     actual = recogniser.analyse("fake_text", entities=["PER"])
     mock_tokeniser.assert_called_with("fake_tokeniser", {"fake_param": "fake_value"})
-    assert actual == [SpanLabel("PER", 8, 11)]
+    assert actual == [Entity("PER", 8, 11)]
 
     actual = recogniser.analyse("fake_text", entities=["PER", "LOC"])
-    assert actual == [SpanLabel("PER", 8, 11), SpanLabel("LOC", 17, 26)]
+    assert actual == [Entity("PER", 8, 11), Entity("LOC", 17, 26)]
 
     with pytest.raises(AssertionError) as err:
         recogniser.analyse("fake_text", entities=["PER", "LOC", "TIME"])

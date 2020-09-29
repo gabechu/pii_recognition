@@ -6,7 +6,7 @@ import numpy as np
 import pytest
 from pytest import fixture
 
-from pii_recognition.labels.schema import EvalLabel, SpanLabel
+from pii_recognition.labels.schema import EvalLabel, Entity
 from pii_recognition.tokenisation.token_schema import Token
 
 from .model_evaluator import ModelEvaluator
@@ -22,8 +22,8 @@ def text():
 def mock_recogniser():
     recogniser = Mock()
     recogniser.analyse.return_value = [
-        SpanLabel("PER", 8, 11),
-        SpanLabel("LOC", 17, 26),
+        Entity("PER", 8, 11),
+        Entity("LOC", 17, 26),
     ]
     recogniser.supported_entities = ["PER", "LOC"]
     return recogniser
@@ -34,7 +34,7 @@ def mock_bad_recogniser():
     # failed to predict location entity
     recogniser = Mock()
     recogniser.analyse.return_value = [
-        SpanLabel("PER", 8, 11),
+        Entity("PER", 8, 11),
     ]
     recogniser.supported_entities = ["PER", "LOC"]
     return recogniser
@@ -87,8 +87,8 @@ def test_get_span_based_prediction(mock_recogniser, mock_tokeniser, text):
     )
     actual = evaluator.get_span_based_prediction(text)
     assert actual == [
-        SpanLabel(entity_type="PER", start=8, end=11),
-        SpanLabel(entity_type="LOC", start=17, end=26),
+        Entity(entity_type="PER", start=8, end=11),
+        Entity(entity_type="LOC", start=17, end=26),
     ]
 
     # test 2: raise assertion error

@@ -4,7 +4,7 @@ from typing import Dict, List, Optional, Tuple
 import numpy as np
 
 from pii_recognition.labels.mapping import map_labels, mask_labels
-from pii_recognition.labels.schema import EvalLabel, SpanLabel, TokenLabel
+from pii_recognition.labels.schema import EvalLabel, Entity, TokenLabel
 from pii_recognition.labels.span import span_labels_to_token_labels
 from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
 from pii_recognition.tokenisation.tokenisers import Tokeniser
@@ -91,7 +91,7 @@ class ModelEvaluator:
             f"{sorted(list(predicted_entities - asked_entities))}"
         )
 
-    def get_span_based_prediction(self, text: str) -> List[SpanLabel]:
+    def get_span_based_prediction(self, text: str) -> List[Entity]:
         predicted_spans = self.recogniser.analyse(text, self.target_entities)
         self._validate_predictions([label.entity_type for label in predicted_spans])
         return predicted_spans
