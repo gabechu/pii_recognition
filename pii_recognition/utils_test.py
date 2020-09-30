@@ -1,12 +1,20 @@
+import json
 from unittest.mock import Mock, call, mock_open, patch
 
 from pii_recognition.utils import (
     cached_property,
     dump_yaml_file,
     is_ascending,
+    load_json_file,
     load_yaml_file,
     write_iterable_to_file,
 )
+
+
+def json_dumps():
+    return json.dumps(
+        [{"name": "John", "location": "AU"}, {"name": "Mia", "location": "AU"}]
+    )
 
 
 def test_write_iterable_to_file():
@@ -66,3 +74,12 @@ def test_dump_yaml_file():
         handle.write.assert_has_calls(
             [call("key"), call(":"), call(" "), call("value"), call("\n")]
         )
+
+
+@patch("builtins.open", new_callable=mock_open, read_data=json_dumps())
+def test_load_json_file(mock_file):
+    data = load_json_file("any_path/file.json")
+    assert data == [
+        {"name": "John", "location": "AU"},
+        {"name": "Mia", "location": "AU"},
+    ]

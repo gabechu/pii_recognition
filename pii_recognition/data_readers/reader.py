@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from typing import List, Set
 
 
+# TODO: replace Data with the one from data.py
 @dataclass
 class Data:
     # a recogniser takes a string as input so need a setence
