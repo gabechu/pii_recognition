@@ -2,7 +2,6 @@ from collections import Counter
 from typing import List
 from unittest.mock import Mock
 
-import numpy as np
 import pytest
 from pytest import fixture
 
@@ -323,7 +322,7 @@ def test_calculate_score(mock_recogniser, mock_tokeniser):
     recall, precision, f1 = evaluator.calculate_score(counters)
     assert recall == {"PER": 1.0, "LOC": 0.0}
     assert precision == {"PER": 1.0, "LOC": 0.0}
-    assert f1 == {"PER": 1.0, "LOC": np.nan}
+    assert f1 == {"PER": 1.0, "LOC": 0.0}
 
     # test 2: multiple texts
     counters = [
