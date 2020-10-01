@@ -1,9 +1,11 @@
 from typing import List
+from numpy.testing import assert_almost_equal
 
 import pytest
 from pii_recognition.evaluation.character_level_evaluation import (
     compute_entity_precisions_for_prediction,
     compute_entity_recalls_for_ground_truth,
+    compute_pii_detection_f1,
     label_encoder,
 )
 from pii_recognition.labels.schema import Entity
@@ -393,3 +395,31 @@ def test_compute_precisions_recalls_for_no_true():
         {"entity_type": "PER", "start": 10, "end": 15, "precision": 0.0},
     ]
     assert recalls == []
+
+
+def test_compute_pii_detection_f1_for_no_recall_threshold_f1_is_one():
+    precisions = [1.0, 1.0]
+    recalls = [1.0, 1.0]
+    actual = compute_pii_detection_f1(precisions, recalls)
+    assert actual == 1.0
+
+
+def test_compute_pii_detection_f1_for_no_recall_threshold_f1_is_zero():
+    precisions = [0.0, 0.0]
+    recalls = [0.0, 0.0]
+    actual = compute_pii_detection_f1(precisions, recalls)
+    assert actual == 0.0
+
+
+def test_compute_pii_detection_f1_for_no_recall_threshold():
+    precisions = [0.4, 0.8]
+    recalls = [0.2, 0.7]
+    actual = compute_pii_detection_f1(precisions, recalls)
+    assert_almost_equal(actual, 0.5142857)
+
+
+def test_compute_pii_detection_f1_with_recall_threshold():
+    precisions = [0.4, 0.8, 0.9]
+    recalls = [0.2, 0.51, 0.7]
+    actual = compute_pii_detection_f1(precisions, recalls, recall_threshold=0.5)
+    assert_almost_equal(actual, 0.716279)
