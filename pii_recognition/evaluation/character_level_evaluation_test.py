@@ -423,3 +423,30 @@ def test_compute_pii_detection_f1_with_recall_threshold():
     recalls = [0.2, 0.51, 0.7]
     actual = compute_pii_detection_f1(precisions, recalls, recall_threshold=0.5)
     assert_almost_equal(actual, 0.716279)
+
+
+def test_compute_pii_detection_f1_for_invalid_threshold():
+    precisions = recalls = [0.0]
+    with pytest.raises(ValueError) as err:
+        compute_pii_detection_f1(precisions, recalls, recall_threshold=2.0)
+    assert str(err.value) == (
+        "Invalid threshold! Recall threshold must between 0 and 1 but got 2.0"
+    )
+
+
+def test_compute_pii_detection_f1_for_empty_precisions():
+    with pytest.raises(ValueError) as err:
+        compute_pii_detection_f1([], [0.0], recall_threshold=0.5)
+    assert str(err.value) == "You are passing empty precisions list!"
+
+
+def test_compute_pii_detection_f1_for_empty_recalls():
+    with pytest.raises(ValueError) as err:
+        compute_pii_detection_f1([0.0], [], recall_threshold=0.5)
+    assert str(err.value) == "You are passing empty recalls list!"
+
+
+def test_compute_pii_detection_f1_for_empty_precisions_recalls():
+    with pytest.raises(ValueError) as err:
+        compute_pii_detection_f1([], [], recall_threshold=0.5)
+    assert str(err.value) == "You are passing empty precisions and recalls lists!"

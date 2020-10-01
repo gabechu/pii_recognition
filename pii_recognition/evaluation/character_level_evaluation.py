@@ -122,6 +122,20 @@ def compute_pii_detection_f1(
         F1 score.
     """
     if recall_threshold:
+        if recall_threshold > 1.0 or recall_threshold < 0.0:
+            raise ValueError(
+                f"Invalid threshold! Recall threshold must between 0 and 1 "
+                f"but got {recall_threshold}"
+            )
+
+    if not precisions and not recalls:
+        raise ValueError("You are passing empty precisions and recalls lists!")
+    if not precisions:
+        raise ValueError("You are passing empty precisions list!")
+    elif not recalls:
+        raise ValueError("You are passing empty recalls list!")
+
+    if recall_threshold:
         recalls = [1.0 if item >= recall_threshold else item for item in recalls]
 
     ave_precision = sum(precisions) / len(precisions)
