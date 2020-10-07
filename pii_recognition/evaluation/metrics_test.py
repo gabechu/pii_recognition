@@ -4,18 +4,18 @@ from numpy.testing import assert_almost_equal
 from .metrics import compute_f_beta, compute_label_precision, compute_label_recall
 
 
-def test_compute_f_beta_for_zero_division():
+def test_compute_f_beta_for_zero_precision_recall():
     actual = compute_f_beta(0.0, 0.0)
-    assert np.isnan(actual)
+    assert actual == 0.0
 
 
 def test_compute_f_beta_for_nan_numerator():
-    actual = compute_f_beta(np.nan, 1.0)
+    actual = compute_f_beta(float("nan"), 1.0)
     assert np.isnan(actual)
 
 
 def test_test_compute_f_beta_for_nan_denominator():
-    actual = compute_f_beta(1.0, np.nan)
+    actual = compute_f_beta(1.0, float("nan"))
     assert np.isnan(actual)
 
 
