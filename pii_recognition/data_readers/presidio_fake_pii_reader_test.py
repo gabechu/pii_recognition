@@ -38,11 +38,11 @@ def presidio_fake_pii_json():
 def test_PresidioFakePiiReader(mock_file):
     reader = PresidioFakePiiReader()
     data = reader.build_data("fake_path/file.json")
-    assert data.texts == [
+    assert [x.text for x in data.items] == [
         "It's like that since 12/17/1967",
         "A tribute to Joshua Lewis – sadly, she wasn't impressed.",
     ]
-    assert data.labels == [
+    assert [x.true_label for x in data.items] == [
         [
             {
                 "entity_type": "BIRTHDAY",
@@ -60,4 +60,5 @@ def test_PresidioFakePiiReader(mock_file):
             }
         ],
     ]
+    assert [x.pred_label for x in data.items] == [None, None]
     assert data.supported_entities == {"BIRTHDAY", "PERSON"}

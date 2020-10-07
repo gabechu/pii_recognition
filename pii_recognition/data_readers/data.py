@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from typing import List, TypeVar, Set, Generic
+from typing import Generic, List, Optional, Set, TypeVar
+
 from pii_recognition.labels.schema import Entity
 
 # Two kinds of entity labels
@@ -9,14 +10,14 @@ TEXT_LABELS = TypeVar("TEXT_LABELS", List[str], List[Entity])
 
 
 @dataclass
-class Data(Generic[TEXT_LABELS]):
-    texts: List[str]
-    labels: List[TEXT_LABELS]
+class DataItem(Generic[TEXT_LABELS]):
+    text: str
+    true_label: TEXT_LABELS
+    pred_label: Optional[TEXT_LABELS] = None
+
+
+@dataclass
+class Data:
+    items: List[DataItem]
     supported_entities: Set[str]
     is_io_schema: bool
-
-    def __post_init__(self):
-        assert len(self.texts) == len(self.labels), (
-            f"Texts length does not match with labels length: texts length is "
-            f"{len(self.texts)} and labels length is {len(self.labels)}"
-        )
