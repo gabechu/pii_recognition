@@ -1,6 +1,6 @@
-from dataclasses import asdict
-from typing import Any, Dict, List
 import logging
+from dataclasses import asdict, dataclass
+from typing import Any, Dict, List
 
 from pii_recognition.evaluation.metrics import (
     compute_label_precision,
@@ -9,10 +9,26 @@ from pii_recognition.evaluation.metrics import (
 from pii_recognition.labels.schema import Entity
 
 
+@dataclass
+class EntityPrecision:
+    entity: Entity
+    precision: float
+
+
+@dataclass
+class EntityRecall:
+    entity: Entity
+    recall: float
+
+
+@dataclass
+class TicketScore:
+    entity_precisions: List[EntityPrecision]
+    entity_recalls: List[EntityRecall]
+
+
 def label_encoder(
-    text_length: int,
-    entities: List[Entity],
-    label_to_int: Dict[Any, int],
+    text_length: int, entities: List[Entity], label_to_int: Dict[Any, int],
 ) -> List[int]:
     """Encode entity labels into integers.
 
@@ -33,7 +49,8 @@ def label_encoder(
     code = [0] * text_length
     removed_labels = [key for key, value in label_to_int.items() if value == 0]
     logging.info(
-        f"Removing the following entity types from evaluation: {removed_labels}.")
+        f"Removing the following entity types from evaluation: {removed_labels}."
+    )
 
     for span in entities:
         label_name = span.entity_type
@@ -62,7 +79,7 @@ def compute_entity_precisions_for_prediction(
     true_entities: List[Entity],
     pred_entities: List[Entity],
     label_mapping: Dict,
-) -> List[Dict]:
+) -> List[EntityPrecision]:
     """Compute precision for every entity in prediction."""
     true_code: List[int] = label_encoder(text_length, true_entities, label_mapping)
 
@@ -75,11 +92,8 @@ def compute_entity_precisions_for_prediction(
         pred_entity_code: List[int] = label_encoder(
             text_length, [pred_entity], label_mapping
         )
-        score = compute_label_precision(true_code, pred_entity_code, int_label)
-
-        entity_dict = asdict(pred_entity)
-        entity_dict.update({"precision": score})
-        precisions.append(entity_dict)
+        precision = compute_label_precision(true_code, pred_entity_code, int_label)
+        precisions.append(EntityPrecision(pred_entity, precision))
 
     return precisions
 
@@ -89,7 +103,7 @@ def compute_entity_recalls_for_ground_truth(
     true_entities: List[Entity],
     pred_entities: List[Entity],
     label_mapping: Dict,
-) -> List[Dict]:
+) -> List[EntityRecall]:
     """Compute recall for every entity in ground truth."""
     pred_code: List[int] = label_encoder(text_length, pred_entities, label_mapping)
 
@@ -102,10 +116,7 @@ def compute_entity_recalls_for_ground_truth(
         true_entity_code: List[int] = label_encoder(
             text_length, [true_entity], label_mapping
         )
-        score = compute_label_recall(true_entity_code, pred_code, int_label)
-
-        entity_dict = asdict(true_entity)
-        entity_dict.update({"recall": score})
-        recalls.append(entity_dict)
+        recall = compute_label_recall(true_entity_code, pred_code, int_label)
+        recalls.append(EntityRecall(true_entity, recall))
 
     return recalls

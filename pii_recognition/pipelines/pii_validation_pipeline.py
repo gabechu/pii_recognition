@@ -1,4 +1,5 @@
 import os
+import time
 from typing import Dict, List, Tuple
 
 from pakkr import Pipeline, returns
@@ -6,10 +7,10 @@ from pii_recognition.constants import PROJECT_DIR
 from pii_recognition.data_readers.data import Data
 from pii_recognition.data_readers.presidio_fake_pii_reader import PresidioFakePiiReader
 from pii_recognition.evaluation.character_level_evaluation import (
+    TicketScore,
     compute_entity_precisions_for_prediction,
     compute_entity_recalls_for_ground_truth,
 )
-from pii_recognition.labels.schema import Entity
 from pii_recognition.recognisers.comprehend_recogniser import ComprehendRecogniser
 
 
@@ -34,18 +35,19 @@ def identify_pii_entities(data: Data, benchmark_data_file) -> Data:
     ]
     supported_languages = ["en"]
     recogniser = ComprehendRecogniser(supported_entities, supported_languages)
-
-    for item in data.items[:5]:
+    start = time.time()
+    for item in data.items[:50]:
         item.pred_label = recogniser.analyse(item.text, supported_entities)
+    end = time.time()
+    print(f"Prediction time: {end-start}")
     return data
 
 
 @returns(Tuple)
 def calculate_precisions_and_recalls(
     data: Data, label_mapping: Dict[str, int]
-) -> Tuple[List, List]:
-    data_precisions = []
-    data_recalls = []
+) -> List[TicketScore]:
+    scores = []
     for item in data.items[:5]:
         ent_precisions = compute_entity_precisions_for_prediction(
             len(item.text), item.true_label, item.pred_label, label_mapping
@@ -53,10 +55,10 @@ def calculate_precisions_and_recalls(
         ent_recalls = compute_entity_recalls_for_ground_truth(
             len(item.text), item.true_label, item.pred_label, label_mapping
         )
-        data_precisions.append(ent_precisions)
-        data_recalls.append(ent_recalls)
+        ticket_score = TicketScore(ent_precisions, ent_recalls)
+        scores.append(ticket_score)
 
-    return data_precisions, data_recalls
+    return scores
 
 
 @returns
@@ -67,14 +69,6 @@ def rollup_scores():
 @returns
 def log_scores_to_file():
     ...
-
-
-def execute_evaluation_pipeline(config: Dict):
-    eval_pipeline = Pipeline(
-        read_benchmark_data, identify_pii_entities, calculate_precisions_and_recalls
-    )
-
-    return eval_pipeline(**config)
 
 
 if __name__ == "__main__":
@@ -105,4 +99,10 @@ if __name__ == "__main__":
             "NATIONALITY": 0,
         },
     }
-    execute_evaluation_pipeline(config)
+    pipeline = Pipeline(
+        read_benchmark_data,
+        identify_pii_entities,
+        calculate_precisions_and_recalls,
+        _suppress_timing_logs=False,
+    )
+    pipeline(**config)
