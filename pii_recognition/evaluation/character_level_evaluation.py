@@ -1,11 +1,10 @@
 import logging
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
-from pii_recognition.evaluation.metrics import (
-    compute_label_precision,
-    compute_label_recall,
-)
+from pii_recognition.evaluation.metrics import (compute_f_beta,
+                                                compute_label_precision,
+                                                compute_label_recall)
 from pii_recognition.labels.schema import Entity
 
 
@@ -120,3 +119,46 @@ def compute_entity_recalls_for_ground_truth(
         recalls.append(EntityRecall(true_entity, recall))
 
     return recalls
+
+
+def compute_pii_detection_f1(
+    precisions: List[float],
+    recalls: List[float],
+    recall_threshold: Optional[float] = None,
+) -> float:
+    """Evaluate performance of PII detection with F1.
+
+    Rollup precisions and recalls to calculate F1 on boundary detection for PII
+    recognition. Recall thresholding is supported, if the system can recognise
+    a certain portion of an entity beyond the threshold, we will consider it a
+    success.
+
+    Args:
+        precisions: a list of entity precision values.
+        recalls: a list of entity recall values.
+        recall_threshold: a float between 0 and 1. Any value greater than or equals
+            to the threshold would be rounded up to 1.
+
+    Returns:
+        F1 score.
+    """
+    if recall_threshold:
+        if recall_threshold > 1.0 or recall_threshold < 0.0:
+            raise ValueError(
+                f"Invalid threshold! Recall threshold must between 0 and 1 "
+                f"but got {recall_threshold}"
+            )
+
+    if not precisions and not recalls:
+        raise ValueError("You are passing empty precisions and recalls lists!")
+    if not precisions:
+        raise ValueError("You are passing empty precisions list!")
+    elif not recalls:
+        raise ValueError("You are passing empty recalls list!")
+
+    if recall_threshold:
+        recalls = [1.0 if item >= recall_threshold else item for item in recalls]
+
+    ave_precision = sum(precisions) / len(precisions)
+    ave_recall = sum(recalls) / len(recalls)
+    return compute_f_beta(ave_precision, ave_recall)

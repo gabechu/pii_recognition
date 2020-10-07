@@ -8,8 +8,11 @@ LT = TypeVar("LT", int, str)
 
 
 def compute_f_beta(precision: float, recall: float, beta: float = 1.0) -> float:
-    if np.isnan(precision) or np.isnan(recall) or (precision == 0 and recall == 0):
-        return np.nan
+    if np.isnan(precision) or np.isnan(recall):
+        return float("nan")
+
+    if precision == 0.0 and recall == 0.0:
+        return 0.0
 
     return ((1 + beta ** 2) * precision * recall) / (((beta ** 2) * precision) + recall)
 
