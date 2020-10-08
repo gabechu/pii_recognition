@@ -14,10 +14,10 @@ from pii_recognition.recognisers.comprehend_recogniser import \
     ComprehendRecogniser
 
 
-@returns(data=Data)
+@returns(Data)
 def read_benchmark_data(benchmark_data_file: str) -> Data:
     reader = PresidioFakePiiReader()
-    return {"data": reader.build_data(benchmark_data_file)}
+    return reader.build_data(benchmark_data_file)
 
 
 @returns(List)
