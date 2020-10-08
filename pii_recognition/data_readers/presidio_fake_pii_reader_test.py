@@ -1,6 +1,7 @@
 import json
 
 from mock import mock_open, patch
+from pii_recognition.data_readers.data import Entity
 
 from .presidio_fake_pii_reader import PresidioFakePiiReader
 
@@ -20,14 +21,22 @@ def presidio_fake_pii_json():
                 ],
             },
             {
-                "full_text": "A tribute to Joshua Lewis – sadly, she wasn't impressed.",
+                "full_text": (
+                    "The address of Balefire Global is Valadouro 3, Ubide 48145"
+                ),
                 "spans": [
                     {
-                        "entity_type": "PERSON",
-                        "entity_value": "Joshua Lewis",
-                        "start_position": 13,
-                        "end_position": 25,
-                    }
+                        "entity_type": "ORGANIZATION",
+                        "entity_value": "Balefire Global",
+                        "start_position": 15,
+                        "end_position": 30,
+                    },
+                    {
+                        "entity_type": "LOCATION",
+                        "entity_value": "Valadouro 3, Ubide 48145",
+                        "start_position": 34,
+                        "end_position": 58,
+                    },
                 ],
             },
         ]
@@ -35,29 +44,16 @@ def presidio_fake_pii_json():
 
 
 @patch("builtins.open", new_callable=mock_open, read_data=presidio_fake_pii_json())
-def test_PresidioFakePiiReader(mock_file):
+def test_build_data_for_presidio_fake_pii_reader(mock_file):
     reader = PresidioFakePiiReader()
     data = reader.build_data("fake_path/file.json")
-    assert data.texts == [
+    assert [item.text for item in data.items] == [
         "It's like that since 12/17/1967",
-        "A tribute to Joshua Lewis – sadly, she wasn't impressed.",
+        "The address of Balefire Global is Valadouro 3, Ubide 48145",
     ]
-    assert data.labels == [
-        [
-            {
-                "entity_type": "BIRTHDAY",
-                "entity_value": "12/17/1967",
-                "start_position": 21,
-                "end_position": 31,
-            }
-        ],
-        [
-            {
-                "entity_type": "PERSON",
-                "entity_value": "Joshua Lewis",
-                "start_position": 13,
-                "end_position": 25,
-            }
-        ],
+    assert [item.true_labels for item in data.items] == [
+        [Entity("BIRTHDAY", 21, 31)],
+        [Entity("ORGANIZATION", 15, 30), Entity("LOCATION", 34, 58)],
     ]
-    assert data.supported_entities == {"BIRTHDAY", "PERSON"}
+    assert [item.pred_labels for item in data.items] == [None, None]
+    assert data.supported_entities == {"BIRTHDAY", "ORGANIZATION", "LOCATION"}
