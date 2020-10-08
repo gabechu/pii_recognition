@@ -29,7 +29,7 @@ class TicketScore:
 
 
 def label_encoder(
-    text_length: int, entities: List[Entity], label_to_int: Dict[Any, int],
+    text_length: int, entities: List[Entity], label_groups: Set[Set[str]], ignored_labels: Set[str]
 ) -> List[int]:
     """Encode entity labels into integers.
 
@@ -46,6 +46,31 @@ def label_encoder(
     Returns:
         Integer code of the text.
     """
+    # i.e. of label_to_int
+    label_to_int = {
+        "PERSON": 1,
+        "LOCATION": 2,
+        "PER": 1,
+        "ORG": 0
+    }
+
+    label_groups = [{"PER", "PERSON"}, {"LOCATION"}]
+    ignored_labels = {"ORG"}
+
+    label_to_int = {
+        **{
+            label: i+1
+            for i, label_group in enumerate(label_groups)
+            for label in label_group
+        },
+        **{
+            label: 0
+            for label in ignored_labels
+        }
+    }
+
+
+
     # TODO: update tests
     code = [0] * text_length
     removed_labels = [key for key, value in label_to_int.items() if value == 0]
