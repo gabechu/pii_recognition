@@ -4,7 +4,7 @@ from pii_recognition.labels.schema import Entity
 
 # Two kinds of entity labels
 # 1. List[str] indicates every token has a label of entity type.
-# 2. List[Entity] indicates every text-span has a label of entity type/
+# 2. List[Entity] indicates every text-span has a label of entity type.
 TEXT_LABELS = TypeVar("TEXT_LABELS", List[str], List[Entity])
 
 
