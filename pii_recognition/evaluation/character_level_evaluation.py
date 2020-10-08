@@ -1,6 +1,5 @@
-import logging
-from dataclasses import asdict, dataclass
-from typing import Any, Dict, List, Optional
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Set
 
 from pii_recognition.evaluation.metrics import (
     compute_f_beta,
@@ -28,59 +27,56 @@ class TicketScore:
     ticket_recalls: List[EntityRecall]
 
 
+def build_label_mapping(
+    grouped_targeted_labels: List[Set[str]], ignored_labels: Set[str]
+) -> Dict[str, int]:
+    """Map entity label to an integer.
+
+    Create a dictionary for enity label mapping. Targeted labels would be mapped to a
+    positive integer, if these labels are in the same group they will be mapped to the
+    same integer. Non-targeted labels would map to zero.
+
+    Args:
+        grouped_labels: targeted entity labels. You can group these labels and each
+            group would be mapped to an integer.
+        ignored_labels: non-targeted entity labels. Those labels would be mapped to
+            zero.
+
+    Returns:
+        A mapping dictionary.
+    """
+    return {
+        **{
+            label: i + 1
+            for i, label_group in enumerate(grouped_targeted_labels)
+            for label in label_group
+        },
+        **{label: 0 for label in ignored_labels},
+    }
+
+
 def label_encoder(
-    text_length: int, entities: List[Entity], label_groups: Set[Set[str]], ignored_labels: Set[str]
+    text_length: int, entities: List[Entity], label_to_int: Dict[str, int]
 ) -> List[int]:
     """Encode entity labels into integers.
 
-    Encode a text at character level according to its entity labels as well as a mapping
-    defined by `label_to_int`. Note multi-tagging is not supported. One entity can have
-    only one label tag. Non-entities are encoded to 0 and any entities you are not
-    interested could get encoded to 0.
+    Convert characters in a text to integers according to the entity labels provided
+    and label_to_int dictionary.
 
     Args:
         text_length: length of a text.
-        entities: entities in a text identified by entity_type, start, end.
-        label_to_int: a mapping between entity labels and integers.
+        entities: entities identified in a text.
+        label_to_int: a dictionary that keys are entity labels and values are integers.
 
     Returns:
-        Integer code of the text.
+        Integer code for text.
     """
-    # i.e. of label_to_int
-    label_to_int = {
-        "PERSON": 1,
-        "LOCATION": 2,
-        "PER": 1,
-        "ORG": 0
-    }
-
-    label_groups = [{"PER", "PERSON"}, {"LOCATION"}]
-    ignored_labels = {"ORG"}
-
-    label_to_int = {
-        **{
-            label: i+1
-            for i, label_group in enumerate(label_groups)
-            for label in label_group
-        },
-        **{
-            label: 0
-            for label in ignored_labels
-        }
-    }
-
-
-
-    # TODO: update tests
     code = [0] * text_length
-    removed_labels = [key for key, value in label_to_int.items() if value == 0]
-    logging.info(
-        f"Removing the following entity types from evaluation: {removed_labels}."
-    )
 
     for span in entities:
         label_name = span.entity_type
-        if label_to_int[label_name] in removed_labels:
+        # 0 refers to ignored labels
+        if label_to_int[label_name] == 0:
             continue
         s = span.start
         e = span.end
@@ -104,7 +100,7 @@ def compute_entity_precisions_for_prediction(
     text_length: int,
     true_entities: List[Entity],
     pred_entities: List[Entity],
-    label_mapping: Dict,
+    label_mapping: Dict[str, int],
 ) -> List[EntityPrecision]:
     """Compute precision for every entity in prediction."""
     true_code: List[int] = label_encoder(text_length, true_entities, label_mapping)
@@ -112,7 +108,7 @@ def compute_entity_precisions_for_prediction(
     precisions = []
     for pred_entity in pred_entities:
         int_label: int = label_mapping[pred_entity.entity_type]
-        # 0 labels are ignored from calculation
+        # 0 refers to ignored labels
         if int_label == 0:
             continue
         pred_entity_code: List[int] = label_encoder(
@@ -136,7 +132,7 @@ def compute_entity_recalls_for_ground_truth(
     recalls = []
     for true_entity in true_entities:
         int_label: int = label_mapping[true_entity.entity_type]
-        # 0 labels are ignored from calculation
+        # 0 refers to ignored labels
         if int_label == 0:
             continue
         true_entity_code: List[int] = label_encoder(

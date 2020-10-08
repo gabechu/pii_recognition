@@ -1,6 +1,6 @@
 import os
 import time
-from typing import Dict, List, Tuple
+from typing import Dict, List
 
 from pakkr import Pipeline, returns
 from pii_recognition.constants import PROJECT_DIR
