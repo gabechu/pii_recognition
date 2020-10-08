@@ -2,9 +2,11 @@ import logging
 from dataclasses import asdict, dataclass
 from typing import Any, Dict, List, Optional
 
-from pii_recognition.evaluation.metrics import (compute_f_beta,
-                                                compute_label_precision,
-                                                compute_label_recall)
+from pii_recognition.evaluation.metrics import (
+    compute_f_beta,
+    compute_label_precision,
+    compute_label_recall,
+)
 from pii_recognition.labels.schema import Entity
 
 
@@ -22,8 +24,8 @@ class EntityRecall:
 
 @dataclass
 class TicketScore:
-    entity_precisions: List[EntityPrecision]
-    entity_recalls: List[EntityRecall]
+    ticket_precisions: List[EntityPrecision]
+    ticket_recalls: List[EntityRecall]
 
 
 def label_encoder(

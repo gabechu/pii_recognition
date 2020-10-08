@@ -5,13 +5,13 @@ from typing import Dict, List, Tuple
 from pakkr import Pipeline, returns
 from pii_recognition.constants import PROJECT_DIR
 from pii_recognition.data_readers.data import Data
-from pii_recognition.data_readers.presidio_fake_pii_reader import PresidioFakePiiReader
+from pii_recognition.data_readers.presidio_fake_pii_reader import \
+    PresidioFakePiiReader
 from pii_recognition.evaluation.character_level_evaluation import (
-    TicketScore,
-    compute_entity_precisions_for_prediction,
-    compute_entity_recalls_for_ground_truth,
-)
-from pii_recognition.recognisers.comprehend_recogniser import ComprehendRecogniser
+    TicketScore, compute_entity_precisions_for_prediction,
+    compute_entity_recalls_for_ground_truth, compute_pii_detection_f1)
+from pii_recognition.recognisers.comprehend_recogniser import \
+    ComprehendRecogniser
 
 
 @returns(data=Data)
@@ -43,7 +43,7 @@ def identify_pii_entities(data: Data, benchmark_data_file) -> Data:
     return data
 
 
-@returns(Tuple)
+@returns(List)
 def calculate_precisions_and_recalls(
     data: Data, label_mapping: Dict[str, int]
 ) -> List[TicketScore]:
@@ -61,13 +61,20 @@ def calculate_precisions_and_recalls(
     return scores
 
 
-@returns
-def rollup_scores():
-    ...
+@returns(List)
+def rollup_scores(scores: List[TicketScore]) -> List[float]:
+    f1s = []
+    for ticket_score in scores:
+        precisions = [x.precision for x in ticket_score.ticket_precisions]
+        recalls = [x.recall for x in ticket_score.ticket_recalls]
+        ticket_f1 = compute_pii_detection_f1(precisions, recalls)
+        f1s.append(ticket_f1)
+    print(f1s)
+    return f1s
 
 
 @returns
-def log_scores_to_file():
+def log_scores_to_file(scores: List[float]):
     ...
 
 
@@ -103,6 +110,6 @@ if __name__ == "__main__":
         read_benchmark_data,
         identify_pii_entities,
         calculate_precisions_and_recalls,
-        _suppress_timing_logs=False,
+        rollup_scores
     )
     pipeline(**config)
