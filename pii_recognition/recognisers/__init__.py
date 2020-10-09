@@ -8,6 +8,7 @@ def init() -> Registry:
     from .flair_recogniser import FlairRecogniser
     from .spacy_recogniser import SpacyRecogniser
     from .stanza_recogniser import StanzaRecogniser
+    from .comprehend_recogniser import ComprehendRecogniser
 
     registry = Registry[EntityRecogniser]()
     registry.register(CrfRecogniser)
@@ -15,6 +16,7 @@ def init() -> Registry:
     registry.register(FlairRecogniser)
     registry.register(SpacyRecogniser)
     registry.register(StanzaRecogniser)
+    registry.register(ComprehendRecogniser)
 
     return registry
 
