@@ -12,6 +12,7 @@ from pii_recognition.evaluation.character_level_evaluation import (
 )
 from pii_recognition.recognisers import registry as recogniser_registry
 from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
+from pii_recognition.utils import dump_to_json_file
 
 
 @returns(Data)
@@ -73,6 +74,11 @@ def calculate_aggregate_metrics(
         partial_match
     )
     return results
+
+
+@returns
+def report_results(results: Dict[str, float], dump_file: str):
+    dump_to_json_file(results, dump_file)
 
 
 def get_rollup_f1s_on_pii(

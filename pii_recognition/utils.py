@@ -45,3 +45,9 @@ def dump_yaml_file(path: str, data: Any):
 def load_json_file(path: str) -> List[Dict]:
     with open(path, "r") as f:
         return json.load(f)
+
+
+# Any is not a precise signature but it's ergonomic in practice
+def dump_to_json_file(obj: Any, path: str):
+    with open(path, "w") as f:
+        json.dump(obj, f)
