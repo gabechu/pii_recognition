@@ -81,7 +81,7 @@ def report_results(results: Dict[str, float], dump_file: str):
     dump_to_json_file(results, dump_file)
 
 
-# TODO: change f1 to fbeta
+# TODO: F1 is an accurate name, change to fbeta
 def get_rollup_f1s_on_pii(
     scores: List[TextScore], f1_beta: float, recall_threshold: Optional[float]
 ) -> List[float]:
