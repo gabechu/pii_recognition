@@ -29,7 +29,6 @@ def identify_pii_entities(
     recogniser: EntityRecogniser = recogniser_registry.create_instance(
         recogniser_name, recogniser_params
     )
-    data.items = data.items
     for item in data.items:
         item.pred_labels = recogniser.analyse(item.text, recogniser.supported_entities)
     return data
