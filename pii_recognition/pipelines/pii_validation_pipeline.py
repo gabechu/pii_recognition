@@ -1,16 +1,12 @@
 from typing import Dict, List, Optional, Set
 
 from pakkr import Pipeline, returns
-from pii_recognition.constants import ROOT_DIR
 from pii_recognition.data_readers.data import Data
-from pii_recognition.data_readers.presidio_fake_pii_reader import PresidioFakePiiReader
+from pii_recognition.data_readers.presidio_fake_pii_reader import \
+    PresidioFakePiiReader
 from pii_recognition.evaluation.character_level_evaluation import (
-    TextScore,
-    build_label_mapping,
-    compute_entity_precisions_for_prediction,
-    compute_entity_recalls_for_ground_truth,
-    compute_pii_detection_f1,
-)
+    TextScore, build_label_mapping, compute_entity_precisions_for_prediction,
+    compute_entity_recalls_for_ground_truth, compute_pii_detection_f1)
 from pii_recognition.recognisers import registry as recogniser_registry
 from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
 from pii_recognition.utils import dump_to_json_file, load_yaml_file
@@ -33,7 +29,7 @@ def identify_pii_entities(
     recogniser: EntityRecogniser = recogniser_registry.create_instance(
         recogniser_name, recogniser_params
     )
-    data.items = data.items[:10]
+    data.items = data.items
     for item in data.items:
         item.pred_labels = recogniser.analyse(item.text, recogniser.supported_entities)
     return data
@@ -111,7 +107,7 @@ def get_rollup_f1s_on_pii(
     return f1s
 
 
-def exec_pipeline(config_yaml):
+def exec_pipeline(config_yaml_file: str):
     pipeline = Pipeline(
         read_benchmark_data,
         identify_pii_entities,
@@ -121,7 +117,7 @@ def exec_pipeline(config_yaml):
         name="pii_validation_pipeline",
     )
 
-    config = load_yaml_file(config_yaml)
+    config = load_yaml_file(config_yaml_file)
     if config:
         # conversions to meet requirements on type checks
         config["grouped_targeted_labels"] = [
