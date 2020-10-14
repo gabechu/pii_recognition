@@ -391,6 +391,50 @@ def test_compute_precisions_recalls_for_no_true():
     assert recalls == []
 
 
+def test_compute_entity_precisions_for_prediction_no_true_entities():
+    actual = compute_entity_precisions_for_prediction(
+        50, [], [Entity("PER", 5, 10), Entity("LOC", 15, 25)], {"PER": 1, "LOC": 2}
+    )
+    assert actual == [
+        EntityPrecision(Entity("PER", 5, 10), 0.0),
+        EntityPrecision(Entity("LOC", 15, 25), 0.0),
+    ]
+
+
+def test_compute_entity_precisions_for_prediction_no_pred_entities():
+    actual = compute_entity_precisions_for_prediction(
+        50, [Entity("PER", 5, 10), Entity("LOC", 15, 25)], [], {"PER": 1, "LOC": 2}
+    )
+    assert actual == []
+
+
+def test_compute_entity_precisions_for_prediction_no_true_no_pred_entities():
+    actual = compute_entity_precisions_for_prediction(50, [], [], {"PER": 1, "LOC": 2})
+    assert actual == []
+
+
+def test_compute_entity_recalls_for_ground_truth_no_true_entities():
+    actual = compute_entity_recalls_for_ground_truth(
+        50, [], [Entity("PER", 5, 10), Entity("LOC", 15, 25)], {"PER": 1, "LOC": 2}
+    )
+    assert actual == []
+
+
+def test_compute_entity_recalls_for_ground_truth_no_pred_entities():
+    actual = compute_entity_recalls_for_ground_truth(
+        50, [Entity("PER", 5, 10), Entity("LOC", 15, 25)], [], {"PER": 1, "LOC": 2}
+    )
+    assert actual == [
+        EntityRecall(Entity("PER", 5, 10), 0.0),
+        EntityRecall(Entity("LOC", 15, 25), 0.0),
+    ]
+
+
+def test_compute_entity_recalls_for_ground_truth_no_true_pred_entities():
+    actual = compute_entity_recalls_for_ground_truth(50, [], [], {"PER": 1, "LOC": 2})
+    assert actual == []
+
+
 def test_compute_pii_detection_f1_for_no_recall_threshold_f1_is_one():
     precisions = [1.0, 1.0]
     recalls = [1.0, 1.0]
