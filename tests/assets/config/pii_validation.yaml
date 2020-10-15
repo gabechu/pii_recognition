@@ -1,0 +1,41 @@
+benchmark_data_file: tests/assets/datasets/presidio_fake_pii/test.json
+recogniser_name: ComprehendRecogniser
+recogniser_params:
+  supported_entities:
+    - COMMERCIAL_ITEM
+    - DATE
+    - EVENT
+    - LOCATION
+    - ORGANIZATION
+    - OTHER
+    - PERSON
+    - QUANTITY
+    - TITLE
+  supported_languages: 
+    - en
+grouped_targeted_labels:
+  - 
+    - OTHER
+    - US_SSN
+    - IP_ADDRESS
+    - PHONE_NUMBER
+    - CREDIT_CARD
+    - URL
+    - EMAIL
+  - 
+    - BIRTHDAY
+    - DATE
+  - 
+    - LOCATION
+  - 
+    - PERSON
+nontargeted_labels:
+  - TITLE
+  - ORGANIZATION
+  - IBAN
+  - NATIONALITY
+  - EVENT
+  - QUANTITY
+  - COMMERCIAL_ITEM
+dump_file: pii_recognition/experiments/pii_validation/reports/comprehend_scores.json
+f1_beta: 1.0
