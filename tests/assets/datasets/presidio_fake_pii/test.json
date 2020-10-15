@@ -1,0 +1,638 @@
+[
+    {
+        "full_text": "Please update billing addrress with Markt 84, MÜLLNERN 9123 for this card: 5550253262199449",
+        "masked": null,
+        "spans": [
+            {
+                "entity_type": "LOCATION",
+                "entity_value": "Markt 84, MÜLLNERN 9123",
+                "start_position": 36,
+                "end_position": 59
+            },
+            {
+                "entity_type": "CREDIT_CARD",
+                "entity_value": "5550253262199449",
+                "start_position": 75,
+                "end_position": 91
+            }
+        ],
+        "tokens": [
+            {
+                "text": "Please",
+                "idx": 0,
+                "tag_": "UH",
+                "pos_": "INTJ",
+                "dep_": "intj",
+                "lemma_": "please",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "update",
+                "idx": 7,
+                "tag_": "VB",
+                "pos_": "VERB",
+                "dep_": "ROOT",
+                "lemma_": "update",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "billing",
+                "idx": 14,
+                "tag_": "NN",
+                "pos_": "NOUN",
+                "dep_": "compound",
+                "lemma_": "billing",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "addrress",
+                "idx": 22,
+                "tag_": "NN",
+                "pos_": "NOUN",
+                "dep_": "dobj",
+                "lemma_": "addrress",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "with",
+                "idx": 31,
+                "tag_": "IN",
+                "pos_": "ADP",
+                "dep_": "prep",
+                "lemma_": "with",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "Markt",
+                "idx": 36,
+                "tag_": "NNP",
+                "pos_": "PROPN",
+                "dep_": "pobj",
+                "lemma_": "Markt",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "84",
+                "idx": 42,
+                "tag_": "CD",
+                "pos_": "NUM",
+                "dep_": "nummod",
+                "lemma_": "84",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": ",",
+                "idx": 44,
+                "tag_": ",",
+                "pos_": "PUNCT",
+                "dep_": "punct",
+                "lemma_": ",",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "MÜLLNERN",
+                "idx": 46,
+                "tag_": "NNP",
+                "pos_": "PROPN",
+                "dep_": "appos",
+                "lemma_": "MÜLLNERN",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "9123",
+                "idx": 55,
+                "tag_": "CD",
+                "pos_": "NUM",
+                "dep_": "nummod",
+                "lemma_": "9123",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "for",
+                "idx": 60,
+                "tag_": "IN",
+                "pos_": "ADP",
+                "dep_": "prep",
+                "lemma_": "for",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "this",
+                "idx": 64,
+                "tag_": "DT",
+                "pos_": "DET",
+                "dep_": "det",
+                "lemma_": "this",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "card",
+                "idx": 69,
+                "tag_": "NN",
+                "pos_": "NOUN",
+                "dep_": "pobj",
+                "lemma_": "card",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": ":",
+                "idx": 73,
+                "tag_": ":",
+                "pos_": "PUNCT",
+                "dep_": "punct",
+                "lemma_": ":",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "5550253262199449",
+                "idx": 75,
+                "tag_": "CD",
+                "pos_": "NUM",
+                "dep_": "appos",
+                "lemma_": "5550253262199449",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            }
+        ],
+        "tags": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "B-LOCATION",
+            "I-LOCATION",
+            "I-LOCATION",
+            "I-LOCATION",
+            "L-LOCATION",
+            "O",
+            "O",
+            "O",
+            "O",
+            "U-CREDIT_CARD"
+        ],
+        "template_id": null,
+        "metadata": {
+            "Gender": "male",
+            "NameSet": "Polish",
+            "Country": "Nigeria",
+            "Lowercase": false,
+            "Template#": 8
+        }
+    },
+    {
+        "full_text": "My name appears incorrectly on credit card statement could you please correct it to Ms. Aybika Rushisvili?",
+        "masked": null,
+        "spans": [
+            {
+                "entity_type": "TITLE",
+                "entity_value": "Ms.",
+                "start_position": 84,
+                "end_position": 87
+            },
+            {
+                "entity_type": "PERSON",
+                "entity_value": "Aybika Rushisvili",
+                "start_position": 88,
+                "end_position": 105
+            }
+        ],
+        "tokens": [
+            {
+                "text": "My",
+                "idx": 0,
+                "tag_": "PRP$",
+                "pos_": "DET",
+                "dep_": "poss",
+                "lemma_": "-PRON-",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "name",
+                "idx": 3,
+                "tag_": "NN",
+                "pos_": "NOUN",
+                "dep_": "nsubj",
+                "lemma_": "name",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "appears",
+                "idx": 8,
+                "tag_": "VBZ",
+                "pos_": "VERB",
+                "dep_": "ccomp",
+                "lemma_": "appear",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "incorrectly",
+                "idx": 16,
+                "tag_": "RB",
+                "pos_": "ADV",
+                "dep_": "advmod",
+                "lemma_": "incorrectly",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "on",
+                "idx": 28,
+                "tag_": "IN",
+                "pos_": "ADP",
+                "dep_": "prep",
+                "lemma_": "on",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "credit",
+                "idx": 31,
+                "tag_": "NN",
+                "pos_": "NOUN",
+                "dep_": "compound",
+                "lemma_": "credit",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "card",
+                "idx": 38,
+                "tag_": "NN",
+                "pos_": "NOUN",
+                "dep_": "compound",
+                "lemma_": "card",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "statement",
+                "idx": 43,
+                "tag_": "NN",
+                "pos_": "NOUN",
+                "dep_": "pobj",
+                "lemma_": "statement",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "could",
+                "idx": 53,
+                "tag_": "MD",
+                "pos_": "VERB",
+                "dep_": "aux",
+                "lemma_": "could",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "you",
+                "idx": 59,
+                "tag_": "PRP",
+                "pos_": "PRON",
+                "dep_": "nsubj",
+                "lemma_": "-PRON-",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "please",
+                "idx": 63,
+                "tag_": "UH",
+                "pos_": "INTJ",
+                "dep_": "intj",
+                "lemma_": "please",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "correct",
+                "idx": 70,
+                "tag_": "VB",
+                "pos_": "VERB",
+                "dep_": "ROOT",
+                "lemma_": "correct",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "it",
+                "idx": 78,
+                "tag_": "PRP",
+                "pos_": "PRON",
+                "dep_": "dobj",
+                "lemma_": "-PRON-",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "to",
+                "idx": 81,
+                "tag_": "IN",
+                "pos_": "ADP",
+                "dep_": "prep",
+                "lemma_": "to",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "Ms.",
+                "idx": 84,
+                "tag_": "NNP",
+                "pos_": "PROPN",
+                "dep_": "compound",
+                "lemma_": "Ms.",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "Aybika",
+                "idx": 88,
+                "tag_": "NNP",
+                "pos_": "PROPN",
+                "dep_": "compound",
+                "lemma_": "Aybika",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "Rushisvili",
+                "idx": 95,
+                "tag_": "NNP",
+                "pos_": "PROPN",
+                "dep_": "pobj",
+                "lemma_": "Rushisvili",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "?",
+                "idx": 105,
+                "tag_": ".",
+                "pos_": "PUNCT",
+                "dep_": "punct",
+                "lemma_": "?",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            }
+        ],
+        "tags": [
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "U-TITLE",
+            "B-PERSON",
+            "L-PERSON",
+            "O"
+        ],
+        "template_id": null,
+        "metadata": {
+            "Gender": "female",
+            "NameSet": "Chechen (Latin)",
+            "Country": "Paraguay",
+            "Lowercase": false,
+            "Template#": 28
+        }
+    },
+    {
+        "full_text": "A tribute to Joshua Lewis – sadly, she wasn't impressed.",
+        "masked": null,
+        "spans": [
+            {
+                "entity_type": "PERSON",
+                "entity_value": "Joshua Lewis",
+                "start_position": 13,
+                "end_position": 25
+            }
+        ],
+        "tokens": [
+            {
+                "text": "A",
+                "idx": 0,
+                "tag_": "DT",
+                "pos_": "DET",
+                "dep_": "det",
+                "lemma_": "a",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "tribute",
+                "idx": 2,
+                "tag_": "NN",
+                "pos_": "NOUN",
+                "dep_": "nsubj",
+                "lemma_": "tribute",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "to",
+                "idx": 10,
+                "tag_": "IN",
+                "pos_": "ADP",
+                "dep_": "prep",
+                "lemma_": "to",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "Joshua",
+                "idx": 13,
+                "tag_": "NNP",
+                "pos_": "PROPN",
+                "dep_": "compound",
+                "lemma_": "Joshua",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "Lewis",
+                "idx": 20,
+                "tag_": "NNP",
+                "pos_": "PROPN",
+                "dep_": "pobj",
+                "lemma_": "Lewis",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "–",
+                "idx": 26,
+                "tag_": ":",
+                "pos_": "PUNCT",
+                "dep_": "punct",
+                "lemma_": "–",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "sadly",
+                "idx": 28,
+                "tag_": "RB",
+                "pos_": "ADV",
+                "dep_": "advmod",
+                "lemma_": "sadly",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": ",",
+                "idx": 33,
+                "tag_": ",",
+                "pos_": "PUNCT",
+                "dep_": "punct",
+                "lemma_": ",",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "she",
+                "idx": 35,
+                "tag_": "PRP",
+                "pos_": "PRON",
+                "dep_": "nsubj",
+                "lemma_": "-PRON-",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "was",
+                "idx": 39,
+                "tag_": "VBD",
+                "pos_": "AUX",
+                "dep_": "ROOT",
+                "lemma_": "be",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "n't",
+                "idx": 42,
+                "tag_": "RB",
+                "pos_": "PART",
+                "dep_": "neg",
+                "lemma_": "not",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": "impressed",
+                "idx": 46,
+                "tag_": "JJ",
+                "pos_": "ADJ",
+                "dep_": "acomp",
+                "lemma_": "impressed",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            },
+            {
+                "text": ".",
+                "idx": 55,
+                "tag_": ".",
+                "pos_": "PUNCT",
+                "dep_": "punct",
+                "lemma_": ".",
+                "_": {
+                    "is_in_vocabulary": false
+                }
+            }
+        ],
+        "tags": [
+            "O",
+            "O",
+            "O",
+            "B-PERSON",
+            "L-PERSON",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O",
+            "O"
+        ],
+        "template_id": null,
+        "metadata": {
+            "Gender": "male",
+            "NameSet": "England/Wales",
+            "Country": "Italy",
+            "Lowercase": false,
+            "Template#": 100
+        }
+    }
+]
