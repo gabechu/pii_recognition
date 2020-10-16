@@ -1,12 +1,17 @@
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional, Set, Union
 
 from pakkr import Pipeline, returns
 from pii_recognition.data_readers.data import Data
-from pii_recognition.data_readers.presidio_fake_pii_reader import \
-    PresidioFakePiiReader
+from pii_recognition.data_readers.presidio_fake_pii_reader import PresidioFakePiiReader
 from pii_recognition.evaluation.character_level_evaluation import (
-    TextScore, build_label_mapping, compute_entity_precisions_for_prediction,
-    compute_entity_recalls_for_ground_truth, compute_pii_detection_f1)
+    EntityPrecision,
+    EntityRecall,
+    TextScore,
+    build_label_mapping,
+    compute_entity_precisions_for_prediction,
+    compute_entity_recalls_for_ground_truth,
+    compute_pii_detection_f1,
+)
 from pii_recognition.recognisers import registry as recogniser_registry
 from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
 from pii_recognition.utils import dump_to_json_file, load_yaml_file
@@ -106,6 +111,48 @@ def get_rollup_f1s_on_pii(
             )
         f1s.append(f1)
     return f1s
+
+
+def get_rollup_f1s_on_every_type(
+    scores: List[TextScore], f1_beta: float, grouped_targeted_labels: List[Set[str]]
+):
+    scores = {
+        tuple(label_set): {"precisions": [], "recalls": [], "f1": None}
+        for label_set in grouped_targeted_labels
+    }
+
+    def update_scores_dict(new_value: Union[EntityPrecision, EntityRecall]):
+        entity_label = new_value.entity.entity_type
+        for label_set in scores.keys():
+            if type(new_value) == EntityPrecision:
+                if entity_label in label_set:
+                    new_value[label_set]["precisions"].append(new_value.precision)
+            if type(new_value) == EntityRecall:
+                if entity_label in label_set:
+                    new_value[label_set]["recalls"].append(new_value.recall)
+
+    # appending scores
+    for text_score in scores:
+        for precision in text_score.precisions:
+            update_scores_dict(precision)
+
+        for recall in text_score.recalls:
+            update_scores_dict(recall)
+
+    # average precisions and recalls
+    for key, value in scores.items():
+        if not value["precisions"] and value["recalls"]:
+            value["f1"] = 0.0
+        elif value["precisions"] and not value["recalls"]:
+            value["f1"] = 0.0
+        elif not value["precisions"] and not value["recalls"]:
+            value["f1"] = 1.0
+        else:
+            value["f1"] = compute_pii_detection_f1(
+                value["precisions"], value["recalls"]
+            )
+
+    return {label_set: value["f1"] for label_set, value in scores.items()}
 
 
 def exec_pipeline(config_yaml_file: str):
