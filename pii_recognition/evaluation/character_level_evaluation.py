@@ -155,7 +155,7 @@ def compute_pii_detection_f1(
     precisions: List[float],
     recalls: List[float],
     recall_threshold: Optional[float] = None,
-    beta: float = 1
+    beta: float = 1,
 ) -> float:
     """Evaluate performance of PII detection with F1.
 
@@ -181,11 +181,17 @@ def compute_pii_detection_f1(
             )
 
     if not precisions and not recalls:
-        raise ValueError("You are passing empty precisions and recalls lists!")
+        # empty precisions and recalls mean that
+        # there is no true entity and the system predicts nothing
+        return 1.0
     if not precisions:
-        raise ValueError("You are passing empty precisions list!")
+        # empty precisions mean that
+        # there are true entities but the system predicts nothing
+        return 0.0
     elif not recalls:
-        raise ValueError("You are passing empty recalls list!")
+        # empty recalls mean that
+        # there is no true entity but the system predicts something
+        return 0.0
 
     if recall_threshold:
         recalls = [1.0 if item >= recall_threshold else item for item in recalls]

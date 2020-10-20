@@ -429,21 +429,18 @@ def test_compute_pii_detection_f1_for_invalid_threshold():
 
 
 def test_compute_pii_detection_f1_for_empty_precisions():
-    with pytest.raises(ValueError) as err:
-        compute_pii_detection_f1([], [0.0], recall_threshold=0.5)
-    assert str(err.value) == "You are passing empty precisions list!"
+    actual = compute_pii_detection_f1([], [0.0])
+    assert actual == 0.0
 
 
 def test_compute_pii_detection_f1_for_empty_recalls():
-    with pytest.raises(ValueError) as err:
-        compute_pii_detection_f1([0.0], [], recall_threshold=0.5)
-    assert str(err.value) == "You are passing empty recalls list!"
+    actual = compute_pii_detection_f1([0.0], [])
+    assert actual == 0.0
 
 
 def test_compute_pii_detection_f1_for_empty_precisions_recalls():
-    with pytest.raises(ValueError) as err:
-        compute_pii_detection_f1([], [], recall_threshold=0.5)
-    assert str(err.value) == "You are passing empty precisions and recalls lists!"
+    actual = compute_pii_detection_f1([], [])
+    assert actual == 1.0
 
 
 def test_build_label_mapping_with_nontargeted_labels():
@@ -459,3 +456,47 @@ def test_build_label_mapping_without_nontargeted_labels():
 
     actual = build_label_mapping(grouped_targeted_labels)
     assert actual == {"PERSON": 1, "PER": 1, "LOCATION": 2, "DATE": 3}
+
+
+def test_compute_entity_precisions_for_prediction_no_true_entities():
+    actual = compute_entity_precisions_for_prediction(
+        50, [], [Entity("PER", 5, 10), Entity("LOC", 15, 25)], {"PER": 1, "LOC": 2}
+    )
+    assert actual == [
+        EntityPrecision(Entity("PER", 5, 10), 0.0),
+        EntityPrecision(Entity("LOC", 15, 25), 0.0),
+    ]
+
+
+def test_compute_entity_precisions_for_prediction_no_pred_entities():
+    actual = compute_entity_precisions_for_prediction(
+        50, [Entity("PER", 5, 10), Entity("LOC", 15, 25)], [], {"PER": 1, "LOC": 2}
+    )
+    assert actual == []
+
+
+def test_compute_entity_precisions_for_prediction_no_true_no_pred_entities():
+    actual = compute_entity_precisions_for_prediction(50, [], [], {"PER": 1, "LOC": 2})
+    assert actual == []
+
+
+def test_compute_entity_recalls_for_ground_truth_no_true_entities():
+    actual = compute_entity_recalls_for_ground_truth(
+        50, [], [Entity("PER", 5, 10), Entity("LOC", 15, 25)], {"PER": 1, "LOC": 2}
+    )
+    assert actual == []
+
+
+def test_compute_entity_recalls_for_ground_truth_no_pred_entities():
+    actual = compute_entity_recalls_for_ground_truth(
+        50, [Entity("PER", 5, 10), Entity("LOC", 15, 25)], [], {"PER": 1, "LOC": 2}
+    )
+    assert actual == [
+        EntityRecall(Entity("PER", 5, 10), 0.0),
+        EntityRecall(Entity("LOC", 15, 25), 0.0),
+    ]
+
+
+def test_compute_entity_recalls_for_ground_truth_no_true_pred_entities():
+    actual = compute_entity_recalls_for_ground_truth(50, [], [], {"PER": 1, "LOC": 2})
+    assert actual == []
