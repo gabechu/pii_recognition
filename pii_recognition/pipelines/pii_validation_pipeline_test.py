@@ -9,9 +9,8 @@ from pii_recognition.labels.schema import Entity
 from pytest import fixture
 
 from .pii_validation_pipeline import (
-    calculate_aggregate_metrics,
     calculate_precisions_and_recalls,
-    get_rollup_f1s_on_pii,
+    get_rollup_fscore_on_pii,
     identify_pii_entities,
 )
 
@@ -147,19 +146,11 @@ def test_calculate_precisions_and_recalls_with_nontargeted_labels(data):
     )
 
 
-def test_get_rollup_f1s_on_pii_no_threshold(scores):
-    actual = get_rollup_f1s_on_pii(scores, f1_beta=1, recall_threshold=None)
-    assert actual == [0.0, 0.7]
+def test_get_rollup_fscore_on_pii_no_threshold(scores):
+    actual = get_rollup_fscore_on_pii(scores, fbeta=1, recall_threshold=None)
+    assert actual == 0.35
 
 
-def test_get_rollup_f1s_on_pii_threshold(scores):
-    actual = get_rollup_f1s_on_pii(scores, f1_beta=1, recall_threshold=0.4)
-    assert actual == [0.0, 14 / 15]
-
-
-@patch("pii_recognition.pipelines.pii_validation_pipeline.get_rollup_f1s_on_pii")
-def test_calculate_aggregate_metrics(mock_pii_f1s):
-    mock_pii_f1s.return_value = [0.5, 0.5]
-
-    actual = calculate_aggregate_metrics([])
-    assert actual == {"exact_match_f1": 0.5, "partial_match_f1_threshold_at_50%": 0.5}
+def test_get_rollup_fscore_on_pii_threshold(scores):
+    actual = get_rollup_fscore_on_pii(scores, fbeta=1, recall_threshold=0.4)
+    assert actual == 7 / 15

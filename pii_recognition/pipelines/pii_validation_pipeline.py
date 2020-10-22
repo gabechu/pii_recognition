@@ -8,7 +8,7 @@ from pii_recognition.evaluation.character_level_evaluation import (
     build_label_mapping,
     compute_entity_precisions_for_prediction,
     compute_entity_recalls_for_ground_truth,
-    compute_pii_detection_f1,
+    compute_pii_detection_fscore,
 )
 from pii_recognition.recognisers import registry as recogniser_registry
 from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
@@ -67,20 +67,15 @@ def calculate_precisions_and_recalls(
 
 @returns(Dict)
 def calculate_aggregate_metrics(
-    scores: List[TextScore], f1_beta: float = 1.0
+    scores: List[TextScore], fbeta: float = 1.0
 ) -> Dict[str, float]:
     round_ndigits = 4
     results = dict()
-
-    # This is not final, it has been changed slightly in another PR
-    exact_match = get_rollup_f1s_on_pii(scores, f1_beta, recall_threshold=None)
     results["exact_match_f1"] = round(
-        sum(exact_match) / len(exact_match), round_ndigits
+        get_rollup_fscore_on_pii(scores, fbeta, recall_threshold=None), round_ndigits
     )
-
-    partial_match = get_rollup_f1s_on_pii(scores, f1_beta, recall_threshold=0.5)
     results["partial_match_f1_threshold_at_50%"] = round(
-        sum(partial_match) / len(partial_match), round_ndigits
+        get_rollup_fscore_on_pii(scores, fbeta, recall_threshold=0.5), round_ndigits
     )
     return results
 
@@ -90,17 +85,38 @@ def report_results(results: Dict[str, float], dump_file: str):
     dump_to_json_file(results, dump_file)
 
 
-# TODO: F1 is an accurate name, change to fbeta
-def get_rollup_f1s_on_pii(
-    scores: List[TextScore], f1_beta: float, recall_threshold: Optional[float]
-) -> List[float]:
-    f1s = []
+def get_rollup_fscore_on_pii(
+    scores: List[TextScore], fbeta: float, recall_threshold: Optional[float]
+) -> float:
+    """Calculate f score on PII recognition.
+
+    A single score, f score, will be calculate to indicate how a system did on
+    predicting PII entities. Recall thresholding is supported, if the system can
+    recognise a certain portion of an entity greater than the threshold, that
+    entity then will be considered identified.
+
+    Args:
+        scores: a list of text scores providing info including precisions and recalls.
+        fbeta: beta value for f score.
+        recall_threshold: a float between 0 and 1. Any recall value that is greater
+            than or equals to the threshold would be rounded up to 1.
+
+    Returns:
+        A f score represents performance of a system.
+    """
+    fscores = []
     for text_score in scores:
         precisions = [p.precision for p in text_score.precisions]
         recalls = [r.recall for r in text_score.recalls]
-        f1 = compute_pii_detection_f1(precisions, recalls, recall_threshold, f1_beta)
-        f1s.append(f1)
-    return f1s
+        f = compute_pii_detection_fscore(precisions, recalls, recall_threshold, fbeta)
+        fscores.append(f)
+
+    if fscores:
+        return sum(fscores) / len(fscores)
+    else:
+        # The only possibility to have empty fscores is that argument "scores"
+        # is empty. In this case, we assign f score to 0.
+        return 0.0
 
 
 def exec_pipeline(config_yaml_file: str):

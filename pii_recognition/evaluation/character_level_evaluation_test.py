@@ -6,7 +6,7 @@ from pii_recognition.evaluation.character_level_evaluation import (
     build_label_mapping,
     compute_entity_precisions_for_prediction,
     compute_entity_recalls_for_ground_truth,
-    compute_pii_detection_f1,
+    compute_pii_detection_fscore,
     label_encoder,
     EntityRecall,
     EntityPrecision,
@@ -391,55 +391,55 @@ def test_compute_precisions_recalls_for_no_true():
     assert recalls == []
 
 
-def test_compute_pii_detection_f1_for_no_recall_threshold_f1_is_one():
+def test_compute_pii_detection_fscore_for_no_recall_threshold_fscore_is_one():
     precisions = [1.0, 1.0]
     recalls = [1.0, 1.0]
-    actual = compute_pii_detection_f1(precisions, recalls)
+    actual = compute_pii_detection_fscore(precisions, recalls)
     assert actual == 1.0
 
 
-def test_compute_pii_detection_f1_for_no_recall_threshold_f1_is_zero():
+def test_compute_pii_detection_fscore_for_no_recall_threshold_fscore_is_zero():
     precisions = [0.0, 0.0]
     recalls = [0.0, 0.0]
-    actual = compute_pii_detection_f1(precisions, recalls)
+    actual = compute_pii_detection_fscore(precisions, recalls)
     assert actual == 0.0
 
 
-def test_compute_pii_detection_f1_for_no_recall_threshold():
+def test_compute_pii_detection_fscore_for_no_recall_threshold():
     precisions = [0.4, 0.8]
     recalls = [0.2, 0.7]
-    actual = compute_pii_detection_f1(precisions, recalls)
+    actual = compute_pii_detection_fscore(precisions, recalls)
     assert_almost_equal(actual, 0.5142857)
 
 
-def test_compute_pii_detection_f1_with_recall_threshold():
+def test_compute_pii_detection_fscore_with_recall_threshold():
     precisions = [0.4, 0.8, 0.9]
     recalls = [0.2, 0.51, 0.7]
-    actual = compute_pii_detection_f1(precisions, recalls, recall_threshold=0.5)
+    actual = compute_pii_detection_fscore(precisions, recalls, recall_threshold=0.5)
     assert_almost_equal(actual, 0.716279)
 
 
-def test_compute_pii_detection_f1_for_invalid_threshold():
+def test_compute_pii_detection_fscore_for_invalid_threshold():
     precisions = recalls = [0.0]
     with pytest.raises(ValueError) as err:
-        compute_pii_detection_f1(precisions, recalls, recall_threshold=2.0)
+        compute_pii_detection_fscore(precisions, recalls, recall_threshold=2.0)
     assert str(err.value) == (
         "Invalid threshold! Recall threshold must between 0 and 1 but got 2.0"
     )
 
 
-def test_compute_pii_detection_f1_for_empty_precisions():
-    actual = compute_pii_detection_f1([], [0.0])
+def test_compute_pii_detection_fscore_for_empty_precisions():
+    actual = compute_pii_detection_fscore([], [0.0])
     assert actual == 0.0
 
 
-def test_compute_pii_detection_f1_for_empty_recalls():
-    actual = compute_pii_detection_f1([0.0], [])
+def test_compute_pii_detection_fscore_for_empty_recalls():
+    actual = compute_pii_detection_fscore([0.0], [])
     assert actual == 0.0
 
 
-def test_compute_pii_detection_f1_for_empty_precisions_recalls():
-    actual = compute_pii_detection_f1([], [])
+def test_compute_pii_detection_fscore_for_empty_precisions_recalls():
+    actual = compute_pii_detection_fscore([], [])
     assert actual == 1.0
 
 
