@@ -22,6 +22,7 @@ def test_registry_for_comprehend(mock_analyse, mock_session):
             "TITLE",
         ],
         "supported_languages": ["en"],
+        "model_name": "pii",
     }
 
     recogniser = recogniser_registry.create_instance(recogniser_name, recogniser_params)

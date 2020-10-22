@@ -1,9 +1,19 @@
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 import pytest
-
+from moto import mock_cognitoidentity
 from pii_recognition.labels.schema import Entity
 from pii_recognition.recognisers.comprehend_recogniser import ComprehendRecogniser
+
+
+@pytest.fixture
+def text():
+    return (
+        "Could you please email me the statement for laste month , "
+        "my credit card number is 5467800309398046? Also, how do I "
+        "change my address to 23 Settlement Road, WINNINDOO 3858 for "
+        "post mail?"
+    )
 
 
 @pytest.fixture
@@ -39,51 +49,77 @@ def fake_response():
     }
 
 
-@patch("pii_recognition.recognisers.comprehend_recogniser.config_cognito_session")
-def test_comprehend_recogniser_analyse(mock_session, fake_response):
-    mocked_comprehend = MagicMock()
-    mocked_comprehend.detect_entities.return_value = fake_response
-
-    fake_text = (
-        "Could you please email me the statement for laste month , "
-        "my credit card number is 5467800309398046? Also, how do I "
-        "change my address to 23 Settlement Road, WINNINDOO 3858 for "
-        "post mail?"
+@mock_cognitoidentity
+def test_comprehend_recogniser_for_initialisation_ner_model():
+    actual = ComprehendRecogniser(
+        supported_entities=["test"], supported_languages=["test"], model_name="ner"
     )
+    assert actual.model_name == "ner"
+    assert actual.supported_entities == ["test"]
+    assert actual.supported_languages == ["test"]
+
+
+@mock_cognitoidentity
+def test_comprehend_recogniser_for_initialisation_pii_model():
+    actual = ComprehendRecogniser(
+        supported_entities=["test"], supported_languages=["test"], model_name="pii"
+    )
+    assert actual.model_name == "pii"
+    assert actual.supported_entities == ["test"]
+    assert actual.supported_languages == ["test"]
+
+
+@mock_cognitoidentity
+def test_comprehend_recogniser_for_initialisation_invalid_model():
+    with pytest.raises(ValueError) as err:
+        ComprehendRecogniser(
+            supported_entities=["test"],
+            supported_languages=["test"],
+            model_name="invalid_model",
+        )
+    assert str(err.value) == (
+        "Available model names are: ['ner', 'pii'] but got model named invalid_model"
+    )
+
+
+@mock_cognitoidentity
+def test_comprehend_recogniser_analyse(text, fake_response):
+    # mock API call
+    mock_model = MagicMock()
+    mock_model.return_value = fake_response
 
     recogniser = ComprehendRecogniser(
-        supported_entities=[
-            "COMMERCIAL_ITEM",
-            "DATE",
-            "EVENT",
-            "LOCATION",
-            "ORGANIZATION",
-            "OTHER",
-            "PERSON",
-            "QUANTITY",
-            "TITLE",
-        ],
+        supported_entities=["LOCATION", "OTHER"],
         supported_languages=["en"],
+        model_name="ner",
     )
-    recogniser.comprehend = mocked_comprehend
+    recogniser.model_func = mock_model
 
-    spans = recogniser.analyse(fake_text, recogniser.supported_entities)
+    spans = recogniser.analyse(text, recogniser.supported_entities)
     assert spans == [Entity("OTHER", 83, 99), Entity("LOCATION", 137, 171)]
 
-    spans = recogniser.analyse(fake_text, ["OTHER"])
+    spans = recogniser.analyse(text, ["OTHER"])
     assert spans == [
         Entity("OTHER", 83, 99),
     ]
 
-    spans = recogniser.analyse(fake_text, ["LOCATION"])
+    spans = recogniser.analyse(text, ["LOCATION"])
     assert spans == [Entity("LOCATION", 137, 171)]
+
+
+@mock_cognitoidentity
+def test_comprehend_recogniser_analyse_for_non_supported_entities(text):
+    recogniser = ComprehendRecogniser(
+        supported_entities=["LOCATION", "OTHER"],
+        supported_languages=["en"],
+        model_name="pii",
+    )
 
     with pytest.raises(AssertionError) as err:
         recogniser.analyse(
-            fake_text, entities=["THOSE", "ENTITIES", "NOT", "SUPPORTED"]
+            text, entities=["THOSE", "ENTITIES", "ARE", "NOT", "SUPPORTED"]
         )
     assert str(err.value) == (
-        "Only support ['COMMERCIAL_ITEM', 'DATE', 'EVENT', 'LOCATION', 'ORGANIZATION', "
-        "'OTHER', 'PERSON', 'QUANTITY', 'TITLE'], but got ['THOSE', 'ENTITIES', 'NOT', "
-        "'SUPPORTED']"
+        "Only support ['LOCATION', 'OTHER'], but got "
+        "['THOSE', 'ENTITIES', 'ARE', 'NOT', 'SUPPORTED']"
     )

@@ -45,8 +45,6 @@ class FlairRecogniser(EntityRecogniser):
         span_labels = []
         for entity in sentence.get_spans("ner"):
             if entity.tag in entities:
-                span_labels.append(
-                    Entity(entity.tag, entity.start_pos, entity.end_pos)
-                )
+                span_labels.append(Entity(entity.tag, entity.start_pos, entity.end_pos))
 
         return span_labels

@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Callable, List
 
 from boto3.session import Session
 from botocore.client import BaseClient
@@ -13,10 +13,31 @@ IDENTITY_POOL_ID = config("IDENTITY_POOL_ID")
 AWS_REGION = "us-west-2"
 
 
+class ModelMapping(dict):
+    def __getitem__(self, key: str) -> Callable:
+        try:
+            return super().__getitem__(key)
+        except KeyError:
+            key_list = list(super().keys())
+            raise ValueError(
+                f"Available model names are: {key_list} but got model named {key}"
+            )
+
+
 class ComprehendRecogniser(EntityRecogniser):
-    def __init__(self, supported_entities: List[str], supported_languages: List[str]):
+    def __init__(
+        self,
+        supported_entities: List[str],
+        supported_languages: List[str],
+        model_name: str,
+    ):
         sess = config_cognito_session(IDENTITY_POOL_ID, AWS_REGION)
-        self.comprehend = self._initiate_comprehend(sess)
+        comprehend = self._initiate_comprehend(sess)
+        model_mapping = ModelMapping(
+            ner=comprehend.detect_entities, pii=comprehend.detect_pii_entities
+        )
+        self.model_func = model_mapping[model_name]
+        self.model_name = model_name
 
         super().__init__(
             supported_entities=supported_entities,
@@ -26,23 +47,23 @@ class ComprehendRecogniser(EntityRecogniser):
     def _initiate_comprehend(self, session: Session) -> BaseClient:
         return session.client(service_name="comprehend", region_name=AWS_REGION)
 
-    def analyse(self, text: str, entities: List[str]) -> Optional[List[Entity]]:
+    def analyse(self, text: str, entities: List[str]) -> List[Entity]:
         self.validate_entities(entities)
 
         # TODO: Add multilingual support
+        # based on boto3 Comprehend doc Comprehend supports
+        # 'en'|'es'|'fr'|'de'|'it'|'pt'|'ar'|'hi'|'ja'|'ko'|'zh'|'zh-TW'
         DEFAULT_LANG = "en"
 
-        response = self.comprehend.detect_entities(Text=text, LanguageCode=DEFAULT_LANG)
-        predicted_entities = response["Entities"]
+        response = self.model_func(Text=text, LanguageCode=DEFAULT_LANG)
 
-        # Enhancement: filter on comprehend prediction scores
+        # parse response
+        predicted_entities = response["Entities"]
+        # Remove entities we are not interested
         filtered = filter(lambda ent: ent["Type"] in entities, predicted_entities)
         span_labels = map(
             lambda ent: Entity(ent["Type"], ent["BeginOffset"], ent["EndOffset"]),
             filtered,
         )
 
-        results = list(span_labels)
-        if results:
-            return results
-        return None
+        return list(span_labels)
