@@ -24,6 +24,7 @@ jobs:
       - name: ${{ matrix.task }}
         run: |
           pip install poetry
+          poetry -V
           poetry install
           poetry config virtualenvs.in-project true
           poetry run $${{ matrix.run }}
