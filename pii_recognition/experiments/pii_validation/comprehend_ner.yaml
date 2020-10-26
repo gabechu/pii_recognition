@@ -13,6 +13,7 @@ recogniser_params:
     - TITLE
   supported_languages: 
     - en
+  model_name: ner
 grouped_targeted_labels:
   - 
     - OTHER
@@ -37,5 +38,5 @@ nontargeted_labels:
   - EVENT
   - QUANTITY
   - COMMERCIAL_ITEM
-dump_file: pii_recognition/experiments/pii_validation/reports/comprehend_scores.json
-f1_beta: 1.0
+dump_file: pii_recognition/experiments/pii_validation/reports/comprehend_ner_scores.json
+fbeta: 1.0

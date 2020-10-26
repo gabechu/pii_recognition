@@ -1,0 +1,78 @@
+benchmark_data_file: pii_recognition/datasets/predisio_fake_pii/generated_size_500_date_August_25_2020.json
+recogniser_name: ComprehendRecogniser
+recogniser_params:
+  supported_entities:
+    - BANK_ACCOUNT_NUMBER
+    - BANK_ROUTING
+    - CREDIT_DEBIT_NUMBER
+    - CREDIT_DEBIT_CVV
+    - CREDIT_DEBIT_EXPIRY
+    - PIN
+    - NAME
+    - ADDRESS
+    - PHONE
+    - EMAIL
+    - AGE
+    - USERNAME
+    - PASSWORD
+    - URL
+    - AWS_ACCESS_KEY
+    - AWS_SECRET_KEY
+    - IP_ADDRESS
+    - MAC_ADDRESS
+    - SSN
+    - PASSPORT_NUMBER
+    - DRIVER_ID
+    - DATE_TIME
+  supported_languages: 
+    - en
+  model_name: pii
+grouped_targeted_labels:
+  - 
+    - CREDIT_CARD
+    - BANK_ACCOUNT_NUMBER
+    - BANK_ROUTING
+    - CREDIT_DEBIT_NUMBER
+    - CREDIT_DEBIT_CVV
+    - CREDIT_DEBIT_EXPIRY
+    - PIN
+  - 
+    - US_SSN
+    - SSN
+  -
+    - URL
+  - 
+    - IP_ADDRESS
+    - MAC_ADDRESS
+  - 
+    - PERSON
+  -
+    - EMAIL
+  -
+    - BIRTHDAY
+    - DATE_TIME
+  -
+    - PHONE_NUMBER
+    - PHONE
+  -
+    - LOCATION
+    - ADDRESS
+  -
+    - PERSON
+    - USERNAME
+    - NAME
+nontargeted_labels:
+  # benchmark entities being removed
+  - NATIONALITY
+  - IBAN
+  - TITLE
+  - ORGANIZATION
+  # comprehend entities being removed
+  - AGE
+  - AWS_SECRET_KEY
+  - AWS_ACCESS_KEY
+  - PASSWORD
+  - PASSPORT_NUMBER
+  - DRIVER_ID
+dump_file: pii_recognition/experiments/pii_validation/reports/comprehend_pii_scores.json
+fbeta: 1.0
