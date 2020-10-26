@@ -1,0 +1,29 @@
+name: Python CI
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        inlcude:
+          - task: "Linting"
+            run: flake8 pii_recognition
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: ${{ matrix.task }}
+        run: |
+          pip install poetry
+          poetry install
+          poetry config virtualenvs.in-project true
+          poetry run $${{ matrix.run }}
