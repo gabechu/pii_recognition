@@ -1,9 +1,11 @@
-from typing import Dict, List, Optional, Set
+from typing import Dict, FrozenSet, List, Optional, Set, Union
 
 from pakkr import Pipeline, returns
 from pii_recognition.data_readers.data import Data
 from pii_recognition.data_readers.presidio_fake_pii_reader import PresidioFakePiiReader
 from pii_recognition.evaluation.character_level_evaluation import (
+    EntityPrecision,
+    EntityRecall,
     TextScore,
     build_label_mapping,
     compute_entity_precisions_for_prediction,
@@ -117,6 +119,58 @@ def get_rollup_fscore_on_pii(
         # The only possibility to have empty fscores is that argument "scores"
         # is empty. In this case, we assign f score to 0.
         return 0.0
+
+
+def _update_table(
+    table: Dict[FrozenSet, Dict], new_item: Union[EntityPrecision, EntityRecall]
+) -> Dict[FrozenSet, Dict]:
+    """A helper function to log fscores."""
+    entity_label = new_item.entity.entity_type
+    for label_set in table.keys():
+        if entity_label in label_set:
+            if isinstance(new_item, EntityPrecision):
+                table[label_set]["precisions"].append(new_item.precision)
+            elif isinstance(new_item, EntityRecall):
+                table[label_set]["recalls"].append(new_item.recall)
+    return table
+
+
+def get_rollup_fscores_on_types(
+    grouped_labels: List[Set[str]], scores: List[TextScore], fbeta: float,
+) -> Dict[FrozenSet, float]:
+    """Calculate a f scores for every group in the grouped labels.
+
+    There are entity labels being grouped and passed to this function as an argument,
+    with which we can reorganise the list of scores and calculate f scores accordingly.
+    Once it done, we will get a f score for every group in grouped labels.
+
+    Args:
+        grouped_llabels: entity labels we are interested that have been
+            separated as sets of groups, for example, [{"PER", "PERSON"}, {"ORG"}].
+        scores: a list of text scores providing info including precisions and recalls.
+        fbeta: beta value for f score.
+
+    Returns:
+        A dictionary that key is a group of entities and value is f score for the group.
+    """
+    score_table: Dict[FrozenSet, Dict] = {
+        frozenset(label_set): {"precisions": [], "recalls": [], "f1": None}
+        for label_set in grouped_labels
+    }
+
+    # update score table
+    for text_score in scores:
+        for precision in text_score.precisions:
+            score_table = _update_table(score_table, precision)
+        for recall in text_score.recalls:
+            score_table = _update_table(score_table, recall)
+
+    # average precisions and recalls
+    for key, value in score_table.items():
+        value["f1"] = compute_pii_detection_fscore(
+            value["precisions"], value["recalls"], beta=fbeta
+        )
+    return {key: value["f1"] for key, value in score_table.items()}
 
 
 def exec_pipeline(config_yaml_file: str):
