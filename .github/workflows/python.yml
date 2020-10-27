@@ -12,9 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        inlcude:
+        include:
           - task: "Linting"
-            run: flake8 pii_recognition
+            run: |
+              flake8 pii_recognition
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.7
