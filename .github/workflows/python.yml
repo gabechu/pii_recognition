@@ -17,12 +17,12 @@ jobs:
             run: flake8 pii_recognition
     steps:
       - uses: actions/checkout@v2
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
       - name: Set up Python 3.7
         uses: actions/setup-python@v2
         with:
           python-version: 3.7
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
       - name: ${{ matrix.task }}
         run: |
           pip install poetry
