@@ -9,24 +9,29 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        include:
+          - task: 'Type Check'
+            run: |
+              mypy --config-file pyproject.toml pii_recognition
+          - task: 'Unit Tests'
+            run: |
+              pytest pii_recognition
+          - task: 'Integration Tests'
+            run: |
+              poetry run pytest tests 
+          - task: 'Lint with flake8'
+            run: |
+              flake8
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.7
         uses: actions/setup-python@v2
         with:
-          python-version: 3.7
-      - name: Install and set up Poetry
+          python-version: 3.7.7
+      - name: ${{ matrix.task }}
         run: |
           pip install poetry
-          poetry config virtualenvs.in-project true
-      - name: Install dependencies
-        run: poetry install
-      - name: Lint with flake8
-        run: poetry run flake8 pii_recognition tests
-      - name: Type Check
-        run: poetry run mypy --config-file pyproject.toml pii_recognition
-      - name: Unit Tests
-        run: poetry run pytest pii_recognition
-      - name: Integration Tests
-        run: poetry run pytest tests 
+          poetry install
+          poetry run ${{ matrix.run }}
