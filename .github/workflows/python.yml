@@ -22,18 +22,19 @@ jobs:
             run: pytest tests 
     steps:
       - uses: actions/checkout@v2
-      - name: Cache .cache dir
-        uses: actions/cache@v2
-        with:
-          path: ~/.cache
-          key: ${{ runner.os }}-cache-dir-${{ hashFiles('poetry.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cache-dir-
-            ${{ runner.os }}-
       - name: Set up Python 3.7
         uses: actions/setup-python@v2
         with:
           python-version: 3.7
+      - name: Get full python version
+        id: full-python-version
+        run: |
+          echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info[:3]))")
+      - name: Cache .cache dir
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache
+          key: ${{ runner.os }}-${{ steps.full-python-version.outputs.version }}-${{ hashFiles('poetry.lock') }}
       - name: ${{ matrix.task }}
         run: |
           pip install poetry
