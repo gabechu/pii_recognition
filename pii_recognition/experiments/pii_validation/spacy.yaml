@@ -1,0 +1,68 @@
+benchmark_data_file: pii_recognition/datasets/predisio_fake_pii/generated_size_500_date_August_25_2020.json
+recogniser_name: SpacyRecogniser
+recogniser_params:
+  supported_entities:
+    - CARDINAL
+    - DATE
+    - EVENT
+    - FAC
+    - GPE
+    - LANGUAGE
+    - LAW
+    - LOC
+    - MONEY
+    - NORP
+    - ORDINAL
+    - ORG
+    - PERCENT
+    - PERSON
+    - PRODUCT
+    - QUANTITY
+    - TIME
+    - WORK_OF_ART
+  supported_languages:
+    - en
+  model_name: en_core_web_lg
+grouped_targeted_labels:
+  -
+    - BIRTHDAY
+    - DATE
+    - TIME
+  -
+    - CREDIT_CARD
+    - US_SSN
+    - PHONE_NUMBER
+    - CARDINAL
+  -
+    - LOCATION
+    - LOC
+    - GPE
+  -
+    - PERSON
+  -
+    - URL
+  -
+    - IP_ADDRESS
+  -
+    - EMAIL
+nontargeted_labels:
+  # benchmark labels being removed
+  - NATIONALITY
+  - IBAN
+  - TITLE
+  - ORGANIZATION
+  # Spacy labels being removed
+  - EVENT
+  - FAC
+  - LANGUAGE
+  - LAW
+  - MONEY
+  - NORP
+  - ORDINAL
+  - ORG
+  - PERCENT
+  - PRODUCT
+  - QUANTITY
+  - WORK_OF_ART
+dump_file: pii_recognition/experiments/pii_validation/reports/spacy_scores.json
+fbeta: 1.0 
