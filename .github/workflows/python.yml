@@ -19,7 +19,7 @@ jobs:
           - task: Unit tests
             run: pytest pii_recognition
           - task: Integration tests
-            run: poetry run pytest tests 
+            run: pytest tests 
     steps:
       - uses: actions/checkout@v2
       - name: Cache .cache dir
@@ -33,7 +33,7 @@ jobs:
       - name: Set up Python 3.7
         uses: actions/setup-python@v2
         with:
-          python-version: 3.7.7
+          python-version: 3.7
       - name: ${{ matrix.task }}
         run: |
           pip install poetry
