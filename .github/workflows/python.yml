@@ -12,18 +12,14 @@ jobs:
     strategy:
       matrix:
         include:
-          - task: 'Lint with flake8'
-            run: |
-              flake8 pii_recognition
-          - task: 'Type Check'
-            run: |
-              mypy --config-file pyproject.toml pii_recognition
-          - task: 'Unit Tests'
-            run: |
-              pytest pii_recognition
-          - task: 'Integration Tests'
-            run: |
-              poetry run pytest tests 
+          - task: Lint with flake8
+            run: flake8 pii_recognition
+          - task: Type Check
+            run: mypy --config-file pyproject.toml pii_recognition
+          - task: Unit Tests
+            run: pytest pii_recognition
+          - task: Integration Tests
+            run: poetry run pytest tests 
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.7
