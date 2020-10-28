@@ -44,8 +44,6 @@ grouped_targeted_labels:
   - 
     - IP_ADDRESS
     - MAC_ADDRESS
-  - 
-    - PERSON
   -
     - EMAIL
   -
