@@ -30,13 +30,13 @@ jobs:
         run: |
           pip install poetry
           poetry install
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
       - name: Cache .cache dir
         uses: actions/cache@v2
         with:
-          path: "$HOME/.cache"    
-          key: ${{ runner.os }}-cache-dir-${{ hashFiles('poetry.lock') }}          
+          path: ~/.cache
+          key: ${{ runner.os }}-cache-dir-${{ hashFiles('poetry.lock') }}
           restore-keys: |
             ${{ runner.os }}-cache-dir-
             ${{ runner.os }}-
