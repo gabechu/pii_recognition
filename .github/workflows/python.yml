@@ -40,3 +40,4 @@ jobs:
           pip install poetry
           poetry install
           poetry run ${{ matrix.run }}
+# let's run it one more time, now cache should be available
