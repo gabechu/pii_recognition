@@ -22,16 +22,6 @@ jobs:
             run: poetry run pytest tests 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python 3.7
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.7.7
-      - name: Install poetry dependencies
-        run: |
-          pip install poetry
-          poetry install
-      # - name: Setup tmate session
-      #   uses: mxschmitt/action-tmate@v3
       - name: Cache .cache dir
         uses: actions/cache@v2
         with:
@@ -40,5 +30,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cache-dir-
             ${{ runner.os }}-
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7.7
       - name: ${{ matrix.task }}
-        run: poetry run ${{ matrix.run }}
+        run: |
+          pip install poetry
+          poetry install
+          poetry run ${{ matrix.run }}
