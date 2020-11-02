@@ -1,4 +1,4 @@
-from typing import Dict, FrozenSet, List, Optional, Set, Union
+from typing import Dict, FrozenSet, List, Mapping, Optional, Set, Union
 
 from pakkr import Pipeline, returns
 from pii_recognition.data_readers.data import Data
@@ -14,7 +14,7 @@ from pii_recognition.evaluation.character_level_evaluation import (
 )
 from pii_recognition.recognisers import registry as recogniser_registry
 from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
-from pii_recognition.utils import dump_to_json_file, load_yaml_file
+from pii_recognition.utils import dump_to_json_file, load_yaml_file, stringify_keys
 
 
 @returns(Data)
@@ -69,21 +69,35 @@ def calculate_precisions_and_recalls(
 
 @returns(Dict)
 def calculate_aggregate_metrics(
-    scores: List[TextScore], fbeta: float = 1.0
-) -> Dict[str, float]:
+    scores: List[TextScore],
+    grouped_targeted_labels: List[Set[str]],
+    fbeta: float = 1.0,
+) -> Dict[Union[str, FrozenSet[str]], float]:
     round_ndigits = 4
-    results = dict()
+    results: Dict[Union[str, FrozenSet[str]], float] = dict()
+
     results["exact_match_f1"] = round(
         get_rollup_fscore_on_pii(scores, fbeta, recall_threshold=None), round_ndigits
     )
+
     results["partial_match_f1_threshold_at_50%"] = round(
         get_rollup_fscore_on_pii(scores, fbeta, recall_threshold=0.5), round_ndigits
     )
+
+    type_scores: Mapping = get_rollup_fscores_on_types(
+        grouped_targeted_labels, scores, fbeta
+    )
+    type_scores = {
+        key: round(value, round_ndigits) for key, value in type_scores.items()
+    }
+    results.update(type_scores)
+
     return results
 
 
 @returns()
-def report_results(results: Dict[str, float], dump_file: str):
+def report_results(results: Dict, dump_file: str):
+    results = stringify_keys(results)
     dump_to_json_file(results, dump_file)
 
 
@@ -122,7 +136,7 @@ def get_rollup_fscore_on_pii(
 
 
 def _update_table(
-    table: Dict[FrozenSet, Dict], new_item: Union[EntityPrecision, EntityRecall]
+    table: Dict[FrozenSet[str], Dict], new_item: Union[EntityPrecision, EntityRecall]
 ) -> Dict[FrozenSet, Dict]:
     """A helper function to log fscores."""
     entity_label = new_item.entity.entity_type
@@ -137,7 +151,7 @@ def _update_table(
 
 def get_rollup_fscores_on_types(
     grouped_labels: List[Set[str]], scores: List[TextScore], fbeta: float,
-) -> Dict[FrozenSet, float]:
+) -> Dict[FrozenSet[str], float]:
     """Calculate a f scores for every group in the grouped labels.
 
     There are entity labels being grouped and passed to this function as an argument,

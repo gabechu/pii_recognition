@@ -51,3 +51,14 @@ def load_json_file(path: str) -> List[Dict]:
 def dump_to_json_file(obj: Any, path: str):
     with open(path, "w") as f:
         json.dump(obj, f)
+
+
+def stringify_keys(data: Dict) -> Dict[str, Any]:
+    for key, value in data.items():
+        if isinstance(value, dict):
+            data[key] = stringify_keys(value)
+
+        if not isinstance(key, str):
+            data[str(key)] = value
+            del data[key]
+    return data

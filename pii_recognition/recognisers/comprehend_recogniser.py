@@ -8,10 +8,6 @@ from pii_recognition.labels.schema import Entity
 
 from .entity_recogniser import EntityRecogniser
 
-# read from .env
-IDENTITY_POOL_ID = config("IDENTITY_POOL_ID")
-AWS_REGION = "us-west-2"
-
 
 class ModelMapping(dict):
     def __getitem__(self, key: str) -> Callable:
@@ -25,13 +21,17 @@ class ModelMapping(dict):
 
 
 class ComprehendRecogniser(EntityRecogniser):
+    # read from .env
+    IDENTITY_POOL_ID = config("IDENTITY_POOL_ID")
+    AWS_REGION = "us-west-2"
+
     def __init__(
         self,
         supported_entities: List[str],
         supported_languages: List[str],
         model_name: str,
     ):
-        sess = config_cognito_session(IDENTITY_POOL_ID, AWS_REGION)
+        sess = config_cognito_session(self.IDENTITY_POOL_ID, self.AWS_REGION)
         comprehend = self._initiate_comprehend(sess)
         model_mapping = ModelMapping(
             ner=comprehend.detect_entities, pii=comprehend.detect_pii_entities
@@ -45,7 +45,7 @@ class ComprehendRecogniser(EntityRecogniser):
         )
 
     def _initiate_comprehend(self, session: Session) -> BaseClient:
-        return session.client(service_name="comprehend", region_name=AWS_REGION)
+        return session.client(service_name="comprehend", region_name=self.AWS_REGION)
 
     def analyse(self, text: str, entities: List[str]) -> List[Entity]:
         self.validate_entities(entities)

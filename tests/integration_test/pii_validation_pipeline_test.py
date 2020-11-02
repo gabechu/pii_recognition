@@ -61,7 +61,12 @@ def test_execute_pii_validation_pipeline(mock_registry):
         exec_pipeline(temp_config_yaml)
         report = load_json_file(temp_json_dump)
         assert set(os.listdir(tempdir)) == {"config.yaml", "test_report.json"}
-        assert report == {
-            "exact_match_f1": 0.5062,
-            "partial_match_f1_threshold_at_50%": 0.5333,
-        }
+        assert len(report.keys()) == 5
+        assert report["exact_match_f1"] == 0.5062
+        assert report["partial_match_f1_threshold_at_50%"] == 0.5333
+        assert report["frozenset({'PERSON'})"] == 0.4
+        assert report["frozenset({'LOCATION'})"] == 0.6857
+        assert (
+            report["frozenset({'CREDIT_CARD', 'OTHER'})"] == 1.0
+            or report["frozenset({'OTHER', 'CREDIT_CARD'})"] == 1.0
+        )

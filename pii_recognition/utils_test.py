@@ -10,6 +10,7 @@ from pii_recognition.utils import (
     is_ascending,
     load_json_file,
     load_yaml_file,
+    stringify_keys,
     write_iterable_to_file,
 )
 
@@ -107,3 +108,53 @@ def test_dump_and_read_json_file():
         dump_to_json_file(obj, file_path)
         actual = load_json_file(file_path)
     assert actual == obj
+
+
+def test_stringify_keys_for_int():
+    actual = stringify_keys({1: 2})
+    assert actual == {"1": 2}
+
+
+def test_stringify_keys_for_float():
+    actual = stringify_keys({1.0: 2})
+    assert actual == {"1.0": 2}
+
+
+def test_stringify_keys_for_bool():
+    actual = stringify_keys({True: 1})
+    assert actual == {"True": 1}
+
+
+def test_stringify_keys_for_tuple():
+    actual = stringify_keys({(1, 2): 3})
+    assert actual == {"(1, 2)": 3}
+
+
+def test_stringify_keys_for_range():
+    actual = stringify_keys({range(3): 3})
+    assert actual == {"range(0, 3)": 3}
+
+
+def test_stringify_keys_for_frozenset():
+    actual = stringify_keys({frozenset([1, 2]): 3})
+    assert actual == {"frozenset({1, 2})": 3}
+
+
+def test_stringify_keys_for_bytes():
+    actual = stringify_keys({b"\x00\x10": 1})
+    assert actual == {"b'\\x00\\x10'": 1}
+
+
+def test_stringify_keys_for_instance():
+    class MyClass:
+        ...
+
+    instance = MyClass()
+    actual = stringify_keys({instance: 1})
+    assert isinstance(list(actual.keys())[0], str)
+    assert list(actual.values()) == [1]
+
+
+def test_stringify_keys_for_nested():
+    actual = stringify_keys({(1, 2): {1: 1, 2: 2}, 3: 3})
+    assert actual == {"(1, 2)": {"1": 1, "2": 2}, "3": 3}
