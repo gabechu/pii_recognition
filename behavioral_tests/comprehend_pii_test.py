@@ -124,7 +124,11 @@ def test_AGE(recogniser):
 
 
 def test_USERNAME(recogniser):
-    ...
+    text = "I have a seller account and my username is water_ionizers_and_f."
+    actual = recogniser.analyse(text, recogniser.supported_entities)
+
+    # Entity: water_ionizers_and_f
+    assert Entity("USERNAME", 43, 63) in actual
 
 
 def test_PASSWORD(recogniser):
@@ -164,7 +168,13 @@ def test_IP_ADDRESS(recogniser):
 
 
 def test_MAC_ADDRESS(recogniser):
-    ...
+    text = (
+        "A MAC address consists of six sets of two characters, each separated by a "
+        "colon. 00:1B:44:11:3A:B7 is an example of a MAC address."
+    )
+    actual = recogniser.analyse(text, recogniser.supported_entities)
+
+    assert Entity("MAC_ADDRESS", 81, 98) in actual
 
 
 def test_SSN(recogniser):
@@ -175,7 +185,14 @@ def test_SSN(recogniser):
 
 
 def test_PASSPORT_NUMBER(recogniser):
-    ...
+    text = (
+        "Can you help me check my flight reservation. I've booked with "
+        "passport M0993353."
+    )
+    actual = recogniser.analyse(text, recogniser.supported_entities)
+
+    # Entity: M0993353
+    assert Entity("PASSPORT_NUMBER", 71, 79) in actual
 
 
 def test_DRIVER_ID(recogniser):
@@ -183,4 +200,8 @@ def test_DRIVER_ID(recogniser):
 
 
 def test_DATE_TIME(recogniser):
-    ...
+    text = "Please tell me your date of birth. It's 10/19/1975."
+    actual = recogniser.analyse(text, recogniser.supported_entities)
+
+    # Entity: 10/19/1975
+    assert Entity("DATE_TIME", 40, 50) in actual
