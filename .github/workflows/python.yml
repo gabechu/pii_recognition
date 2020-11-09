@@ -13,9 +13,9 @@ jobs:
       matrix:
         include:
           - task: Lint with flake8
-            run: flake8 pii_recognition
+            run: flake8 pii_recognition tests behavioral_tests
           - task: Type check
-            run: mypy --config-file pyproject.toml pii_recognition
+            run: mypy --config-file pyproject.toml pii_recognition tests behavioral_tests
           - task: Unit tests
             run: pytest pii_recognition
           - task: Integration tests
