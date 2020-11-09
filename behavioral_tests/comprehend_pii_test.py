@@ -156,7 +156,17 @@ def test_AWS_ACCESS_KEY(recogniser):
 
 
 def test_AWS_SECRET_KEY(recogniser):
-    ...
+    text = (
+        "export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE\n"
+        "export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY\n"
+        "export AWS_DEFAULT_REGION=us-west-2\n"
+        "Setting the environment variable changes the value used until the end of your "
+        "shell session, or until you set the variable to a different value."
+    )
+    actual = recogniser.analyse(text, recogniser.supported_entities)
+
+    # Entity: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+    assert Entity("AWS_SECRET_KEY", 75, 115) in actual
 
 
 def test_IP_ADDRESS(recogniser):
