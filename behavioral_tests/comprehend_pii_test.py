@@ -139,6 +139,7 @@ def test_PASSWORD(recogniser):
     )
     actual = recogniser.analyse(text, recogniser.supported_entities)
 
+    # Entity: Cartoon-Duck-14-Coffee-Glvs
     assert Entity("PASSWORD", 35, 62) in actual
 
 
@@ -146,6 +147,7 @@ def test_URL(recogniser):
     text = "Just posted a photo http://premiumbot.com.cy/gentlemudNpca4."
     actual = recogniser.analyse(text, recogniser.supported_entities)
 
+    # Entity: http://premiumbot.com.cy/gentlemudNpca4
     assert Entity("URL", 20, 59) in actual
 
 
@@ -164,6 +166,7 @@ def test_IP_ADDRESS(recogniser):
     )
     actual = recogniser.analyse(text, recogniser.supported_entities)
 
+    # Entity: c4c4:9bac:38a3:886:f173:826c:d16d:e730
     assert Entity("IP_ADDRESS", 50, 88) in actual
 
 
@@ -174,6 +177,7 @@ def test_MAC_ADDRESS(recogniser):
     )
     actual = recogniser.analyse(text, recogniser.supported_entities)
 
+    # Entity: 00:1B:44:11:3A:B7
     assert Entity("MAC_ADDRESS", 81, 98) in actual
 
 
@@ -181,6 +185,7 @@ def test_SSN(recogniser):
     text = "His social security number is 831-61-5012."
     actual = recogniser.analyse(text, recogniser.supported_entities)
 
+    # Entity: 831-61-5012
     assert Entity("SSN", 30, 41) in actual
 
 
