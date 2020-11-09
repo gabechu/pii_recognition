@@ -40,12 +40,12 @@ def identify_pii_entities(
     return data
 
 
-@returns(List)
+@returns(scores=List)
 def calculate_precisions_and_recalls(
     data: Data,
     grouped_targeted_labels: List[Set[str]],
     nontargeted_labels: Optional[Set[str]] = None,
-) -> List[TextScore]:
+) -> Dict[str, List[TextScore]]:
     label_mapping = build_label_mapping(grouped_targeted_labels, nontargeted_labels)
 
     scores = []
@@ -61,10 +61,43 @@ def calculate_precisions_and_recalls(
         ent_recalls = compute_entity_recalls_for_ground_truth(
             len(item.text), item.true_labels, pred_labels, label_mapping
         )
-        ticket_score = TextScore(precisions=ent_precisions, recalls=ent_recalls)
+        ticket_score = TextScore(
+            text=item.text, precisions=ent_precisions, recalls=ent_recalls
+        )
         scores.append(ticket_score)
 
-    return scores
+    return {"scores": scores}
+
+
+@returns()
+def log_mistakes(mistakes_dump_path: str, scores: List[TextScore]):
+    mistakes = dict()
+    for score in scores:
+        text = score.text
+        mistakes_in_precisions = {
+            text[p.entity.start : p.entity.end]: {
+                "type": p.entity.entity_type,
+                "score": round(p.precision, 2),
+                "src": p.entity_src,
+            }
+            for p in score.precisions
+            if p.precision != 1.0
+        }
+        mistakes_in_recalls = {
+            text[r.entity.start : r.entity.end]: {
+                "type": r.entity.entity_type,
+                "score": round(r.recall, 2),
+                "src": r.entity_src,
+            }
+            for r in score.recalls
+            if r.recall != 1.0
+        }
+
+        text_mistakes = {**mistakes_in_precisions, **mistakes_in_recalls}
+        if text_mistakes:
+            mistakes.update({text: {**mistakes_in_precisions, **mistakes_in_recalls}})
+
+    dump_to_json_file(mistakes, mistakes_dump_path)
 
 
 @returns(Dict)
@@ -96,9 +129,9 @@ def calculate_aggregate_metrics(
 
 
 @returns()
-def report_results(results: Dict, dump_file: str):
+def report_results(results: Dict, scores_dump_path: str):
     results = stringify_keys(results)
-    dump_to_json_file(results, dump_file)
+    dump_to_json_file(results, scores_dump_path)
 
 
 def get_rollup_fscore_on_pii(
@@ -192,6 +225,7 @@ def exec_pipeline(config_yaml_file: str):
         read_benchmark_data,
         identify_pii_entities,
         calculate_precisions_and_recalls,
+        log_mistakes,
         calculate_aggregate_metrics,
         report_results,
         name="pii_validation_pipeline",

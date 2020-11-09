@@ -52,21 +52,30 @@ def test_execute_pii_validation_pipeline(mock_registry):
     with TemporaryDirectory() as tempdir:
         # direct file writings to temp dir
         temp_config_yaml = os.path.join(tempdir, "config.yaml")
-        temp_json_dump = os.path.join(tempdir, "test_report.json")
 
         config = load_yaml_file(config_yaml)
-        config["dump_file"] = temp_json_dump
+        config["mistakes_dump_path"] = os.path.join(
+            tempdir, "test_mistakes.json"
+        )
+        config["scores_dump_path"] = scores_dump_path = os.path.join(
+            tempdir, "test_scores.json"
+        )
         dump_yaml_file(temp_config_yaml, config)
 
         exec_pipeline(temp_config_yaml)
-        report = load_json_file(temp_json_dump)
-        assert set(os.listdir(tempdir)) == {"config.yaml", "test_report.json"}
-        assert len(report.keys()) == 5
-        assert report["exact_match_f1"] == 0.5062
-        assert report["partial_match_f1_threshold_at_50%"] == 0.5333
-        assert report["frozenset({'PERSON'})"] == 0.4
-        assert report["frozenset({'LOCATION'})"] == 0.6857
+        scores = load_json_file(scores_dump_path)
+
+        assert set(os.listdir(tempdir)) == {
+            "config.yaml",
+            "test_mistakes.json",
+            "test_scores.json",
+        }
+        assert len(scores.keys()) == 5
+        assert scores["exact_match_f1"] == 0.5062
+        assert scores["partial_match_f1_threshold_at_50%"] == 0.5333
+        assert scores["frozenset({'PERSON'})"] == 0.4
+        assert scores["frozenset({'LOCATION'})"] == 0.6857
         assert (
-            report.get("frozenset({'CREDIT_CARD', 'OTHER'})") == 1.0
-            or report.get("frozenset({'OTHER', 'CREDIT_CARD'})") == 1.0
+            scores.get("frozenset({'CREDIT_CARD', 'OTHER'})") == 1.0
+            or scores.get("frozenset({'OTHER', 'CREDIT_CARD'})") == 1.0
         )

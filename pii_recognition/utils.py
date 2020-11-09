@@ -1,5 +1,5 @@
 import json
-from typing import Any, Dict, Iterable, List, Optional, Sequence, Type
+from typing import Any, Dict, Iterable, Optional, Sequence, Type
 
 import yaml
 
@@ -42,13 +42,16 @@ def dump_yaml_file(path: str, data: Any):
         yaml.dump(data, stream)
 
 
-def load_json_file(path: str) -> List[Dict]:
+# Type hint for json.load has not been supported because of recursive types
+# found details here https://github.com/python/typing/issues/182
+def load_json_file(path: str):
     with open(path, "r") as f:
         return json.load(f)
 
 
 # Any is not a precise signature but it's ergonomic in practice
 def dump_to_json_file(obj: Any, path: str):
+    # TODO: enable write to directories that do not exist
     with open(path, "w") as f:
         json.dump(obj, f)
 

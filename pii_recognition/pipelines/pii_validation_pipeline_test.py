@@ -1,4 +1,8 @@
+import os
+from tempfile import TemporaryDirectory
+
 from mock import patch
+from numpy.testing import assert_almost_equal
 from pii_recognition.data_readers.data import Data, DataItem
 from pii_recognition.evaluation.character_level_evaluation import (
     EntityPrecision,
@@ -6,6 +10,7 @@ from pii_recognition.evaluation.character_level_evaluation import (
     TextScore,
 )
 from pii_recognition.labels.schema import Entity
+from pii_recognition.utils import load_json_file
 from pytest import fixture
 
 from .pii_validation_pipeline import (
@@ -13,6 +18,7 @@ from .pii_validation_pipeline import (
     get_rollup_fscore_on_pii,
     get_rollup_fscores_on_types,
     identify_pii_entities,
+    log_mistakes,
 )
 
 
@@ -40,12 +46,14 @@ def scores():
     scores = []
     scores.append(
         TextScore(
+            text="It's like that since 9/23/1993",
             precisions=[EntityPrecision(Entity("BIRTHDAY", 0, 10), 0.0)],
             recalls=[EntityRecall(Entity("BIRTHDAY", 21, 31), 0.0)],
         )
     )
     scores.append(
         TextScore(
+            text="The address of Balefire Global is Valadouro 3, Ubide 48145",
             precisions=[
                 EntityPrecision(Entity("ORGANIZATION", 20, 30), 1.0),
                 EntityPrecision(Entity("LOCATION", 30, 46), 0.75),
@@ -62,22 +70,21 @@ def scores():
 
 @fixture
 def complex_scores():
-    # 1. test label grouping i.e. DATE and BIRTHDAY
-    # 2. test removal of non-interested i.e. ORGANIZATION
-    # 3. test entity types appear in more than one texts i.e. LOCATION
-    # 4. test empty precisions
-    # 5. test empty recalls
-    # 6. test empty precisions and recalls
     scores = []
+
+    # 1. test grouping i.e. DATE and BIRTHDAY
     scores.append(
         TextScore(
+            text="It's like that since 12/17/1967",
             precisions=[EntityPrecision(Entity("DATE", 0, 10), 0.0)],
             recalls=[EntityRecall(Entity("BIRTHDAY", 21, 31), 0.0)],
         )
     )
 
+    # 2. test removal of non-interested i.e. ORGANIZATION
     scores.append(
         TextScore(
+            text="The address of Balefire Global is Valadouro 3, Ubide 48145",
             precisions=[
                 EntityPrecision(Entity("ORGANIZATION", 20, 30), 1.0),
                 EntityPrecision(Entity("LOCATION", 30, 46), 0.75),
@@ -89,34 +96,55 @@ def complex_scores():
         )
     )
 
+    # 3. test multiple occurrences of a type i.e. LOCATION it occurs in
+    # case 4 and 5 as well, this will test calculation on aggregated scores.
     scores.append(
         TextScore(
+            text=(
+                "Please update billing addrress with Slovenčeva 71, "
+                "Dol pri Ljubljani 1262 for this card: 4539881821557738"
+            ),
             precisions=[
-                EntityPrecision(Entity("LOCATION", 10, 15), 1.0),
-                EntityPrecision(Entity("LOCATION", 20, 30), 0.5),
-                EntityPrecision(Entity("CREDIT_CARD", 40, 56), 1.0),
+                EntityPrecision(Entity("LOCATION", 26, 66), 0.75),
+                EntityPrecision(Entity("CREDIT_CARD", 89, 105), 1.0),
             ],
             recalls=[
-                EntityRecall(Entity("LOCATION", 10, 15), 1.0),
-                EntityRecall(Entity("LOCATION", 25, 35), 0.5),
-                EntityRecall(Entity("CREDIT_CARD", 40, 56), 1.0),
+                EntityRecall(Entity("LOCATION", 36, 73), 30 / 37),
+                EntityRecall(Entity("CREDIT_CARD", 89, 105), 1.0),
             ],
         )
     )
 
+    # 4. test empty precisions
     scores.append(
         TextScore(
-            precisions=[], recalls=[EntityRecall(Entity("LOCATION", 13, 20), 0.0)],
+            text=(
+                "I once lived in Árpád fejedelem útja 89., Bicske 2063. "
+                "I now live in Sarandi 5156, 25 de Agosto 94002"
+            ),
+            precisions=[],
+            recalls=[
+                EntityRecall(Entity("LOCATION", 16, 53), 0.0),
+                EntityRecall(Entity("LOCATION", 69, 101), 0.0),
+            ],
         )
     )
 
+    # 5. test empty recalls
     scores.append(
         TextScore(
-            precisions=[EntityPrecision(Entity("LOCATION", 13, 20), 0.0)], recalls=[],
+            text="rory is from revelstone",
+            precisions=[EntityPrecision(Entity("LOCATION", 13, 23), 0.0)],
+            recalls=[],
         )
     )
 
-    scores.append(TextScore(precisions=[], recalls=[]))
+    # 6. test empty precisions and recalls
+    scores.append(
+        TextScore(
+            text="How can I request a new credit card pin ?", precisions=[], recalls=[]
+        )
+    )
 
     return scores
 
@@ -150,12 +178,17 @@ def test_identify_pii_entities(mock_registry, data):
 def test_calculate_precisions_and_recalls_with_empty_predictions(data):
     grouped_targeted_labels = [{"BIRTHDAY"}, {"ORGANIZATION"}, {"LOCATION"}]
 
-    actual = calculate_precisions_and_recalls(data, grouped_targeted_labels)
+    unwrapped = calculate_precisions_and_recalls(data, grouped_targeted_labels)
+    actual = unwrapped["scores"]
+
     assert len(actual) == 2
     assert actual[0] == TextScore(
-        precisions=[], recalls=[EntityRecall(Entity("BIRTHDAY", 21, 31), 0.0)]
+        text="It's like that since 12/17/1967",
+        precisions=[],
+        recalls=[EntityRecall(Entity("BIRTHDAY", 21, 31), 0.0)],
     )
     assert actual[1] == TextScore(
+        text="The address of Balefire Global is Valadouro 3, Ubide 48145",
         precisions=[],
         recalls=[
             EntityRecall(Entity("ORGANIZATION", 15, 30), 0.0),
@@ -172,13 +205,17 @@ def test_calculate_precisions_and_recalls_with_predictions(data):
     ]
     grouped_targeted_labels = [{"BIRTHDAY"}, {"ORGANIZATION"}, {"LOCATION"}]
 
-    actual = calculate_precisions_and_recalls(data, grouped_targeted_labels)
+    unwrapped = calculate_precisions_and_recalls(data, grouped_targeted_labels)
+    actual = unwrapped["scores"]
+
     assert len(actual) == 2
     assert actual[0] == TextScore(
+        text="It's like that since 12/17/1967",
         precisions=[EntityPrecision(Entity("BIRTHDAY", 0, 10), 0.0)],
         recalls=[EntityRecall(Entity("BIRTHDAY", 21, 31), 0.0)],
     )
     assert actual[1] == TextScore(
+        text="The address of Balefire Global is Valadouro 3, Ubide 48145",
         precisions=[
             EntityPrecision(Entity("ORGANIZATION", 20, 30), 1.0),
             EntityPrecision(Entity("LOCATION", 30, 46), 0.75),
@@ -194,12 +231,17 @@ def test_calculate_precisions_and_recalls_with_nontargeted_labels(data):
     grouped_targeted_labels = [{"ORGANIZATION"}, {"LOCATION"}]
     nontargeted_labels = {"BIRTHDAY", "DATE"}
 
-    actual = calculate_precisions_and_recalls(
+    unwrapped = calculate_precisions_and_recalls(
         data, grouped_targeted_labels, nontargeted_labels
     )
+    actual = unwrapped["scores"]
+
     assert len(actual) == 2
-    assert actual[0] == TextScore(precisions=[], recalls=[],)
+    assert actual[0] == TextScore(
+        text="It's like that since 12/17/1967", precisions=[], recalls=[],
+    )
     assert actual[1] == TextScore(
+        text="The address of Balefire Global is Valadouro 3, Ubide 48145",
         precisions=[],
         recalls=[
             EntityRecall(Entity("ORGANIZATION", 15, 30), 0.0),
@@ -218,13 +260,38 @@ def test_get_rollup_fscore_on_pii_threshold(scores):
     assert actual == 7 / 15
 
 
-def test_get_rollup_f1s_on_types(complex_scores):
+def test_get_rollup_fscores_on_types(complex_scores):
     actual = get_rollup_fscores_on_types(
         [{"BIRTHDAY", "DATE"}, {"LOCATION"}, {"CREDIT_CARD"}], complex_scores, 1.0
     )
 
-    assert actual == {
-        frozenset({"BIRTHDAY", "DATE"}): 0.0,
-        frozenset({"LOCATION"}): 9 / 17,
-        frozenset({"CREDIT_CARD"}): 1.0,
+    assert len(actual) == 3
+    assert actual[frozenset({"BIRTHDAY", "DATE"})] == 0.0
+    assert actual[frozenset({"CREDIT_CARD"})] == 1.0
+    assert_almost_equal(actual[frozenset({"LOCATION"})], 0.395918367)
+
+
+def test_log_mistakes(scores):
+    with TemporaryDirectory() as tempdir:
+        fake_path = os.path.join(tempdir, "fake_path")
+        log_mistakes(fake_path, scores)
+        actual = load_json_file(fake_path)
+
+    assert len(actual) == 2
+    assert actual["It's like that since 9/23/1993"] == {
+        "It's like ": {"type": "BIRTHDAY", "score": 0.0, "src": "predicted"},
+        "9/23/1993": {"type": "BIRTHDAY", "score": 0.0, "src": "ground_truth"},
+    }
+    assert actual["The address of Balefire Global is Valadouro 3, Ubide 48145"] == {
+        " is Valadouro 3,": {"type": "LOCATION", "score": 0.75, "src": "predicted"},
+        "Balefire Global": {
+            "type": "ORGANIZATION",
+            "score": 0.67,
+            "src": "ground_truth",
+        },
+        "Valadouro 3, Ubide 48145": {
+            "type": "LOCATION",
+            "score": 0.5,
+            "src": "ground_truth",
+        },
     }

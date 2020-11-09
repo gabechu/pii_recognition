@@ -25,6 +25,7 @@ class EntityRecall:
 
 @dataclass
 class TextScore:
+    text: str
     precisions: List[EntityPrecision]
     recalls: List[EntityRecall]
 

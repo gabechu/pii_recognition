@@ -38,5 +38,6 @@ nontargeted_labels:
   - EVENT
   - QUANTITY
   - COMMERCIAL_ITEM
-dump_file: pii_recognition/experiments/pii_validation/reports/comprehend_ner_scores.json
+mistakes_dump_path: pii_recognition/experiments/pii_validation/comprehend_reports/mistakes_ner.json
+scores_dump_path: pii_recognition/experiments/pii_validation/comprehend_reports/scores_ner.json
 fbeta: 1.0
