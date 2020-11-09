@@ -67,6 +67,6 @@ def test_execute_pii_validation_pipeline(mock_registry):
         assert report["frozenset({'PERSON'})"] == 0.4
         assert report["frozenset({'LOCATION'})"] == 0.6857
         assert (
-            report["frozenset({'CREDIT_CARD', 'OTHER'})"] == 1.0
-            or report["frozenset({'OTHER', 'CREDIT_CARD'})"] == 1.0
+            report.get("frozenset({'CREDIT_CARD', 'OTHER'})") == 1.0
+            or report.get("frozenset({'OTHER', 'CREDIT_CARD'})") == 1.0
         )

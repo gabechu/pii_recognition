@@ -19,6 +19,7 @@ pakkr = "^0.1.0"
 python-decouple = "^3.3"
 flair = "^0.6.1"
 boto3 = "^1.16.0"
+google-cloud-language = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

@@ -143,3 +143,6 @@ media
 
 # IDE
 .vscode
+
+# anything else
+secrets

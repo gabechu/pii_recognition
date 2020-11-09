@@ -9,6 +9,7 @@ def init() -> Registry:
     from .spacy_recogniser import SpacyRecogniser
     from .stanza_recogniser import StanzaRecogniser
     from .comprehend_recogniser import ComprehendRecogniser
+    from .google_recogniser import GoogleRecogniser
 
     registry = Registry[EntityRecogniser]()
     registry.register(CrfRecogniser)
@@ -17,6 +18,7 @@ def init() -> Registry:
     registry.register(SpacyRecogniser)
     registry.register(StanzaRecogniser)
     registry.register(ComprehendRecogniser)
+    registry.register(GoogleRecogniser)
 
     return registry
 
