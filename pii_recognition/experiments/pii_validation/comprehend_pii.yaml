@@ -30,12 +30,14 @@ recogniser_params:
 grouped_targeted_labels:
   - 
     - CREDIT_CARD
-    - BANK_ACCOUNT_NUMBER
     - BANK_ROUTING
     - CREDIT_DEBIT_NUMBER
     - CREDIT_DEBIT_CVV
     - CREDIT_DEBIT_EXPIRY
     - PIN
+  -
+    - IBAN
+    - BANK_ACCOUNT_NUMBER
   - 
     - US_SSN
     - SSN
@@ -62,7 +64,6 @@ grouped_targeted_labels:
 nontargeted_labels:
   # benchmark entities being removed
   - NATIONALITY
-  - IBAN
   - TITLE
   - ORGANIZATION
   # comprehend entities being removed

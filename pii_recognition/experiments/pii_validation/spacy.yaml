@@ -32,6 +32,7 @@ grouped_targeted_labels:
     - CREDIT_CARD
     - US_SSN
     - PHONE_NUMBER
+    - IBAN
     - CARDINAL
   -
     - LOCATION
@@ -48,7 +49,6 @@ grouped_targeted_labels:
 nontargeted_labels:
   # benchmark labels being removed
   - NATIONALITY
-  - IBAN
   - TITLE
   - ORGANIZATION
   # Spacy labels being removed

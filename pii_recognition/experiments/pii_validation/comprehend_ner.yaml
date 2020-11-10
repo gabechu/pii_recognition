@@ -23,6 +23,7 @@ grouped_targeted_labels:
     - CREDIT_CARD
     - URL
     - EMAIL
+    - IBAN
   - 
     - BIRTHDAY
     - DATE
@@ -31,10 +32,11 @@ grouped_targeted_labels:
   - 
     - PERSON
 nontargeted_labels:
+  # benchmark entities being removed
   - TITLE
   - ORGANIZATION
-  - IBAN
   - NATIONALITY
+  # comprehend entities being removed
   - EVENT
   - QUANTITY
   - COMMERCIAL_ITEM
