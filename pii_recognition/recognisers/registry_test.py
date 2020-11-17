@@ -33,9 +33,7 @@ def test_registry_for_comprehend(mock_analyse, mock_session):
 
 @patch("pii_recognition.recognisers.google_recogniser.GoogleRecogniser.client")
 @patch("pii_recognition.recognisers.google_recogniser.GoogleRecogniser.analyse")
-def test_registry_for_google_recogniser(
-    mock_analyse, mock_client
-):
+def test_registry_for_google_recogniser(mock_analyse, mock_client):
     mock_analyse.return_value = [Entity("test", 0, 4)]
 
     recogniser_name = "GoogleRecogniser"

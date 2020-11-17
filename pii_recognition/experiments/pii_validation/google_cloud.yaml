@@ -1,0 +1,56 @@
+benchmark_data_file: pii_recognition/datasets/predisio_fake_pii/generated_size_500_date_August_25_2020.json
+recogniser_name: GoogleRecogniser
+recogniser_params:
+  supported_entities:
+    - UNKNOWN
+    - PERSON
+    - LOCATION
+    - ORGANIZATION
+    - EVENT
+    - WORK_OF_ART
+    - CONSUMER_GOOD
+    - OTHER
+    - PHONE_NUMBER
+    - ADDRESS
+    - DATE
+    - NUMBER
+    - PRICE
+  supported_languages: 
+    - en
+grouped_targeted_labels:
+  - 
+    - EMAIL
+    - OTHER
+  -
+    - US_SSN
+    - IBAN
+    - IP_ADDRESS
+    - CREDIT_CARD
+    - NUMBER
+  -
+    - BIRTHDAY
+    - DATE
+  -
+    - PHONE_NUMBER
+  -
+    - LOCATION
+    - ADDRESS
+  -
+    - PERSON
+  -
+    # checked, URL is not in the model's OTHER category
+    - URL
+nontargeted_labels:
+  # benchmark entities being removed
+  - NATIONALITY
+  - TITLE
+  - ORGANIZATION
+  # Google NL API entities being removed
+  - UNKNOWN
+  - EVENT
+  - WORK_OF_ART
+  - CONSUMER_GOOD
+  - PRICE
+mistakes_dump_path: pii_recognition/experiments/pii_validation/google_cloud_reports/mistakes_ner.json
+scores_dump_path: pii_recognition/experiments/pii_validation/google_cloud_reports/scores_ner.json
+fbeta: 1.0

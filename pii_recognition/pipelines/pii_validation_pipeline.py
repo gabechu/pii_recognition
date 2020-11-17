@@ -15,6 +15,7 @@ from pii_recognition.evaluation.character_level_evaluation import (
 from pii_recognition.recognisers import registry as recogniser_registry
 from pii_recognition.recognisers.entity_recogniser import EntityRecogniser
 from pii_recognition.utils import dump_to_json_file, load_yaml_file, stringify_keys
+from tqdm import tqdm
 
 
 @returns(Data)
@@ -35,7 +36,7 @@ def identify_pii_entities(
         recogniser_name, recogniser_params
     )
 
-    for item in data.items:
+    for item in tqdm(data.items):
         item.pred_labels = recogniser.analyse(item.text, recogniser.supported_entities)
     return data
 

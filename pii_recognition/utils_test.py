@@ -4,6 +4,7 @@ from tempfile import TemporaryDirectory
 from unittest.mock import Mock, call, mock_open, patch
 
 from pii_recognition.utils import (
+    TextIndexer,
     cached_property,
     dump_to_json_file,
     dump_yaml_file,
@@ -13,6 +14,7 @@ from pii_recognition.utils import (
     stringify_keys,
     write_iterable_to_file,
 )
+from pytest import raises
 
 
 def json_dumps():
@@ -158,3 +160,25 @@ def test_stringify_keys_for_instance():
 def test_stringify_keys_for_nested():
     actual = stringify_keys({(1, 2): {1: 1, 2: 2}, 3: 3})
     assert actual == {"(1, 2)": {"1": 1, "2": 2}, "3": 3}
+
+
+def test_text_indexer_byte_index_to_utf8_index_succeeded():
+    text = (
+        "Please update billing addrress with Markt 84, MÜLLNERN 9123 "
+        "for this card: 5550253262199449"
+    )
+    indexer = TextIndexer(text)
+    assert indexer.byte_index_to_utf8_index(14) == 14
+    assert indexer.byte_index_to_utf8_index(70) == 69
+    assert indexer.byte_index_to_utf8_index(92) == 91
+
+
+def test_text_indexer_byte_index_to_utf8_index_failed():
+    text = (
+        "Please update billing addrress with Markt 84, MÜLLNERN 9123 "
+        "for this card: 5550253262199449"
+    )
+    indexer = TextIndexer(text)
+    with raises(Exception) as err:
+        indexer.byte_index_to_utf8_index(48)
+    assert str(err.value) == "Index 48 is an invalid boundary converting to UTF8."
