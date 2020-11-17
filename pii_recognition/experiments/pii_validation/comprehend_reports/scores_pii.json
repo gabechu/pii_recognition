@@ -1,0 +1,14 @@
+{
+  "exact_match_f1": 0.8525,
+  "partial_match_f1_threshold_at_50%": 0.8546,
+  "frozenset({'CREDIT_CARD', 'CREDIT_DEBIT_CVV', 'CREDIT_DEBIT_EXPIRY', 'PIN', 'BANK_ROUTING', 'CREDIT_DEBIT_NUMBER'})": 0.9457,
+  "frozenset({'IBAN', 'BANK_ACCOUNT_NUMBER'})": 0.8,
+  "frozenset({'SSN', 'US_SSN'})": 1.0,
+  "frozenset({'URL'})": 0.6316,
+  "frozenset({'MAC_ADDRESS', 'IP_ADDRESS'})": 0.9799,
+  "frozenset({'EMAIL'})": 1.0,
+  "frozenset({'DATE_TIME', 'BIRTHDAY'})": 0.5352,
+  "frozenset({'PHONE', 'PHONE_NUMBER'})": 0.8899,
+  "frozenset({'LOCATION', 'ADDRESS'})": 0.7168,
+  "frozenset({'NAME', 'PERSON', 'USERNAME'})": 0.9262
+}

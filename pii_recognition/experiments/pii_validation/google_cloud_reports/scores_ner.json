@@ -1,0 +1,11 @@
+{
+  "exact_match_f1": 0.6363,
+  "partial_match_f1_threshold_at_50%": 0.6442,
+  "frozenset({'EMAIL', 'OTHER'})": 0.2946,
+  "frozenset({'US_SSN', 'IBAN', 'IP_ADDRESS', 'CREDIT_CARD', 'NUMBER'})": 0.3799,
+  "frozenset({'DATE', 'BIRTHDAY'})": 0.2877,
+  "frozenset({'PHONE_NUMBER'})": 0.0174,
+  "frozenset({'ADDRESS', 'LOCATION'})": 0.6402,
+  "frozenset({'PERSON'})": 0.8104,
+  "frozenset({'URL'})": 0.0
+}
