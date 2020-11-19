@@ -51,6 +51,6 @@ nontargeted_labels:
   - WORK_OF_ART
   - CONSUMER_GOOD
   - PRICE
-mistakes_dump_path: pii_recognition/experiments/pii_validation/google_cloud_reports/mistakes_ner.json
+predictions_dump_path: pii_recognition/experiments/pii_validation/google_cloud_reports/predictions_ner.json
 scores_dump_path: pii_recognition/experiments/pii_validation/google_cloud_reports/scores_ner.json
 fbeta: 1.0

@@ -1,0 +1,4211 @@
+{
+  "Please update billing addrress with Markt 84, M\u00dcLLNERN 9123 for this card: 5550253262199449": {
+    "predicted": {
+      "5550253262199449": { "type": "CARDINAL", "score": 1.0, "start": 75 }
+    },
+    "ground_truth": {
+      "Markt 84, M\u00dcLLNERN 9123": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 36
+      },
+      "5550253262199449": { "type": "CREDIT_CARD", "score": 1.0, "start": 75 }
+    }
+  },
+  "My name appears incorrectly on credit card statement could you please correct it to Ms. Aybika Rushisvili?": {
+    "predicted": {
+      "Aybika Rushisvili": { "type": "PERSON", "score": 1.0, "start": 88 }
+    },
+    "ground_truth": {
+      "Aybika Rushisvili": { "type": "PERSON", "score": 1.0, "start": 88 }
+    }
+  },
+  "A tribute to Joshua Lewis \u2013 sadly, she wasn't impressed.": {
+    "predicted": {
+      "Joshua Lewis": { "type": "PERSON", "score": 1.0, "start": 13 }
+    },
+    "ground_truth": {
+      "Joshua Lewis": { "type": "PERSON", "score": 1.0, "start": 13 }
+    }
+  },
+  "The address of Balefire Global is Valadouro 3, Ubide 48145": {
+    "predicted": { "48145": { "type": "CARDINAL", "score": 0.0, "start": 53 } },
+    "ground_truth": {
+      "Valadouro 3, Ubide 48145": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 34
+      }
+    }
+  },
+  "I want to cancel my card 4556733991563087 because I lost it": {
+    "predicted": {
+      "4556733991563087": { "type": "CARDINAL", "score": 1.0, "start": 25 }
+    },
+    "ground_truth": {
+      "4556733991563087": { "type": "CREDIT_CARD", "score": 1.0, "start": 25 }
+    }
+  },
+  "One of the most depressing songs on the list. He's injured from the waist down from Mozambique, but Malvin just has to get laid. Don't go to town, Bojka!": {
+    "predicted": {
+      "One": { "type": "CARDINAL", "score": 0.0, "start": 0 },
+      "Mozambique": { "type": "GPE", "score": 1.0, "start": 84 },
+      "Bojka": { "type": "GPE", "score": 0.0, "start": 147 }
+    },
+    "ground_truth": {
+      "Mozambique": { "type": "LOCATION", "score": 1.0, "start": 84 },
+      "Malvin": { "type": "PERSON", "score": 0.0, "start": 100 },
+      "Bojka": { "type": "PERSON", "score": 0.0, "start": 147 }
+    }
+  },
+  "Can I withdraw cash using my card 4532272104540970 at aTM center ?": {
+    "predicted": {
+      "4532272104540970": { "type": "CARDINAL", "score": 1.0, "start": 34 }
+    },
+    "ground_truth": {
+      "4532272104540970": { "type": "CREDIT_CARD", "score": 1.0, "start": 34 }
+    }
+  },
+  "how do i change my address to p.o. box 194, upernavik 3962 for post mail?": {
+    "predicted": {
+      "p.o.": { "type": "GPE", "score": 1.0, "start": 30 },
+      "194": { "type": "CARDINAL", "score": 0.0, "start": 39 },
+      "3962": { "type": "CARDINAL", "score": 0.0, "start": 54 }
+    },
+    "ground_truth": {
+      "p.o. box 194, upernavik 3962": {
+        "type": "LOCATION",
+        "score": 0.14,
+        "start": 30
+      }
+    }
+  },
+  "It's like that since 12/17/1967": {
+    "predicted": {
+      "12/17/1967": { "type": "DATE", "score": 1.0, "start": 21 }
+    },
+    "ground_truth": {
+      "12/17/1967": { "type": "BIRTHDAY", "score": 1.0, "start": 21 }
+    }
+  },
+  "C'mon, sing it with me: \"You picked a fine time to leave me Paige, four hungry children and a crop in the field...\"": {
+    "predicted": {
+      "Paige": { "type": "PERSON", "score": 1.0, "start": 60 },
+      "four": { "type": "CARDINAL", "score": 0.0, "start": 67 }
+    },
+    "ground_truth": { "Paige": { "type": "PERSON", "score": 1.0, "start": 60 } }
+  },
+  "You can tell Romina was a huge Romina Ruelas fan. Written when he was only 14.": {
+    "predicted": {
+      "Romina": { "type": "PERSON", "score": 1.0, "start": 13 },
+      "Romina Ruelas": { "type": "PERSON", "score": 1.0, "start": 31 },
+      "14": { "type": "CARDINAL", "score": 0.0, "start": 75 }
+    },
+    "ground_truth": {
+      "Romina": { "type": "PERSON", "score": 1.0, "start": 13 },
+      "Romina Ruelas": { "type": "PERSON", "score": 1.0, "start": 31 }
+    }
+  },
+  "It's like that since 9/23/1993": {
+    "predicted": { "9/23/1993": { "type": "DATE", "score": 1.0, "start": 21 } },
+    "ground_truth": {
+      "9/23/1993": { "type": "BIRTHDAY", "score": 1.0, "start": 21 }
+    }
+  },
+  "Zoolander is a 2001 American action-comedy film directed by Lara Pottinger and starring Pottinger": {
+    "predicted": {
+      "2001": { "type": "DATE", "score": 0.0, "start": 15 },
+      "Lara Pottinger": { "type": "PERSON", "score": 1.0, "start": 60 }
+    },
+    "ground_truth": {
+      "Lara Pottinger": { "type": "PERSON", "score": 1.0, "start": 60 },
+      "Pottinger": { "type": "PERSON", "score": 0.0, "start": 88 }
+    }
+  },
+  "Please have the manager call me at 0378 8718408 I'd like to join accounts with ms. Caroline": {
+    "predicted": {
+      "0378": { "type": "DATE", "score": 0.0, "start": 35 },
+      "Caroline": { "type": "PERSON", "score": 1.0, "start": 83 }
+    },
+    "ground_truth": {
+      "0378 8718408": { "type": "PHONE_NUMBER", "score": 0.0, "start": 35 },
+      "Caroline": { "type": "PERSON", "score": 1.0, "start": 83 }
+    }
+  },
+  "New Zealand was super fun to visit!": {
+    "predicted": { "New Zealand": { "type": "GPE", "score": 1.0, "start": 0 } },
+    "ground_truth": {
+      "New Zealand": { "type": "LOCATION", "score": 1.0, "start": 0 }
+    }
+  },
+  "In case of my child's account, we need to add Marie Gottschalk as guardian": {
+    "predicted": {
+      "Marie Gottschalk": { "type": "PERSON", "score": 1.0, "start": 46 }
+    },
+    "ground_truth": {
+      "Marie Gottschalk": { "type": "PERSON", "score": 1.0, "start": 46 }
+    }
+  },
+  "gregg shouted at patrizio: \"what are you doing here?\"": {
+    "predicted": {
+      "gregg": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "patrizio": { "type": "PERSON", "score": 1.0, "start": 17 }
+    },
+    "ground_truth": {
+      "gregg": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "patrizio": { "type": "PERSON", "score": 1.0, "start": 17 }
+    }
+  },
+  "Here's my SSN: 388-74-1585": {
+    "predicted": { "388": { "type": "CARDINAL", "score": 1.0, "start": 15 } },
+    "ground_truth": {
+      "388-74-1585": { "type": "US_SSN", "score": 0.27, "start": 15 }
+    }
+  },
+  "Please transfer all funds from my account to this hackers' VidoslavBabic@rhyta.com": {
+    "predicted": {},
+    "ground_truth": {
+      "VidoslavBabic@rhyta.com": { "type": "EMAIL", "score": 0.0, "start": 59 }
+    }
+  },
+  "The true gender of Milovan has been under debate for years, but the riff and building energy is a rock masterpiece regardless.": {
+    "predicted": {
+      "Milovan": { "type": "PERSON", "score": 1.0, "start": 19 },
+      "years": { "type": "DATE", "score": 0.0, "start": 53 }
+    },
+    "ground_truth": {
+      "Milovan": { "type": "PERSON", "score": 1.0, "start": 19 }
+    }
+  },
+  "I need to add  addresses, here they are: Mikkelenborgvej 76, K\u00f8benhavn K 1370, Dayka G\u00e1bor u. 18., Miske 6343": {
+    "predicted": {
+      "Mikkelenborgvej": { "type": "PERSON", "score": 0.0, "start": 41 },
+      "76": { "type": "CARDINAL", "score": 0.0, "start": 57 },
+      "Dayka G\u00e1bor": { "type": "PERSON", "score": 0.0, "start": 79 },
+      "18": { "type": "DATE", "score": 0.0, "start": 94 },
+      "6343": { "type": "CARDINAL", "score": 0.0, "start": 105 }
+    },
+    "ground_truth": {
+      "Mikkelenborgvej 76, K\u00f8benhavn K 1370": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 41
+      },
+      "Dayka G\u00e1bor u. 18., Miske 6343": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 79
+      }
+    }
+  },
+  "Zoolander is a 2001 American action-comedy film directed by Aedan McKay and starring McKay": {
+    "predicted": {
+      "2001": { "type": "DATE", "score": 0.0, "start": 15 },
+      "Aedan McKay": { "type": "PERSON", "score": 1.0, "start": 60 },
+      "McKay": { "type": "PERSON", "score": 1.0, "start": 85 }
+    },
+    "ground_truth": {
+      "Aedan McKay": { "type": "PERSON", "score": 1.0, "start": 60 },
+      "McKay": { "type": "PERSON", "score": 1.0, "start": 85 }
+    }
+  },
+  "Just posted a photo mediasweep.de/roughcherryu10z": {
+    "predicted": {},
+    "ground_truth": {
+      "mediasweep.de/roughcherryu10z": {
+        "type": "URL",
+        "score": 0.0,
+        "start": 20
+      }
+    }
+  },
+  "you said your email is aurorasoderberg@cuvox.de. is that correct?": {
+    "predicted": {},
+    "ground_truth": {
+      "aurorasoderberg@cuvox.de": { "type": "EMAIL", "score": 0.0, "start": 23 }
+    }
+  },
+  "My name appears incorrectly on credit card statement could you please correct it to Miss Laura Souza?": {
+    "predicted": {
+      "Laura Souza": { "type": "PERSON", "score": 1.0, "start": 89 }
+    },
+    "ground_truth": {
+      "Laura Souza": { "type": "PERSON", "score": 1.0, "start": 89 }
+    }
+  },
+  "Victoria Bruun listed his top 20 songs for Entertainment Weekly and had the balls to list this song at #15. (What did he put at #1 you ask? Answer:\"Tube Snake Boogie\" by Annikki Numminen \u2013 go figure)": {
+    "predicted": {
+      "Victoria Bruun": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "20": { "type": "CARDINAL", "score": 0.0, "start": 30 },
+      "Answer:\"Tube Snake Boogie": {
+        "type": "PERSON",
+        "score": 0.0,
+        "start": 140
+      },
+      "Annikki Numminen": { "type": "PERSON", "score": 1.0, "start": 170 }
+    },
+    "ground_truth": {
+      "Victoria Bruun": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Annikki Numminen": { "type": "PERSON", "score": 1.0, "start": 170 }
+    }
+  },
+  "Can someone call me on 0319 3144400? I have some questions about opening an account.": {
+    "predicted": {},
+    "ground_truth": {
+      "0319 3144400": { "type": "PHONE_NUMBER", "score": 0.0, "start": 23 }
+    }
+  },
+  "On 29 March 2017, the Sunni government formally began the process of withdrawal by invoking Article 50 of the Treaty on European Union": {
+    "predicted": {
+      "29 March 2017": { "type": "DATE", "score": 0.0, "start": 3 }
+    },
+    "ground_truth": {}
+  },
+  "One of the most depressing songs on the list. He's injured from the waist down from Benin, but Mark just has to get laid. Don't go to town, Ewan!": {
+    "predicted": {
+      "One": { "type": "CARDINAL", "score": 0.0, "start": 0 },
+      "Benin": { "type": "GPE", "score": 1.0, "start": 84 },
+      "Mark": { "type": "PERSON", "score": 1.0, "start": 95 },
+      "Ewan": { "type": "PERSON", "score": 1.0, "start": 140 }
+    },
+    "ground_truth": {
+      "Benin": { "type": "LOCATION", "score": 1.0, "start": 84 },
+      "Mark": { "type": "PERSON", "score": 1.0, "start": 95 },
+      "Ewan": { "type": "PERSON", "score": 1.0, "start": 140 }
+    }
+  },
+  "Hello, this is Mr. Marijan Stankovi\u0107. Who are you?": {
+    "predicted": {
+      "Marijan Stankovi\u0107": { "type": "PERSON", "score": 1.0, "start": 19 }
+    },
+    "ground_truth": {
+      "Marijan Stankovi\u0107": { "type": "PERSON", "score": 1.0, "start": 19 }
+    }
+  },
+  "A tribute to V\u00e1clav Slepi\u010dka \u2013 sadly, she wasn't impressed.": {
+    "predicted": {
+      "V\u00e1clav Slepi\u010dka": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 13
+      }
+    },
+    "ground_truth": {
+      "V\u00e1clav Slepi\u010dka": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 13
+      }
+    }
+  },
+  "How can I request a new credit card pin ?": {
+    "predicted": {},
+    "ground_truth": {}
+  },
+  "On 29 March 2017, the Vanuatuan government formally began the process of withdrawal by invoking Article 50 of the Treaty on European Union": {
+    "predicted": {
+      "29 March 2017": { "type": "DATE", "score": 0.0, "start": 3 }
+    },
+    "ground_truth": {}
+  },
+  "can i speak to a real person?!?!": { "predicted": {}, "ground_truth": {} },
+  "My name appears incorrectly on credit card statement could you please correct it to Miss Alaine Armijo?": {
+    "predicted": {
+      "Miss Alaine Armijo": { "type": "PERSON", "score": 0.72, "start": 84 }
+    },
+    "ground_truth": {
+      "Alaine Armijo": { "type": "PERSON", "score": 1.0, "start": 89 }
+    }
+  },
+  "Jonas is a very sympathetic person. He's also a good listener": {
+    "predicted": {},
+    "ground_truth": { "Jonas": { "type": "PERSON", "score": 0.0, "start": 0 } }
+  },
+  "Fletcher Hill from Github is the keynote speaker": {
+    "predicted": {
+      "Fletcher Hill": { "type": "PERSON", "score": 1.0, "start": 0 }
+    },
+    "ground_truth": {
+      "Fletcher Hill": { "type": "PERSON", "score": 1.0, "start": 0 }
+    }
+  },
+  "Please tell me your date of birth. It's 10/3/1953": {
+    "predicted": {},
+    "ground_truth": {
+      "10/3/1953": { "type": "BIRTHDAY", "score": 0.0, "start": 40 }
+    }
+  },
+  "Hektor shouted at Ingunn: \"What are you doing here?\"": {
+    "predicted": {
+      "Hektor": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Ingunn": { "type": "PERSON", "score": 1.0, "start": 18 }
+    },
+    "ground_truth": {
+      "Hektor": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Ingunn": { "type": "PERSON", "score": 1.0, "start": 18 }
+    }
+  },
+  "It may be too that Novakovi\u0107 was influenced by an earlier song, \"Carry Me Back To Romania,\" which was arranged and sung by Margrethe Lundblad in 1847 (though Lundblad's song was actually about a boat!).": {
+    "predicted": {
+      "Novakovi\u0107": { "type": "PERSON", "score": 1.0, "start": 19 },
+      "Margrethe Lundblad": { "type": "PERSON", "score": 1.0, "start": 123 },
+      "1847": { "type": "DATE", "score": 0.0, "start": 145 },
+      "Lundblad": { "type": "PERSON", "score": 1.0, "start": 158 }
+    },
+    "ground_truth": {
+      "Novakovi\u0107": { "type": "PERSON", "score": 1.0, "start": 19 },
+      "Romania": { "type": "LOCATION", "score": 0.0, "start": 82 },
+      "Margrethe Lundblad": { "type": "PERSON", "score": 1.0, "start": 123 },
+      "Lundblad": { "type": "PERSON", "score": 1.0, "start": 158 }
+    }
+  },
+  "I'm so jealous! said Laerke to Josef": {
+    "predicted": {
+      "Laerke": { "type": "PERSON", "score": 1.0, "start": 21 },
+      "Josef": { "type": "PERSON", "score": 1.0, "start": 31 }
+    },
+    "ground_truth": {
+      "Laerke": { "type": "PERSON", "score": 1.0, "start": 21 },
+      "Josef": { "type": "PERSON", "score": 1.0, "start": 31 }
+    }
+  },
+  "hi \u00fe\u00f3rbergur, i'm contacting you about a problem i have with sending a wire transfer using this iban il270126100000000544211": {
+    "predicted": {
+      "\u00fe\u00f3rbergur": { "type": "PERSON", "score": 1.0, "start": 3 }
+    },
+    "ground_truth": {
+      "\u00fe\u00f3rbergur": { "type": "PERSON", "score": 1.0, "start": 3 },
+      "il270126100000000544211": { "type": "IBAN", "score": 0.0, "start": 101 }
+    }
+  },
+  "The true gender of Callum has been under debate for years, but the riff and building energy is a rock masterpiece regardless.": {
+    "predicted": {
+      "Callum": { "type": "PERSON", "score": 1.0, "start": 19 },
+      "years": { "type": "DATE", "score": 0.0, "start": 52 }
+    },
+    "ground_truth": {
+      "Callum": { "type": "PERSON", "score": 1.0, "start": 19 }
+    }
+  },
+  "Zoe is very reliable. You can always depend on him.": {
+    "predicted": { "Zoe": { "type": "PERSON", "score": 1.0, "start": 0 } },
+    "ground_truth": { "Zoe": { "type": "PERSON", "score": 1.0, "start": 0 } }
+  },
+  "The address of Zurich Insurance Risk Room is Avenue des Sartiaux 318, Wijchmaal 3990": {
+    "predicted": {
+      "318": { "type": "CARDINAL", "score": 0.0, "start": 65 },
+      "3990": { "type": "CARDINAL", "score": 0.0, "start": 80 }
+    },
+    "ground_truth": {
+      "Avenue des Sartiaux 318, Wijchmaal 3990": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 45
+      }
+    }
+  },
+  "On 29 March 2017, the Laotian government formally began the process of withdrawal by invoking Article 50 of the Treaty on European Union": {
+    "predicted": {
+      "29 March 2017": { "type": "DATE", "score": 0.0, "start": 3 }
+    },
+    "ground_truth": {}
+  },
+  "Hi Lara, I'm contacting you about a problem I have with sending a wire transfer using this IBAN IL270126100000000544211": {
+    "predicted": { "Lara": { "type": "PERSON", "score": 1.0, "start": 3 } },
+    "ground_truth": {
+      "Lara": { "type": "PERSON", "score": 1.0, "start": 3 },
+      "IL270126100000000544211": { "type": "IBAN", "score": 0.0, "start": 96 }
+    }
+  },
+  "What's your email? GombosFrici@armyspy.com": {
+    "predicted": {},
+    "ground_truth": {
+      "GombosFrici@armyspy.com": { "type": "EMAIL", "score": 0.0, "start": 19 }
+    }
+  },
+  "Can someone call me on 51 194 97 76? I have some questions about opening an account.": {
+    "predicted": {
+      "51 194": { "type": "CARDINAL", "score": 1.0, "start": 23 }
+    },
+    "ground_truth": {
+      "51 194 97 76": { "type": "PHONE_NUMBER", "score": 0.5, "start": 23 }
+    }
+  },
+  "How can we reach you? You can call 01.41.28.69.59": {
+    "predicted": {},
+    "ground_truth": {
+      "01.41.28.69.59": { "type": "PHONE_NUMBER", "score": 0.0, "start": 35 }
+    }
+  },
+  "Mission Statement: This non-profit founded by radio executives \"serves as an advocate for the value of music\" and \"supports its songwriters, composers and publishers by taking care of an important aspect of their careers \u2013 getting paid,\" according to the U.N. website. They offer blanket music licenses to businesses and organizations that allow them to play nearly 13 million musical works.": {
+    "predicted": {
+      "nearly 13 million": { "type": "CARDINAL", "score": 0.0, "start": 359 }
+    },
+    "ground_truth": {}
+  },
+  "Why is Barbara so impulsive?": {
+    "predicted": { "Barbara": { "type": "PERSON", "score": 1.0, "start": 7 } },
+    "ground_truth": {
+      "Barbara": { "type": "PERSON", "score": 1.0, "start": 7 }
+    }
+  },
+  "It's like that since 3/2/1947": {
+    "predicted": { "3/2/1947": { "type": "DATE", "score": 1.0, "start": 21 } },
+    "ground_truth": {
+      "3/2/1947": { "type": "BIRTHDAY", "score": 1.0, "start": 21 }
+    }
+  },
+  "The true gender of Kadosa has been under debate for years, but the riff and building energy is a rock masterpiece regardless.": {
+    "predicted": { "years": { "type": "DATE", "score": 0.0, "start": 52 } },
+    "ground_truth": {
+      "Kadosa": { "type": "PERSON", "score": 0.0, "start": 19 }
+    }
+  },
+  "I'm so jealous! said Maisie to Robert": {
+    "predicted": {
+      "Maisie": { "type": "PERSON", "score": 1.0, "start": 21 },
+      "Robert": { "type": "PERSON", "score": 1.0, "start": 31 }
+    },
+    "ground_truth": {
+      "Maisie": { "type": "PERSON", "score": 1.0, "start": 21 },
+      "Robert": { "type": "PERSON", "score": 1.0, "start": 31 }
+    }
+  },
+  "So where are we meeting? There's this nice new Thai place downtown. Cool, what's the address? Oh do they serve vegan stuff? It's in El Roqueo 75, Mota del Cuervo 16630": {
+    "predicted": {
+      "Mota del Cuervo": { "type": "PERSON", "score": 0.0, "start": 146 }
+    },
+    "ground_truth": {
+      "El Roqueo 75, Mota del Cuervo 16630": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 132
+      }
+    }
+  },
+  "I once lived in Villacher Strasse 89, PFAFFING 5230. I now live in 281 Eleftheriou Venizelou str, Orgontas Stathmos 2868": {
+    "predicted": {
+      "Villacher Strasse 89": { "type": "PERSON", "score": 0.0, "start": 16 },
+      "5230": { "type": "CARDINAL", "score": 0.0, "start": 47 },
+      "281": { "type": "CARDINAL", "score": 0.0, "start": 67 },
+      "Eleftheriou Venizelou str": {
+        "type": "PERSON",
+        "score": 0.0,
+        "start": 71
+      },
+      "Orgontas Stathmos 2868": { "type": "PERSON", "score": 0.0, "start": 98 }
+    },
+    "ground_truth": {
+      "Villacher Strasse 89, PFAFFING 5230": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 16
+      },
+      "281 Eleftheriou Venizelou str, Orgontas Stathmos 2868": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 67
+      }
+    }
+  },
+  "I would like to remove my kid Mali from the will. How do I do that?": {
+    "predicted": { "Mali": { "type": "PERSON", "score": 1.0, "start": 30 } },
+    "ground_truth": { "Mali": { "type": "PERSON", "score": 1.0, "start": 30 } }
+  },
+  "I can't browse to your site, keep getting address c4c4:9bac:38a3:886:f173:826c:d16d:e730 blocked error": {
+    "predicted": {
+      "c4c4:9bac:38a3:886:": { "type": "PERSON", "score": 0.0, "start": 50 }
+    },
+    "ground_truth": {
+      "c4c4:9bac:38a3:886:f173:826c:d16d:e730": {
+        "type": "IP_ADDRESS",
+        "score": 0.0,
+        "start": 50
+      }
+    }
+  },
+  "hi line, i'm contacting you about a problem i have with sending a wire transfer using this iban il270126100000000544211": {
+    "predicted": { "line": { "type": "PERSON", "score": 1.0, "start": 3 } },
+    "ground_truth": {
+      "line": { "type": "PERSON", "score": 1.0, "start": 3 },
+      "il270126100000000544211": { "type": "IBAN", "score": 0.0, "start": 96 }
+    }
+  },
+  "How do I open my credit card statement?": {
+    "predicted": {},
+    "ground_truth": {}
+  },
+  "Please tell me your date of birth. It's 6/11/1957": {
+    "predicted": {},
+    "ground_truth": {
+      "6/11/1957": { "type": "BIRTHDAY", "score": 0.0, "start": 40 }
+    }
+  },
+  "Please send my portfolio to this email BerndFrey@gustr.com": {
+    "predicted": {},
+    "ground_truth": {
+      "BerndFrey@gustr.com": { "type": "EMAIL", "score": 0.0, "start": 39 }
+    }
+  },
+  "How do I change the address linked to my credit card to \u039c\u03b5\u03b3\u03ac\u03bb\u03b7 \u0386\u03bc\u03bc\u03bf\u03c2 184, \u03a0\u0391\u03a6\u039f\u03a3 8104?": {
+    "predicted": {
+      "184": { "type": "CARDINAL", "score": 0.0, "start": 69 },
+      "8104": { "type": "DATE", "score": 0.0, "start": 80 }
+    },
+    "ground_truth": {
+      "\u039c\u03b5\u03b3\u03ac\u03bb\u03b7 \u0386\u03bc\u03bc\u03bf\u03c2 184, \u03a0\u0391\u03a6\u039f\u03a3 8104": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 56
+      }
+    }
+  },
+  "Could you please email me the statement for laste month , my credit card number is 5216918553157191?": {
+    "predicted": {
+      "laste month": { "type": "DATE", "score": 0.0, "start": 44 },
+      "5216918553157191": { "type": "DATE", "score": 0.0, "start": 83 }
+    },
+    "ground_truth": {
+      "5216918553157191": { "type": "CREDIT_CARD", "score": 0.0, "start": 83 }
+    }
+  },
+  "Who's coming to Somalia with me?": {
+    "predicted": { "Somalia": { "type": "GPE", "score": 1.0, "start": 16 } },
+    "ground_truth": {
+      "Somalia": { "type": "LOCATION", "score": 1.0, "start": 16 }
+    }
+  },
+  "May I request to have the statement sent to Pettersvollen 195, DRAMMEN 3032?": {
+    "predicted": {},
+    "ground_truth": {
+      "Pettersvollen 195, DRAMMEN 3032": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 44
+      }
+    }
+  },
+  "Flightaware songwriter Arist\u00f3teles \u00c1valos employs corporate lingo in the first verse of his Enervee Corporation Resignation Letter": {
+    "predicted": {
+      "Arist\u00f3teles \u00c1valos": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 23
+      }
+    },
+    "ground_truth": {
+      "Arist\u00f3teles \u00c1valos": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 23
+      }
+    }
+  },
+  "The Christine Dam version recorded for Be Informed became the first celebrity recording by a classical musician to sell one million copies. The song was awarded the seventh gold disc ever granted.": {
+    "predicted": {
+      "Christine": { "type": "PERSON", "score": 1.0, "start": 4 },
+      "one million": { "type": "CARDINAL", "score": 0.0, "start": 120 }
+    },
+    "ground_truth": {
+      "Christine Dam": { "type": "PERSON", "score": 0.69, "start": 4 }
+    }
+  },
+  "Who's coming to Burundi with me?": {
+    "predicted": { "Burundi": { "type": "GPE", "score": 1.0, "start": 16 } },
+    "ground_truth": {
+      "Burundi": { "type": "LOCATION", "score": 1.0, "start": 16 }
+    }
+  },
+  "Erik is very reliable. You can always depend on him.": {
+    "predicted": { "Erik": { "type": "PERSON", "score": 1.0, "start": 0 } },
+    "ground_truth": { "Erik": { "type": "PERSON", "score": 1.0, "start": 0 } }
+  },
+  "How do I check my balance on my credit card?": {
+    "predicted": {},
+    "ground_truth": {}
+  },
+  "In case of my child's account, we need to add Abraham Gaona as guardian": {
+    "predicted": {
+      "Abraham Gaona": { "type": "PERSON", "score": 1.0, "start": 46 }
+    },
+    "ground_truth": {
+      "Abraham Gaona": { "type": "PERSON", "score": 1.0, "start": 46 }
+    }
+  },
+  "I'd like it to be sent to 50 Prestwick Road, INVERERNE IV367FJ": {
+    "predicted": { "50": { "type": "CARDINAL", "score": 0.0, "start": 26 } },
+    "ground_truth": {
+      "50 Prestwick Road, INVERERNE IV367FJ": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 26
+      }
+    }
+  },
+  "Who's coming to China with me?": {
+    "predicted": { "China": { "type": "GPE", "score": 1.0, "start": 16 } },
+    "ground_truth": {
+      "China": { "type": "LOCATION", "score": 1.0, "start": 16 }
+    }
+  },
+  "The name in the account is not correct, please change it to Landro Panicucci": {
+    "predicted": {
+      "Landro Panicucci": { "type": "PERSON", "score": 1.0, "start": 60 }
+    },
+    "ground_truth": {
+      "Landro Panicucci": { "type": "PERSON", "score": 1.0, "start": 60 }
+    }
+  },
+  "dalal mar\u00edn from way better patents is the keynote speaker": {
+    "predicted": {
+      "dalal mar\u00edn": { "type": "PERSON", "score": 1.0, "start": 0 }
+    },
+    "ground_truth": {
+      "dalal mar\u00edn": { "type": "PERSON", "score": 1.0, "start": 0 }
+    }
+  },
+  "My credit card 4556454378058845 has been lost, Can I request you to block it.": {
+    "predicted": {
+      "4556454378058845": { "type": "CARDINAL", "score": 1.0, "start": 15 }
+    },
+    "ground_truth": {
+      "4556454378058845": { "type": "CREDIT_CARD", "score": 1.0, "start": 15 }
+    }
+  },
+  "The title refers to  Street in MOURA. It was on this street that many of the clubs where Metallica first played were situated. \"Battery is found in me\" shows that these early shows on Sunset Drive Street were important to them. Battery is where \"lunacy finds you\" and you \"smash through the boundaries.\"": {
+    "predicted": {
+      "Metallica": { "type": "PERSON", "score": 0.0, "start": 89 }
+    },
+    "ground_truth": {
+      "": { "type": "LOCATION", "score": 0.0, "start": 20 },
+      "MOURA": { "type": "LOCATION", "score": 0.0, "start": 31 },
+      "Sunset Drive": { "type": "LOCATION", "score": 0.0, "start": 184 }
+    }
+  },
+  "Is there a better crafted pop song on this list? \ufeffHor\u00e1k and Vinogradov were precision engineers.": {
+    "predicted": {},
+    "ground_truth": {
+      "\ufeffHor\u00e1k": { "type": "PERSON", "score": 0.0, "start": 49 },
+      "Vinogradov": { "type": "PERSON", "score": 0.0, "start": 60 }
+    }
+  },
+  "Are there any charges applied to widraw money from ATM with the card 5117398483315666": {
+    "predicted": {
+      "5117398483315666": { "type": "CARDINAL", "score": 1.0, "start": 69 }
+    },
+    "ground_truth": {
+      "5117398483315666": { "type": "CREDIT_CARD", "score": 1.0, "start": 69 }
+    }
+  },
+  "The title refers to  Street in Cite Ezzitoun 2. It was on this street that many of the clubs where Metallica first played were situated. \"Battery is found in me\" shows that these early shows on Rue de Ouerdanine Street were important to them. Battery is where \"lunacy finds you\" and you \"smash through the boundaries.\"": {
+    "predicted": { "2": { "type": "CARDINAL", "score": 0.0, "start": 45 } },
+    "ground_truth": {
+      "": { "type": "LOCATION", "score": 0.0, "start": 20 },
+      "Cite Ezzitoun 2": { "type": "LOCATION", "score": 0.0, "start": 31 },
+      "Rue de Ouerdanine": { "type": "LOCATION", "score": 0.0, "start": 194 }
+    }
+  },
+  "Ji\u0159\u00ed Sch\u00e4fer will be talking in the conference": {
+    "predicted": {
+      "Ji\u0159\u00ed Sch\u00e4fer": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 0
+      }
+    },
+    "ground_truth": {
+      "Ji\u0159\u00ed Sch\u00e4fer": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 0
+      }
+    }
+  },
+  "I want to increase limit on my card # 5196008893718508 for certain duration of time. is it possible?": {
+    "predicted": {},
+    "ground_truth": {
+      "5196008893718508": { "type": "CREDIT_CARD", "score": 0.0, "start": 38 }
+    }
+  },
+  "Are there any charges applied to widraw money from ATM with the card 5507254806824207": {
+    "predicted": {
+      "5507254806824207": { "type": "CARDINAL", "score": 1.0, "start": 69 }
+    },
+    "ground_truth": {
+      "5507254806824207": { "type": "CREDIT_CARD", "score": 1.0, "start": 69 }
+    }
+  },
+  "Indoors is the brainchild of our 3 founders: Petr P\u0159ececht\u011bl, Daavid Haanp\u00e4\u00e4 and Michaela Vinkl\u00e1rkov\u00e1.  The idea was born (on the beach) while they were constructing a website to be the basis of another start-up idea.": {
+    "predicted": {
+      "3": { "type": "CARDINAL", "score": 0.0, "start": 33 },
+      "Petr P\u0159ececht\u011bl": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 45
+      },
+      "Daavid Haanp\u00e4\u00e4": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 62
+      },
+      "Michaela Vinkl\u00e1rkov\u00e1": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 81
+      }
+    },
+    "ground_truth": {
+      "Petr P\u0159ececht\u011bl": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 45
+      },
+      "Daavid Haanp\u00e4\u00e4": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 62
+      },
+      "Michaela Vinkl\u00e1rkov\u00e1": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 81
+      }
+    }
+  },
+  "Who's coming to Tanzania with me?": {
+    "predicted": { "Tanzania": { "type": "GPE", "score": 1.0, "start": 16 } },
+    "ground_truth": {
+      "Tanzania": { "type": "LOCATION", "score": 1.0, "start": 16 }
+    }
+  },
+  "I'm moving out of the country, so please cancel my subscription": {
+    "predicted": {},
+    "ground_truth": {}
+  },
+  "What is the limit for card 4485666252538792?": {
+    "predicted": {
+      "4485666252538792": { "type": "CARDINAL", "score": 1.0, "start": 27 }
+    },
+    "ground_truth": {
+      "4485666252538792": { "type": "CREDIT_CARD", "score": 1.0, "start": 27 }
+    }
+  },
+  "His social security number is 831-61-5012": {
+    "predicted": { "831": { "type": "CARDINAL", "score": 1.0, "start": 30 } },
+    "ground_truth": {
+      "831-61-5012": { "type": "US_SSN", "score": 0.27, "start": 30 }
+    }
+  },
+  "may i request to have the statement sent to dreim\u00fchlenweg 94, schmieden 5112?": {
+    "predicted": {
+      "dreim\u00fchlenweg": { "type": "PERSON", "score": 0.0, "start": 44 },
+      "5112": { "type": "CARDINAL", "score": 0.0, "start": 72 }
+    },
+    "ground_truth": {
+      "dreim\u00fchlenweg 94, schmieden 5112": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 44
+      }
+    }
+  },
+  "i'm originally from turkey": {
+    "predicted": { "turkey": { "type": "GPE", "score": 1.0, "start": 20 } },
+    "ground_truth": {
+      "turkey": { "type": "LOCATION", "score": 1.0, "start": 20 }
+    }
+  },
+  "What's your credit card? 5261750518363547": {
+    "predicted": {
+      "5261750518363547": { "type": "DATE", "score": 0.0, "start": 25 }
+    },
+    "ground_truth": {
+      "5261750518363547": { "type": "CREDIT_CARD", "score": 0.0, "start": 25 }
+    }
+  },
+  "From the film American graffiti (also features Tenma Tsuchii. What's not to love?": {
+    "predicted": {
+      "Tenma Tsuchii": { "type": "PERSON", "score": 1.0, "start": 47 }
+    },
+    "ground_truth": {
+      "Tenma Tsuchii": { "type": "PERSON", "score": 1.0, "start": 47 }
+    }
+  },
+  "Mission Statement: This non-profit founded by radio executives \"serves as an advocate for the value of music\" and \"supports its songwriters, composers and publishers by taking care of an important aspect of their careers \u2013 getting paid,\" according to the Solar Census website. They offer blanket music licenses to businesses and organizations that allow them to play nearly 13 million musical works.": {
+    "predicted": {
+      "nearly 13 million": { "type": "CARDINAL", "score": 0.0, "start": 367 }
+    },
+    "ground_truth": {}
+  },
+  "Earthquake Alert is the brainchild of our 3 founders: Abby Laidlaw, Wiola Jab\u0142o\u0144ska and Ansel Masson.  The idea was born (on the beach) while they were constructing a website to be the basis of another start-up idea.": {
+    "predicted": {
+      "3": { "type": "CARDINAL", "score": 0.0, "start": 42 },
+      "Abby Laidlaw": { "type": "PERSON", "score": 1.0, "start": 54 },
+      "Wiola Jab\u0142o\u0144ska": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 68
+      },
+      "Ansel Masson": { "type": "PERSON", "score": 1.0, "start": 88 }
+    },
+    "ground_truth": {
+      "Abby Laidlaw": { "type": "PERSON", "score": 1.0, "start": 54 },
+      "Wiola Jab\u0142o\u0144ska": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 68
+      },
+      "Ansel Masson": { "type": "PERSON", "score": 1.0, "start": 88 }
+    }
+  },
+  "please transfer all funds from my account to this hackers' alexandrawade@fleckens.hu": {
+    "predicted": {},
+    "ground_truth": {
+      "alexandrawade@fleckens.hu": {
+        "type": "EMAIL",
+        "score": 0.0,
+        "start": 59
+      }
+    }
+  },
+  "My name is Louise Thygesen but everyone calls me Louise": {
+    "predicted": {
+      "Louise Thygesen": { "type": "PERSON", "score": 1.0, "start": 11 },
+      "Louise": { "type": "PERSON", "score": 1.0, "start": 49 }
+    },
+    "ground_truth": {
+      "Louise Thygesen": { "type": "PERSON", "score": 1.0, "start": 11 },
+      "Louise": { "type": "PERSON", "score": 1.0, "start": 49 }
+    }
+  },
+  "One of the most depressing songs on the list. He's injured from the waist down from Solomon Islands, but Janet just has to get laid. Don't go to town, Celina!": {
+    "predicted": {
+      "One": { "type": "CARDINAL", "score": 0.0, "start": 0 },
+      "Solomon Islands": { "type": "GPE", "score": 1.0, "start": 84 },
+      "Janet": { "type": "PERSON", "score": 1.0, "start": 105 }
+    },
+    "ground_truth": {
+      "Solomon Islands": { "type": "LOCATION", "score": 1.0, "start": 84 },
+      "Janet": { "type": "PERSON", "score": 1.0, "start": 105 },
+      "Celina": { "type": "PERSON", "score": 0.0, "start": 151 }
+    }
+  },
+  "Please tell me your date of birth. It's 10/19/1975": {
+    "predicted": {},
+    "ground_truth": {
+      "10/19/1975": { "type": "BIRTHDAY", "score": 0.0, "start": 40 }
+    }
+  },
+  "please transfer all funds from my account to this hackers' evemagrath@armyspy.com": {
+    "predicted": {},
+    "ground_truth": {
+      "evemagrath@armyspy.com": { "type": "EMAIL", "score": 0.0, "start": 59 }
+    }
+  },
+  "I want to cancel my card 4556428665644004 because I lost it": {
+    "predicted": {
+      "4556428665644004": { "type": "CARDINAL", "score": 1.0, "start": 25 }
+    },
+    "ground_truth": {
+      "4556428665644004": { "type": "CREDIT_CARD", "score": 1.0, "start": 25 }
+    }
+  },
+  "WHAT ??? I DONT KNOW WHAT TO PRESS NEXT!!! ? !! ?!": {
+    "predicted": {},
+    "ground_truth": {}
+  },
+  "A tribute to Leevi Hasti \u2013 sadly, she wasn't impressed.": {
+    "predicted": {
+      "Leevi Hasti": { "type": "PERSON", "score": 1.0, "start": 13 }
+    },
+    "ground_truth": {
+      "Leevi Hasti": { "type": "PERSON", "score": 1.0, "start": 13 }
+    }
+  },
+  "Sofie is a very sympathetic person. He's also a good listener": {
+    "predicted": { "Sofie": { "type": "PERSON", "score": 1.0, "start": 0 } },
+    "ground_truth": { "Sofie": { "type": "PERSON", "score": 1.0, "start": 0 } }
+  },
+  "C'mon, sing it with me: \"You picked a fine time to leave me Alba, four hungry children and a crop in the field...\"": {
+    "predicted": {
+      "Alba": { "type": "PERSON", "score": 1.0, "start": 60 },
+      "four": { "type": "CARDINAL", "score": 0.0, "start": 66 }
+    },
+    "ground_truth": { "Alba": { "type": "PERSON", "score": 1.0, "start": 60 } }
+  },
+  "Are there any charges applied to widraw money from ATM with the card 5400728668697684": {
+    "predicted": {},
+    "ground_truth": {
+      "5400728668697684": { "type": "CREDIT_CARD", "score": 0.0, "start": 69 }
+    }
+  },
+  "I want to cancel my card 5553074253947076 because I lost it": {
+    "predicted": {
+      "5553074253947076": { "type": "CARDINAL", "score": 1.0, "start": 25 }
+    },
+    "ground_truth": {
+      "5553074253947076": { "type": "CREDIT_CARD", "score": 1.0, "start": 25 }
+    }
+  },
+  "Vu\u010dkovi\u0107 spent a year at Iodine as the assistant to Milenko Vu\u010dkovi\u0107, and the following year at Impact Forecasting Aon in Longueuil, which later became Credit Sesame in 1965.": {
+    "predicted": {
+      "a year": { "type": "DATE", "score": 0.0, "start": 15 },
+      "Milenko Vu\u010dkovi\u0107": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 52
+      },
+      "the following year": { "type": "DATE", "score": 0.0, "start": 74 },
+      "Longueuil": { "type": "GPE", "score": 1.0, "start": 122 },
+      "1965": { "type": "DATE", "score": 0.0, "start": 169 }
+    },
+    "ground_truth": {
+      "Vu\u010dkovi\u0107": { "type": "PERSON", "score": 0.0, "start": 0 },
+      "Milenko Vu\u010dkovi\u0107": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 52
+      },
+      "Longueuil": { "type": "LOCATION", "score": 1.0, "start": 122 }
+    }
+  },
+  "Please block card no 5556061972630791": {
+    "predicted": {},
+    "ground_truth": {
+      "5556061972630791": { "type": "CREDIT_CARD", "score": 0.0, "start": 21 }
+    }
+  },
+  "Sven is a very sympathetic person. He's also a good listener": {
+    "predicted": { "Sven": { "type": "PERSON", "score": 1.0, "start": 0 } },
+    "ground_truth": { "Sven": { "type": "PERSON", "score": 1.0, "start": 0 } }
+  },
+  "how do i check my balance on my credit card?": {
+    "predicted": {},
+    "ground_truth": {}
+  },
+  "The title refers to Oakridge Lane Street in Horjul. It was on this street that many of the clubs where Metallica first played were situated. \"Battery is found in me\" shows that these early shows on  Street were important to them. Battery is where \"lunacy finds you\" and you \"smash through the boundaries.\"": {
+    "predicted": {
+      "Horjul": { "type": "GPE", "score": 1.0, "start": 44 },
+      "Metallica": { "type": "PERSON", "score": 0.0, "start": 103 }
+    },
+    "ground_truth": {
+      "Oakridge Lane": { "type": "LOCATION", "score": 0.0, "start": 20 },
+      "Horjul": { "type": "LOCATION", "score": 1.0, "start": 44 },
+      "": { "type": "LOCATION", "score": 0.0, "start": 198 }
+    }
+  },
+  "What's your last name? Sedej": {
+    "predicted": {},
+    "ground_truth": { "Sedej": { "type": "PERSON", "score": 0.0, "start": 23 } }
+  },
+  "Vrhovski began writing as a teenager, publishing her first story, \"The Dimensions of a Shadow\", in 1950 while studying English and journalism at the University of Wroc\u0142aw.": {
+    "predicted": {
+      "Vrhovski": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "1950": { "type": "DATE", "score": 0.0, "start": 99 }
+    },
+    "ground_truth": {
+      "Vrhovski": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Wroc\u0142aw": { "type": "LOCATION", "score": 0.0, "start": 163 }
+    }
+  },
+  "Please update billing addrress with Dalmatinova 43, Velenje 3503 for this card: 4556488508858765": {
+    "predicted": {
+      "4556488508858765": { "type": "CARDINAL", "score": 1.0, "start": 80 }
+    },
+    "ground_truth": {
+      "Dalmatinova 43, Velenje 3503": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 36
+      },
+      "4556488508858765": { "type": "CREDIT_CARD", "score": 1.0, "start": 80 }
+    }
+  },
+  "I want to add Reuqu\u00e9n Qui\u00f1\u00f3nez as a beneficiary to my account": {
+    "predicted": {
+      "Reuqu\u00e9n Qui\u00f1\u00f3nez": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 14
+      }
+    },
+    "ground_truth": {
+      "Reuqu\u00e9n Qui\u00f1\u00f3nez": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 14
+      }
+    }
+  },
+  "could you please send me the last billed amount for cc 4556884798485816 on my e-mail emilyakhtar@fleckens.hu?": {
+    "predicted": {},
+    "ground_truth": {
+      "4556884798485816": { "type": "CREDIT_CARD", "score": 0.0, "start": 55 },
+      "emilyakhtar@fleckens.hu": { "type": "EMAIL", "score": 0.0, "start": 85 }
+    }
+  },
+  "Greco began writing as a teenager, publishing her first story, \"The Dimensions of a Shadow\", in 1950 while studying English and journalism at the University of Schw\u00e4nberg.": {
+    "predicted": {
+      "Greco": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "1950": { "type": "DATE", "score": 0.0, "start": 96 }
+    },
+    "ground_truth": {
+      "Greco": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Schw\u00e4nberg": { "type": "LOCATION", "score": 0.0, "start": 160 }
+    }
+  },
+  "Is there a better crafted pop song on this list? Vedzizhev and Lundgren were precision engineers.": {
+    "predicted": {
+      "Vedzizhev": { "type": "GPE", "score": 0.0, "start": 49 },
+      "Lundgren": { "type": "PERSON", "score": 1.0, "start": 63 }
+    },
+    "ground_truth": {
+      "Vedzizhev": { "type": "PERSON", "score": 0.0, "start": 49 },
+      "Lundgren": { "type": "PERSON", "score": 1.0, "start": 63 }
+    }
+  },
+  "The true gender of K\u00edra has been under debate for years, but the riff and building energy is a rock masterpiece regardless.": {
+    "predicted": {
+      "K\u00edra": { "type": "GPE", "score": 0.0, "start": 19 },
+      "years": { "type": "DATE", "score": 0.0, "start": 50 }
+    },
+    "ground_truth": {
+      "K\u00edra": { "type": "PERSON", "score": 0.0, "start": 19 }
+    }
+  },
+  "i'm moving out of the country, so please cancel my subscription": {
+    "predicted": {},
+    "ground_truth": {}
+  },
+  "Sometimes people call me Nehemias": {
+    "predicted": {
+      "Nehemias": { "type": "PERSON", "score": 1.0, "start": 25 }
+    },
+    "ground_truth": {
+      "Nehemias": { "type": "PERSON", "score": 1.0, "start": 25 }
+    }
+  },
+  "Not getting bank documents on my addres. Can you please validate the following 482 Protea St, Middelburg 5900": {
+    "predicted": {
+      "482": { "type": "CARDINAL", "score": 0.0, "start": 79 },
+      "5900": { "type": "CARDINAL", "score": 0.0, "start": 105 }
+    },
+    "ground_truth": {
+      "482 Protea St, Middelburg 5900": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 79
+      }
+    }
+  },
+  "Bot: What's the name on the account? User: Valery Weekers": {
+    "predicted": {
+      "Valery Weekers": { "type": "PERSON", "score": 1.0, "start": 43 }
+    },
+    "ground_truth": {
+      "Valery Weekers": { "type": "PERSON", "score": 1.0, "start": 43 }
+    }
+  },
+  "you said your email is kurutzfruzsina@jourrapide.com. is that correct?": {
+    "predicted": {
+      "kurutzfruzsina@jourrapide.com": {
+        "type": "PERSON",
+        "score": 0.0,
+        "start": 23
+      }
+    },
+    "ground_truth": {
+      "kurutzfruzsina@jourrapide.com": {
+        "type": "EMAIL",
+        "score": 0.0,
+        "start": 23
+      }
+    }
+  },
+  "Maybe it's under Clotilde Napolitani": {
+    "predicted": {},
+    "ground_truth": {
+      "Clotilde Napolitani": { "type": "PERSON", "score": 0.0, "start": 17 }
+    }
+  },
+  "On 29 March 2017, the Mozambican government formally began the process of withdrawal by invoking Article 50 of the Treaty on European Union": {
+    "predicted": {
+      "29 March 2017": { "type": "DATE", "score": 0.0, "start": 3 }
+    },
+    "ground_truth": {}
+  },
+  "Hello I moved, please update my new address is Skolegyden 33, K\u00f8benhavn K 1010": {
+    "predicted": {
+      "Skolegyden 33": { "type": "GPE", "score": 1.0, "start": 47 }
+    },
+    "ground_truth": {
+      "Skolegyden 33, K\u00f8benhavn K 1010": {
+        "type": "LOCATION",
+        "score": 0.42,
+        "start": 47
+      }
+    }
+  },
+  "Just posted a photo bondedcompany.at/soft/night/QqDF": {
+    "predicted": {},
+    "ground_truth": {
+      "bondedcompany.at/soft/night/QqDF": {
+        "type": "URL",
+        "score": 0.0,
+        "start": 20
+      }
+    }
+  },
+  "I would like to remove my kid Athina from the will. How do I do that?": {
+    "predicted": { "Athina": { "type": "PERSON", "score": 1.0, "start": 30 } },
+    "ground_truth": {
+      "Athina": { "type": "PERSON", "score": 1.0, "start": 30 }
+    }
+  },
+  "the title refers to  street in voli\u010dina. it was on this street that many of the clubs where metallica first played were situated. \"battery is found in me\" shows that these early shows on  street were important to them. battery is where \"lunacy finds you\" and you \"smash through the boundaries.\"": {
+    "predicted": {
+      "voli\u010dina": { "type": "GPE", "score": 1.0, "start": 31 }
+    },
+    "ground_truth": {
+      "": { "type": "LOCATION", "score": 0.0, "start": 187 },
+      "voli\u010dina": { "type": "LOCATION", "score": 1.0, "start": 31 }
+    }
+  },
+  "Need to see last 10 transaction of card 5190042673719945": {
+    "predicted": {
+      "last 10": { "type": "DATE", "score": 0.0, "start": 12 },
+      "5190042673719945": { "type": "CARDINAL", "score": 1.0, "start": 40 }
+    },
+    "ground_truth": {
+      "5190042673719945": { "type": "CREDIT_CARD", "score": 1.0, "start": 40 }
+    }
+  },
+  "I once lived in Eikarlundur 60, \u00de\u00f3rsh\u00f6fn 680. I now live in Nybyv\u00e4gen 80, SKULTUNA 73050": {
+    "predicted": {
+      "Eikarlundur 60": { "type": "PERSON", "score": 0.0, "start": 16 },
+      "Nybyv\u00e4gen 80": { "type": "GPE", "score": 1.0, "start": 60 },
+      "73050": { "type": "CARDINAL", "score": 0.0, "start": 83 }
+    },
+    "ground_truth": {
+      "Eikarlundur 60, \u00de\u00f3rsh\u00f6fn 680": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 16
+      },
+      "Nybyv\u00e4gen 80, SKULTUNA 73050": {
+        "type": "LOCATION",
+        "score": 0.43,
+        "start": 60
+      }
+    }
+  },
+  "A tribute to Renato Kalloe \u2013 sadly, she wasn't impressed.": {
+    "predicted": {
+      "Renato Kalloe": { "type": "PERSON", "score": 1.0, "start": 13 }
+    },
+    "ground_truth": {
+      "Renato Kalloe": { "type": "PERSON", "score": 1.0, "start": 13 }
+    }
+  },
+  "Koyama spent a year at Nationwide Mutual Insurance Company as the assistant to Soudai Koyama, and the following year at Epsilon in K\u00f8benhavn K, which later became Datamarket in 1965.": {
+    "predicted": {
+      "Koyama": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "a year": { "type": "DATE", "score": 0.0, "start": 13 },
+      "Soudai Koyama": { "type": "PERSON", "score": 1.0, "start": 79 },
+      "the following year": { "type": "DATE", "score": 0.0, "start": 98 },
+      "K\u00f8benhavn K": { "type": "GPE", "score": 1.0, "start": 131 },
+      "Datamarket": { "type": "PERSON", "score": 0.0, "start": 163 },
+      "1965": { "type": "DATE", "score": 0.0, "start": 177 }
+    },
+    "ground_truth": {
+      "Koyama": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Soudai Koyama": { "type": "PERSON", "score": 1.0, "start": 79 },
+      "K\u00f8benhavn K": { "type": "LOCATION", "score": 1.0, "start": 131 }
+    }
+  },
+  "CAN I SPEAK TO A REAL PERSON?!?!": { "predicted": {}, "ground_truth": {} },
+  "I work for Flightview": { "predicted": {}, "ground_truth": {} },
+  "\"The big three\" of The Big Three Killed My Baby are the car manufacturers that dominate the economy of the White Stripes' home city Reykjav\u00edk: Citysourced, Greatschools and Ibm. \"Don't feed me planned obsolescence,\" says An\u0111a Tomi\u0107 in an uncharacteristically political song, lamenting the demise of the unions in the 60s.": {
+    "predicted": {
+      "three": { "type": "CARDINAL", "score": 0.0, "start": 9 },
+      "An\u0111a Tomi\u0107": { "type": "PERSON", "score": 1.0, "start": 221 },
+      "the 60s": { "type": "DATE", "score": 0.0, "start": 313 }
+    },
+    "ground_truth": {
+      "Reykjav\u00edk": { "type": "LOCATION", "score": 0.0, "start": 132 },
+      "An\u0111a Tomi\u0107": { "type": "PERSON", "score": 1.0, "start": 221 }
+    }
+  },
+  "I have lost my card 5199807081286740. Could you please block my credit card ASAP ? , My name is Maisie Griffiths.": {
+    "predicted": {
+      "5199807081286740": { "type": "DATE", "score": 0.0, "start": 20 },
+      "Maisie Griffiths": { "type": "PERSON", "score": 1.0, "start": 96 }
+    },
+    "ground_truth": {
+      "5199807081286740": { "type": "CREDIT_CARD", "score": 0.0, "start": 20 },
+      "Maisie Griffiths": { "type": "PERSON", "score": 1.0, "start": 96 }
+    }
+  },
+  "Astrid Bj\u00f6rgvinsd\u00f3ttir from Wattzon is the keynote speaker": {
+    "predicted": {
+      "Astrid Bj\u00f6rgvinsd\u00f3ttir": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 0
+      }
+    },
+    "ground_truth": {
+      "Astrid Bj\u00f6rgvinsd\u00f3ttir": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 0
+      }
+    }
+  },
+  "I would like to stop receiving messages to 468 1513": {
+    "predicted": { "468": { "type": "CARDINAL", "score": 1.0, "start": 43 } },
+    "ground_truth": {
+      "468 1513": { "type": "PHONE_NUMBER", "score": 0.38, "start": 43 }
+    }
+  },
+  "Fredrik shouted at Rafael: \"What are you doing here?\"": {
+    "predicted": {
+      "Fredrik": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Rafael": { "type": "PERSON", "score": 1.0, "start": 19 }
+    },
+    "ground_truth": {
+      "Fredrik": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Rafael": { "type": "PERSON", "score": 1.0, "start": 19 }
+    }
+  },
+  "Bot: What's the name on the account? User: Ouya Baba": {
+    "predicted": {},
+    "ground_truth": {
+      "Ouya Baba": { "type": "PERSON", "score": 0.0, "start": 43 }
+    }
+  },
+  "On 29 March 2017, the Djiboutian government formally began the process of withdrawal by invoking Article 50 of the Treaty on European Union": {
+    "predicted": {
+      "29 March 2017": { "type": "DATE", "score": 0.0, "start": 3 }
+    },
+    "ground_truth": {}
+  },
+  "bot: where would you like this to be sent to? user: ul. lubartowska 42, lublin 20-115": {
+    "predicted": {
+      "lubartowska": { "type": "PERSON", "score": 0.0, "start": 56 }
+    },
+    "ground_truth": {
+      "ul. lubartowska 42, lublin 20-115": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 52
+      }
+    }
+  },
+  "What's your email? JulianeAmsel@gustr.com": {
+    "predicted": {},
+    "ground_truth": {
+      "JulianeAmsel@gustr.com": { "type": "EMAIL", "score": 0.0, "start": 19 }
+    }
+  },
+  "What's your name? Daniel Thorkildsen": {
+    "predicted": {
+      "Daniel Thorkildsen": { "type": "PERSON", "score": 1.0, "start": 18 }
+    },
+    "ground_truth": {
+      "Daniel Thorkildsen": { "type": "PERSON", "score": 1.0, "start": 18 }
+    }
+  },
+  "have you heard Ulrich Bieber speak yet?": {
+    "predicted": {
+      "Ulrich Bieber": { "type": "PERSON", "score": 1.0, "start": 15 }
+    },
+    "ground_truth": {
+      "Ulrich Bieber": { "type": "PERSON", "score": 1.0, "start": 15 }
+    }
+  },
+  "My card 5275531038487535 expires soon \ufffd when will I get a new one?": {
+    "predicted": {
+      "5275531038487535": { "type": "CARDINAL", "score": 1.0, "start": 8 }
+    },
+    "ground_truth": {
+      "5275531038487535": { "type": "CREDIT_CARD", "score": 1.0, "start": 8 }
+    }
+  },
+  "I will be travelling to Monaco next week, so I need my passport to be ready by then": {
+    "predicted": {
+      "Monaco": { "type": "GPE", "score": 1.0, "start": 24 },
+      "next week": { "type": "DATE", "score": 0.0, "start": 31 }
+    },
+    "ground_truth": {
+      "Monaco": { "type": "LOCATION", "score": 1.0, "start": 24 }
+    }
+  },
+  "Here's my SSN: 486-67-4095": {
+    "predicted": { "486": { "type": "CARDINAL", "score": 1.0, "start": 15 } },
+    "ground_truth": {
+      "486-67-4095": { "type": "US_SSN", "score": 0.27, "start": 15 }
+    }
+  },
+  "I once lived in Binzm\u00fchlestrasse 30, San Bernardino 6565. I now live in ul. Gda\u0144ska 25, Zabrze 41-819": {
+    "predicted": {
+      "Binzm\u00fchlestrasse": { "type": "PERSON", "score": 0.0, "start": 16 },
+      "ul": { "type": "GPE", "score": 1.0, "start": 72 },
+      "Gda\u0144ska": { "type": "PERSON", "score": 0.0, "start": 76 },
+      "25": { "type": "CARDINAL", "score": 0.0, "start": 84 },
+      "41": { "type": "CARDINAL", "score": 0.0, "start": 95 }
+    },
+    "ground_truth": {
+      "Binzm\u00fchlestrasse 30, San Bernardino 6565": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 16
+      },
+      "ul. Gda\u0144ska 25, Zabrze 41-819": {
+        "type": "LOCATION",
+        "score": 0.07,
+        "start": 72
+      }
+    }
+  },
+  "I'm so jealous! said Silvia to Natasja": {
+    "predicted": {
+      "Silvia": { "type": "PERSON", "score": 1.0, "start": 21 },
+      "Natasja": { "type": "PERSON", "score": 1.0, "start": 31 }
+    },
+    "ground_truth": {
+      "Silvia": { "type": "PERSON", "score": 1.0, "start": 21 },
+      "Natasja": { "type": "PERSON", "score": 1.0, "start": 31 }
+    }
+  },
+  "My IBAN is IL270126100000000544211": {
+    "predicted": {},
+    "ground_truth": {
+      "IL270126100000000544211": { "type": "IBAN", "score": 0.0, "start": 11 }
+    }
+  },
+  "When they weren't singing about Hobbits, satanic felines and interstellar journeys, they were singing about the verses from Oumaima Ronner's Cautionary Tales. Is there a better example of unbridled creativity than early Ronner?": {
+    "predicted": {
+      "Oumaima Ronner's": { "type": "PERSON", "score": 0.88, "start": 124 },
+      "Ronner": { "type": "PERSON", "score": 1.0, "start": 220 }
+    },
+    "ground_truth": {
+      "Oumaima Ronner": { "type": "PERSON", "score": 1.0, "start": 124 },
+      "Ronner": { "type": "PERSON", "score": 1.0, "start": 220 }
+    }
+  },
+  "My credit card 5556674415148054 has been lost, Can I request you to block it.": {
+    "predicted": {
+      "5556674415148054": { "type": "DATE", "score": 0.0, "start": 15 }
+    },
+    "ground_truth": {
+      "5556674415148054": { "type": "CREDIT_CARD", "score": 0.0, "start": 15 }
+    }
+  },
+  "kazu kichida listed his top 20 songs for entertainment weekly and had the balls to list this song at #15. (what did he put at #1 you ask? answer:\"tube snake boogie\" by kelima kisilak \u2013 go figure)": {
+    "predicted": {
+      "kazu kichida": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "20": { "type": "CARDINAL", "score": 0.0, "start": 28 },
+      "weekly": { "type": "DATE", "score": 0.0, "start": 55 },
+      "kelima kisilak": { "type": "PERSON", "score": 1.0, "start": 168 }
+    },
+    "ground_truth": {
+      "kazu kichida": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "kelima kisilak": { "type": "PERSON", "score": 1.0, "start": 168 }
+    }
+  },
+  "His social security number is 398-97-5122": {
+    "predicted": { "398": { "type": "CARDINAL", "score": 1.0, "start": 30 } },
+    "ground_truth": {
+      "398-97-5122": { "type": "US_SSN", "score": 0.27, "start": 30 }
+    }
+  },
+  "Please transfer all funds from my account to this hackers' HildingCarlsson@cuvox.de": {
+    "predicted": {},
+    "ground_truth": {
+      "HildingCarlsson@cuvox.de": { "type": "EMAIL", "score": 0.0, "start": 59 }
+    }
+  },
+  "My religion does not allow speaking to bots, they are evil and hacked by the Devil": {
+    "predicted": {},
+    "ground_truth": {}
+  },
+  "His social security number is 866-40-5923": {
+    "predicted": { "866": { "type": "CARDINAL", "score": 1.0, "start": 30 } },
+    "ground_truth": {
+      "866-40-5923": { "type": "US_SSN", "score": 0.27, "start": 30 }
+    }
+  },
+  "Who's coming to Mozambique with me?": {
+    "predicted": { "Mozambique": { "type": "GPE", "score": 1.0, "start": 16 } },
+    "ground_truth": {
+      "Mozambique": { "type": "LOCATION", "score": 1.0, "start": 16 }
+    }
+  },
+  "May I request to have the statement sent to Liini 22, Metsla 73307?": {
+    "predicted": {
+      "Metsla 73307": { "type": "PERSON", "score": 0.0, "start": 54 }
+    },
+    "ground_truth": {
+      "Liini 22, Metsla 73307": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 44
+      }
+    }
+  },
+  "During the 1990s, Asc Partners invested heavily in new microprocessor designs fostering the rapid growth of the computer industry.": {
+    "predicted": { "the 1990s": { "type": "DATE", "score": 0.0, "start": 7 } },
+    "ground_truth": {}
+  },
+  "Oliver is a very sympathetic person. He's also a good listener": {
+    "predicted": { "Oliver": { "type": "PERSON", "score": 1.0, "start": 0 } },
+    "ground_truth": { "Oliver": { "type": "PERSON", "score": 1.0, "start": 0 } }
+  },
+  "Here's my SSN: 480-76-6997": {
+    "predicted": { "480": { "type": "CARDINAL", "score": 1.0, "start": 15 } },
+    "ground_truth": {
+      "480-76-6997": { "type": "US_SSN", "score": 0.27, "start": 15 }
+    }
+  },
+  "Tyson, can I please speak to your boss?": {
+    "predicted": { "Tyson": { "type": "PERSON", "score": 1.0, "start": 0 } },
+    "ground_truth": { "Tyson": { "type": "PERSON", "score": 1.0, "start": 0 } }
+  },
+  "I'm originally from Lithuania": {
+    "predicted": { "Lithuania": { "type": "GPE", "score": 1.0, "start": 20 } },
+    "ground_truth": {
+      "Lithuania": { "type": "LOCATION", "score": 1.0, "start": 20 }
+    }
+  },
+  "For my take on Mr. Petrussen, see Guilty Pleasures: 5 Musicians Of The 70s You're Supposed To Hate (But Secretly Love)": {
+    "predicted": {
+      "Petrussen": { "type": "PERSON", "score": 1.0, "start": 19 },
+      "5": { "type": "CARDINAL", "score": 0.0, "start": 52 }
+    },
+    "ground_truth": {
+      "Petrussen": { "type": "PERSON", "score": 1.0, "start": 19 }
+    }
+  },
+  "I'm originally from Burma (Or Myanmar)": {
+    "predicted": {
+      "Burma": { "type": "GPE", "score": 1.0, "start": 20 },
+      "Myanmar": { "type": "GPE", "score": 1.0, "start": 30 }
+    },
+    "ground_truth": {
+      "Burma (Or Myanmar)": { "type": "LOCATION", "score": 0.67, "start": 20 }
+    }
+  },
+  "What's your credit card? 5574896932989797": {
+    "predicted": {
+      "5574896932989797": { "type": "DATE", "score": 0.0, "start": 25 }
+    },
+    "ground_truth": {
+      "5574896932989797": { "type": "CREDIT_CARD", "score": 0.0, "start": 25 }
+    }
+  },
+  "I want to upadte my primary and secondary address to same: Skoanveien 226, FAUSKE 8200": {
+    "predicted": {
+      "Skoanveien 226": { "type": "PERSON", "score": 0.0, "start": 59 }
+    },
+    "ground_truth": {
+      "Skoanveien 226, FAUSKE 8200": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 59
+      }
+    }
+  },
+  "Alphonsine Coupart listed his top 20 songs for Entertainment Weekly and had the balls to list this song at #15. (What did he put at #1 you ask? Answer:\"Tube Snake Boogie\" by Andr\u00e9 Souza \u2013 go figure)": {
+    "predicted": {
+      "Alphonsine Coupart": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "20": { "type": "CARDINAL", "score": 0.0, "start": 34 },
+      "Answer:\"Tube Snake Boogie": {
+        "type": "PERSON",
+        "score": 0.0,
+        "start": 144
+      },
+      "Andr\u00e9 Souza": { "type": "PERSON", "score": 1.0, "start": 174 }
+    },
+    "ground_truth": {
+      "Alphonsine Coupart": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Andr\u00e9 Souza": { "type": "PERSON", "score": 1.0, "start": 174 }
+    }
+  },
+  "Sky songwriter Alexandra S\u00e1ghy employs corporate lingo in the first verse of his Sophic Systems Alliance Resignation Letter": {
+    "predicted": {
+      "Alexandra S\u00e1ghy": { "type": "PERSON", "score": 1.0, "start": 15 }
+    },
+    "ground_truth": {
+      "Alexandra S\u00e1ghy": { "type": "PERSON", "score": 1.0, "start": 15 }
+    }
+  },
+  "Who's coming to South Africa with me?": {
+    "predicted": {
+      "South Africa": { "type": "GPE", "score": 1.0, "start": 16 }
+    },
+    "ground_truth": {
+      "South Africa": { "type": "LOCATION", "score": 1.0, "start": 16 }
+    }
+  },
+  "Not getting bank documents on my addres. Can you please validate the following 1317 Kimberly Way, Grand Rapids 49503": {
+    "predicted": {
+      "1317": { "type": "CARDINAL", "score": 0.0, "start": 79 },
+      "Kimberly Way": { "type": "PERSON", "score": 0.0, "start": 84 },
+      "Grand Rapids": { "type": "GPE", "score": 1.0, "start": 98 },
+      "49503": { "type": "DATE", "score": 0.0, "start": 111 }
+    },
+    "ground_truth": {
+      "1317 Kimberly Way, Grand Rapids 49503": {
+        "type": "LOCATION",
+        "score": 0.32,
+        "start": 79
+      }
+    }
+  },
+  "Celebrating its 10th year in KOOJAN, Overture Technologies is a 501(c)3 that invites songwriters from around the world to Texas to share the universal language of music in collaborations designed to bridge cultures, build friendships and cultivate peace.": {
+    "predicted": {
+      "501(c)3": { "type": "CARDINAL", "score": 0.0, "start": 64 },
+      "Texas": { "type": "GPE", "score": 0.0, "start": 122 }
+    },
+    "ground_truth": {
+      "KOOJAN": { "type": "LOCATION", "score": 0.0, "start": 29 }
+    }
+  },
+  "Just posted a photo http://premiumbot.com.cy/gentlemudNpca4": {
+    "predicted": {},
+    "ground_truth": {
+      "http://premiumbot.com.cy/gentlemudNpca4": {
+        "type": "URL",
+        "score": 0.0,
+        "start": 20
+      }
+    }
+  },
+  "Please tell me your date of birth. It's 7/5/1958": {
+    "predicted": {},
+    "ground_truth": {
+      "7/5/1958": { "type": "BIRTHDAY", "score": 0.0, "start": 40 }
+    }
+  },
+  "Please tell me your date of birth. It's 11/22/2000": {
+    "predicted": {},
+    "ground_truth": {
+      "11/22/2000": { "type": "BIRTHDAY", "score": 0.0, "start": 40 }
+    }
+  },
+  "here's my ssn: 396-98-7804": {
+    "predicted": { "396": { "type": "CARDINAL", "score": 1.0, "start": 15 } },
+    "ground_truth": {
+      "396-98-7804": { "type": "US_SSN", "score": 0.27, "start": 15 }
+    }
+  },
+  "please have the manager call me at 0483 84 44 50 i'd like to join accounts with ms. kusama": {
+    "predicted": { "kusama": { "type": "PERSON", "score": 1.0, "start": 84 } },
+    "ground_truth": {
+      "0483 84 44 50": { "type": "PHONE_NUMBER", "score": 0.0, "start": 35 },
+      "kusama": { "type": "PERSON", "score": 1.0, "start": 84 }
+    }
+  },
+  "Are there any charges applied to widraw money from ATM with the card 4532686979246803": {
+    "predicted": {
+      "4532686979246803": { "type": "CARDINAL", "score": 1.0, "start": 69 }
+    },
+    "ground_truth": {
+      "4532686979246803": { "type": "CREDIT_CARD", "score": 1.0, "start": 69 }
+    }
+  },
+  "Please transfer all funds from my account to this hackers' AbbyKincaid@armyspy.com": {
+    "predicted": {},
+    "ground_truth": {
+      "AbbyKincaid@armyspy.com": { "type": "EMAIL", "score": 0.0, "start": 59 }
+    }
+  },
+  "I'm so jealous! said Brosca to Emilia": {
+    "predicted": {
+      "Brosca": { "type": "PERSON", "score": 1.0, "start": 21 },
+      "Emilia": { "type": "PERSON", "score": 1.0, "start": 31 }
+    },
+    "ground_truth": {
+      "Brosca": { "type": "PERSON", "score": 1.0, "start": 21 },
+      "Emilia": { "type": "PERSON", "score": 1.0, "start": 31 }
+    }
+  },
+  "Here's my SSN: 361-58-9002": {
+    "predicted": { "361": { "type": "CARDINAL", "score": 1.0, "start": 15 } },
+    "ground_truth": {
+      "361-58-9002": { "type": "US_SSN", "score": 0.27, "start": 15 }
+    }
+  },
+  "I have done an online order but didn't get any message on my registered 27 848088. Could you please look into it ?": {
+    "predicted": { "27 848088": { "type": "DATE", "score": 0.0, "start": 72 } },
+    "ground_truth": {
+      "27 848088": { "type": "PHONE_NUMBER", "score": 0.0, "start": 72 }
+    }
+  },
+  "Please transfer all funds from my account to this hackers' FelixKastner@dayrep.com": {
+    "predicted": {},
+    "ground_truth": {
+      "FelixKastner@dayrep.com": { "type": "EMAIL", "score": 0.0, "start": 59 }
+    }
+  },
+  "Can someone call me on 22 778128? I have some questions about opening an account.": {
+    "predicted": { "22 778128": { "type": "DATE", "score": 0.0, "start": 23 } },
+    "ground_truth": {
+      "22 778128": { "type": "PHONE_NUMBER", "score": 0.0, "start": 23 }
+    }
+  },
+  "Please tell me your date of birth. It's 10/20/1960": {
+    "predicted": {},
+    "ground_truth": {
+      "10/20/1960": { "type": "BIRTHDAY", "score": 0.0, "start": 40 }
+    }
+  },
+  "The address of Solarlist is Fitjabraut 85, Keflav\u00edk 230": {
+    "predicted": {
+      "Solarlist": { "type": "GPE", "score": 0.0, "start": 15 },
+      "230": { "type": "CARDINAL", "score": 0.0, "start": 52 }
+    },
+    "ground_truth": {
+      "Fitjabraut 85, Keflav\u00edk 230": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 28
+      }
+    }
+  },
+  "Have you been to a Liam Tran concert before?": {
+    "predicted": {
+      "Liam Tran": { "type": "PERSON", "score": 1.0, "start": 19 }
+    },
+    "ground_truth": {
+      "Liam Tran": { "type": "PERSON", "score": 1.0, "start": 19 }
+    }
+  },
+  "my nam is asmart": {
+    "predicted": { "nam": { "type": "PERSON", "score": 0.0, "start": 3 } },
+    "ground_truth": {
+      "asmart": { "type": "PERSON", "score": 0.0, "start": 10 }
+    }
+  },
+  "Please tell me your date of birth. It's 1/13/1977": {
+    "predicted": { "1/13/1977": { "type": "DATE", "score": 1.0, "start": 40 } },
+    "ground_truth": {
+      "1/13/1977": { "type": "BIRTHDAY", "score": 1.0, "start": 40 }
+    }
+  },
+  "Bot: Where would you like this to be sent to? User: La Fontanilla 37, Villaviciosa de C\u00f3rdoba 14300": {
+    "predicted": {
+      "La Fontanilla 37": { "type": "PERSON", "score": 0.0, "start": 52 },
+      "Villaviciosa de C\u00f3rdoba": {
+        "type": "PERSON",
+        "score": 0.0,
+        "start": 70
+      }
+    },
+    "ground_truth": {
+      "La Fontanilla 37, Villaviciosa de C\u00f3rdoba 14300": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 52
+      }
+    }
+  },
+  "Bot: What's the name on the account? User: Thiago Alves": {
+    "predicted": {
+      "Thiago Alves": { "type": "PERSON", "score": 1.0, "start": 43 }
+    },
+    "ground_truth": {
+      "Thiago Alves": { "type": "PERSON", "score": 1.0, "start": 43 }
+    }
+  },
+  "Meet me at 4520 Nelson Street, Pickle Lake P0V3A0": {
+    "predicted": {
+      "Pickle Lake": { "type": "LOC", "score": 1.0, "start": 31 }
+    },
+    "ground_truth": {
+      "4520 Nelson Street, Pickle Lake P0V3A0": {
+        "type": "LOCATION",
+        "score": 0.29,
+        "start": 11
+      }
+    }
+  },
+  "Are there any charges applied to widraw money from ATM with the card 5509545094787578": {
+    "predicted": {
+      "5509545094787578": { "type": "CARDINAL", "score": 1.0, "start": 69 }
+    },
+    "ground_truth": {
+      "5509545094787578": { "type": "CREDIT_CARD", "score": 1.0, "start": 69 }
+    }
+  },
+  "Here's my SSN: 694-79-2773": {
+    "predicted": { "694": { "type": "CARDINAL", "score": 1.0, "start": 15 } },
+    "ground_truth": {
+      "694-79-2773": { "type": "US_SSN", "score": 0.27, "start": 15 }
+    }
+  },
+  "Tereza shouted at Tyler: \"What are you doing here?\"": {
+    "predicted": {
+      "Tereza": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Tyler": { "type": "PERSON", "score": 1.0, "start": 18 }
+    },
+    "ground_truth": {
+      "Tereza": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Tyler": { "type": "PERSON", "score": 1.0, "start": 18 }
+    }
+  },
+  "The name in the account is not correct, please change it to Ante Bengtsson": {
+    "predicted": {},
+    "ground_truth": {
+      "Ante Bengtsson": { "type": "PERSON", "score": 0.0, "start": 60 }
+    }
+  },
+  "Mission Statement: This non-profit founded by radio executives \"serves as an advocate for the value of music\" and \"supports its songwriters, composers and publishers by taking care of an important aspect of their careers \u2013 getting paid,\" according to the Olsen, Mitchell And Jackson website. They offer blanket music licenses to businesses and organizations that allow them to play nearly 13 million musical works.": {
+    "predicted": {
+      "Olsen": { "type": "PERSON", "score": 0.0, "start": 255 },
+      "Mitchell": { "type": "PERSON", "score": 0.0, "start": 262 },
+      "Jackson": { "type": "PERSON", "score": 0.0, "start": 275 },
+      "nearly 13 million": { "type": "CARDINAL", "score": 0.0, "start": 382 }
+    },
+    "ground_truth": {}
+  },
+  "I want to increase limit on my card # 4916537536320027 for certain duration of time. is it possible?": {
+    "predicted": {},
+    "ground_truth": {
+      "4916537536320027": { "type": "CREDIT_CARD", "score": 0.0, "start": 38 }
+    }
+  },
+  "Need to change billing date of my card 4539548223463852": {
+    "predicted": {
+      "4539548223463852": { "type": "CARDINAL", "score": 1.0, "start": 39 }
+    },
+    "ground_truth": {
+      "4539548223463852": { "type": "CREDIT_CARD", "score": 1.0, "start": 39 }
+    }
+  },
+  "what's your email? allanbjork@einrot.com": {
+    "predicted": {},
+    "ground_truth": {
+      "allanbjork@einrot.com": { "type": "EMAIL", "score": 0.0, "start": 19 }
+    }
+  },
+  "It may be too that Lind was influenced by an earlier song, \"Carry Me Back To Fiji,\" which was arranged and sung by Gabriela B\u00e1rtov\u00e1 in 1847 (though B\u00e1rtov\u00e1's song was actually about a boat!).": {
+    "predicted": {
+      "Lind": { "type": "PERSON", "score": 1.0, "start": 19 },
+      "Gabriela B\u00e1rtov\u00e1": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 115
+      },
+      "1847": { "type": "DATE", "score": 0.0, "start": 135 }
+    },
+    "ground_truth": {
+      "Lind": { "type": "PERSON", "score": 1.0, "start": 19 },
+      "Fiji": { "type": "LOCATION", "score": 0.0, "start": 77 },
+      "Gabriela B\u00e1rtov\u00e1": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 115
+      },
+      "B\u00e1rtov\u00e1": { "type": "PERSON", "score": 0.0, "start": 148 }
+    }
+  },
+  "Maybe it's under Grgur Luki\u0107": {
+    "predicted": {},
+    "ground_truth": {
+      "Grgur Luki\u0107": { "type": "PERSON", "score": 0.0, "start": 17 }
+    }
+  },
+  "I'd like to order a taxi to Sk\u00e4rpinge 61, ST\u00d6DE 86013": {
+    "predicted": {
+      "Sk\u00e4rpinge 61": { "type": "PERSON", "score": 0.0, "start": 28 },
+      "86013": { "type": "DATE", "score": 0.0, "start": 48 }
+    },
+    "ground_truth": {
+      "Sk\u00e4rpinge 61, ST\u00d6DE 86013": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 28
+      }
+    }
+  },
+  "In Barbados} they have company songs, musical expressions of employee loyalty sung by salarymen. Unfortunately, as regular RR commenter Vidica Zako\u010d points out, \"most are horrible\".": {
+    "predicted": {
+      "Barbados": { "type": "GPE", "score": 1.0, "start": 3 },
+      "Vidica Zako\u010d": { "type": "PERSON", "score": 1.0, "start": 136 }
+    },
+    "ground_truth": {
+      "Barbados": { "type": "LOCATION", "score": 1.0, "start": 3 },
+      "Vidica Zako\u010d": { "type": "PERSON", "score": 1.0, "start": 136 }
+    }
+  },
+  "Please tell me your date of birth. It's 7/2/1995": {
+    "predicted": {},
+    "ground_truth": {
+      "7/2/1995": { "type": "BIRTHDAY", "score": 0.0, "start": 40 }
+    }
+  },
+  "I have lost my card 5403551039848381. Could you please block my credit card ASAP ? , My name is Regine Egede.": {
+    "predicted": {
+      "5403551039848381": { "type": "DATE", "score": 0.0, "start": 20 },
+      "Regine Egede": { "type": "PERSON", "score": 1.0, "start": 96 }
+    },
+    "ground_truth": {
+      "5403551039848381": { "type": "CREDIT_CARD", "score": 0.0, "start": 20 },
+      "Regine Egede": { "type": "PERSON", "score": 1.0, "start": 96 }
+    }
+  },
+  "Blink-182 pay tribute here to the Honduras. Producer Wijtze Boelens explained to Fuse TV: \"We all liked the idea of writing a song about our state, where we live and love. To me it's the most beautiful place in the world, this song was us giving credit to how lucky we are to have lived here and grown up here, raising families here, the whole thing.\"": {
+    "predicted": {
+      "Honduras": { "type": "GPE", "score": 1.0, "start": 34 },
+      "Wijtze Boelens": { "type": "PERSON", "score": 1.0, "start": 53 }
+    },
+    "ground_truth": {
+      "Honduras": { "type": "LOCATION", "score": 1.0, "start": 34 },
+      "Wijtze Boelens": { "type": "PERSON", "score": 1.0, "start": 53 }
+    }
+  },
+  "My website is http://microupdates.ch/tinygladeCnLuU": {
+    "predicted": {},
+    "ground_truth": {
+      "http://microupdates.ch/tinygladeCnLuU": {
+        "type": "URL",
+        "score": 0.0,
+        "start": 14
+      }
+    }
+  },
+  "My nam is Kenneth": {
+    "predicted": {
+      "nam": { "type": "PERSON", "score": 0.0, "start": 3 },
+      "Kenneth": { "type": "PERSON", "score": 1.0, "start": 10 }
+    },
+    "ground_truth": {
+      "Kenneth": { "type": "PERSON", "score": 1.0, "start": 10 }
+    }
+  },
+  "What are my options?": { "predicted": {}, "ground_truth": {} },
+  "For my take on Mr. Pettersson, see Guilty Pleasures: 5 Musicians Of The 70s You're Supposed To Hate (But Secretly Love)": {
+    "predicted": {
+      "Pettersson": { "type": "PERSON", "score": 1.0, "start": 19 },
+      "5": { "type": "CARDINAL", "score": 0.0, "start": 53 }
+    },
+    "ground_truth": {
+      "Pettersson": { "type": "PERSON", "score": 1.0, "start": 19 }
+    }
+  },
+  "Christian is a very sympathetic person. He's also a good listener": {
+    "predicted": {},
+    "ground_truth": {
+      "Christian": { "type": "PERSON", "score": 0.0, "start": 0 }
+    }
+  },
+  "So where are we meeting? There's this nice new Thai place downtown. Cool, what's the address? Oh do they serve vegan stuff? It's in 203 Kingswood Road, Tauranga 3110": {
+    "predicted": {
+      "203": { "type": "CARDINAL", "score": 0.0, "start": 132 },
+      "Tauranga": { "type": "GPE", "score": 1.0, "start": 152 },
+      "3110": { "type": "CARDINAL", "score": 0.0, "start": 161 }
+    },
+    "ground_truth": {
+      "203 Kingswood Road, Tauranga 3110": {
+        "type": "LOCATION",
+        "score": 0.24,
+        "start": 132
+      }
+    }
+  },
+  "I want to cancel my card 4716170593262767 because I lost it": {
+    "predicted": {
+      "4716170593262767": { "type": "CARDINAL", "score": 1.0, "start": 25 }
+    },
+    "ground_truth": {
+      "4716170593262767": { "type": "CREDIT_CARD", "score": 1.0, "start": 25 }
+    }
+  },
+  "Bot: Where would you like this to be sent to? User: Avenida Marqu\u00eas Tomar 103, Lisboa 1700-149": {
+    "predicted": {
+      "103": { "type": "CARDINAL", "score": 0.0, "start": 74 },
+      "1700-149": { "type": "CARDINAL", "score": 0.0, "start": 86 }
+    },
+    "ground_truth": {
+      "Avenida Marqu\u00eas Tomar 103, Lisboa 1700-149": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 52
+      }
+    }
+  },
+  "It's like that since 4/23/1994": {
+    "predicted": {
+      "4/23/1994": { "type": "CARDINAL", "score": 0.0, "start": 21 }
+    },
+    "ground_truth": {
+      "4/23/1994": { "type": "BIRTHDAY", "score": 0.0, "start": 21 }
+    }
+  },
+  "You said your email is SamirJelenovic@jourrapide.com. Is that correct?": {
+    "predicted": {},
+    "ground_truth": {
+      "SamirJelenovic@jourrapide.com": {
+        "type": "EMAIL",
+        "score": 0.0,
+        "start": 23
+      }
+    }
+  },
+  "Could I change the payment due date of my credit card?": {
+    "predicted": {},
+    "ground_truth": {}
+  },
+  "From the film American graffiti (also features Homer Walker. What's not to love?": {
+    "predicted": {
+      "Homer Walker": { "type": "PERSON", "score": 1.0, "start": 47 }
+    },
+    "ground_truth": {
+      "Homer Walker": { "type": "PERSON", "score": 1.0, "start": 47 }
+    }
+  },
+  "Please have the manager call me at 967 29 104 I'd like to join accounts with ms. Murat": {
+    "predicted": {
+      "967 29": { "type": "CARDINAL", "score": 1.0, "start": 35 },
+      "Murat": { "type": "PERSON", "score": 1.0, "start": 81 }
+    },
+    "ground_truth": {
+      "967 29 104": { "type": "PHONE_NUMBER", "score": 0.6, "start": 35 },
+      "Murat": { "type": "PERSON", "score": 1.0, "start": 81 }
+    }
+  },
+  "I've shared files with you taxdiscussions.si/lucky/wood/srDOcP": {
+    "predicted": {
+      "taxdiscussions.si/lucky/wood/srDOcP": {
+        "type": "PERSON",
+        "score": 0.0,
+        "start": 27
+      }
+    },
+    "ground_truth": {
+      "taxdiscussions.si/lucky/wood/srDOcP": {
+        "type": "URL",
+        "score": 0.0,
+        "start": 27
+      }
+    }
+  },
+  "Just posted a photo http://www.vegetarianpizzas.hu/orange/salad/Opib": {
+    "predicted": {},
+    "ground_truth": {
+      "http://www.vegetarianpizzas.hu/orange/salad/Opib": {
+        "type": "URL",
+        "score": 0.0,
+        "start": 20
+      }
+    }
+  },
+  "Iraq was super fun to visit!": {
+    "predicted": { "Iraq": { "type": "GPE", "score": 1.0, "start": 0 } },
+    "ground_truth": { "Iraq": { "type": "LOCATION", "score": 1.0, "start": 0 } }
+  },
+  "Celebrating its 10th year in Beniarbeig, Scale Unlimited is a 501(c)3 that invites songwriters from around the world to Texas to share the universal language of music in collaborations designed to bridge cultures, build friendships and cultivate peace.": {
+    "predicted": {
+      "501(c)3": { "type": "CARDINAL", "score": 0.0, "start": 62 },
+      "Texas": { "type": "GPE", "score": 0.0, "start": 120 }
+    },
+    "ground_truth": {
+      "Beniarbeig": { "type": "LOCATION", "score": 0.0, "start": 29 }
+    }
+  },
+  "Simone is from Rivet Software": {
+    "predicted": { "Simone": { "type": "PERSON", "score": 1.0, "start": 0 } },
+    "ground_truth": { "Simone": { "type": "PERSON", "score": 1.0, "start": 0 } }
+  },
+  "Is there a better crafted pop song on this list? Garner and Arata were precision engineers.": {
+    "predicted": {
+      "Garner": { "type": "PERSON", "score": 1.0, "start": 49 },
+      "Arata": { "type": "PERSON", "score": 1.0, "start": 60 }
+    },
+    "ground_truth": {
+      "Garner": { "type": "PERSON", "score": 1.0, "start": 49 },
+      "Arata": { "type": "PERSON", "score": 1.0, "start": 60 }
+    }
+  },
+  "Here's my SSN: 347-91-9755": {
+    "predicted": { "347": { "type": "CARDINAL", "score": 1.0, "start": 15 } },
+    "ground_truth": {
+      "347-91-9755": { "type": "US_SSN", "score": 0.27, "start": 15 }
+    }
+  },
+  "What is the limit for card 5577657047611396?": {
+    "predicted": {
+      "5577657047611396": { "type": "DATE", "score": 0.0, "start": 27 }
+    },
+    "ground_truth": {
+      "5577657047611396": { "type": "CREDIT_CARD", "score": 0.0, "start": 27 }
+    }
+  },
+  "I want to upadte my primary and secondary address to same: 2625 Petunia Way, Birmingham 35209": {
+    "predicted": { "2625": { "type": "CARDINAL", "score": 0.0, "start": 59 } },
+    "ground_truth": {
+      "2625 Petunia Way, Birmingham 35209": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 59
+      }
+    }
+  },
+  "Hideko, can I please speak to your boss?": {
+    "predicted": { "Hideko": { "type": "GPE", "score": 0.0, "start": 0 } },
+    "ground_truth": { "Hideko": { "type": "PERSON", "score": 0.0, "start": 0 } }
+  },
+  "It's like that since 1/20/1951": {
+    "predicted": {},
+    "ground_truth": {
+      "1/20/1951": { "type": "BIRTHDAY", "score": 0.0, "start": 21 }
+    }
+  },
+  "I'm so jealous! said Virginia to Pirkko": {
+    "predicted": { "Virginia": { "type": "GPE", "score": 0.0, "start": 21 } },
+    "ground_truth": {
+      "Virginia": { "type": "PERSON", "score": 0.0, "start": 21 },
+      "Pirkko": { "type": "PERSON", "score": 0.0, "start": 33 }
+    }
+  },
+  "i need to add  addresses, here they are: via degli aldobrandeschi 3, jelsi 86015, 49 kallirois avenue, paphos 8020": {
+    "predicted": { "49": { "type": "CARDINAL", "score": 0.0, "start": 82 } },
+    "ground_truth": {
+      "via degli aldobrandeschi 3, jelsi 86015": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 41
+      },
+      "49 kallirois avenue, paphos 8020": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 82
+      }
+    }
+  },
+  "You can tell Rinoka was a huge Rinoka Kamei fan. Written when he was only 14.": {
+    "predicted": {
+      "Rinoka": { "type": "PERSON", "score": 1.0, "start": 13 },
+      "Rinoka Kamei": { "type": "PERSON", "score": 1.0, "start": 31 }
+    },
+    "ground_truth": {
+      "Rinoka": { "type": "PERSON", "score": 1.0, "start": 13 },
+      "Rinoka Kamei": { "type": "PERSON", "score": 1.0, "start": 31 }
+    }
+  },
+  "Margaret is very reliable. You can always depend on him.": {
+    "predicted": { "Margaret": { "type": "PERSON", "score": 1.0, "start": 0 } },
+    "ground_truth": {
+      "Margaret": { "type": "PERSON", "score": 1.0, "start": 0 }
+    }
+  },
+  "the title refers to  street in stains. it was on this street that many of the clubs where metallica first played were situated. \"battery is found in me\" shows that these early shows on avenue jules ferry street were important to them. battery is where \"lunacy finds you\" and you \"smash through the boundaries.\"": {
+    "predicted": {},
+    "ground_truth": {
+      "": { "type": "LOCATION", "score": 0.0, "start": 20 },
+      "stains": { "type": "LOCATION", "score": 0.0, "start": 31 },
+      "avenue jules ferry": { "type": "LOCATION", "score": 0.0, "start": 185 }
+    }
+  },
+  "On 29 March 2017, the Barbadian government formally began the process of withdrawal by invoking Article 50 of the Treaty on European Union": {
+    "predicted": {
+      "29 March 2017": { "type": "DATE", "score": 0.0, "start": 3 }
+    },
+    "ground_truth": {}
+  },
+  "The name in the account is not correct, please change it to Nina Henriksen": {
+    "predicted": {
+      "Nina Henriksen": { "type": "PERSON", "score": 1.0, "start": 60 }
+    },
+    "ground_truth": {
+      "Nina Henriksen": { "type": "PERSON", "score": 1.0, "start": 60 }
+    }
+  },
+  "U.S.A was super fun to visit!": {
+    "predicted": { "U.S.A": { "type": "GPE", "score": 1.0, "start": 0 } },
+    "ground_truth": {
+      "U.S.A": { "type": "LOCATION", "score": 1.0, "start": 0 }
+    }
+  },
+  "I work for Accuweather": { "predicted": {}, "ground_truth": {} },
+  "Monaco was super fun to visit!": {
+    "predicted": { "Monaco": { "type": "GPE", "score": 1.0, "start": 0 } },
+    "ground_truth": {
+      "Monaco": { "type": "LOCATION", "score": 1.0, "start": 0 }
+    }
+  },
+  "Meet me at R Palmeira 59, Cumeira 2480-078": {
+    "predicted": {
+      "59": { "type": "CARDINAL", "score": 0.0, "start": 22 },
+      "Cumeira 2480-078": { "type": "PERSON", "score": 0.0, "start": 26 }
+    },
+    "ground_truth": {
+      "R Palmeira 59, Cumeira 2480-078": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 11
+      }
+    }
+  },
+  "Dime Mitrakovi\u0107 will be talking in the conference": {
+    "predicted": {},
+    "ground_truth": {
+      "Dime Mitrakovi\u0107": { "type": "PERSON", "score": 0.0, "start": 0 }
+    }
+  },
+  "It's like that since 10/14/1965": {
+    "predicted": {
+      "10/14/1965": { "type": "DATE", "score": 1.0, "start": 21 }
+    },
+    "ground_truth": {
+      "10/14/1965": { "type": "BIRTHDAY", "score": 1.0, "start": 21 }
+    }
+  },
+  "I need to add  addresses, here they are: 1595 Mosman Rd, Kimberley 8303, ul. Wi\u0119ckowskiego Stefana 28, \u0141\u00f3d\u017a 90-727": {
+    "predicted": {
+      "1595": { "type": "CARDINAL", "score": 0.0, "start": 41 },
+      "Wi\u0119ckowskiego Stefana": {
+        "type": "PERSON",
+        "score": 0.0,
+        "start": 77
+      }
+    },
+    "ground_truth": {
+      "1595 Mosman Rd, Kimberley 8303": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 41
+      },
+      "ul. Wi\u0119ckowskiego Stefana 28, \u0141\u00f3d\u017a 90-727": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 73
+      }
+    }
+  },
+  "I want to add Magnus Poulsen as a beneficiary to my account": {
+    "predicted": {},
+    "ground_truth": {
+      "Magnus Poulsen": { "type": "PERSON", "score": 0.0, "start": 14 }
+    }
+  },
+  "Malon van den Bogaert listed his top 20 songs for Entertainment Weekly and had the balls to list this song at #15. (What did he put at #1 you ask? Answer:\"Tube Snake Boogie\" by Konrad Knutsen \u2013 go figure)": {
+    "predicted": {
+      "Malon van den Bogaert": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "20": { "type": "CARDINAL", "score": 0.0, "start": 37 },
+      "Answer:\"Tube Snake Boogie": {
+        "type": "PERSON",
+        "score": 0.0,
+        "start": 147
+      },
+      "Konrad Knutsen": { "type": "PERSON", "score": 1.0, "start": 177 }
+    },
+    "ground_truth": {
+      "Malon van den Bogaert": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Konrad Knutsen": { "type": "PERSON", "score": 1.0, "start": 177 }
+    }
+  },
+  "Hello I moved, please update my new address is Ctra. Villena 79, Allande 33880": {
+    "predicted": {
+      "Ctra": { "type": "LOC", "score": 1.0, "start": 47 },
+      "Villena 79": { "type": "GPE", "score": 1.0, "start": 53 },
+      "Allande 33880": { "type": "PERSON", "score": 0.0, "start": 65 }
+    },
+    "ground_truth": {
+      "Ctra. Villena 79, Allande 33880": {
+        "type": "LOCATION",
+        "score": 0.45,
+        "start": 47
+      }
+    }
+  },
+  "Is there a better crafted pop song on this list? Tikhonov and Rustad were precision engineers.": {
+    "predicted": {
+      "Tikhonov": { "type": "PERSON", "score": 1.0, "start": 49 },
+      "Rustad": { "type": "PERSON", "score": 1.0, "start": 62 }
+    },
+    "ground_truth": {
+      "Tikhonov": { "type": "PERSON", "score": 1.0, "start": 49 },
+      "Rustad": { "type": "PERSON", "score": 1.0, "start": 62 }
+    }
+  },
+  "I want to cancel my card 4539364421051774 because I lost it": {
+    "predicted": {
+      "4539364421051774": { "type": "CARDINAL", "score": 1.0, "start": 25 }
+    },
+    "ground_truth": {
+      "4539364421051774": { "type": "CREDIT_CARD", "score": 1.0, "start": 25 }
+    }
+  },
+  "please tell me your date of birth. it's 7/10/1979": {
+    "predicted": { "7/10/1979": { "type": "DATE", "score": 1.0, "start": 40 } },
+    "ground_truth": {
+      "7/10/1979": { "type": "BIRTHDAY", "score": 1.0, "start": 40 }
+    }
+  },
+  "Blink-182 pay tribute here to the Usa. Producer Mai Fujimura explained to Fuse TV: \"We all liked the idea of writing a song about our state, where we live and love. To me it's the most beautiful place in the world, this song was us giving credit to how lucky we are to have lived here and grown up here, raising families here, the whole thing.\"": {
+    "predicted": {
+      "Usa": { "type": "GPE", "score": 1.0, "start": 34 },
+      "Mai Fujimura": { "type": "PERSON", "score": 1.0, "start": 48 }
+    },
+    "ground_truth": {
+      "Usa": { "type": "LOCATION", "score": 1.0, "start": 34 },
+      "Mai Fujimura": { "type": "PERSON", "score": 1.0, "start": 48 }
+    }
+  },
+  "could you please email me the statement for laste month , my credit card number is 5307807766838442?": {
+    "predicted": {
+      "laste month": { "type": "DATE", "score": 0.0, "start": 44 },
+      "5307807766838442": { "type": "DATE", "score": 0.0, "start": 83 }
+    },
+    "ground_truth": {
+      "5307807766838442": { "type": "CREDIT_CARD", "score": 0.0, "start": 83 }
+    }
+  },
+  "C'mon, sing it with me: \"You picked a fine time to leave me Madeleine, four hungry children and a crop in the field...\"": {
+    "predicted": {
+      "Madeleine": { "type": "PERSON", "score": 1.0, "start": 60 },
+      "four": { "type": "CARDINAL", "score": 0.0, "start": 71 }
+    },
+    "ground_truth": {
+      "Madeleine": { "type": "PERSON", "score": 1.0, "start": 60 }
+    }
+  },
+  "Wis\u0142awa Szczepa\u0144ska will be talking in the conference": {
+    "predicted": {},
+    "ground_truth": {
+      "Wis\u0142awa Szczepa\u0144ska": {
+        "type": "PERSON",
+        "score": 0.0,
+        "start": 0
+      }
+    }
+  },
+  "Hello, this is Doctor. Onni Savolainen. Who are you?": {
+    "predicted": {
+      "Onni Savolainen": { "type": "PERSON", "score": 1.0, "start": 23 }
+    },
+    "ground_truth": {
+      "Onni Savolainen": { "type": "PERSON", "score": 1.0, "start": 23 }
+    }
+  },
+  "I have lost my card 4716799162922433. Could you please block my credit card ASAP ? , My name is Brodie Walker.": {
+    "predicted": {
+      "4716799162922433": { "type": "CARDINAL", "score": 1.0, "start": 20 },
+      "Brodie Walker": { "type": "PERSON", "score": 1.0, "start": 96 }
+    },
+    "ground_truth": {
+      "4716799162922433": { "type": "CREDIT_CARD", "score": 1.0, "start": 20 },
+      "Brodie Walker": { "type": "PERSON", "score": 1.0, "start": 96 }
+    }
+  },
+  "Seweryna is from Rank And Filed": {
+    "predicted": {},
+    "ground_truth": {
+      "Seweryna": { "type": "PERSON", "score": 0.0, "start": 0 }
+    }
+  },
+  "Why is Leonor so impulsive?": {
+    "predicted": { "Leonor": { "type": "PERSON", "score": 1.0, "start": 7 } },
+    "ground_truth": { "Leonor": { "type": "PERSON", "score": 1.0, "start": 7 } }
+  },
+  "Csaba shouted at Batirbek: \"What are you doing here?\"": {
+    "predicted": {
+      "Csaba": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Batirbek": { "type": "GPE", "score": 0.0, "start": 17 }
+    },
+    "ground_truth": {
+      "Csaba": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Batirbek": { "type": "PERSON", "score": 0.0, "start": 17 }
+    }
+  },
+  "Mario is from Cgi": {
+    "predicted": { "Mario": { "type": "PERSON", "score": 1.0, "start": 0 } },
+    "ground_truth": { "Mario": { "type": "PERSON", "score": 1.0, "start": 0 } }
+  },
+  "My name appears incorrectly on credit card statement could you please correct it to Mr. Hayden Cockburn?": {
+    "predicted": {
+      "Hayden Cockburn": { "type": "PERSON", "score": 1.0, "start": 88 }
+    },
+    "ground_truth": {
+      "Hayden Cockburn": { "type": "PERSON", "score": 1.0, "start": 88 }
+    }
+  },
+  "A great song made even greater by a mandolin coda (not by Alvir Pu\u0161aver).": {
+    "predicted": {
+      "Alvir Pu\u0161aver": { "type": "PERSON", "score": 1.0, "start": 58 }
+    },
+    "ground_truth": {
+      "Alvir Pu\u0161aver": { "type": "PERSON", "score": 1.0, "start": 58 }
+    }
+  },
+  "I would like to stop receiving messages to 0688 272 85 17": {
+    "predicted": { "0688": { "type": "CARDINAL", "score": 1.0, "start": 43 } },
+    "ground_truth": {
+      "0688 272 85 17": { "type": "PHONE_NUMBER", "score": 0.29, "start": 43 }
+    }
+  },
+  "This song by ex-Zombie \u0106osi\u0107 is a perfect example of why you shouldn't concentrate on the order of this list. An argument could be made that this should be at number one, and I wouldn't argue with it.": {
+    "predicted": {
+      "ex-Zombie \u0106osi\u0107": {
+        "type": "PERSON",
+        "score": 0.33,
+        "start": 13
+      }
+    },
+    "ground_truth": {
+      "\u0106osi\u0107": { "type": "PERSON", "score": 1.0, "start": 23 }
+    }
+  },
+  "Will my account stay active? It's under my partner's name Harri J\u00e4ntti": {
+    "predicted": {
+      "Harri J\u00e4ntti": { "type": "PERSON", "score": 1.0, "start": 58 }
+    },
+    "ground_truth": {
+      "Harri J\u00e4ntti": { "type": "PERSON", "score": 1.0, "start": 58 }
+    }
+  },
+  "\u00c1rv\u00f6k, can I please speak to your boss?": {
+    "predicted": {},
+    "ground_truth": {
+      "\u00c1rv\u00f6k": { "type": "PERSON", "score": 0.0, "start": 0 }
+    }
+  },
+  "What's your last name? Johansen": {
+    "predicted": {
+      "Johansen": { "type": "PERSON", "score": 1.0, "start": 23 }
+    },
+    "ground_truth": {
+      "Johansen": { "type": "PERSON", "score": 1.0, "start": 23 }
+    }
+  },
+  "How can we reach you? You can call 618 377 112": {
+    "predicted": { "618": { "type": "CARDINAL", "score": 1.0, "start": 35 } },
+    "ground_truth": {
+      "618 377 112": { "type": "PHONE_NUMBER", "score": 0.27, "start": 35 }
+    }
+  },
+  "Marik shouted at Arnold: \"What are you doing here?\"": {
+    "predicted": {
+      "Marik": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Arnold": { "type": "PERSON", "score": 1.0, "start": 17 }
+    },
+    "ground_truth": {
+      "Marik": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Arnold": { "type": "PERSON", "score": 1.0, "start": 17 }
+    }
+  },
+  "The true gender of Dita has been under debate for years, but the riff and building energy is a rock masterpiece regardless.": {
+    "predicted": {
+      "Dita": { "type": "PERSON", "score": 1.0, "start": 19 },
+      "years": { "type": "DATE", "score": 0.0, "start": 50 }
+    },
+    "ground_truth": { "Dita": { "type": "PERSON", "score": 1.0, "start": 19 } }
+  },
+  "Not getting bank documents on my addres. Can you please validate the following R Direita-Igreja 21, Vila Franca do Campo 9680-151": {
+    "predicted": {},
+    "ground_truth": {
+      "R Direita-Igreja 21, Vila Franca do Campo 9680-151": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 79
+      }
+    }
+  },
+  "Maybe it's under Robi Siposs": {
+    "predicted": {
+      "Robi Siposs": { "type": "PERSON", "score": 1.0, "start": 17 }
+    },
+    "ground_truth": {
+      "Robi Siposs": { "type": "PERSON", "score": 1.0, "start": 17 }
+    }
+  },
+  "My credit card 5221630413601531 has been lost, Can I request you to block it.": {
+    "predicted": {
+      "5221630413601531": { "type": "DATE", "score": 0.0, "start": 15 }
+    },
+    "ground_truth": {
+      "5221630413601531": { "type": "CREDIT_CARD", "score": 0.0, "start": 15 }
+    }
+  },
+  "Artemio is from Connotate": {
+    "predicted": {},
+    "ground_truth": {
+      "Artemio": { "type": "PERSON", "score": 0.0, "start": 0 }
+    }
+  },
+  "This song by ex-Zombie \u0160vec is a perfect example of why you shouldn't concentrate on the order of this list. An argument could be made that this should be at number one, and I wouldn't argue with it.": {
+    "predicted": {
+      "ex-Zombie \u0160vec": { "type": "PERSON", "score": 0.29, "start": 13 }
+    },
+    "ground_truth": {
+      "\u0160vec": { "type": "PERSON", "score": 1.0, "start": 23 }
+    }
+  },
+  "The address of Brown-Oneal is Via Scala 30, Gallina 53023": {
+    "predicted": { "Gallina": { "type": "PERSON", "score": 0.0, "start": 44 } },
+    "ground_truth": {
+      "Via Scala 30, Gallina 53023": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 30
+      }
+    }
+  },
+  "You can tell Mstislav was a huge Mstislav Dolgorukova fan. Written when he was only 14.": {
+    "predicted": {
+      "Mstislav": { "type": "PERSON", "score": 1.0, "start": 13 },
+      "Mstislav Dolgorukova": { "type": "PERSON", "score": 1.0, "start": 33 }
+    },
+    "ground_truth": {
+      "Mstislav": { "type": "PERSON", "score": 1.0, "start": 13 },
+      "Mstislav Dolgorukova": { "type": "PERSON", "score": 1.0, "start": 33 }
+    }
+  },
+  "unlike the gallo novel, it's not about necrophilia. what it is about, i suppose is anyone's guess. a brilliant piece of baroque pop.": {
+    "predicted": {},
+    "ground_truth": { "gallo": { "type": "PERSON", "score": 0.0, "start": 11 } }
+  },
+  "Abellona is from Code For America": {
+    "predicted": {},
+    "ground_truth": {
+      "Abellona": { "type": "PERSON", "score": 0.0, "start": 0 }
+    }
+  },
+  "On 29 March 2017, the Greek government formally began the process of withdrawal by invoking Article 50 of the Treaty on European Union": {
+    "predicted": {
+      "29 March 2017": { "type": "DATE", "score": 0.0, "start": 3 }
+    },
+    "ground_truth": {}
+  },
+  "Need to see last 10 transaction of card 4485691374557884": {
+    "predicted": {
+      "last 10": { "type": "DATE", "score": 0.0, "start": 12 },
+      "4485691374557884": { "type": "CARDINAL", "score": 1.0, "start": 40 }
+    },
+    "ground_truth": {
+      "4485691374557884": { "type": "CREDIT_CARD", "score": 1.0, "start": 40 }
+    }
+  },
+  "From the film American graffiti (also features Hetem Mikol\u010di\u0107. What's not to love?": {
+    "predicted": {
+      "Hetem Mikol\u010di\u0107": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 47
+      }
+    },
+    "ground_truth": {
+      "Hetem Mikol\u010di\u0107": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 47
+      }
+    }
+  },
+  "Trevisano spent a year at Optigov as the assistant to Abelardo Trevisano, and the following year at Wolfram Research in PORT O' WARREN, which later became Connectdot Llc in 1965.": {
+    "predicted": {
+      "a year": { "type": "DATE", "score": 0.0, "start": 16 },
+      "Abelardo Trevisano": { "type": "PERSON", "score": 1.0, "start": 54 },
+      "the following year": { "type": "DATE", "score": 0.0, "start": 78 },
+      "WARREN": { "type": "PERSON", "score": 0.0, "start": 128 },
+      "1965": { "type": "DATE", "score": 0.0, "start": 173 }
+    },
+    "ground_truth": {
+      "Trevisano": { "type": "PERSON", "score": 0.0, "start": 0 },
+      "Abelardo Trevisano": { "type": "PERSON", "score": 1.0, "start": 54 },
+      "PORT O' WARREN": { "type": "LOCATION", "score": 0.0, "start": 120 }
+    }
+  },
+  "I once lived in 2272 Cedarstone Drive, Findlay 45840. I now live in Piazza Rezzonico 20, Villette 1096": {
+    "predicted": {
+      "Findlay 45840": { "type": "GPE", "score": 1.0, "start": 39 },
+      "Villette": { "type": "PERSON", "score": 0.0, "start": 89 }
+    },
+    "ground_truth": {
+      "2272 Cedarstone Drive, Findlay 45840": {
+        "type": "LOCATION",
+        "score": 0.36,
+        "start": 16
+      },
+      "Piazza Rezzonico 20, Villette 1096": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 68
+      }
+    }
+  },
+  "Sometimes people call me Dobrovit": {
+    "predicted": {},
+    "ground_truth": {
+      "Dobrovit": { "type": "PERSON", "score": 0.0, "start": 25 }
+    }
+  },
+  "what's your name? bethany coburn": {
+    "predicted": {
+      "bethany coburn": { "type": "PERSON", "score": 1.0, "start": 18 }
+    },
+    "ground_truth": {
+      "bethany coburn": { "type": "PERSON", "score": 1.0, "start": 18 }
+    }
+  },
+  "Can someone call me on 405-550-9555? I have some questions about opening an account.": {
+    "predicted": {
+      "405-550-9555": { "type": "CARDINAL", "score": 1.0, "start": 23 }
+    },
+    "ground_truth": {
+      "405-550-9555": { "type": "PHONE_NUMBER", "score": 1.0, "start": 23 }
+    }
+  },
+  "May I request to have the statement sent to 106 Kate Edger Place, Bishopdale 7011?": {
+    "predicted": {
+      "106": { "type": "CARDINAL", "score": 0.0, "start": 44 },
+      "Kate Edger Place": { "type": "PERSON", "score": 0.0, "start": 48 },
+      "7011": { "type": "DATE", "score": 0.0, "start": 77 }
+    },
+    "ground_truth": {
+      "106 Kate Edger Place, Bishopdale 7011": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 44
+      }
+    }
+  },
+  "May I request to have the statement sent to 69 boulevard Aristide Briand, LE CREUSOT 71200?": {
+    "predicted": {
+      "69": { "type": "CARDINAL", "score": 0.0, "start": 44 },
+      "71200": { "type": "DATE", "score": 0.0, "start": 85 }
+    },
+    "ground_truth": {
+      "69 boulevard Aristide Briand, LE CREUSOT 71200": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 44
+      }
+    }
+  },
+  "please charge my credit card. number is 5243756513354624": {
+    "predicted": {
+      "5243756513354624": { "type": "DATE", "score": 0.0, "start": 40 }
+    },
+    "ground_truth": {
+      "5243756513354624": { "type": "CREDIT_CARD", "score": 0.0, "start": 40 }
+    }
+  },
+  "I'd like it to be sent to Sloven\u010deva 46, Dobrovo v Brdih 5212": {
+    "predicted": { "5212": { "type": "CARDINAL", "score": 0.0, "start": 57 } },
+    "ground_truth": {
+      "Sloven\u010deva 46, Dobrovo v Brdih 5212": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 26
+      }
+    }
+  },
+  "i will be travelling to nepal next week, so i need my passport to be ready by then": {
+    "predicted": {
+      "nepal": { "type": "GPE", "score": 1.0, "start": 24 },
+      "next week": { "type": "DATE", "score": 0.0, "start": 30 }
+    },
+    "ground_truth": {
+      "nepal": { "type": "LOCATION", "score": 1.0, "start": 24 }
+    }
+  },
+  "I want to upadte my primary and secondary address to same: Gotzkowskystrasse 39, Wollmerath 56826": {
+    "predicted": {
+      "Gotzkowskystrasse": { "type": "PERSON", "score": 0.0, "start": 59 },
+      "Wollmerath 56826": { "type": "PERSON", "score": 0.0, "start": 81 }
+    },
+    "ground_truth": {
+      "Gotzkowskystrasse 39, Wollmerath 56826": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 59
+      }
+    }
+  },
+  "My card 5459020534190585 expires soon \ufffd when will I get a new one?": {
+    "predicted": {
+      "5459020534190585": { "type": "CARDINAL", "score": 1.0, "start": 8 }
+    },
+    "ground_truth": {
+      "5459020534190585": { "type": "CREDIT_CARD", "score": 1.0, "start": 8 }
+    }
+  },
+  "I work for Graham, Ochoa And Vasquez": {
+    "predicted": {
+      "Graham": { "type": "PERSON", "score": 0.0, "start": 11 },
+      "Ochoa": { "type": "PERSON", "score": 0.0, "start": 19 },
+      "Vasquez": { "type": "PERSON", "score": 0.0, "start": 29 }
+    },
+    "ground_truth": {}
+  },
+  "How can we reach you? You can call 071 739 12 43": {
+    "predicted": { "071": { "type": "CARDINAL", "score": 1.0, "start": 35 } },
+    "ground_truth": {
+      "071 739 12 43": { "type": "PHONE_NUMBER", "score": 0.23, "start": 35 }
+    }
+  },
+  "a tribute to edward horton \u2013 sadly, she wasn't impressed.": {
+    "predicted": {
+      "edward horton": { "type": "PERSON", "score": 1.0, "start": 13 }
+    },
+    "ground_truth": {
+      "edward horton": { "type": "PERSON", "score": 1.0, "start": 13 }
+    }
+  },
+  "This song by ex-Zombie Filemonsen is a perfect example of why you shouldn't concentrate on the order of this list. An argument could be made that this should be at number one, and I wouldn't argue with it.": {
+    "predicted": {
+      "ex-Zombie Filemonsen": { "type": "PERSON", "score": 0.5, "start": 13 }
+    },
+    "ground_truth": {
+      "Filemonsen": { "type": "PERSON", "score": 1.0, "start": 23 }
+    }
+  },
+  "My nam is Don\u00e1t": {
+    "predicted": { "nam": { "type": "PERSON", "score": 0.0, "start": 3 } },
+    "ground_truth": {
+      "Don\u00e1t": { "type": "PERSON", "score": 0.0, "start": 10 }
+    }
+  },
+  "My website is http://toolingnews.es/sweetshapeN1jx8w": {
+    "predicted": {},
+    "ground_truth": {
+      "http://toolingnews.es/sweetshapeN1jx8w": {
+        "type": "URL",
+        "score": 0.0,
+        "start": 14
+      }
+    }
+  },
+  "\"The big three\" of The Big Three Killed My Baby are the car manufacturers that dominate the economy of the White Stripes' home city Winschoten: Nationwide Mutual Insurance Company, Carr-Schaefer and Hubbard-Thomas. \"Don't feed me planned obsolescence,\" says Vilhj\u00e1lmur Georgsson in an uncharacteristically political song, lamenting the demise of the unions in the 60s.": {
+    "predicted": {
+      "three": { "type": "CARDINAL", "score": 0.0, "start": 9 },
+      "Carr-Schaefer": { "type": "PERSON", "score": 0.0, "start": 181 },
+      "Hubbard-Thomas": { "type": "PERSON", "score": 0.0, "start": 199 },
+      "Vilhj\u00e1lmur Georgsson": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 258
+      },
+      "the 60s": { "type": "DATE", "score": 0.0, "start": 360 }
+    },
+    "ground_truth": {
+      "Winschoten": { "type": "LOCATION", "score": 0.0, "start": 132 },
+      "Vilhj\u00e1lmur Georgsson": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 258
+      }
+    }
+  },
+  "just posted a photo http://www.sanfranciscogazette.es/muddy/violet/ealb": {
+    "predicted": {},
+    "ground_truth": {
+      "http://www.sanfranciscogazette.es/muddy/violet/ealb": {
+        "type": "URL",
+        "score": 0.0,
+        "start": 20
+      }
+    }
+  },
+  "Are there any charges applied to widraw money from ATM with the card 5130436589977303": {
+    "predicted": {
+      "5130436589977303": { "type": "CARDINAL", "score": 1.0, "start": 69 }
+    },
+    "ground_truth": {
+      "5130436589977303": { "type": "CREDIT_CARD", "score": 1.0, "start": 69 }
+    }
+  },
+  "What's your email? CalliopeRomani@superrito.com": {
+    "predicted": {},
+    "ground_truth": {
+      "CalliopeRomani@superrito.com": {
+        "type": "EMAIL",
+        "score": 0.0,
+        "start": 19
+      }
+    }
+  },
+  "In Mauritius} they have company songs, musical expressions of employee loyalty sung by salarymen. Unfortunately, as regular RR commenter Hanna Mattila points out, \"most are horrible\".": {
+    "predicted": {
+      "Mauritius": { "type": "GPE", "score": 1.0, "start": 3 },
+      "Hanna Mattila": { "type": "PERSON", "score": 1.0, "start": 137 }
+    },
+    "ground_truth": {
+      "Mauritius": { "type": "LOCATION", "score": 1.0, "start": 3 },
+      "Hanna Mattila": { "type": "PERSON", "score": 1.0, "start": 137 }
+    }
+  },
+  "The address of Miller Ltd. is \u010cesk\u00e9ho odboje 1735, Pardubice 2 53002": {
+    "predicted": { "1735": { "type": "DATE", "score": 0.0, "start": 45 } },
+    "ground_truth": {
+      "\u010cesk\u00e9ho odboje 1735, Pardubice 2 53002": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 30
+      }
+    }
+  },
+  "What's your email? NikolaKralikova@fleckens.hu": {
+    "predicted": {},
+    "ground_truth": {
+      "NikolaKralikova@fleckens.hu": {
+        "type": "EMAIL",
+        "score": 0.0,
+        "start": 19
+      }
+    }
+  },
+  "Please update billing addrress with Eyrarodda 6, Flateyri 425 for this card: 4539461334088446": {
+    "predicted": {
+      "4539461334088446": { "type": "CARDINAL", "score": 1.0, "start": 77 }
+    },
+    "ground_truth": {
+      "Eyrarodda 6, Flateyri 425": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 36
+      },
+      "4539461334088446": { "type": "CREDIT_CARD", "score": 1.0, "start": 77 }
+    }
+  },
+  "Cnn is the brainchild of our 3 founders: Marie Langrov\u00e1, Klaudijo Kundid and Matias Yli-Sirni\u00f6.  The idea was born (on the beach) while they were constructing a website to be the basis of another start-up idea.": {
+    "predicted": {
+      "3": { "type": "CARDINAL", "score": 0.0, "start": 29 },
+      "Marie Langrov\u00e1": { "type": "PERSON", "score": 1.0, "start": 41 },
+      "Klaudijo Kundid": { "type": "PERSON", "score": 1.0, "start": 57 },
+      "Matias Yli-Sirni\u00f6": { "type": "PERSON", "score": 1.0, "start": 77 }
+    },
+    "ground_truth": {
+      "Marie Langrov\u00e1": { "type": "PERSON", "score": 1.0, "start": 41 },
+      "Klaudijo Kundid": { "type": "PERSON", "score": 1.0, "start": 57 },
+      "Matias Yli-Sirni\u00f6": { "type": "PERSON", "score": 1.0, "start": 77 }
+    }
+  },
+  "how do i open my credit card statement?": {
+    "predicted": {},
+    "ground_truth": {}
+  },
+  "Zoolander is a 2001 American action-comedy film directed by Tekla Blomqvist and starring Blomqvist": {
+    "predicted": {
+      "2001": { "type": "DATE", "score": 0.0, "start": 15 },
+      "Tekla Blomqvist": { "type": "PERSON", "score": 1.0, "start": 60 }
+    },
+    "ground_truth": {
+      "Tekla Blomqvist": { "type": "PERSON", "score": 1.0, "start": 60 },
+      "Blomqvist": { "type": "PERSON", "score": 0.0, "start": 89 }
+    }
+  },
+  "Just posted a photo domainerfinder.fi/broad/poetry/k8Zh": {
+    "predicted": {},
+    "ground_truth": {
+      "domainerfinder.fi/broad/poetry/k8Zh": {
+        "type": "URL",
+        "score": 0.0,
+        "start": 20
+      }
+    }
+  },
+  "I want to cancel my card 5497578157471099 because I lost it": {
+    "predicted": {
+      "5497578157471099": { "type": "DATE", "score": 0.0, "start": 25 }
+    },
+    "ground_truth": {
+      "5497578157471099": { "type": "CREDIT_CARD", "score": 0.0, "start": 25 }
+    }
+  },
+  "Just posted a photo cardknowledge.fi/solitaryleafdyiIeV4p": {
+    "predicted": {},
+    "ground_truth": {
+      "cardknowledge.fi/solitaryleafdyiIeV4p": {
+        "type": "URL",
+        "score": 0.0,
+        "start": 20
+      }
+    }
+  },
+  "I want to add Abby Laidlaw as a beneficiary to my account": {
+    "predicted": {
+      "Abby Laidlaw": { "type": "PERSON", "score": 1.0, "start": 14 }
+    },
+    "ground_truth": {
+      "Abby Laidlaw": { "type": "PERSON", "score": 1.0, "start": 14 }
+    }
+  },
+  "The Felix Jakobsen version recorded for Patentlyo became the first celebrity recording by a classical musician to sell one million copies. The song was awarded the seventh gold disc ever granted.": {
+    "predicted": {
+      "Felix Jakobsen": { "type": "PERSON", "score": 1.0, "start": 4 },
+      "one million": { "type": "CARDINAL", "score": 0.0, "start": 119 }
+    },
+    "ground_truth": {
+      "Felix Jakobsen": { "type": "PERSON", "score": 1.0, "start": 4 }
+    }
+  },
+  "Please charge my credit card. Number is 4556031904757957": {
+    "predicted": {
+      "4556031904757957": { "type": "CARDINAL", "score": 1.0, "start": 40 }
+    },
+    "ground_truth": {
+      "4556031904757957": { "type": "CREDIT_CARD", "score": 1.0, "start": 40 }
+    }
+  },
+  "Will my account stay active? It's under my partner's name Carla Pinto": {
+    "predicted": {
+      "Carla Pinto": { "type": "PERSON", "score": 1.0, "start": 58 }
+    },
+    "ground_truth": {
+      "Carla Pinto": { "type": "PERSON", "score": 1.0, "start": 58 }
+    }
+  },
+  "have you heard Alessandro Arvidsson speak yet?": {
+    "predicted": {
+      "Alessandro Arvidsson": { "type": "PERSON", "score": 1.0, "start": 15 }
+    },
+    "ground_truth": {
+      "Alessandro Arvidsson": { "type": "PERSON", "score": 1.0, "start": 15 }
+    }
+  },
+  "Are there any charges applied for money transfer from IL270126100000000544211 to other bank accounts": {
+    "predicted": {},
+    "ground_truth": {
+      "IL270126100000000544211": { "type": "IBAN", "score": 0.0, "start": 54 }
+    }
+  },
+  "My card 5309087379920220 is expiring this month. Please let me know process to it's extend validity.": {
+    "predicted": {
+      "5309087379920220": { "type": "DATE", "score": 0.0, "start": 8 },
+      "this month": { "type": "DATE", "score": 0.0, "start": 37 }
+    },
+    "ground_truth": {
+      "5309087379920220": { "type": "CREDIT_CARD", "score": 0.0, "start": 8 }
+    }
+  },
+  "natalie \u00e5berg will be talking in the conference": {
+    "predicted": {
+      "natalie \u00e5berg": { "type": "PERSON", "score": 1.0, "start": 0 }
+    },
+    "ground_truth": {
+      "natalie \u00e5berg": { "type": "PERSON", "score": 1.0, "start": 0 }
+    }
+  },
+  "The address of Weber-Santana is Erzs\u00e9bet t\u00e9r 92., \u00c1t\u00e1ny 3371": {
+    "predicted": {
+      "Weber-Santana": { "type": "PERSON", "score": 0.0, "start": 15 },
+      "3371": { "type": "CARDINAL", "score": 0.0, "start": 56 }
+    },
+    "ground_truth": {
+      "Erzs\u00e9bet t\u00e9r 92., \u00c1t\u00e1ny 3371": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 32
+      }
+    }
+  },
+  "Kristine, can I please speak to your boss?": {
+    "predicted": { "Kristine": { "type": "PERSON", "score": 1.0, "start": 0 } },
+    "ground_truth": {
+      "Kristine": { "type": "PERSON", "score": 1.0, "start": 0 }
+    }
+  },
+  "Please tell me your date of birth. It's 8/12/1985": {
+    "predicted": {},
+    "ground_truth": {
+      "8/12/1985": { "type": "BIRTHDAY", "score": 0.0, "start": 40 }
+    }
+  },
+  "how do i change my address to jaanioja 7, karunga 44404 for post mail?": {
+    "predicted": {},
+    "ground_truth": {
+      "jaanioja 7, karunga 44404": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 30
+      }
+    }
+  },
+  "I want to cancel my card 5591016424503910 because I lost it": {
+    "predicted": {},
+    "ground_truth": {
+      "5591016424503910": { "type": "CREDIT_CARD", "score": 0.0, "start": 25 }
+    }
+  },
+  "It's like that since 2/21/1942": {
+    "predicted": { "2/21/1942": { "type": "DATE", "score": 1.0, "start": 21 } },
+    "ground_truth": {
+      "2/21/1942": { "type": "BIRTHDAY", "score": 1.0, "start": 21 }
+    }
+  },
+  "May I request to have the statement sent to Osmajoentie 86, VARKAUS 78900?": {
+    "predicted": {},
+    "ground_truth": {
+      "Osmajoentie 86, VARKAUS 78900": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 44
+      }
+    }
+  },
+  "For my take on Mr. Thomas, see Guilty Pleasures: 5 Musicians Of The 70s You're Supposed To Hate (But Secretly Love)": {
+    "predicted": {
+      "Thomas": { "type": "PERSON", "score": 1.0, "start": 19 },
+      "5": { "type": "CARDINAL", "score": 0.0, "start": 49 }
+    },
+    "ground_truth": {
+      "Thomas": { "type": "PERSON", "score": 1.0, "start": 19 }
+    }
+  },
+  "Could you please send me the last billed amount for cc 4916374093735656 on my e-mail MarjancoNose@cuvox.de?": {
+    "predicted": {
+      "4916374093735656": { "type": "CARDINAL", "score": 1.0, "start": 55 }
+    },
+    "ground_truth": {
+      "4916374093735656": { "type": "CREDIT_CARD", "score": 1.0, "start": 55 },
+      "MarjancoNose@cuvox.de": { "type": "EMAIL", "score": 0.0, "start": 85 }
+    }
+  },
+  "Anderson is very reliable. You can always depend on him.": {
+    "predicted": {},
+    "ground_truth": {
+      "Anderson": { "type": "PERSON", "score": 0.0, "start": 0 }
+    }
+  },
+  "Trulia songwriter Mara \u0106osi\u0107 employs corporate lingo in the first verse of his Kroll Bond Ratings Agency Resignation Letter": {
+    "predicted": {
+      "Mara \u0106osi\u0107": { "type": "PERSON", "score": 1.0, "start": 18 }
+    },
+    "ground_truth": {
+      "Mara \u0106osi\u0107": { "type": "PERSON", "score": 1.0, "start": 18 }
+    }
+  },
+  "The true gender of Evdokim has been under debate for years, but the riff and building energy is a rock masterpiece regardless.": {
+    "predicted": { "years": { "type": "DATE", "score": 0.0, "start": 53 } },
+    "ground_truth": {
+      "Evdokim": { "type": "PERSON", "score": 0.0, "start": 19 }
+    }
+  },
+  "You said your email is SnaefridurFridbjarnardottir@cuvox.de. Is that correct?": {
+    "predicted": {},
+    "ground_truth": {
+      "SnaefridurFridbjarnardottir@cuvox.de": {
+        "type": "EMAIL",
+        "score": 0.0,
+        "start": 23
+      }
+    }
+  },
+  "Could you please send me the last billed amount for cc 4556488508858765 on my e-mail MinekoKimura@armyspy.com?": {
+    "predicted": {
+      "4556488508858765": { "type": "DATE", "score": 0.0, "start": 55 }
+    },
+    "ground_truth": {
+      "4556488508858765": { "type": "CREDIT_CARD", "score": 0.0, "start": 55 },
+      "MinekoKimura@armyspy.com": { "type": "EMAIL", "score": 0.0, "start": 85 }
+    }
+  },
+  "My name is Marcus Paulsen but everyone calls me Marcus": {
+    "predicted": {
+      "Marcus Paulsen": { "type": "PERSON", "score": 1.0, "start": 11 },
+      "Marcus": { "type": "PERSON", "score": 1.0, "start": 48 }
+    },
+    "ground_truth": {
+      "Marcus Paulsen": { "type": "PERSON", "score": 1.0, "start": 11 },
+      "Marcus": { "type": "PERSON", "score": 1.0, "start": 48 }
+    }
+  },
+  "I want to add Shovda Masaev as a beneficiary to my account": {
+    "predicted": {},
+    "ground_truth": {
+      "Shovda Masaev": { "type": "PERSON", "score": 0.0, "start": 14 }
+    }
+  },
+  "Who's coming to Bahamas with me?": {
+    "predicted": { "Bahamas": { "type": "GPE", "score": 1.0, "start": 16 } },
+    "ground_truth": {
+      "Bahamas": { "type": "LOCATION", "score": 1.0, "start": 16 }
+    }
+  },
+  "I have done an online order but didn't get any message on my registered 09721 88 29 47. Could you please look into it ?": {
+    "predicted": {
+      "09721": { "type": "CARDINAL", "score": 1.0, "start": 72 },
+      "29 47": { "type": "DATE", "score": 0.0, "start": 81 }
+    },
+    "ground_truth": {
+      "09721 88 29 47": { "type": "PHONE_NUMBER", "score": 0.36, "start": 72 }
+    }
+  },
+  "A tribute to Henryka Wo\u017aniak \u2013 sadly, she wasn't impressed.": {
+    "predicted": {
+      "Henryka Wo\u017aniak": { "type": "PERSON", "score": 1.0, "start": 13 }
+    },
+    "ground_truth": {
+      "Henryka Wo\u017aniak": { "type": "PERSON", "score": 1.0, "start": 13 }
+    }
+  },
+  "what are my options?": { "predicted": {}, "ground_truth": {} },
+  "Who's coming to Gambia with me?": {
+    "predicted": { "Gambia": { "type": "GPE", "score": 1.0, "start": 16 } },
+    "ground_truth": {
+      "Gambia": { "type": "LOCATION", "score": 1.0, "start": 16 }
+    }
+  },
+  "My name appears incorrectly on credit card statement could you please correct it to Mrs. Hanne Kreutzmann?": {
+    "predicted": {
+      "Hanne Kreutzmann": { "type": "PERSON", "score": 1.0, "start": 89 }
+    },
+    "ground_truth": {
+      "Hanne Kreutzmann": { "type": "PERSON", "score": 1.0, "start": 89 }
+    }
+  },
+  "What's your email? LempiLilja@rhyta.com": {
+    "predicted": {},
+    "ground_truth": {
+      "LempiLilja@rhyta.com": { "type": "EMAIL", "score": 0.0, "start": 19 }
+    }
+  },
+  "Sage spent a year at Ford Llc as the assistant to Nate Sage, and the following year at Science Exchange in Dutovlje, which later became Lopez-Lang in 1965.": {
+    "predicted": {
+      "a year": { "type": "DATE", "score": 0.0, "start": 11 },
+      "Nate Sage": { "type": "PERSON", "score": 1.0, "start": 50 },
+      "the following year": { "type": "DATE", "score": 0.0, "start": 65 },
+      "Lopez-Lang": { "type": "PERSON", "score": 0.0, "start": 136 },
+      "1965": { "type": "DATE", "score": 0.0, "start": 150 }
+    },
+    "ground_truth": {
+      "Sage": { "type": "PERSON", "score": 0.0, "start": 0 },
+      "Nate Sage": { "type": "PERSON", "score": 1.0, "start": 50 },
+      "Dutovlje": { "type": "LOCATION", "score": 0.0, "start": 107 }
+    }
+  },
+  "I'm originally from Costa Rica": {
+    "predicted": { "Costa Rica": { "type": "GPE", "score": 1.0, "start": 20 } },
+    "ground_truth": {
+      "Costa Rica": { "type": "LOCATION", "score": 1.0, "start": 20 }
+    }
+  },
+  "I'd like it to be sent to Ingvald Scheys gate 155, LILLEHAMMER 2615": {
+    "predicted": {
+      "155": { "type": "CARDINAL", "score": 0.0, "start": 46 },
+      "2615": { "type": "CARDINAL", "score": 0.0, "start": 63 }
+    },
+    "ground_truth": {
+      "Ingvald Scheys gate 155, LILLEHAMMER 2615": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 26
+      }
+    }
+  },
+  "I would like to remove my kid Tore from the will. How do I do that?": {
+    "predicted": { "Tore": { "type": "PERSON", "score": 1.0, "start": 30 } },
+    "ground_truth": { "Tore": { "type": "PERSON", "score": 1.0, "start": 30 } }
+  },
+  "Mission Statement: This non-profit founded by radio executives \"serves as an advocate for the value of music\" and \"supports its songwriters, composers and publishers by taking care of an important aspect of their careers \u2013 getting paid,\" according to the Snapsense website. They offer blanket music licenses to businesses and organizations that allow them to play nearly 13 million musical works.": {
+    "predicted": {
+      "nearly 13 million": { "type": "CARDINAL", "score": 0.0, "start": 364 }
+    },
+    "ground_truth": {}
+  },
+  "can i withdraw cash using my card 4539484574719421 at atm center ?": {
+    "predicted": {
+      "4539484574719421": { "type": "CARDINAL", "score": 1.0, "start": 34 }
+    },
+    "ground_truth": {
+      "4539484574719421": { "type": "CREDIT_CARD", "score": 1.0, "start": 34 }
+    }
+  },
+  "I would like to remove my kid Markus from the will. How do I do that?": {
+    "predicted": { "Markus": { "type": "PERSON", "score": 1.0, "start": 30 } },
+    "ground_truth": {
+      "Markus": { "type": "PERSON", "score": 1.0, "start": 30 }
+    }
+  },
+  "The Alaine Armijo version recorded for Legistorm became the first celebrity recording by a classical musician to sell one million copies. The song was awarded the seventh gold disc ever granted.": {
+    "predicted": {
+      "one million": { "type": "CARDINAL", "score": 0.0, "start": 118 }
+    },
+    "ground_truth": {
+      "Alaine Armijo": { "type": "PERSON", "score": 0.0, "start": 4 }
+    }
+  },
+  "Meet me at 4589 40th Street, Calgary T2N2A7": {
+    "predicted": { "Calgary": { "type": "GPE", "score": 1.0, "start": 29 } },
+    "ground_truth": {
+      "4589 40th Street, Calgary T2N2A7": {
+        "type": "LOCATION",
+        "score": 0.22,
+        "start": 11
+      }
+    }
+  },
+  "What's your name? Leonor Cavalcanti": {
+    "predicted": {
+      "Leonor Cavalcanti": { "type": "PERSON", "score": 1.0, "start": 18 }
+    },
+    "ground_truth": {
+      "Leonor Cavalcanti": { "type": "PERSON", "score": 1.0, "start": 18 }
+    }
+  },
+  "My card 4716053253023796 is expiring this month. Please let me know process to it's extend validity.": {
+    "predicted": {
+      "4716053253023796": { "type": "DATE", "score": 0.0, "start": 8 },
+      "this month": { "type": "DATE", "score": 0.0, "start": 37 }
+    },
+    "ground_truth": {
+      "4716053253023796": { "type": "CREDIT_CARD", "score": 0.0, "start": 8 }
+    }
+  },
+  "Please block card no 4485842077171057": {
+    "predicted": {},
+    "ground_truth": {
+      "4485842077171057": { "type": "CREDIT_CARD", "score": 0.0, "start": 21 }
+    }
+  },
+  "My nam is J\u00f8rgen": {
+    "predicted": {
+      "nam": { "type": "PERSON", "score": 0.0, "start": 3 },
+      "J\u00f8rgen": { "type": "PERSON", "score": 1.0, "start": 10 }
+    },
+    "ground_truth": {
+      "J\u00f8rgen": { "type": "PERSON", "score": 1.0, "start": 10 }
+    }
+  },
+  "A great song made even greater by a mandolin coda (not by Jaroslava Sedl\u00e1\u010dkov\u00e1).": {
+    "predicted": {
+      "Jaroslava Sedl\u00e1\u010dkov\u00e1": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 58
+      }
+    },
+    "ground_truth": {
+      "Jaroslava Sedl\u00e1\u010dkov\u00e1": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 58
+      }
+    }
+  },
+  "Here's my SSN: 421-65-2945": {
+    "predicted": { "421": { "type": "CARDINAL", "score": 1.0, "start": 15 } },
+    "ground_truth": {
+      "421-65-2945": { "type": "US_SSN", "score": 0.27, "start": 15 }
+    }
+  },
+  "Is there a better crafted pop song on this list? G\u00f6ransson and Abramovich were precision engineers.": {
+    "predicted": {
+      "G\u00f6ransson": { "type": "PERSON", "score": 1.0, "start": 49 },
+      "Abramovich": { "type": "PERSON", "score": 1.0, "start": 63 }
+    },
+    "ground_truth": {
+      "G\u00f6ransson": { "type": "PERSON", "score": 1.0, "start": 49 },
+      "Abramovich": { "type": "PERSON", "score": 1.0, "start": 63 }
+    }
+  },
+  "Please have the manager call me at 23 453081 I'd like to join accounts with ms. Mashuu": {
+    "predicted": {
+      "23 453081": { "type": "DATE", "score": 0.0, "start": 35 },
+      "Mashuu": { "type": "PERSON", "score": 1.0, "start": 80 }
+    },
+    "ground_truth": {
+      "23 453081": { "type": "PHONE_NUMBER", "score": 0.0, "start": 35 },
+      "Mashuu": { "type": "PERSON", "score": 1.0, "start": 80 }
+    }
+  },
+  "I'm so jealous! said Inger to Katr\u00edn": {
+    "predicted": {
+      "Inger": { "type": "PERSON", "score": 1.0, "start": 21 },
+      "Katr\u00edn": { "type": "PERSON", "score": 1.0, "start": 30 }
+    },
+    "ground_truth": {
+      "Inger": { "type": "PERSON", "score": 1.0, "start": 21 },
+      "Katr\u00edn": { "type": "PERSON", "score": 1.0, "start": 30 }
+    }
+  },
+  "Please block card no 5499390950095671": {
+    "predicted": {},
+    "ground_truth": {
+      "5499390950095671": { "type": "CREDIT_CARD", "score": 0.0, "start": 21 }
+    }
+  },
+  "I want to add Alberico Rizzo as a beneficiary to my account": {
+    "predicted": {
+      "Alberico Rizzo": { "type": "PERSON", "score": 1.0, "start": 14 }
+    },
+    "ground_truth": {
+      "Alberico Rizzo": { "type": "PERSON", "score": 1.0, "start": 14 }
+    }
+  },
+  "tomislav rukavina from morgan stanley is the keynote speaker": {
+    "predicted": {
+      "tomislav rukavina": { "type": "PERSON", "score": 1.0, "start": 0 }
+    },
+    "ground_truth": {
+      "tomislav rukavina": { "type": "PERSON", "score": 1.0, "start": 0 }
+    }
+  },
+  "What's your name? Dr\u017eislav Mati\u0107": {
+    "predicted": {
+      "Dr\u017eislav Mati\u0107": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 18
+      }
+    },
+    "ground_truth": {
+      "Dr\u017eislav Mati\u0107": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 18
+      }
+    }
+  },
+  "Mission Statement: This non-profit founded by radio executives \"serves as an advocate for the value of music\" and \"supports its songwriters, composers and publishers by taking care of an important aspect of their careers \u2013 getting paid,\" according to the Cappex website. They offer blanket music licenses to businesses and organizations that allow them to play nearly 13 million musical works.": {
+    "predicted": {
+      "nearly 13 million": { "type": "CARDINAL", "score": 0.0, "start": 361 }
+    },
+    "ground_truth": {}
+  },
+  "What is the limit for card 5293025225984832?": {
+    "predicted": {
+      "5293025225984832": { "type": "DATE", "score": 0.0, "start": 27 }
+    },
+    "ground_truth": {
+      "5293025225984832": { "type": "CREDIT_CARD", "score": 0.0, "start": 27 }
+    }
+  },
+  "i've shared files with you vocalaid.es/square/resonance/k009s": {
+    "predicted": {},
+    "ground_truth": {
+      "vocalaid.es/square/resonance/k009s": {
+        "type": "URL",
+        "score": 0.0,
+        "start": 27
+      }
+    }
+  },
+  "His social security number is 175-88-2416": {
+    "predicted": { "175": { "type": "CARDINAL", "score": 1.0, "start": 30 } },
+    "ground_truth": {
+      "175-88-2416": { "type": "US_SSN", "score": 0.27, "start": 30 }
+    }
+  },
+  "In case of my child's account, we need to add Kira Fransson as guardian": {
+    "predicted": {
+      "Kira Fransson": { "type": "PERSON", "score": 1.0, "start": 46 }
+    },
+    "ground_truth": {
+      "Kira Fransson": { "type": "PERSON", "score": 1.0, "start": 46 }
+    }
+  },
+  "I would like to stop receiving messages to 966 73 857": {
+    "predicted": { "966": { "type": "CARDINAL", "score": 1.0, "start": 43 } },
+    "ground_truth": {
+      "966 73 857": { "type": "PHONE_NUMBER", "score": 0.3, "start": 43 }
+    }
+  },
+  "I can't browse to your site, keep getting address d231:758b:ba49:87c5:440d:cd8c:28ff:e0d3 blocked error": {
+    "predicted": {},
+    "ground_truth": {
+      "d231:758b:ba49:87c5:440d:cd8c:28ff:e0d3": {
+        "type": "IP_ADDRESS",
+        "score": 0.0,
+        "start": 50
+      }
+    }
+  },
+  "A great song made even greater by a mandolin coda (not by Vi\u0161eslav \u0106osi\u0107).": {
+    "predicted": {
+      "Vi\u0161eslav \u0106osi\u0107": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 58
+      }
+    },
+    "ground_truth": {
+      "Vi\u0161eslav \u0106osi\u0107": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 58
+      }
+    }
+  },
+  "Just posted a photo androidpdas.fr/namelessbrook7Ldc8": {
+    "predicted": {},
+    "ground_truth": {
+      "androidpdas.fr/namelessbrook7Ldc8": {
+        "type": "URL",
+        "score": 0.0,
+        "start": 20
+      }
+    }
+  },
+  "Turkey was super fun to visit!": {
+    "predicted": { "Turkey": { "type": "GPE", "score": 1.0, "start": 0 } },
+    "ground_truth": {
+      "Turkey": { "type": "LOCATION", "score": 1.0, "start": 0 }
+    }
+  },
+  "Meet me at L\u00f8vgavlveien 207, FAUSKE 8208": {
+    "predicted": {},
+    "ground_truth": {
+      "L\u00f8vgavlveien 207, FAUSKE 8208": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 11
+      }
+    }
+  },
+  "Excuse me, Sir bot, but I really don't like this tone": {
+    "predicted": {},
+    "ground_truth": {}
+  },
+  "His social security number is 639-66-5753": {
+    "predicted": { "639": { "type": "CARDINAL", "score": 1.0, "start": 30 } },
+    "ground_truth": {
+      "639-66-5753": { "type": "US_SSN", "score": 0.27, "start": 30 }
+    }
+  },
+  "Please block card no 4539816440300953": {
+    "predicted": {},
+    "ground_truth": {
+      "4539816440300953": { "type": "CREDIT_CARD", "score": 0.0, "start": 21 }
+    }
+  },
+  "I have done an online order but didn't get any message on my registered 01.73.61.52.04. Could you please look into it ?": {
+    "predicted": {},
+    "ground_truth": {
+      "01.73.61.52.04": { "type": "PHONE_NUMBER", "score": 0.0, "start": 72 }
+    }
+  },
+  "Could you please email me the statement for laste month , my credit card number is 4485085358615299?": {
+    "predicted": {
+      "laste month": { "type": "DATE", "score": 0.0, "start": 44 },
+      "4485085358615299": { "type": "DATE", "score": 0.0, "start": 83 }
+    },
+    "ground_truth": {
+      "4485085358615299": { "type": "CREDIT_CARD", "score": 0.0, "start": 83 }
+    }
+  },
+  "Celebrating its 10th year in Miko\u0142\u00f3w, Ranku is a 501(c)3 that invites songwriters from around the world to Texas to share the universal language of music in collaborations designed to bridge cultures, build friendships and cultivate peace.": {
+    "predicted": {
+      "Miko\u0142\u00f3w": { "type": "PERSON", "score": 0.0, "start": 29 },
+      "Ranku": { "type": "PERSON", "score": 0.0, "start": 38 },
+      "501(c)3": { "type": "CARDINAL", "score": 0.0, "start": 49 },
+      "Texas": { "type": "GPE", "score": 0.0, "start": 107 }
+    },
+    "ground_truth": {
+      "Miko\u0142\u00f3w": { "type": "LOCATION", "score": 0.0, "start": 29 }
+    }
+  },
+  "can i withdraw cash using my card 4556400155348206 at atm center ?": {
+    "predicted": {
+      "4556400155348206": { "type": "CARDINAL", "score": 1.0, "start": 34 }
+    },
+    "ground_truth": {
+      "4556400155348206": { "type": "CREDIT_CARD", "score": 1.0, "start": 34 }
+    }
+  },
+  "What's your credit card? 5393410356699228": {
+    "predicted": {
+      "5393410356699228": { "type": "CARDINAL", "score": 1.0, "start": 25 }
+    },
+    "ground_truth": {
+      "5393410356699228": { "type": "CREDIT_CARD", "score": 1.0, "start": 25 }
+    }
+  },
+  "Zoolander is a 2001 American action-comedy film directed by Ernest Aksenov and starring Aksenov": {
+    "predicted": {
+      "2001": { "type": "DATE", "score": 0.0, "start": 15 },
+      "Ernest Aksenov": { "type": "PERSON", "score": 1.0, "start": 60 },
+      "Aksenov": { "type": "PERSON", "score": 1.0, "start": 88 }
+    },
+    "ground_truth": {
+      "Ernest Aksenov": { "type": "PERSON", "score": 1.0, "start": 60 },
+      "Aksenov": { "type": "PERSON", "score": 1.0, "start": 88 }
+    }
+  },
+  "A tribute to Valtteri J\u00e4rvilehto \u2013 sadly, she wasn't impressed.": {
+    "predicted": {
+      "Valtteri J\u00e4rvilehto": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 13
+      }
+    },
+    "ground_truth": {
+      "Valtteri J\u00e4rvilehto": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 13
+      }
+    }
+  },
+  "Could you please email me the statement for laste month , my credit card number is 5517248214826604?": {
+    "predicted": {
+      "laste month": { "type": "DATE", "score": 0.0, "start": 44 },
+      "5517248214826604": { "type": "DATE", "score": 0.0, "start": 83 }
+    },
+    "ground_truth": {
+      "5517248214826604": { "type": "CREDIT_CARD", "score": 0.0, "start": 83 }
+    }
+  },
+  "I can't browse to your site, keep getting address 3c86:e3ee:37b5:329e:d0ad:88e2:8b80:ee40 blocked error": {
+    "predicted": { "3c86": { "type": "CARDINAL", "score": 0.0, "start": 50 } },
+    "ground_truth": {
+      "3c86:e3ee:37b5:329e:d0ad:88e2:8b80:ee40": {
+        "type": "IP_ADDRESS",
+        "score": 0.0,
+        "start": 50
+      }
+    }
+  },
+  "Unlike the L\u00e1szl\u00f3 novel, it's not about necrophilia. What it is about, I suppose is anyone's guess. A brilliant piece of baroque pop.": {
+    "predicted": {},
+    "ground_truth": {
+      "L\u00e1szl\u00f3": { "type": "PERSON", "score": 0.0, "start": 11 }
+    }
+  },
+  "So where are we meeting? There's this nice new Thai place downtown. Cool, what's the address? Oh do they serve vegan stuff? It's in 168 Fairview Avenue, Northcross 0632": {
+    "predicted": {
+      "168": { "type": "CARDINAL", "score": 0.0, "start": 132 },
+      "Northcross 0632": { "type": "PERSON", "score": 0.0, "start": 153 }
+    },
+    "ground_truth": {
+      "168 Fairview Avenue, Northcross 0632": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 132
+      }
+    }
+  },
+  "How do I change my address to Rue Camille Joset 112, Ruddervoorde 8020 for post mail?": {
+    "predicted": {
+      "Rue Camille": { "type": "PERSON", "score": 0.0, "start": 30 }
+    },
+    "ground_truth": {
+      "Rue Camille Joset 112, Ruddervoorde 8020": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 30
+      }
+    }
+  },
+  "When they weren't singing about Hobbits, satanic felines and interstellar journeys, they were singing about the verses from Heli Ylim\u00e4ki's Cautionary Tales. Is there a better example of unbridled creativity than early Ylim\u00e4ki?": {
+    "predicted": {
+      "Ylim\u00e4ki": { "type": "PERSON", "score": 1.0, "start": 218 }
+    },
+    "ground_truth": {
+      "Heli Ylim\u00e4ki": { "type": "PERSON", "score": 0.0, "start": 124 },
+      "Ylim\u00e4ki": { "type": "PERSON", "score": 1.0, "start": 218 }
+    }
+  },
+  "When they weren't singing about Hobbits, satanic felines and interstellar journeys, they were singing about the verses from Abbas Kadyrov's Cautionary Tales. Is there a better example of unbridled creativity than early Kadyrov?": {
+    "predicted": {
+      "Abbas Kadyrov's": { "type": "PERSON", "score": 0.87, "start": 124 },
+      "Kadyrov": { "type": "PERSON", "score": 1.0, "start": 219 }
+    },
+    "ground_truth": {
+      "Abbas Kadyrov": { "type": "PERSON", "score": 1.0, "start": 124 },
+      "Kadyrov": { "type": "PERSON", "score": 1.0, "start": 219 }
+    }
+  },
+  "Krbec spent a year at Brown-Oneal as the assistant to Emil Krbec, and the following year at Careset Systems in Richmond, which later became Healthgrades in 1965.": {
+    "predicted": {
+      "a year": { "type": "DATE", "score": 0.0, "start": 12 },
+      "Emil Krbec": { "type": "PERSON", "score": 1.0, "start": 54 },
+      "the following year": { "type": "DATE", "score": 0.0, "start": 70 },
+      "Richmond": { "type": "GPE", "score": 1.0, "start": 111 },
+      "Healthgrades": { "type": "PERSON", "score": 0.0, "start": 140 },
+      "1965": { "type": "DATE", "score": 0.0, "start": 156 }
+    },
+    "ground_truth": {
+      "Krbec": { "type": "PERSON", "score": 0.0, "start": 0 },
+      "Emil Krbec": { "type": "PERSON", "score": 1.0, "start": 54 },
+      "Richmond": { "type": "LOCATION", "score": 1.0, "start": 111 }
+    }
+  },
+  "Have you been to an Aster Bodelier concert before?": {
+    "predicted": {
+      "Aster Bodelier": { "type": "PERSON", "score": 1.0, "start": 20 }
+    },
+    "ground_truth": {
+      "Aster Bodelier": { "type": "PERSON", "score": 1.0, "start": 20 }
+    }
+  },
+  "On 29 March 2017, the Belgian government formally began the process of withdrawal by invoking Article 50 of the Treaty on European Union": {
+    "predicted": {
+      "29 March 2017": { "type": "DATE", "score": 0.0, "start": 3 }
+    },
+    "ground_truth": {}
+  },
+  "Could you please email me the statement for laste month , my credit card number is 4539852144986912?": {
+    "predicted": {
+      "laste month": { "type": "DATE", "score": 0.0, "start": 44 },
+      "4539852144986912": { "type": "DATE", "score": 0.0, "start": 83 }
+    },
+    "ground_truth": {
+      "4539852144986912": { "type": "CREDIT_CARD", "score": 0.0, "start": 83 }
+    }
+  },
+  "Luiz, can I please speak to your boss?": {
+    "predicted": { "Luiz": { "type": "PERSON", "score": 1.0, "start": 0 } },
+    "ground_truth": { "Luiz": { "type": "PERSON", "score": 1.0, "start": 0 } }
+  },
+  "A tribute to Clotilde Napolitani \u2013 sadly, she wasn't impressed.": {
+    "predicted": {},
+    "ground_truth": {
+      "Clotilde Napolitani": { "type": "PERSON", "score": 0.0, "start": 13 }
+    }
+  },
+  "Anna Grunewald from Gray, Hawkins And Williamson is the keynote speaker": {
+    "predicted": {
+      "Anna Grunewald": { "type": "PERSON", "score": 1.0, "start": 0 }
+    },
+    "ground_truth": {
+      "Anna Grunewald": { "type": "PERSON", "score": 1.0, "start": 0 }
+    }
+  },
+  "I work for Ceiba Solutions": { "predicted": {}, "ground_truth": {} },
+  "A great song made even greater by a mandolin coda (not by Eva Marija Suknovi\u0107).": {
+    "predicted": {
+      "Eva Marija Suknovi\u0107": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 58
+      }
+    },
+    "ground_truth": {
+      "Eva Marija Suknovi\u0107": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 58
+      }
+    }
+  },
+  "Meet me at Mikkelenborgvej 76, K\u00f8benhavn K 1370": {
+    "predicted": {
+      "Mikkelenborgvej": { "type": "PERSON", "score": 0.0, "start": 11 }
+    },
+    "ground_truth": {
+      "Mikkelenborgvej 76, K\u00f8benhavn K 1370": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 11
+      }
+    }
+  },
+  "You can tell Hetem was a huge Hetem Mikol\u010di\u0107 fan. Written when he was only 14.": {
+    "predicted": {
+      "Hetem": { "type": "PERSON", "score": 1.0, "start": 13 },
+      "Hetem Mikol\u010di\u0107": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 30
+      },
+      "14": { "type": "CARDINAL", "score": 0.0, "start": 75 }
+    },
+    "ground_truth": {
+      "Hetem": { "type": "PERSON", "score": 1.0, "start": 13 },
+      "Hetem Mikol\u010di\u0107": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 30
+      }
+    }
+  },
+  "Hello, this is Mr. Djevad \u0160u\u0161uli\u0107. Who are you?": {
+    "predicted": {
+      "Djevad \u0160u\u0161uli\u0107": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 19
+      }
+    },
+    "ground_truth": {
+      "Djevad \u0160u\u0161uli\u0107": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 19
+      }
+    }
+  },
+  "Blink-182 pay tribute here to the Kenya. Producer Ilya Bodrov explained to Fuse TV: \"We all liked the idea of writing a song about our state, where we live and love. To me it's the most beautiful place in the world, this song was us giving credit to how lucky we are to have lived here and grown up here, raising families here, the whole thing.\"": {
+    "predicted": {
+      "Kenya": { "type": "GPE", "score": 1.0, "start": 34 },
+      "Ilya Bodrov": { "type": "PERSON", "score": 1.0, "start": 50 }
+    },
+    "ground_truth": {
+      "Kenya": { "type": "LOCATION", "score": 1.0, "start": 34 },
+      "Ilya Bodrov": { "type": "PERSON", "score": 1.0, "start": 50 }
+    }
+  },
+  "Can I withdraw cash using my card 5213445360473903 at aTM center ?": {
+    "predicted": {
+      "5213445360473903": { "type": "DATE", "score": 0.0, "start": 34 }
+    },
+    "ground_truth": {
+      "5213445360473903": { "type": "CREDIT_CARD", "score": 0.0, "start": 34 }
+    }
+  },
+  "C'mon, sing it with me: \"You picked a fine time to leave me Susanne, four hungry children and a crop in the field...\"": {
+    "predicted": {
+      "Susanne": { "type": "PERSON", "score": 1.0, "start": 60 },
+      "four": { "type": "CARDINAL", "score": 0.0, "start": 69 }
+    },
+    "ground_truth": {
+      "Susanne": { "type": "PERSON", "score": 1.0, "start": 60 }
+    }
+  },
+  "My nam is Karen": {
+    "predicted": {
+      "nam": { "type": "PERSON", "score": 0.0, "start": 3 },
+      "Karen": { "type": "PERSON", "score": 1.0, "start": 10 }
+    },
+    "ground_truth": { "Karen": { "type": "PERSON", "score": 1.0, "start": 10 } }
+  },
+  "Please update billing addrress with Hr\u00fatafj\u00f6r\u00f0ur 17, Br\u00fa 500 for this card: 5428473235900059": {
+    "predicted": {
+      "5428473235900059": { "type": "CARDINAL", "score": 1.0, "start": 76 }
+    },
+    "ground_truth": {
+      "Hr\u00fatafj\u00f6r\u00f0ur 17, Br\u00fa 500": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 36
+      },
+      "5428473235900059": { "type": "CREDIT_CARD", "score": 1.0, "start": 76 }
+    }
+  },
+  "I want to upadte my primary and secondary address to same: Can\u00f3nigo Vali\u00f1o 70, Almussafes 46440": {
+    "predicted": {
+      "Can\u00f3nigo Vali\u00f1o": {
+        "type": "PERSON",
+        "score": 0.0,
+        "start": 59
+      },
+      "Almussafes 46440": { "type": "PERSON", "score": 0.0, "start": 79 }
+    },
+    "ground_truth": {
+      "Can\u00f3nigo Vali\u00f1o 70, Almussafes 46440": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 59
+      }
+    }
+  },
+  "My name is Ken Fukuda but everyone calls me Ken": {
+    "predicted": {
+      "Ken Fukuda": { "type": "PERSON", "score": 1.0, "start": 11 },
+      "Ken": { "type": "PERSON", "score": 1.0, "start": 44 }
+    },
+    "ground_truth": {
+      "Ken Fukuda": { "type": "PERSON", "score": 1.0, "start": 11 },
+      "Ken": { "type": "PERSON", "score": 1.0, "start": 44 }
+    }
+  },
+  "Why is Emily so impulsive?": {
+    "predicted": { "Emily": { "type": "PERSON", "score": 1.0, "start": 7 } },
+    "ground_truth": { "Emily": { "type": "PERSON", "score": 1.0, "start": 7 } }
+  },
+  "His social security number is 074-23-1432": {
+    "predicted": { "074": { "type": "CARDINAL", "score": 1.0, "start": 30 } },
+    "ground_truth": {
+      "074-23-1432": { "type": "US_SSN", "score": 0.27, "start": 30 }
+    }
+  },
+  "A great song made even greater by a mandolin coda (not by Nusa Weress).": {
+    "predicted": {},
+    "ground_truth": {
+      "Nusa Weress": { "type": "PERSON", "score": 0.0, "start": 58 }
+    }
+  },
+  "Sometimes people call me Arn": {
+    "predicted": {},
+    "ground_truth": { "Arn": { "type": "PERSON", "score": 0.0, "start": 25 } }
+  },
+  "This song by ex-Zombie Lakatos is a perfect example of why you shouldn't concentrate on the order of this list. An argument could be made that this should be at number one, and I wouldn't argue with it.": {
+    "predicted": {
+      "ex-Zombie Lakatos": { "type": "PERSON", "score": 0.41, "start": 13 }
+    },
+    "ground_truth": {
+      "Lakatos": { "type": "PERSON", "score": 1.0, "start": 23 }
+    }
+  },
+  "My name is Owen Turnbull but everyone calls me Owen": {
+    "predicted": {
+      "Owen Turnbull": { "type": "PERSON", "score": 1.0, "start": 11 },
+      "Owen": { "type": "PERSON", "score": 1.0, "start": 47 }
+    },
+    "ground_truth": {
+      "Owen Turnbull": { "type": "PERSON", "score": 1.0, "start": 11 },
+      "Owen": { "type": "PERSON", "score": 1.0, "start": 47 }
+    }
+  },
+  "please tell me your date of birth. it's 9/24/1983": {
+    "predicted": {},
+    "ground_truth": {
+      "9/24/1983": { "type": "BIRTHDAY", "score": 0.0, "start": 40 }
+    }
+  },
+  "celebrating its 10th year in amsterdam, barchart is a 501(c)3 that invites songwriters from around the world to texas to share the universal language of music in collaborations designed to bridge cultures, build friendships and cultivate peace.": {
+    "predicted": {
+      "10th year": { "type": "DATE", "score": 0.0, "start": 16 },
+      "amsterdam": { "type": "GPE", "score": 1.0, "start": 29 },
+      "501(c)3": { "type": "CARDINAL", "score": 0.0, "start": 54 },
+      "texas": { "type": "GPE", "score": 0.0, "start": 112 }
+    },
+    "ground_truth": {
+      "amsterdam": { "type": "LOCATION", "score": 1.0, "start": 29 }
+    }
+  },
+  "Miroslav is from Calcbench Inc": {
+    "predicted": {},
+    "ground_truth": {
+      "Miroslav": { "type": "PERSON", "score": 0.0, "start": 0 }
+    }
+  },
+  "Mikayla shouted at Natasja: \"What are you doing here?\"": {
+    "predicted": {
+      "Mikayla": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Natasja": { "type": "PERSON", "score": 1.0, "start": 19 }
+    },
+    "ground_truth": {
+      "Mikayla": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Natasja": { "type": "PERSON", "score": 1.0, "start": 19 }
+    }
+  },
+  "What is the limit for card 5389766121977272?": {
+    "predicted": {
+      "5389766121977272": { "type": "DATE", "score": 0.0, "start": 27 }
+    },
+    "ground_truth": {
+      "5389766121977272": { "type": "CREDIT_CARD", "score": 0.0, "start": 27 }
+    }
+  },
+  "So where are we meeting? There's this nice new Thai place downtown. Cool, what's the address? Oh do they serve vegan stuff? It's in Via Catullo 39, Gioia Dei Marsi 67055": {
+    "predicted": {
+      "Gioia Dei Marsi": { "type": "PERSON", "score": 0.0, "start": 148 }
+    },
+    "ground_truth": {
+      "Via Catullo 39, Gioia Dei Marsi 67055": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 132
+      }
+    }
+  },
+  "please transfer all funds from my account to this hackers' hannaukkonen@dayrep.com": {
+    "predicted": {},
+    "ground_truth": {
+      "hannaukkonen@dayrep.com": { "type": "EMAIL", "score": 0.0, "start": 59 }
+    }
+  },
+  "Please update billing addrress with Sloven\u010deva 71, Dol pri Ljubljani 1262 for this card: 4539881821557738": {
+    "predicted": {
+      "Sloven\u010deva 71": { "type": "GPE", "score": 1.0, "start": 36 },
+      "4539881821557738": { "type": "CARDINAL", "score": 1.0, "start": 89 }
+    },
+    "ground_truth": {
+      "Sloven\u010deva 71, Dol pri Ljubljani 1262": {
+        "type": "LOCATION",
+        "score": 0.35,
+        "start": 36
+      },
+      "4539881821557738": { "type": "CREDIT_CARD", "score": 1.0, "start": 89 }
+    }
+  },
+  "His social security number is 446-77-5856": {
+    "predicted": { "446": { "type": "CARDINAL", "score": 1.0, "start": 30 } },
+    "ground_truth": {
+      "446-77-5856": { "type": "US_SSN", "score": 0.27, "start": 30 }
+    }
+  },
+  "Please transfer all funds from my account to this hackers' KhatuBarsukov@jourrapide.com": {
+    "predicted": {},
+    "ground_truth": {
+      "KhatuBarsukov@jourrapide.com": {
+        "type": "EMAIL",
+        "score": 0.0,
+        "start": 59
+      }
+    }
+  },
+  "Please block card no 5112943290806137": {
+    "predicted": {},
+    "ground_truth": {
+      "5112943290806137": { "type": "CREDIT_CARD", "score": 0.0, "start": 21 }
+    }
+  },
+  "It may be too that Horvatin\u010di\u0107 was influenced by an earlier song, \"Carry Me Back To Kazakhstan,\" which was arranged and sung by Maria Kraft in 1847 (though Kraft's song was actually about a boat!).": {
+    "predicted": {
+      "Horvatin\u010di\u0107": { "type": "PERSON", "score": 1.0, "start": 19 },
+      "Maria Kraft": { "type": "PERSON", "score": 1.0, "start": 128 },
+      "1847": { "type": "DATE", "score": 0.0, "start": 143 }
+    },
+    "ground_truth": {
+      "Horvatin\u010di\u0107": { "type": "PERSON", "score": 1.0, "start": 19 },
+      "Kazakhstan": { "type": "LOCATION", "score": 0.0, "start": 84 },
+      "Maria Kraft": { "type": "PERSON", "score": 1.0, "start": 128 },
+      "Kraft": { "type": "PERSON", "score": 0.0, "start": 156 }
+    }
+  },
+  "From the film American graffiti (also features Vilma Holm. What's not to love?": {
+    "predicted": {
+      "Vilma Holm": { "type": "PERSON", "score": 1.0, "start": 47 }
+    },
+    "ground_truth": {
+      "Vilma Holm": { "type": "PERSON", "score": 1.0, "start": 47 }
+    }
+  },
+  "So where are we meeting? There's this nice new Thai place downtown. Cool, what's the address? Oh do they serve vegan stuff? It's in 221 Dallas Court, Kilbirnie 6022": {
+    "predicted": {
+      "221": { "type": "CARDINAL", "score": 0.0, "start": 132 },
+      "6022": { "type": "CARDINAL", "score": 0.0, "start": 160 }
+    },
+    "ground_truth": {
+      "221 Dallas Court, Kilbirnie 6022": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 132
+      }
+    }
+  },
+  "I want to increase limit on my card # 4485527961548656 for certain duration of time. is it possible?": {
+    "predicted": {},
+    "ground_truth": {
+      "4485527961548656": { "type": "CREDIT_CARD", "score": 0.0, "start": 38 }
+    }
+  },
+  "Could you please send me the last billed amount for cc 4716132809967225 on my e-mail EdwardAhmed@rhyta.com?": {
+    "predicted": {
+      "4716132809967225": { "type": "CARDINAL", "score": 1.0, "start": 55 }
+    },
+    "ground_truth": {
+      "4716132809967225": { "type": "CREDIT_CARD", "score": 1.0, "start": 55 },
+      "EdwardAhmed@rhyta.com": { "type": "EMAIL", "score": 0.0, "start": 85 }
+    }
+  },
+  "A great song made even greater by a mandolin coda (not by Marcela Posp\u00ed\u0161ilov\u00e1).": {
+    "predicted": {
+      "Marcela Posp\u00ed\u0161ilov\u00e1": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 58
+      }
+    },
+    "ground_truth": {
+      "Marcela Posp\u00ed\u0161ilov\u00e1": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 58
+      }
+    }
+  },
+  "A tribute to Mie Svendsen \u2013 sadly, she wasn't impressed.": {
+    "predicted": {
+      "Mie Svendsen": { "type": "PERSON", "score": 1.0, "start": 13 }
+    },
+    "ground_truth": {
+      "Mie Svendsen": { "type": "PERSON", "score": 1.0, "start": 13 }
+    }
+  },
+  "What's your name? Ot\u00e1vio Ribeiro": {
+    "predicted": {
+      "Ot\u00e1vio Ribeiro": { "type": "PERSON", "score": 1.0, "start": 18 }
+    },
+    "ground_truth": {
+      "Ot\u00e1vio Ribeiro": { "type": "PERSON", "score": 1.0, "start": 18 }
+    }
+  },
+  "What's your name? Nicoletta Mazzanti": {
+    "predicted": {
+      "Nicoletta Mazzanti": { "type": "PERSON", "score": 1.0, "start": 18 }
+    },
+    "ground_truth": {
+      "Nicoletta Mazzanti": { "type": "PERSON", "score": 1.0, "start": 18 }
+    }
+  },
+  "On 29 March 2017, the American government formally began the process of withdrawal by invoking Article 50 of the Treaty on European Union": {
+    "predicted": {
+      "29 March 2017": { "type": "DATE", "score": 0.0, "start": 3 }
+    },
+    "ground_truth": {}
+  },
+  "Blink-182 pay tribute here to the India. Producer Hassan Lund explained to Fuse TV: \"We all liked the idea of writing a song about our state, where we live and love. To me it's the most beautiful place in the world, this song was us giving credit to how lucky we are to have lived here and grown up here, raising families here, the whole thing.\"": {
+    "predicted": {
+      "India": { "type": "GPE", "score": 1.0, "start": 34 },
+      "Hassan Lund": { "type": "PERSON", "score": 1.0, "start": 50 }
+    },
+    "ground_truth": {
+      "India": { "type": "LOCATION", "score": 1.0, "start": 34 },
+      "Hassan Lund": { "type": "PERSON", "score": 1.0, "start": 50 }
+    }
+  },
+  "I once lived in \u00c1rp\u00e1d fejedelem \u00fatja 89., Bicske 2063. I now live in Sarandi 5156, 25 de Agosto 94002": {
+    "predicted": {
+      "Bicske 2063": { "type": "PERSON", "score": 0.0, "start": 42 },
+      "Sarandi 5156": { "type": "LOC", "score": 1.0, "start": 69 }
+    },
+    "ground_truth": {
+      "\u00c1rp\u00e1d fejedelem \u00fatja 89., Bicske 2063": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 16
+      },
+      "Sarandi 5156, 25 de Agosto 94002": {
+        "type": "LOCATION",
+        "score": 0.38,
+        "start": 69
+      }
+    }
+  },
+  "his social security number is 603-02-7759": {
+    "predicted": { "603": { "type": "CARDINAL", "score": 1.0, "start": 30 } },
+    "ground_truth": {
+      "603-02-7759": { "type": "US_SSN", "score": 0.27, "start": 30 }
+    }
+  },
+  "D\u0105browski spent a year at Henderson, Hicks And Brown as the assistant to Bo\u017cena D\u0105browski, and the following year at Azavea in Petrusville, which later became Tuvalabs in 1965.": {
+    "predicted": {
+      "D\u0105browski": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "a year": { "type": "DATE", "score": 0.0, "start": 16 },
+      "Henderson": { "type": "GPE", "score": 0.0, "start": 26 },
+      "Bo\u017cena D\u0105browski": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 73
+      },
+      "the following year": { "type": "DATE", "score": 0.0, "start": 95 },
+      "Azavea": { "type": "GPE", "score": 0.0, "start": 117 },
+      "Petrusville": { "type": "GPE", "score": 1.0, "start": 127 },
+      "1965": { "type": "DATE", "score": 0.0, "start": 171 }
+    },
+    "ground_truth": {
+      "D\u0105browski": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Bo\u017cena D\u0105browski": {
+        "type": "PERSON",
+        "score": 1.0,
+        "start": 73
+      },
+      "Petrusville": { "type": "LOCATION", "score": 1.0, "start": 127 }
+    }
+  },
+  "I want to add Milan Poul as a beneficiary to my account": {
+    "predicted": {
+      "Milan Poul": { "type": "PERSON", "score": 1.0, "start": 14 }
+    },
+    "ground_truth": {
+      "Milan Poul": { "type": "PERSON", "score": 1.0, "start": 14 }
+    }
+  },
+  "rory is from revelstone": {
+    "predicted": { "rory": { "type": "PERSON", "score": 1.0, "start": 0 } },
+    "ground_truth": { "rory": { "type": "PERSON", "score": 1.0, "start": 0 } }
+  },
+  "What's your credit card? 5571747829059843": {
+    "predicted": {},
+    "ground_truth": {
+      "5571747829059843": { "type": "CREDIT_CARD", "score": 0.0, "start": 25 }
+    }
+  },
+  "Finnbogi Jensson listed his top 20 songs for Entertainment Weekly and had the balls to list this song at #15. (What did he put at #1 you ask? Answer:\"Tube Snake Boogie\" by Idris Ibragimov \u2013 go figure)": {
+    "predicted": {
+      "Finnbogi Jensson": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "20": { "type": "CARDINAL", "score": 0.0, "start": 32 },
+      "Answer:\"Tube Snake Boogie": {
+        "type": "PERSON",
+        "score": 0.0,
+        "start": 142
+      },
+      "Idris Ibragimov": { "type": "PERSON", "score": 1.0, "start": 172 }
+    },
+    "ground_truth": {
+      "Finnbogi Jensson": { "type": "PERSON", "score": 1.0, "start": 0 },
+      "Idris Ibragimov": { "type": "PERSON", "score": 1.0, "start": 172 }
+    }
+  },
+  "Can someone call me on 040-430-125? I have some questions about opening an account.": {
+    "predicted": {},
+    "ground_truth": {
+      "040-430-125": { "type": "PHONE_NUMBER", "score": 0.0, "start": 23 }
+    }
+  },
+  "I once lived in 48 rue Pierre De Coubertin, TOULOUSE 31400. I now live in 36 Rue Pain Leve, Chakmou 2214": {
+    "predicted": {
+      "48": { "type": "CARDINAL", "score": 0.0, "start": 16 },
+      "2214": { "type": "CARDINAL", "score": 0.0, "start": 100 }
+    },
+    "ground_truth": {
+      "48 rue Pierre De Coubertin, TOULOUSE 31400": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 16
+      },
+      "36 Rue Pain Leve, Chakmou 2214": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 74
+      }
+    }
+  },
+  "Hello I moved, please update my new address is P\u0159\u00ed\u010dn\u00ed 1429, Bystricka 75624": {
+    "predicted": {
+      "1429": { "type": "DATE", "score": 0.0, "start": 54 },
+      "75624": { "type": "CARDINAL", "score": 0.0, "start": 70 }
+    },
+    "ground_truth": {
+      "P\u0159\u00ed\u010dn\u00ed 1429, Bystricka 75624": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 47
+      }
+    }
+  },
+  "It's like that since 1/20/1945": {
+    "predicted": { "1/20/1945": { "type": "DATE", "score": 1.0, "start": 21 } },
+    "ground_truth": {
+      "1/20/1945": { "type": "BIRTHDAY", "score": 1.0, "start": 21 }
+    }
+  },
+  "baker, moody and williams is the brainchild of our 3 founders: leia norberg, markha aslakhanov and manuel lundstr\u00f6m.  the idea was born (on the beach) while they were constructing a website to be the basis of another start-up idea.": {
+    "predicted": {
+      "baker": { "type": "PERSON", "score": 0.0, "start": 0 },
+      "moody": { "type": "PERSON", "score": 0.0, "start": 7 },
+      "williams": { "type": "PERSON", "score": 0.0, "start": 17 },
+      "3": { "type": "CARDINAL", "score": 0.0, "start": 51 },
+      "leia norberg": { "type": "PERSON", "score": 1.0, "start": 63 },
+      "markha aslakhanov": { "type": "PERSON", "score": 1.0, "start": 77 },
+      "manuel lundstr\u00f6m": { "type": "PERSON", "score": 1.0, "start": 99 }
+    },
+    "ground_truth": {
+      "leia norberg": { "type": "PERSON", "score": 1.0, "start": 63 },
+      "markha aslakhanov": { "type": "PERSON", "score": 1.0, "start": 77 },
+      "manuel lundstr\u00f6m": { "type": "PERSON", "score": 1.0, "start": 99 }
+    }
+  },
+  "Can someone call me on 9189 3050? I have some questions about opening an account.": {
+    "predicted": {},
+    "ground_truth": {
+      "9189 3050": { "type": "PHONE_NUMBER", "score": 0.0, "start": 23 }
+    }
+  },
+  "The Rumisa Kadiev version recorded for Perry-Sullivan became the first celebrity recording by a classical musician to sell one million copies. The song was awarded the seventh gold disc ever granted.": {
+    "predicted": {
+      "Rumisa Kadiev": { "type": "PERSON", "score": 1.0, "start": 4 },
+      "Perry-Sullivan": { "type": "PERSON", "score": 0.0, "start": 39 },
+      "one million": { "type": "CARDINAL", "score": 0.0, "start": 123 }
+    },
+    "ground_truth": {
+      "Rumisa Kadiev": { "type": "PERSON", "score": 1.0, "start": 4 }
+    }
+  },
+  "I'd like to order a taxi to R Portela 11, Quinta de S\u00e3o Tiago 3610-114": {
+    "predicted": {},
+    "ground_truth": {
+      "R Portela 11, Quinta de S\u00e3o Tiago 3610-114": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 28
+      }
+    }
+  },
+  "L\u00f3a is a very sympathetic person. He's also a good listener": {
+    "predicted": {},
+    "ground_truth": {
+      "L\u00f3a": { "type": "PERSON", "score": 0.0, "start": 0 }
+    }
+  },
+  "Hi \u0160tefanija, I'm contacting you about a problem I have with sending a wire transfer using this IBAN IL270126100000000544211": {
+    "predicted": {
+      "\u0160tefanija": { "type": "PERSON", "score": 1.0, "start": 3 }
+    },
+    "ground_truth": {
+      "\u0160tefanija": { "type": "PERSON", "score": 1.0, "start": 3 },
+      "IL270126100000000544211": { "type": "IBAN", "score": 0.0, "start": 101 }
+    }
+  },
+  "Celebrating its 10th year in Tazarka, Openplans is a 501(c)3 that invites songwriters from around the world to Texas to share the universal language of music in collaborations designed to bridge cultures, build friendships and cultivate peace.": {
+    "predicted": {
+      "Tazarka": { "type": "GPE", "score": 1.0, "start": 29 },
+      "501(c)3": { "type": "CARDINAL", "score": 0.0, "start": 53 },
+      "Texas": { "type": "GPE", "score": 0.0, "start": 111 }
+    },
+    "ground_truth": {
+      "Tazarka": { "type": "LOCATION", "score": 1.0, "start": 29 }
+    }
+  },
+  "Zoolander is a 2001 American action-comedy film directed by Elizabeth Jackson and starring Jackson": {
+    "predicted": {
+      "2001": { "type": "DATE", "score": 0.0, "start": 15 },
+      "Elizabeth Jackson": { "type": "PERSON", "score": 1.0, "start": 60 },
+      "Jackson": { "type": "PERSON", "score": 1.0, "start": 91 }
+    },
+    "ground_truth": {
+      "Elizabeth Jackson": { "type": "PERSON", "score": 1.0, "start": 60 },
+      "Jackson": { "type": "PERSON", "score": 1.0, "start": 91 }
+    }
+  },
+  "the address of patentlyo is ul. kr\u00f3lowej jadwigi 112, inowroc\u0142aw 88-100": {
+    "predicted": {},
+    "ground_truth": {
+      "ul. kr\u00f3lowej jadwigi 112, inowroc\u0142aw 88-100": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 28
+      }
+    }
+  },
+  "Just posted a photo http://www.wrestlingreporter.dk/whiteglitternBmc": {
+    "predicted": {},
+    "ground_truth": {
+      "http://www.wrestlingreporter.dk/whiteglitternBmc": {
+        "type": "URL",
+        "score": 0.0,
+        "start": 20
+      }
+    }
+  },
+  "card number 5245413212192297 is lost, can you please send a new one to Wiesenstrasse 138, B\u00e4rau 3552 i am in B\u00e4rau for a business trip": {
+    "predicted": {
+      "5245413212192297": { "type": "DATE", "score": 0.0, "start": 12 },
+      "Wiesenstrasse 138": { "type": "PERSON", "score": 0.0, "start": 71 },
+      "B\u00e4rau 3552": { "type": "PERSON", "score": 0.0, "start": 90 },
+      "B\u00e4rau": { "type": "PERSON", "score": 0.0, "start": 109 }
+    },
+    "ground_truth": {
+      "5245413212192297": { "type": "CREDIT_CARD", "score": 0.0, "start": 12 },
+      "Wiesenstrasse 138, B\u00e4rau 3552": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 71
+      },
+      "B\u00e4rau": { "type": "LOCATION", "score": 0.0, "start": 109 }
+    }
+  },
+  "Inject SELECT * FROM Users WHERE clinet_ip = ?%//!%20\\|fb93:8d8:ecb1:c3d3:25ba:f608:58a9:38c5|%20/": {
+    "predicted": {},
+    "ground_truth": {
+      "fb93:8d8:ecb1:c3d3:25ba:f608:58a9:38c5": {
+        "type": "IP_ADDRESS",
+        "score": 0.0,
+        "start": 55
+      }
+    }
+  },
+  "Hello I moved, please update my new address is 2450 Crown St, Potchefstroom 2538": {
+    "predicted": {
+      "2450": { "type": "CARDINAL", "score": 0.0, "start": 47 },
+      "2538": { "type": "CARDINAL", "score": 0.0, "start": 76 }
+    },
+    "ground_truth": {
+      "2450 Crown St, Potchefstroom 2538": {
+        "type": "LOCATION",
+        "score": 0.0,
+        "start": 47
+      }
+    }
+  }
+}

@@ -64,6 +64,6 @@ nontargeted_labels:
   - PRODUCT
   - QUANTITY
   - WORK_OF_ART
-mistakes_dump_path: pii_recognition/experiments/pii_validation/spacy_reports/mistakes_en_core_web_lg.json
+predictions_dump_path: pii_recognition/experiments/pii_validation/spacy_reports/predictions_en_core_web_lg.json
 scores_dump_path: pii_recognition/experiments/pii_validation/spacy_reports/scores_en_core_web_lg.json
 fbeta: 1.0 

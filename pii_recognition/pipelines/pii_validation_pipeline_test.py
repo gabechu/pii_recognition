@@ -18,7 +18,7 @@ from .pii_validation_pipeline import (
     get_rollup_fscore_on_pii,
     get_rollup_fscores_on_types,
     identify_pii_entities,
-    log_mistakes,
+    log_predictions_and_ground_truths,
 )
 
 
@@ -274,24 +274,23 @@ def test_get_rollup_fscores_on_types(complex_scores):
 def test_log_mistakes(scores):
     with TemporaryDirectory() as tempdir:
         fake_path = os.path.join(tempdir, "fake_path")
-        log_mistakes(fake_path, scores)
+        log_predictions_and_ground_truths(fake_path, scores)
         actual = load_json_file(fake_path)
 
     assert len(actual) == 2
-    assert actual["It's like that since 9/23/1993"] == {
-        "It's like ": {"type": "BIRTHDAY", "score": 0.0, "src": "predicted"},
-        "9/23/1993": {"type": "BIRTHDAY", "score": 0.0, "src": "ground_truth"},
+    item_one = actual["It's like that since 9/23/1993"]
+    assert item_one["predicted"] == {
+        "It's like ": {"type": "BIRTHDAY", "score": 0.0, "start": 0}
     }
-    assert actual["The address of Balefire Global is Valadouro 3, Ubide 48145"] == {
-        " is Valadouro 3,": {"type": "LOCATION", "score": 0.75, "src": "predicted"},
-        "Balefire Global": {
-            "type": "ORGANIZATION",
-            "score": 0.67,
-            "src": "ground_truth",
-        },
-        "Valadouro 3, Ubide 48145": {
-            "type": "LOCATION",
-            "score": 0.5,
-            "src": "ground_truth",
-        },
+    assert item_one["ground_truth"] == {
+        "9/23/1993": {"type": "BIRTHDAY", "score": 0.0, "start": 21},
+    }
+    item_two = actual["The address of Balefire Global is Valadouro 3, Ubide 48145"]
+    assert item_two["predicted"] == {
+        "ire Global": {"type": "ORGANIZATION", "score": 1.0, "start": 20},
+        " is Valadouro 3,": {"type": "LOCATION", "score": 0.75, "start": 30},
+    }
+    assert item_two["ground_truth"] == {
+        "Balefire Global": {"type": "ORGANIZATION", "score": 0.67, "start": 15},
+        "Valadouro 3, Ubide 48145": {"type": "LOCATION", "score": 0.5, "start": 34},
     }

@@ -73,6 +73,6 @@ nontargeted_labels:
   - PASSWORD
   - PASSPORT_NUMBER
   - DRIVER_ID
-mistakes_dump_path: pii_recognition/experiments/pii_validation/comprehend_reports/mistakes_pii.json
+predictions_dump_path: pii_recognition/experiments/pii_validation/comprehend_reports/predictions_pii.json
 scores_dump_path: pii_recognition/experiments/pii_validation/comprehend_reports/scores_pii.json
 fbeta: 1.0

@@ -71,34 +71,34 @@ def calculate_precisions_and_recalls(
 
 
 @returns()
-def log_mistakes(mistakes_dump_path: str, scores: List[TextScore]):
-    mistakes = dict()
+def log_predictions_and_ground_truths(
+    predictions_dump_path: str, scores: List[TextScore]
+):
+    results = dict()
     for score in scores:
         text = score.text
-        mistakes_in_precisions = {
+        predictions = {
             text[p.entity.start : p.entity.end]: {
                 "type": p.entity.entity_type,
                 "score": round(p.precision, 2),
-                "src": p.entity_src,
+                "start": p.entity.start,
             }
             for p in score.precisions
-            if p.precision != 1.0
         }
-        mistakes_in_recalls = {
+        ground_truths = {
             text[r.entity.start : r.entity.end]: {
                 "type": r.entity.entity_type,
                 "score": round(r.recall, 2),
-                "src": r.entity_src,
+                "start": r.entity.start,
             }
             for r in score.recalls
-            if r.recall != 1.0
         }
 
-        text_mistakes = {**mistakes_in_precisions, **mistakes_in_recalls}
-        if text_mistakes:
-            mistakes.update({text: {**mistakes_in_precisions, **mistakes_in_recalls}})
+        results.update(
+            {text: {"predicted": predictions, "ground_truth": ground_truths}}
+        )
 
-    dump_to_json_file(mistakes, mistakes_dump_path)
+    dump_to_json_file(results, predictions_dump_path)
 
 
 @returns(Dict)
@@ -226,7 +226,7 @@ def exec_pipeline(config_yaml_file: str):
         read_benchmark_data,
         identify_pii_entities,
         calculate_precisions_and_recalls,
-        log_mistakes,
+        log_predictions_and_ground_truths,
         calculate_aggregate_metrics,
         report_results,
         name="pii_validation_pipeline",

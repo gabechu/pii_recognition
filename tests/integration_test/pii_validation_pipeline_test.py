@@ -54,8 +54,8 @@ def test_execute_pii_validation_pipeline(mock_registry):
         temp_config_yaml = os.path.join(tempdir, "config.yaml")
 
         config = load_yaml_file(config_yaml)
-        config["mistakes_dump_path"] = os.path.join(
-            tempdir, "test_mistakes.json"
+        config["predictions_dump_path"] = preds_dump_path = os.path.join(
+            tempdir, "test_predictions.json"
         )
         config["scores_dump_path"] = scores_dump_path = os.path.join(
             tempdir, "test_scores.json"
@@ -64,10 +64,11 @@ def test_execute_pii_validation_pipeline(mock_registry):
 
         exec_pipeline(temp_config_yaml)
         scores = load_json_file(scores_dump_path)
+        preds = load_json_file(preds_dump_path)
 
         assert set(os.listdir(tempdir)) == {
             "config.yaml",
-            "test_mistakes.json",
+            "test_predictions.json",
             "test_scores.json",
         }
         assert len(scores.keys()) == 5
@@ -79,3 +80,50 @@ def test_execute_pii_validation_pipeline(mock_registry):
             scores.get("frozenset({'CREDIT_CARD', 'OTHER'})") == 1.0
             or scores.get("frozenset({'OTHER', 'CREDIT_CARD'})") == 1.0
         )
+
+        assert len(preds) == 5
+        item_one = preds[
+            "Please update billing addrress with Markt 84, "
+            "MÜLLNERN 9123 for this card: 5550253262199449"
+        ]
+        item_two = preds[
+            "My name appears incorrectly on credit card statement could you "
+            "please correct it to Ms. Aybika Rushisvili?"
+        ]
+        item_three = preds["A tribute to Joshua Lewis – sadly, she wasn't impressed."]
+        item_four = preds["I work for Flightview"]
+        item_five = preds["I work for Flight"]
+
+        assert item_one["predicted"] == {
+            "Markt 84, MÜ": {"type": "LOCATION", "score": 1.0, "start": 36},
+            "5550253262199449": {"type": "OTHER", "score": 1.0, "start": 75},
+        }
+        assert item_one["ground_truth"] == {
+            "Markt 84, MÜLLNERN 9123": {
+                "type": "LOCATION",
+                "score": 0.52,
+                "start": 36,
+            },
+            "5550253262199449": {"type": "CREDIT_CARD", "score": 1.0, "start": 75},
+        }
+
+        assert item_two["predicted"] == {}
+        assert item_two["ground_truth"] == {
+            "Aybika Rushisvili": {"type": "PERSON", "score": 0.0, "start": 88}
+        }
+
+        assert item_three["predicted"] == {
+            "Joshua Lewis": {"type": "PERSON", "score": 1.0, "start": 13},
+            "sadly, ": {"type": "PERSON", "score": 0.0, "start": 28},
+        }
+        assert item_three["ground_truth"] == {
+            "Joshua Lewis": {"type": "PERSON", "score": 1.0, "start": 13}
+        }
+
+        assert item_four["predicted"] == {
+            "Flight": {"type": "PERSON", "score": 0.0, "start": 11}
+        }
+        assert item_four["ground_truth"] == {}
+
+        assert item_five["predicted"] == {}
+        assert item_five["ground_truth"] == {}
