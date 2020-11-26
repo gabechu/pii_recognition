@@ -1,11 +1,39 @@
 {
   "exact_match_f1": 0.5123,
   "partial_match_f1_threshold_at_50%": 0.5137,
-  "frozenset({'BIRTHDAY', 'TIME', 'DATE'})": 0.1333,
-  "frozenset({'IBAN', 'CREDIT_CARD', 'PHONE_NUMBER', 'CARDINAL', 'US_SSN'})": 0.3741,
-  "frozenset({'GPE', 'LOC', 'LOCATION'})": 0.4315,
-  "frozenset({'PERSON'})": 0.7838,
-  "frozenset({'URL'})": 0.0,
-  "frozenset({'IP_ADDRESS'})": 0.0,
-  "frozenset({'EMAIL'})": 0.0
+  "frozenset({'DATE', 'TIME', 'BIRTHDAY'})": {
+    "f1": 0.1333,
+    "ave-precision": 0.0792,
+    "ave-recall": 0.4211
+  },
+  "frozenset({'IBAN', 'CARDINAL', 'PHONE_NUMBER', 'US_SSN', 'CREDIT_CARD'})": {
+    "f1": 0.3741,
+    "ave-precision": 0.4044,
+    "ave-recall": 0.348
+  },
+  "frozenset({'LOC', 'LOCATION', 'GPE'})": {
+    "f1": 0.4315,
+    "ave-precision": 0.7812,
+    "ave-recall": 0.298
+  },
+  "frozenset({'PERSON'})": {
+    "f1": 0.7838,
+    "ave-precision": 0.7535,
+    "ave-recall": 0.8167
+  },
+  "frozenset({'URL'})": {
+    "f1": 0.0,
+    "ave-precision": "undefined",
+    "ave-recall": 0.0
+  },
+  "frozenset({'IP_ADDRESS'})": {
+    "f1": 0.0,
+    "ave-precision": "undefined",
+    "ave-recall": 0.0
+  },
+  "frozenset({'EMAIL'})": {
+    "f1": 0.0,
+    "ave-precision": "undefined",
+    "ave-recall": 0.0
+  }
 }

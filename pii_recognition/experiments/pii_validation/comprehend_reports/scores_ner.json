@@ -1,8 +1,24 @@
 {
   "exact_match_f1": 0.8579,
   "partial_match_f1_threshold_at_50%": 0.8625,
-  "frozenset({'CREDIT_CARD', 'URL', 'IP_ADDRESS', 'PHONE_NUMBER', 'OTHER', 'US_SSN', 'EMAIL', 'IBAN'})": 0.7805,
-  "frozenset({'DATE', 'BIRTHDAY'})": 0.48,
-  "frozenset({'LOCATION'})": 0.7763,
-  "frozenset({'PERSON'})": 0.902
+  "frozenset({'US_SSN', 'CREDIT_CARD', 'PHONE_NUMBER', 'IP_ADDRESS', 'OTHER', 'URL', 'IBAN', 'EMAIL'})": {
+    "f1": 0.7805,
+    "ave-precision": 0.6632,
+    "ave-recall": 0.9483
+  },
+  "frozenset({'BIRTHDAY', 'DATE'})": {
+    "f1": 0.48,
+    "ave-precision": 0.3214,
+    "ave-recall": 0.9474
+  },
+  "frozenset({'LOCATION'})": {
+    "f1": 0.7763,
+    "ave-precision": 0.8302,
+    "ave-recall": 0.7289
+  },
+  "frozenset({'PERSON'})": {
+    "f1": 0.902,
+    "ave-precision": 0.8399,
+    "ave-recall": 0.974
+  }
 }

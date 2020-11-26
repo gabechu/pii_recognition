@@ -107,23 +107,17 @@ def calculate_aggregate_metrics(
     grouped_targeted_labels: List[Set[str]],
     fbeta: float = 1.0,
 ) -> Dict[Union[str, FrozenSet[str]], float]:
-    round_ndigits = 4
     results: Dict[Union[str, FrozenSet[str]], float] = dict()
 
-    results["exact_match_f1"] = round(
-        get_rollup_fscore_on_pii(scores, fbeta, recall_threshold=None), round_ndigits
+    results["exact_match_f1"] = get_rollup_fscore_on_pii(
+        scores, fbeta, recall_threshold=None)
+    results["partial_match_f1_threshold_at_50%"] = get_rollup_fscore_on_pii(
+        scores, fbeta, recall_threshold=0.5
     )
 
-    results["partial_match_f1_threshold_at_50%"] = round(
-        get_rollup_fscore_on_pii(scores, fbeta, recall_threshold=0.5), round_ndigits
-    )
-
-    type_scores: Mapping = get_rollup_fscores_on_types(
+    type_scores: Mapping = get_rollup_metrics_on_types(
         grouped_targeted_labels, scores, fbeta
     )
-    type_scores = {
-        key: round(value, round_ndigits) for key, value in type_scores.items()
-    }
     results.update(type_scores)
 
     return results
@@ -162,7 +156,7 @@ def get_rollup_fscore_on_pii(
         fscores.append(f)
 
     if fscores:
-        return sum(fscores) / len(fscores)
+        return round(sum(fscores) / len(fscores), 4)
     else:
         # The only possibility to have empty fscores is that argument "scores"
         # is empty. In this case, we assign f score to 0.
@@ -183,26 +177,28 @@ def _update_table(
     return table
 
 
-def get_rollup_fscores_on_types(
-    grouped_labels: List[Set[str]], scores: List[TextScore], fbeta: float,
-) -> Dict[FrozenSet[str], float]:
-    """Calculate a f scores for every group in the grouped labels.
+def regroup_scores_on_types(
+    grouped_labels: List[Set[str]], scores: List[TextScore]
+) -> Dict[FrozenSet[str], Dict]:
+    """Regroup scores according to parameter grouped_labels.
 
-    There are entity labels being grouped and passed to this function as an argument,
-    with which we can reorganise the list of scores and calculate f scores accordingly.
-    Once it done, we will get a f score for every group in grouped labels.
+    Prediction scores (precisions and recalls) are collected for each of the example
+    texts and stored in scores parameter. We need to regroup those scores on entity
+    types to obtain, for example, all precisions and recalls for the group
+    {"PER", "PERSON"}.
 
     Args:
-        grouped_llabels: entity labels we are interested that have been
-            separated as sets of groups, for example, [{"PER", "PERSON"}, {"ORG"}].
-        scores: a list of text scores providing info including precisions and recalls.
-        fbeta: beta value for f score.
+        grouped_llabels: entity labels separated as sets of groups, for example,
+            [{"PER", "PERSON"}, {"ORG"}].
+        scores: a list of text scores providing info including precisions and recalls
+            for each prediction and ground truth within a text.
 
     Returns:
-        A dictionary that key is a group of entities and value is f score for the group.
+        A dictionary that key is a group of entities and value precisions and recalls
+        for that group.
     """
     score_table: Dict[FrozenSet, Dict] = {
-        frozenset(label_set): {"precisions": [], "recalls": [], "f1": None}
+        frozenset(label_set): {"precisions": [], "recalls": []}
         for label_set in grouped_labels
     }
 
@@ -213,12 +209,42 @@ def get_rollup_fscores_on_types(
         for recall in text_score.recalls:
             score_table = _update_table(score_table, recall)
 
-    # average precisions and recalls
+    return score_table
+
+
+def get_rollup_metrics_on_types(
+    grouped_labels: List[Set[str]], scores: List[TextScore], fbeta: float,
+) -> Dict[FrozenSet[str], Dict[str, Union[float, str]]]:
+    """Calculate f1, average precision and average recall for every group in the
+    grouped labels.
+    """
+    score_table = regroup_scores_on_types(grouped_labels, scores)
+
+    metrics = dict()
     for key, value in score_table.items():
-        value["f1"] = compute_pii_detection_fscore(
-            value["precisions"], value["recalls"], beta=fbeta
+        f1 = round(
+            compute_pii_detection_fscore(
+                value["precisions"], value["recalls"], beta=fbeta
+            ),
+            4,
         )
-    return {key: value["f1"] for key, value in score_table.items()}
+
+        if value["precisions"]:
+            ave_precision = round(
+                sum(value["precisions"]) / len(value["precisions"]), 4
+            )
+        else:
+            ave_precision = "undefined"
+
+        if value["recalls"]:
+            ave_recall = round(sum(value["recalls"]) / len(value["recalls"]), 4)
+        else:
+            ave_recall = "undefined"
+
+        metrics.update(
+            {key: {"f1": f1, "ave-precision": ave_precision, "ave-recall": ave_recall}}
+        )
+    return metrics
 
 
 def exec_pipeline(config_yaml_file: str):

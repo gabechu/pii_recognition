@@ -2,7 +2,7 @@ import os
 from tempfile import TemporaryDirectory
 
 from mock import patch
-from numpy.testing import assert_almost_equal
+from numpy.testing import assert_array_almost_equal
 from pii_recognition.data_readers.data import Data, DataItem
 from pii_recognition.evaluation.character_level_evaluation import (
     EntityPrecision,
@@ -16,9 +16,10 @@ from pytest import fixture
 from .pii_validation_pipeline import (
     calculate_precisions_and_recalls,
     get_rollup_fscore_on_pii,
-    get_rollup_fscores_on_types,
+    get_rollup_metrics_on_types,
     identify_pii_entities,
     log_predictions_and_ground_truths,
+    regroup_scores_on_types,
 )
 
 
@@ -257,18 +258,42 @@ def test_get_rollup_fscore_on_pii_no_threshold(scores):
 
 def test_get_rollup_fscore_on_pii_threshold(scores):
     actual = get_rollup_fscore_on_pii(scores, fbeta=1, recall_threshold=0.4)
-    assert actual == 7 / 15
+    assert actual == 0.4667
 
 
-def test_get_rollup_fscores_on_types(complex_scores):
-    actual = get_rollup_fscores_on_types(
+def test_get_rollup_metrics_on_types(complex_scores):
+    actual = get_rollup_metrics_on_types(
         [{"BIRTHDAY", "DATE"}, {"LOCATION"}, {"CREDIT_CARD"}], complex_scores, 1.0
     )
 
     assert len(actual) == 3
-    assert actual[frozenset({"BIRTHDAY", "DATE"})] == 0.0
-    assert actual[frozenset({"CREDIT_CARD"})] == 1.0
-    assert_almost_equal(actual[frozenset({"LOCATION"})], 0.395918367)
+    assert actual[frozenset({"BIRTHDAY", "DATE"})] == {
+        "f1": 0.0,
+        "ave-precision": 0.0,
+        "ave-recall": 0.0,
+    }
+    assert actual[frozenset({"CREDIT_CARD"})] == {
+        "f1": 1.0,
+        "ave-precision": 1.0,
+        "ave-recall": 1.0,
+    }
+    assert actual[frozenset({"LOCATION"})] == {
+        "f1": 0.3959,
+        "ave-precision": 0.5,
+        "ave-recall": 0.3277,
+    }
+
+
+def test_get_rollup_metrics_on_types_empty_scores():
+    actual = get_rollup_metrics_on_types([{"BIRTHDAY", "DATE"}], [], 1.0)
+
+    assert actual == {
+        frozenset({"BIRTHDAY", "DATE"}): {
+            "f1": 1.0,
+            "ave-precision": "undefined",
+            "ave-recall": "undefined",
+        }
+    }
 
 
 def test_log_mistakes(scores):
@@ -294,3 +319,20 @@ def test_log_mistakes(scores):
         "Balefire Global": {"type": "ORGANIZATION", "score": 0.67, "start": 15},
         "Valadouro 3, Ubide 48145": {"type": "LOCATION", "score": 0.5, "start": 34},
     }
+
+
+def test_regroup_scores_on_types(scores):
+    actual = regroup_scores_on_types(
+        [{"DATE", "BIRTHDAY"}, {"LOCATION"}, {"ORGANIZATION"}], scores
+    )
+
+    assert len(actual) == 3
+    assert actual[frozenset({"DATE", "BIRTHDAY"})] == {
+        "precisions": [0.0],
+        "recalls": [0.0],
+    }
+    assert actual[frozenset({"LOCATION"})] == {"precisions": [0.75], "recalls": [0.5]}
+    assert actual[frozenset({"ORGANIZATION"})]["precisions"] == [1.0]
+    assert_array_almost_equal(
+        actual[frozenset({"ORGANIZATION"})]["recalls"], [0.6666666666666666]
+    )

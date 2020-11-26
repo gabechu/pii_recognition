@@ -71,15 +71,29 @@ def test_execute_pii_validation_pipeline(mock_registry):
             "test_predictions.json",
             "test_scores.json",
         }
+
         assert len(scores.keys()) == 5
         assert scores["exact_match_f1"] == 0.5062
         assert scores["partial_match_f1_threshold_at_50%"] == 0.5333
-        assert scores["frozenset({'PERSON'})"] == 0.4
-        assert scores["frozenset({'LOCATION'})"] == 0.6857
-        assert (
-            scores.get("frozenset({'CREDIT_CARD', 'OTHER'})") == 1.0
-            or scores.get("frozenset({'OTHER', 'CREDIT_CARD'})") == 1.0
-        )
+        assert scores["frozenset({'PERSON'})"] == {
+            "f1": 0.4,
+            "ave-precision": 0.3333,
+            "ave-recall": 0.5,
+        }
+        assert scores["frozenset({'LOCATION'})"] == {
+            "f1": 0.6857,
+            "ave-precision": 1.0,
+            "ave-recall": 0.5217,
+        }
+        assert scores.get("frozenset({'CREDIT_CARD', 'OTHER'})") == {
+            "f1": 1.0,
+            "ave-precision": 1.0,
+            "ave-recall": 1.0,
+        } or scores.get("frozenset({'OTHER', 'CREDIT_CARD'})") == {
+            "f1": 1.0,
+            "ave-precision": 1.0,
+            "ave-recall": 1.0,
+        }
 
         assert len(preds) == 5
         item_one = preds[

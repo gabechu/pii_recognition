@@ -1,14 +1,54 @@
 {
   "exact_match_f1": 0.8525,
   "partial_match_f1_threshold_at_50%": 0.8546,
-  "frozenset({'CREDIT_DEBIT_CVV', 'BANK_ROUTING', 'PIN', 'CREDIT_CARD', 'CREDIT_DEBIT_EXPIRY', 'CREDIT_DEBIT_NUMBER'})": 0.9457,
-  "frozenset({'IBAN', 'BANK_ACCOUNT_NUMBER'})": 0.8,
-  "frozenset({'SSN', 'US_SSN'})": 1.0,
-  "frozenset({'URL'})": 0.6316,
-  "frozenset({'MAC_ADDRESS', 'IP_ADDRESS'})": 0.9799,
-  "frozenset({'EMAIL'})": 1.0,
-  "frozenset({'BIRTHDAY', 'DATE_TIME'})": 0.5352,
-  "frozenset({'PHONE_NUMBER', 'PHONE'})": 0.8899,
-  "frozenset({'ADDRESS', 'LOCATION'})": 0.7168,
-  "frozenset({'USERNAME', 'PERSON', 'NAME'})": 0.9262
+  "frozenset({'CREDIT_DEBIT_EXPIRY', 'CREDIT_DEBIT_NUMBER', 'CREDIT_CARD', 'BANK_ROUTING', 'CREDIT_DEBIT_CVV', 'PIN'})": {
+    "f1": 0.9457,
+    "ave-precision": 0.9242,
+    "ave-recall": 0.9683
+  },
+  "frozenset({'IBAN', 'BANK_ACCOUNT_NUMBER'})": {
+    "f1": 0.8,
+    "ave-precision": 1.0,
+    "ave-recall": 0.6667
+  },
+  "frozenset({'SSN', 'US_SSN'})": {
+    "f1": 1.0,
+    "ave-precision": 1.0,
+    "ave-recall": 1.0
+  },
+  "frozenset({'URL'})": {
+    "f1": 0.6316,
+    "ave-precision": 1.0,
+    "ave-recall": 0.4615
+  },
+  "frozenset({'MAC_ADDRESS', 'IP_ADDRESS'})": {
+    "f1": 0.9799,
+    "ave-precision": 1.0,
+    "ave-recall": 0.9605
+  },
+  "frozenset({'EMAIL'})": {
+    "f1": 1.0,
+    "ave-precision": 1.0,
+    "ave-recall": 1.0
+  },
+  "frozenset({'BIRTHDAY', 'DATE_TIME'})": {
+    "f1": 0.5352,
+    "ave-precision": 0.3654,
+    "ave-recall": 1.0
+  },
+  "frozenset({'PHONE_NUMBER', 'PHONE'})": {
+    "f1": 0.8899,
+    "ave-precision": 1.0,
+    "ave-recall": 0.8016
+  },
+  "frozenset({'LOCATION', 'ADDRESS'})": {
+    "f1": 0.7168,
+    "ave-precision": 0.9987,
+    "ave-recall": 0.559
+  },
+  "frozenset({'USERNAME', 'NAME', 'PERSON'})": {
+    "f1": 0.9262,
+    "ave-precision": 0.8832,
+    "ave-recall": 0.9736
+  }
 }
